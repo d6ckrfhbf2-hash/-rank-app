@@ -2,36 +2,39 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>RANK — Prototype V5</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a0a0b">
+<title>RANK — V6</title>
 
 <style>
 *{box-sizing:border-box}
 
 :root{
-  --bg:#f5f6f8;
+  --bg:#0a0a0b;
+  --surface:#151517;
+  --surface2:#1d1d20;
   --white:#fff;
-  --text:#15171c;
-  --muted:#747982;
-  --line:#e7e9ed;
-  --soft:#f0f2f5;
-  --accent:#3157f6;
-  --accentSoft:#edf1ff;
-  --green:#1aa775;
-  --red:#e14a57;
-  --gold:#e6a825;
-  --shadow:0 10px 35px rgba(25,32,50,.07);
+  --text:#f7f7f8;
+  --muted:#99999f;
+  --line:#29292d;
+  --blue:#3974ff;
+  --red:#ff3b5c;
+  --green:#25c783;
+  --gold:#ffca4b;
 }
 
 html,body{
   margin:0;
+  width:100%;
+  min-height:100%;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  overscroll-behavior:none;
 }
 
 button,input,textarea{font:inherit}
-button{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 
 .app{
   width:min(100%,560px);
@@ -42,26 +45,25 @@ button{-webkit-tap-highlight-color:transparent}
 }
 
 .header{
-  height:72px;
-  padding:0 20px;
+  height:64px;
+  padding:0 17px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   position:sticky;
   top:0;
-  z-index:30;
-  background:rgba(245,246,248,.92);
-  backdrop-filter:blur(18px);
+  z-index:50;
+  background:rgba(10,10,11,.9);
+  backdrop-filter:blur(20px);
 }
 
 .logo{
-  font-size:24px;
+  font-size:25px;
   font-weight:950;
-  letter-spacing:-1px;
-  cursor:pointer;
+  letter-spacing:-1.3px;
 }
 
-.logo span{color:var(--accent)}
+.logo span{color:var(--blue)}
 
 .headerRight{
   display:flex;
@@ -70,690 +72,712 @@ button{-webkit-tap-highlight-color:transparent}
 }
 
 .streak{
-  background:white;
+  font-size:11px;
+  font-weight:850;
+  padding:8px 10px;
   border:1px solid var(--line);
   border-radius:999px;
-  padding:9px 12px;
-  font-size:12px;
-  font-weight:800;
 }
 
 .profileBtn{
-  width:39px;
-  height:39px;
-  border-radius:50%;
+  width:37px;
+  height:37px;
   border:0;
-  background:#17191e;
-  color:white;
-  font-weight:850;
-  cursor:pointer;
+  border-radius:50%;
+  background:white;
+  color:#111;
+  font-weight:900;
 }
 
-main{padding:14px 18px 110px}
+main{
+  padding:15px 16px 100px;
+}
 
 .screen{display:none}
-.screen.active{display:block;animation:appear .2s ease}
-
-@keyframes appear{
-  from{opacity:.3;transform:translateY(5px)}
-  to{opacity:1;transform:none}
-}
+.screen.active{display:block}
 
 .eyebrow{
-  font-size:11px;
+  color:#777b84;
+  font-size:10px;
   font-weight:900;
-  letter-spacing:1.2px;
-  color:var(--accent);
-  margin-bottom:9px;
+  letter-spacing:1.5px;
+  margin-bottom:8px;
 }
 
 h1{
   margin:0;
   font-size:34px;
-  line-height:1.05;
+  line-height:1.03;
   letter-spacing:-1.5px;
 }
 
 h2{
   margin:0;
   font-size:20px;
-  letter-spacing:-.4px;
+  letter-spacing:-.5px;
 }
 
 p{margin:0}
 
 .sub{
   color:var(--muted);
-  font-size:14px;
+  font-size:13px;
   line-height:1.5;
-  margin-top:9px;
+  margin-top:8px;
 }
 
 .card{
-  background:white;
+  background:var(--surface);
   border:1px solid var(--line);
-  border-radius:22px;
-  padding:18px;
+  border-radius:20px;
+  padding:17px;
   margin-top:14px;
-  box-shadow:var(--shadow);
-}
-
-.sectionHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  margin:28px 2px 11px;
-}
-
-.sectionHead small{
-  color:var(--muted);
-  font-size:11px;
 }
 
 .primary{
   width:100%;
-  min-height:50px;
   border:0;
-  border-radius:15px;
-  background:#17191e;
-  color:white;
-  font-weight:850;
-  cursor:pointer;
+  min-height:50px;
+  border-radius:14px;
+  background:white;
+  color:#111;
+  font-weight:900;
   margin-top:14px;
 }
 
-.primary.blue{background:var(--accent)}
-.primary:disabled{opacity:.32}
+.primary.blue{
+  background:var(--blue);
+  color:white;
+}
+
+.primary:disabled{opacity:.3}
 
 .secondary{
   width:100%;
-  min-height:48px;
   border:1px solid var(--line);
-  border-radius:15px;
-  background:white;
-  color:var(--text);
+  min-height:48px;
+  border-radius:14px;
+  background:var(--surface2);
+  color:white;
   font-weight:800;
-  margin-top:10px;
-  cursor:pointer;
+  margin-top:9px;
+}
+
+.sectionHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:26px 2px 10px;
+}
+
+.sectionHead small{
+  color:var(--muted);
+  font-size:10px;
 }
 
 /* TODAY */
 
-.todayHero{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:25px;
-  padding:21px;
+.todayQuestion{
   margin-top:20px;
-  box-shadow:var(--shadow);
+  background:linear-gradient(145deg,#17191e,#101114);
+  border:1px solid #292b32;
+  border-radius:23px;
+  padding:19px;
 }
 
-.liveTag{
+.questionTag{
   display:inline-flex;
-  align-items:center;
-  gap:6px;
+  background:white;
+  color:#111;
   padding:6px 9px;
   border-radius:999px;
-  background:var(--accentSoft);
-  color:var(--accent);
-  font-size:10px;
-  font-weight:900;
-  margin-bottom:15px;
+  font-size:9px;
+  font-weight:950;
+  margin-bottom:14px;
 }
 
 .question{
-  font-size:27px;
-  line-height:1.12;
+  font-size:28px;
+  font-weight:950;
+  line-height:1.1;
   letter-spacing:-.8px;
-  font-weight:900;
-}
-
-.questionInfo{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:7px;
 }
 
 .people{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin-top:19px;
+  gap:8px;
+  margin-top:18px;
 }
 
 .person{
-  border:0;
-  background:var(--soft);
-  border-radius:17px;
-  padding:13px 6px;
+  border:1px solid var(--line);
+  background:var(--surface2);
+  color:white;
+  border-radius:16px;
+  padding:11px 5px;
   position:relative;
-  cursor:pointer;
-  color:var(--text);
 }
 
 .person.selected{
-  background:#e9edff;
+  border-color:var(--blue);
+  background:#162344;
 }
 
 .person.selected:after{
   content:"✓";
   position:absolute;
-  top:7px;
-  right:8px;
-  width:20px;
-  height:20px;
+  right:6px;
+  top:6px;
+  width:19px;
+  height:19px;
+  border-radius:50%;
   display:grid;
   place-items:center;
-  background:var(--accent);
-  color:white;
-  border-radius:50%;
-  font-size:10px;
-  font-weight:900;
+  background:var(--blue);
+  font-size:9px;
 }
 
 .avatar{
-  width:47px;
-  height:47px;
+  width:45px;
+  height:45px;
+  margin:0 auto 7px;
   border-radius:50%;
-  margin:0 auto 8px;
-  background:white;
+  background:#303034;
   display:grid;
   place-items:center;
   font-weight:900;
-  border:1px solid var(--line);
 }
 
 .person strong{
   display:block;
-  font-size:13px;
+  font-size:12px;
 }
 
 .person small{
-  color:var(--muted);
-  font-size:9px;
+  font-size:8px;
+  color:#8d8d93;
 }
 
 .voteSuccess{
   display:none;
-  color:var(--green);
-  background:#edf9f5;
-  padding:11px;
+  background:#10251d;
+  color:#65dda9;
   border-radius:12px;
-  margin-top:10px;
-  font-size:12px;
-  font-weight:800;
+  padding:11px;
+  margin-top:9px;
+  font-size:11px;
+  font-weight:850;
 }
 
-.revealLine{
+.reveal{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   border-top:1px solid var(--line);
-  margin-top:18px;
-  padding-top:16px;
+  padding-top:15px;
+  margin-top:17px;
 }
 
-.revealLine small{
+.reveal small{
   display:block;
-  color:var(--muted);
-  font-size:10px;
+  color:#777b82;
+  font-size:9px;
+  margin-bottom:3px;
 }
 
-.revealLine strong{
+.reveal strong{font-size:18px}
+
+#countdown{
+  color:#6e96ff;
+  font-size:11px;
+  font-weight:850;
+}
+
+.socialShortcut{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.shortcutIcon{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:white;
+  color:#111;
+  display:grid;
+  place-items:center;
+  font-weight:950;
   font-size:17px;
 }
 
-#countdown{
-  color:var(--accent);
-  font-size:11px;
-  font-weight:800;
-  margin-top:2px;
-}
-
-/* HOME FEATURE CARDS */
-
-.homeFeature{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  cursor:pointer;
-  transition:.15s;
-}
-
-.homeFeature:active{transform:scale(.985)}
-
-.featureIcon{
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  flex:0 0 auto;
-  display:grid;
-  place-items:center;
-  font-size:19px;
-  font-weight:950;
-  background:var(--soft);
-}
-
-.featureContent{flex:1}
-
-.featureTitle{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-weight:900;
-}
-
-.newBadge{
-  background:var(--accent);
+.socialShortcut.nowShortcut .shortcutIcon{
+  background:var(--blue);
   color:white;
-  border-radius:999px;
-  padding:3px 6px;
-  font-size:8px;
 }
 
-.featureText{
+.shortcutText{flex:1}
+
+.shortcutText strong{
+  font-size:14px;
+}
+
+.shortcutText span{
+  display:block;
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
   margin-top:3px;
 }
 
-.arrow{
-  font-size:20px;
-  color:#a5a8ae;
-}
-
-/* NOW */
-
-.nowTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:20px;
-}
-
-.addNow{
-  border:0;
-  background:#17191e;
-  color:white;
-  padding:10px 14px;
+.badge{
+  display:inline-block !important;
+  background:var(--red);
+  color:white !important;
   border-radius:999px;
-  font-size:11px;
-  font-weight:850;
-  cursor:pointer;
+  padding:3px 6px;
+  font-size:8px !important;
+  margin-left:4px;
 }
 
-.stories{
-  display:flex;
-  gap:13px;
-  overflow-x:auto;
-  padding:4px 1px 14px;
+/* NOW FULL SCREEN FEED */
+
+#nowScreen{
+  position:fixed;
+  inset:0;
+  z-index:70;
+  background:#000;
+  width:min(100%,560px);
+  left:50%;
+  transform:translateX(-50%);
+}
+
+#nowScreen:not(.active){display:none}
+
+.nowFeed{
+  height:100dvh;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
   scrollbar-width:none;
 }
 
-.stories::-webkit-scrollbar{display:none}
+.nowFeed::-webkit-scrollbar{display:none}
 
-.storyBubble{
-  min-width:65px;
-  border:0;
-  background:none;
-  text-align:center;
-  cursor:pointer;
-  padding:0;
-  color:var(--text);
-}
-
-.storyRing{
-  width:60px;
-  height:60px;
-  margin:auto;
-  padding:3px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#3157f6,#7e55e8,#e45d78);
-}
-
-.storyInner{
+.nowSlide{
+  height:100dvh;
   width:100%;
-  height:100%;
-  background:white;
-  border:3px solid white;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-}
-
-.storyBubble.seen .storyRing{background:#d8dade}
-
-.storyBubble span{
-  display:block;
-  margin-top:5px;
-  font-size:10px;
-  white-space:nowrap;
-}
-
-.nowFeedCard{
-  background:white;
-  border-radius:24px;
-  overflow:hidden;
-  border:1px solid var(--line);
-  margin-top:14px;
-  box-shadow:var(--shadow);
-}
-
-.nowAuthor{
-  display:flex;
-  align-items:center;
-  padding:14px 15px;
-  gap:10px;
-}
-
-.miniAvatar{
-  width:37px;
-  height:37px;
-  border-radius:50%;
-  background:var(--soft);
-  display:grid;
-  place-items:center;
-  font-weight:900;
-}
-
-.nowAuthorInfo{flex:1}
-
-.nowAuthorInfo strong{
-  font-size:13px;
-  display:block;
-}
-
-.nowAuthorInfo span{
-  font-size:10px;
-  color:var(--muted);
-}
-
-.more{
-  border:0;
-  background:none;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.fakeMedia{
-  height:330px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
   position:relative;
-  background:linear-gradient(145deg,#e7ebf7,#d9e2f5);
   overflow:hidden;
+  background:#111;
 }
 
-.fakeMedia.second{
-  background:linear-gradient(145deg,#eee8df,#ded5c8);
-}
-
-.fakeMedia.third{
-  background:linear-gradient(145deg,#e3eee8,#cbded5);
-}
-
-.mediaLetter{
-  font-size:80px;
-  font-weight:950;
-  color:rgba(0,0,0,.09);
-}
-
-.videoBadge{
+.nowMedia{
   position:absolute;
-  right:13px;
-  top:13px;
-  background:rgba(0,0,0,.72);
-  color:white;
-  padding:6px 9px;
-  border-radius:999px;
-  font-size:9px;
-  font-weight:850;
-}
-
-.nowCaption{
-  padding:14px 15px 4px;
-  font-size:13px;
-}
-
-.nowCaption strong{margin-right:5px}
-
-.nowActions{
-  padding:10px 15px 15px;
-}
-
-.quickReactions{
-  display:flex;
-  gap:7px;
-  margin-bottom:10px;
-}
-
-.reaction{
-  border:1px solid var(--line);
-  background:white;
-  border-radius:999px;
-  padding:7px 10px;
-  cursor:pointer;
-}
-
-.commentLine{
-  display:flex;
-  gap:7px;
-}
-
-.commentInput{
-  flex:1;
-  min-width:0;
-  border:1px solid var(--line);
-  background:var(--soft);
-  padding:11px 13px;
-  border-radius:999px;
-  outline:none;
-}
-
-.commentSend{
-  border:0;
-  background:#17191e;
-  color:white;
-  width:41px;
-  height:41px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.comments{
-  padding:0 15px 14px;
-}
-
-.comment{
-  font-size:11px;
-  margin-top:7px;
-  line-height:1.4;
-}
-
-.comment strong{margin-right:5px}
-
-/* STORY FULLSCREEN */
-
-.storyViewer{
-  display:none;
-  position:fixed;
   inset:0;
-  background:#101114;
-  z-index:100;
-  color:white;
-}
-
-.storyViewer.show{display:block}
-
-.storyProgress{
-  display:flex;
-  gap:4px;
-  position:absolute;
-  top:13px;
-  left:13px;
-  right:13px;
-  z-index:3;
-}
-
-.progressBar{
-  height:3px;
-  flex:1;
-  background:rgba(255,255,255,.3);
-  border-radius:99px;
+  display:grid;
+  place-items:center;
   overflow:hidden;
 }
 
-.progressBar.active:after{
-  content:"";
-  display:block;
-  width:72%;
-  height:100%;
-  background:white;
+.nowMedia.one{
+  background:
+    radial-gradient(circle at 70% 15%,#5875b9,transparent 30%),
+    linear-gradient(145deg,#253250,#111827);
 }
 
-.storyViewerHead{
+.nowMedia.two{
+  background:
+    radial-gradient(circle at 25% 20%,#b37e5b,transparent 25%),
+    linear-gradient(145deg,#59463b,#191613);
+}
+
+.nowMedia.three{
+  background:
+    radial-gradient(circle at 70% 70%,#4f9676,transparent 27%),
+    linear-gradient(145deg,#29493d,#101814);
+}
+
+.nowMedia.four{
+  background:
+    radial-gradient(circle at 40% 20%,#9b6171,transparent 28%),
+    linear-gradient(145deg,#55313b,#171013);
+}
+
+.bigLetter{
+  font-size:160px;
+  font-weight:950;
+  color:rgba(255,255,255,.08);
+}
+
+.fakePlay{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(5px);
+  display:grid;
+  place-items:center;
+  position:absolute;
+  font-size:22px;
+}
+
+.nowGradient{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom,rgba(0,0,0,.55),transparent 20%,transparent 52%,rgba(0,0,0,.75));
+  pointer-events:none;
+}
+
+.nowTopBar{
   position:absolute;
   z-index:4;
-  top:26px;
-  left:16px;
-  right:16px;
+  top:0;
+  left:0;
+  right:0;
+  padding:14px 15px;
+  padding-top:max(14px,env(safe-area-inset-top));
   display:flex;
   align-items:center;
+  justify-content:space-between;
+}
+
+.nowBrand{
+  font-weight:950;
+  font-size:20px;
+  letter-spacing:-.8px;
+}
+
+.nowTopActions{
+  display:flex;
   gap:9px;
 }
 
-.storyViewerHead .miniAvatar{
-  background:white;
-  color:#111;
+.roundIcon{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:rgba(20,20,20,.48);
+  color:white;
+  backdrop-filter:blur(8px);
+  font-size:18px;
 }
 
-.storyViewerHead div:nth-child(2){flex:1}
+.nowUser{
+  position:absolute;
+  left:15px;
+  right:85px;
+  bottom:92px;
+  z-index:4;
+}
 
-.storyViewerHead strong{
-  display:block;
+.userLine{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:9px;
+}
+
+.nowAvatar{
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  border:2px solid white;
+  display:grid;
+  place-items:center;
+  background:#252525;
   font-size:12px;
+  font-weight:900;
 }
 
-.storyViewerHead span{
+.userLine strong{font-size:13px}
+
+.userLine span{
+  font-size:10px;
+  color:#ddd;
+}
+
+.nowCaption{
+  font-size:13px;
+  line-height:1.45;
+}
+
+.expire{
+  margin-top:7px;
   font-size:9px;
-  opacity:.7;
+  color:#bbb;
 }
 
-.closeStory{
+.sideActions{
+  position:absolute;
+  z-index:5;
+  right:10px;
+  bottom:92px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:17px;
+}
+
+.sideAction{
   background:none;
   border:0;
   color:white;
-  font-size:28px;
-  cursor:pointer;
+  text-align:center;
+  padding:0;
 }
 
-.storyVisual{
-  height:100%;
+.sideCircle{
+  width:47px;
+  height:47px;
+  border-radius:50%;
+  background:rgba(20,20,20,.46);
+  backdrop-filter:blur(8px);
   display:grid;
   place-items:center;
-  background:linear-gradient(145deg,#3e4d72,#151a27);
+  font-size:20px;
 }
 
-.storyVisual .mediaLetter{
-  color:rgba(255,255,255,.15);
-  font-size:130px;
-}
-
-.storyBottom{
-  position:absolute;
-  bottom:20px;
-  left:15px;
-  right:15px;
-}
-
-.storyCaption{
-  font-size:14px;
-  margin-bottom:12px;
+.sideAction span{
+  display:block;
+  font-size:9px;
+  margin-top:4px;
   text-shadow:0 1px 4px #000;
 }
 
-.storyReply{
+.nowCommentBar{
+  position:absolute;
+  z-index:6;
+  bottom:19px;
+  left:13px;
+  right:13px;
   display:flex;
-  gap:8px;
+  gap:7px;
 }
 
-.storyReply input{
+.nowCommentBar input{
   flex:1;
   min-width:0;
-  border:1px solid rgba(255,255,255,.4);
-  background:rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(15,15,15,.46);
+  backdrop-filter:blur(9px);
   color:white;
   border-radius:999px;
-  padding:13px 16px;
+  padding:12px 15px;
   outline:none;
 }
 
-.storyReply input::placeholder{color:#ddd}
+.nowCommentBar input::placeholder{color:#ddd}
 
-.storyReply button{
-  width:45px;
-  height:45px;
+.nowCommentBar button{
+  width:43px;
+  height:43px;
   border:0;
   border-radius:50%;
   background:white;
   color:#111;
+  font-weight:900;
 }
 
-/* CREATE NOW */
+.scrollHint{
+  position:absolute;
+  z-index:4;
+  top:76px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:9px;
+  color:rgba(255,255,255,.7);
+  background:rgba(0,0,0,.28);
+  border-radius:999px;
+  padding:6px 9px;
+  pointer-events:none;
+}
 
-.modal{
+/* COMMENTS DRAWER */
+
+.commentsOverlay{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(10,12,16,.45);
-  z-index:110;
+  z-index:150;
+  background:rgba(0,0,0,.48);
   align-items:flex-end;
   justify-content:center;
 }
 
-.modal.show{display:flex}
+.commentsOverlay.show{display:flex}
 
-.sheet{
+.commentsSheet{
   width:min(100%,560px);
-  background:white;
-  border-radius:26px 26px 0 0;
-  padding:22px 18px 28px;
+  height:min(68vh,610px);
+  background:#171719;
+  border-radius:25px 25px 0 0;
+  padding:12px 16px 82px;
+  position:relative;
 }
 
-.sheetHandle{
-  width:40px;
+.handle{
+  width:38px;
   height:4px;
-  background:#d7d9dd;
   border-radius:99px;
-  margin:-9px auto 19px;
+  background:#444;
+  margin:0 auto 14px;
 }
 
-.uploadBox{
-  border:1px dashed #c9cdd4;
-  background:var(--soft);
-  border-radius:19px;
-  padding:27px 15px;
+.commentHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.commentHeader button{
+  border:0;
+  background:none;
+  color:white;
+  font-size:25px;
+}
+
+.commentsList{
+  overflow:auto;
+  max-height:calc(100% - 55px);
+  margin-top:12px;
+}
+
+.commentItem{
+  display:flex;
+  gap:9px;
+  margin:15px 0;
+}
+
+.commentAvatar{
+  width:34px;
+  height:34px;
+  flex:0 0 auto;
+  border-radius:50%;
+  background:#303034;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  font-weight:900;
+}
+
+.commentBody strong{
+  display:block;
+  font-size:11px;
+}
+
+.commentBody p{
+  margin-top:3px;
+  font-size:12px;
+  line-height:1.4;
+}
+
+.commentBody small{
+  color:#777;
+  font-size:9px;
+}
+
+.drawerComposer{
+  position:absolute;
+  bottom:20px;
+  left:15px;
+  right:15px;
+  display:flex;
+  gap:7px;
+}
+
+.drawerComposer input{
+  flex:1;
+  border:1px solid var(--line);
+  background:#222225;
+  color:white;
+  border-radius:999px;
+  padding:12px 14px;
+  outline:none;
+}
+
+.drawerComposer button{
+  width:43px;
+  border:0;
+  border-radius:50%;
+  background:white;
+  color:#111;
+}
+
+/* ADD NOW */
+
+.addOverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:170;
+  background:#0b0b0c;
+  color:white;
+}
+
+.addOverlay.show{display:block}
+
+.addHeader{
+  height:65px;
+  padding:0 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.addHeader button{
+  border:0;
+  background:none;
+  color:white;
+  font-size:24px;
+}
+
+.uploadArea{
+  margin:15px;
+  height:55vh;
+  border-radius:24px;
+  border:1px dashed #414146;
+  background:#171719;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  margin-top:16px;
+  padding:20px;
 }
 
-.uploadBox strong{display:block}
-.uploadBox small{color:var(--muted)}
+.uploadIcon{
+  font-size:42px;
+  margin-bottom:12px;
+}
 
 .fileInput{display:none}
 
-.uploadButton{
+.chooseFile{
+  margin-top:15px;
   display:inline-block;
-  background:#17191e;
+  background:white;
+  color:#111;
+  border-radius:999px;
+  padding:11px 17px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.addCaption{
+  margin:15px;
+}
+
+.addCaption input{
+  width:100%;
+  border:1px solid var(--line);
+  background:#171719;
   color:white;
-  padding:10px 14px;
-  border-radius:12px;
-  font-size:11px;
-  font-weight:850;
-  margin-top:12px;
-  cursor:pointer;
+  padding:14px;
+  border-radius:14px;
+  outline:none;
 }
 
 /* PREDICT */
@@ -765,27 +789,25 @@ p{margin:0}
 }
 
 .predictOption{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:11px;
   border:1px solid var(--line);
+  background:var(--surface2);
+  color:white;
+  padding:11px;
   border-radius:14px;
-  background:white;
-  cursor:pointer;
+  display:flex;
+  gap:9px;
+  align-items:center;
 }
 
-.predictOption.selected{background:var(--accentSoft)}
-
-.predictOption .miniAvatar{
-  width:35px;
-  height:35px;
+.predictOption.selected{
+  border-color:var(--blue);
+  background:#172342;
 }
 
 .predictOption span:last-child{
   margin-left:auto;
-  color:var(--muted);
-  font-size:10px;
+  color:#888;
+  font-size:9px;
 }
 
 /* RANK */
@@ -794,241 +816,284 @@ p{margin:0}
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   align-items:end;
-  gap:6px;
-  padding-top:28px;
+  padding-top:30px;
 }
 
-.podiumPerson{text-align:center}
-.podiumPerson.first{transform:translateY(-18px)}
+.podiumItem{text-align:center}
+.podiumItem.first{transform:translateY(-18px)}
 
 .podiumAvatar{
-  width:65px;
-  height:65px;
+  width:64px;
+  height:64px;
   margin:auto auto 7px;
   border-radius:50%;
-  background:var(--soft);
+  background:#29292d;
   display:grid;
   place-items:center;
   font-weight:950;
-  font-size:20px;
 }
 
 .first .podiumAvatar{
   width:78px;
   height:78px;
-  background:#fff7df;
   border:2px solid var(--gold);
 }
 
-.podiumPerson strong{
+.podiumItem strong{
   display:block;
-  font-size:13px;
+  font-size:12px;
 }
 
-.podiumPerson small{
-  color:var(--muted);
-  font-size:10px;
+.podiumItem small{
+  color:#888;
+  font-size:9px;
 }
 
 .rankRow{
+  min-height:55px;
   display:grid;
-  grid-template-columns:34px 1fr auto;
-  gap:9px;
+  grid-template-columns:35px 1fr auto;
   align-items:center;
-  padding:11px 0;
+  gap:8px;
   border-bottom:1px solid var(--line);
 }
 
-.rankRow:last-child{border-bottom:0}
+.rankRow:last-child{border:0}
 
-.rankName{
+.rankUser{
   display:flex;
   align-items:center;
   gap:8px;
-  font-size:13px;
-  font-weight:750;
+  font-size:12px;
+  font-weight:800;
 }
 
-.rankName .miniAvatar{
-  width:34px;
-  height:34px;
+.miniAvatar{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:#303034;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  font-weight:900;
 }
 
 .rankVotes{
-  font-size:11px;
-  color:var(--muted);
+  color:#888;
+  font-size:10px;
 }
 
 /* ROOM */
 
-.roomHeader{
-  background:white;
+.roomHead{
+  background:var(--surface);
   border:1px solid var(--line);
-  border-radius:22px;
-  padding:17px;
-  box-shadow:var(--shadow);
+  border-radius:20px;
+  padding:16px;
 }
 
-.roomTitleLine{
+.roomTop{
   display:flex;
   justify-content:space-between;
 }
 
 .online{
   color:var(--green);
-  font-size:10px;
-  font-weight:850;
+  font-size:9px;
+  font-weight:900;
 }
 
-.roomWinner{
-  margin-top:13px;
-  background:var(--soft);
-  border-radius:14px;
-  padding:11px;
-  font-size:12px;
+.winnerPin{
+  background:#222225;
+  padding:10px;
+  border-radius:12px;
+  margin-top:12px;
+  font-size:11px;
 }
 
-.messages{padding:20px 0 80px}
+.messages{
+  padding:18px 0 75px;
+}
 
 .message{
   display:flex;
   gap:8px;
-  margin-bottom:17px;
+  margin-bottom:16px;
 }
 
 .message.mine{justify-content:flex-end}
 
-.messageBody{max-width:78%}
+.messageContent{max-width:78%}
 
 .messageMeta{
+  color:#777;
   font-size:9px;
-  color:var(--muted);
-  margin:0 0 4px 5px;
+  margin:0 0 4px 4px;
 }
 
 .bubble{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:17px 17px 17px 5px;
+  background:#1d1d20;
+  border:1px solid #2b2b2e;
   padding:11px 13px;
+  border-radius:17px 17px 17px 5px;
   font-size:13px;
   line-height:1.4;
 }
 
 .mine .bubble{
-  background:#17191e;
-  color:white;
+  background:#3165e6;
   border:0;
   border-radius:17px 17px 5px 17px;
 }
 
-.messageDots{
+.dots{
   border:0;
   background:none;
-  color:#999;
-  padding:3px 5px;
-  cursor:pointer;
+  color:#777;
+  padding:3px;
 }
 
-.composer{
+.roomComposer{
   position:fixed;
-  bottom:72px;
+  bottom:69px;
   left:50%;
   transform:translateX(-50%);
   width:min(100%,560px);
-  padding:9px 17px;
-  background:rgba(245,246,248,.95);
+  background:rgba(10,10,11,.94);
   backdrop-filter:blur(15px);
-  z-index:20;
-}
-
-.composerInner{
+  padding:9px 15px;
   display:flex;
   gap:7px;
+  z-index:35;
 }
 
-.composer input{
+.roomComposer input{
   flex:1;
   min-width:0;
   border:1px solid var(--line);
-  background:white;
+  background:#1c1c1f;
+  color:white;
   border-radius:999px;
-  padding:12px 15px;
+  padding:12px 14px;
   outline:none;
 }
 
-.send{
-  width:44px;
-  height:44px;
+.roomComposer button{
+  width:43px;
+  height:43px;
   border:0;
   border-radius:50%;
-  background:#17191e;
-  color:white;
+  background:white;
+  color:#111;
 }
 
 /* RECAP */
 
-.statGrid{
+.stats{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:9px;
+  gap:8px;
   margin-top:14px;
 }
 
 .stat{
-  background:var(--soft);
-  padding:15px;
-  border-radius:15px;
+  background:#1d1d20;
+  border-radius:14px;
+  padding:14px;
 }
 
 .stat strong{
   display:block;
-  font-size:23px;
+  font-size:22px;
 }
 
 .stat span{
-  color:var(--muted);
-  font-size:10px;
+  color:#888;
+  font-size:9px;
 }
 
 .questionInput{
   width:100%;
   min-height:90px;
+  margin-top:13px;
   resize:none;
   border:1px solid var(--line);
-  background:var(--soft);
-  border-radius:15px;
-  padding:13px;
+  background:#1d1d20;
+  color:white;
+  border-radius:14px;
+  padding:12px;
   outline:none;
-  margin-top:13px;
 }
 
 /* PROFILE */
 
-.profileHero{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-
-.profileTop{
+.profile{
   display:flex;
-  gap:13px;
   align-items:center;
+  gap:13px;
 }
 
 .profileAvatar{
   width:72px;
   height:72px;
   border-radius:50%;
-  background:#17191e;
-  color:white;
+  background:white;
+  color:#111;
   display:grid;
   place-items:center;
-  font-size:22px;
-  font-weight:900;
+  font-size:20px;
+  font-weight:950;
+}
+
+/* NAV */
+
+.bottomNav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:min(100%,560px);
+  height:70px;
+  background:rgba(10,10,11,.96);
+  backdrop-filter:blur(20px);
+  border-top:1px solid #222;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  z-index:60;
+}
+
+.navBtn{
+  border:0;
+  background:none;
+  color:#727278;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+
+.navBtn.active{color:white}
+
+.navIcon{
+  font-size:18px;
+  height:21px;
+}
+
+.nowNav .navIcon{
+  width:35px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:white;
+  color:#111;
+}
+
+.navLabel{
+  font-size:8px;
+  font-weight:850;
 }
 
 /* MESSAGE MENU */
@@ -1037,8 +1102,8 @@ p{margin:0}
   display:none;
   position:fixed;
   inset:0;
-  z-index:150;
-  background:rgba(0,0,0,.45);
+  z-index:200;
+  background:rgba(0,0,0,.55);
   align-items:flex-end;
   justify-content:center;
 }
@@ -1047,89 +1112,42 @@ p{margin:0}
 
 .menuSheet{
   width:min(100%,560px);
-  background:white;
-  border-radius:25px 25px 0 0;
-  padding:14px 18px 25px;
+  background:#19191b;
+  border-radius:24px 24px 0 0;
+  padding:13px 17px 24px;
 }
 
-.sheetAction{
+.menuAction{
   width:100%;
-  border:0;
-  background:white;
-  border-bottom:1px solid var(--line);
-  padding:15px 2px;
+  min-height:50px;
   text-align:left;
+  border:0;
+  border-bottom:1px solid var(--line);
+  background:none;
+  color:white;
   font-weight:750;
 }
 
-.sheetAction.danger{color:var(--red)}
+.menuAction.danger{color:#ff6579}
 
-/* NAV */
-
-.bottomNav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(100%,560px);
-  height:72px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  background:rgba(255,255,255,.96);
-  backdrop-filter:blur(18px);
-  border-top:1px solid var(--line);
-  z-index:25;
-}
-
-.navBtn{
-  border:0;
-  background:none;
-  color:#9a9da3;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  cursor:pointer;
-}
-
-.navBtn.active{color:#15171c}
-
-.navIcon{
-  font-size:18px;
-  height:20px;
-}
-
-.navBtn.nowNav .navIcon{
-  width:32px;
-  height:27px;
-  border-radius:10px;
-  background:#17191e;
-  color:white;
-  display:grid;
-  place-items:center;
-}
-
-.navLabel{
-  font-size:8px;
-  font-weight:850;
-}
+/* TOAST */
 
 .toast{
   position:fixed;
-  top:82px;
+  top:75px;
   left:50%;
   transform:translate(-50%,-10px);
   width:min(calc(100% - 30px),520px);
-  background:#17191e;
-  color:white;
-  padding:12px 15px;
+  background:white;
+  color:#111;
   border-radius:13px;
-  z-index:200;
+  padding:12px 14px;
+  z-index:300;
   opacity:0;
   pointer-events:none;
   transition:.2s;
-  font-size:12px;
+  font-size:11px;
+  font-weight:850;
 }
 
 .toast.show{
@@ -1138,12 +1156,9 @@ p{margin:0}
 }
 
 @media(min-width:700px){
-  body{padding:20px}
+  body{background:#151517}
   .app{
-    min-height:900px;
-    border-radius:30px;
-    overflow:hidden;
-    box-shadow:0 25px 80px rgba(30,35,50,.12);
+    box-shadow:0 0 80px rgba(0,0,0,.4);
   }
 }
 </style>
@@ -1155,8 +1170,8 @@ p{margin:0}
 
 <div class="app">
 
-<header class="header">
-  <div class="logo" onclick="changeScreen('todayScreen')">RANK<span>.</span></div>
+<header id="mainHeader" class="header">
+  <div class="logo">RANK<span>.</span></div>
 
   <div class="headerRight">
     <div class="streak">🔥 12</div>
@@ -1164,469 +1179,757 @@ p{margin:0}
   </div>
 </header>
 
-<main>
+<main id="mainContent">
 
 <!-- TODAY -->
+
 <section id="todayScreen" class="screen active">
 
-  <div class="eyebrow">TODAY · #27</div>
-  <h1>Ton groupe.<br>Aujourd'hui.</h1>
-  <p class="sub">Vote, regarde les NOW et retrouve ton groupe ce soir.</p>
+<div class="eyebrow">TODAY · RANK #27</div>
+<h1>Qu'est-ce qui<br>se passe aujourd'hui ?</h1>
+<p class="sub">Vote. Regarde ton groupe. Reviens pour le reveal.</p>
 
-  <div class="todayHero">
-    <div class="liveTag">● QUESTION DU JOUR</div>
+<div class="todayQuestion">
 
-    <div class="question">Qui a le plus d’humour ?</div>
-    <div class="questionInfo">Choisis jusqu’à 3 personnes · vote anonyme</div>
+  <div class="questionTag">QUESTION DU JOUR</div>
 
-    <div id="peopleGrid" class="people"></div>
+  <div class="question">Qui a le plus d'humour ?</div>
 
-    <button id="voteBtn" class="primary blue" disabled>
-      Valider mon vote
+  <p class="sub" style="font-size:10px">
+    Jusqu'à 3 personnes · vote anonyme
+  </p>
+
+  <div id="peopleGrid" class="people"></div>
+
+  <button id="voteBtn" class="primary blue" disabled>
+    Valider mon vote
+  </button>
+
+  <div id="voteSuccess" class="voteSuccess">
+    Vote envoyé ✓
+  </div>
+
+  <div class="reveal">
+    <div>
+      <small>REVEAL</small>
+      <strong>19:30</strong>
+    </div>
+
+    <div style="text-align:right">
+      <small>THE RANK IS OUT</small>
+      <div id="countdown">--</div>
+    </div>
+  </div>
+
+  <button class="secondary" onclick="showResultsDemo()">
+    Voir le reveal · démo
+  </button>
+
+</div>
+
+<div class="sectionHead">
+  <h2>Ton groupe</h2>
+  <small>maintenant</small>
+</div>
+
+<div class="card socialShortcut nowShortcut" onclick="changeScreen('nowScreen')">
+  <div class="shortcutIcon">▶</div>
+
+  <div class="shortcutText">
+    <strong>NOW <span class="badge">6</span></strong>
+    <span>Regarde ce que tes amis ont posté</span>
+  </div>
+
+  <div>›</div>
+</div>
+
+<div class="card socialShortcut" onclick="togglePredict()">
+  <div class="shortcutIcon">◎</div>
+
+  <div class="shortcutText">
+    <strong>PREDICT</strong>
+    <span>Qui sera #1 ce soir ?</span>
+  </div>
+
+  <div>›</div>
+</div>
+
+<div id="predictArea" style="display:none">
+
+  <div class="card">
+
+    <div style="display:flex;justify-content:space-between">
+      <strong>Qui sera #1 ?</strong>
+      <strong style="color:var(--gold)">340 pts</strong>
+    </div>
+
+    <div id="predictOptions" class="predictOptions"></div>
+
+    <button id="predictBtn" class="primary" disabled>
+      Valider ma prédiction
     </button>
 
-    <div id="voteSuccess" class="voteSuccess">Vote envoyé ✓</div>
-
-    <div class="revealLine">
-      <div>
-        <small>RÉSULTATS</small>
-        <strong>19:30</strong>
-      </div>
-
-      <div style="text-align:right">
-        <small>THE RANK IS OUT</small>
-        <div id="countdown">--</div>
-      </div>
-    </div>
-
-    <button class="secondary" onclick="showResultsDemo()">
-      Voir le résultat · démo
-    </button>
   </div>
 
-  <div class="sectionHead">
-    <h2>À faire maintenant</h2>
+</div>
+
+<div class="card socialShortcut" onclick="changeScreen('roomScreen')">
+  <div class="shortcutIcon">↗</div>
+
+  <div class="shortcutText">
+    <strong>ROOM <span class="badge">8</span></strong>
+    <span>Ton groupe parle maintenant</span>
   </div>
 
-  <div class="card homeFeature" onclick="changeScreen('nowScreen')">
-    <div class="featureIcon">▶</div>
-    <div class="featureContent">
-      <div class="featureTitle">
-        NOW
-        <span class="newBadge">6 NOUVEAUX</span>
-      </div>
-      <div class="featureText">Les stories de ton groupe · 24 h</div>
-    </div>
-    <div class="arrow">›</div>
-  </div>
-
-  <div class="card homeFeature" onclick="openPredict()">
-    <div class="featureIcon">◎</div>
-    <div class="featureContent">
-      <div class="featureTitle">PREDICT</div>
-      <div class="featureText">Devine qui finira #1 ce soir</div>
-    </div>
-    <div class="arrow">›</div>
-  </div>
-
-  <div class="card homeFeature" onclick="changeScreen('roomScreen')">
-    <div class="featureIcon">↗</div>
-    <div class="featureContent">
-      <div class="featureTitle">
-        ROOM
-        <span class="newBadge">8</span>
-      </div>
-      <div class="featureText">Le chat privé de ton groupe</div>
-    </div>
-    <div class="arrow">›</div>
-  </div>
-
-  <div id="predictArea" style="display:none">
-
-    <div class="sectionHead">
-      <h2>Predict</h2>
-      <small>340 pts</small>
-    </div>
-
-    <div class="card">
-      <strong>Qui sera #1 ce soir ?</strong>
-      <p class="sub" style="font-size:11px">Une seule prédiction avant 19h30.</p>
-
-      <div id="predictOptions" class="predictOptions"></div>
-
-      <button id="predictBtn" class="primary" disabled>
-        Valider ma prédiction
-      </button>
-    </div>
-  </div>
+  <div>›</div>
+</div>
 
 </section>
 
 <!-- NOW -->
+
 <section id="nowScreen" class="screen">
 
-  <div class="nowTop">
-    <div>
-      <div class="eyebrow">NOW</div>
-      <h1>Entre vous.</h1>
+<div id="nowFeed" class="nowFeed">
+
+  <!-- NOW 1 -->
+
+  <article class="nowSlide">
+
+    <div class="nowMedia one">
+      <div class="bigLetter">L</div>
+      <div class="fakePlay">▶</div>
     </div>
 
-    <button class="addNow" onclick="openCreateNow()">＋ Ajouter</button>
-  </div>
+    <div class="nowGradient"></div>
 
-  <p class="sub" style="margin-bottom:16px">
-    Photos et vidéos jusqu’à 1 minute · visibles 24 h.
-  </p>
+    <div class="nowTopBar">
+      <div class="nowBrand">NOW</div>
 
-  <div id="stories" class="stories"></div>
-
-  <div class="sectionHead">
-    <h2>Maintenant</h2>
-    <small>Ton groupe uniquement</small>
-  </div>
-
-  <div class="nowFeedCard">
-    <div class="nowAuthor">
-      <div class="miniAvatar">L</div>
-      <div class="nowAuthorInfo">
-        <strong>Léna</strong>
-        <span>il y a 12 min</span>
-      </div>
-      <button class="more" onclick="toast('Options du NOW')">•••</button>
-    </div>
-
-    <div class="fakeMedia">
-      <div class="mediaLetter">L</div>
-      <div class="videoBadge">▶ 0:18</div>
-    </div>
-
-    <div class="nowCaption">
-      <strong>@lenaa</strong> journée terminée 😭
-    </div>
-
-    <div class="nowActions">
-      <div class="quickReactions">
-        <button class="reaction" onclick="react(this)">😂</button>
-        <button class="reaction" onclick="react(this)">❤️</button>
-        <button class="reaction" onclick="react(this)">😭</button>
-        <button class="reaction" onclick="react(this)">🔥</button>
-      </div>
-
-      <div class="commentLine">
-        <input id="comment1" class="commentInput" placeholder="Écrire un commentaire...">
-        <button class="commentSend" onclick="addComment(1)">↑</button>
+      <div class="nowTopActions">
+        <button class="roundIcon" onclick="openAddNow()">＋</button>
+        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
       </div>
     </div>
 
-    <div id="comments1" class="comments">
-      <div class="comment"><strong>@emma</strong> enfin 😂</div>
-      <div class="comment"><strong>@noe13</strong> la chance</div>
-    </div>
-  </div>
+    <div class="scrollHint">Glisse vers le haut ↑</div>
 
-  <div class="nowFeedCard">
-    <div class="nowAuthor">
-      <div class="miniAvatar">N</div>
-      <div class="nowAuthorInfo">
-        <strong>Noé</strong>
-        <span>il y a 36 min</span>
-      </div>
-      <button class="more" onclick="toast('Options du NOW')">•••</button>
-    </div>
-
-    <div class="fakeMedia second">
-      <div class="mediaLetter">N</div>
-      <div class="videoBadge">PHOTO</div>
-    </div>
-
-    <div class="nowCaption">
-      <strong>@noe13</strong> aucune explication
-    </div>
-
-    <div class="nowActions">
-      <div class="quickReactions">
-        <button class="reaction" onclick="react(this)">😂</button>
-        <button class="reaction" onclick="react(this)">❤️</button>
-        <button class="reaction" onclick="react(this)">💀</button>
+    <div class="nowUser">
+      <div class="userLine">
+        <div class="nowAvatar">L</div>
+        <div>
+          <strong>@lenaa</strong>
+          <span> · 12 min</span>
+        </div>
       </div>
 
-      <div class="commentLine">
-        <input id="comment2" class="commentInput" placeholder="Écrire un commentaire...">
-        <button class="commentSend" onclick="addComment(2)">↑</button>
+      <div class="nowCaption">
+        Journée terminée 😭
+      </div>
+
+      <div class="expire">disparaît dans 23 h</div>
+    </div>
+
+    <div class="sideActions">
+
+      <button class="sideAction" onclick="likeNow(this)">
+        <div class="sideCircle">♥</div>
+        <span>24</span>
+      </button>
+
+      <button class="sideAction" onclick="openComments('Léna')">
+        <div class="sideCircle">◌</div>
+        <span>8</span>
+      </button>
+
+      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
+        <div class="sideCircle">↗</div>
+        <span>Partager</span>
+      </button>
+
+    </div>
+
+    <div class="nowCommentBar">
+      <input id="quick1" placeholder="Commenter ce NOW...">
+      <button onclick="quickComment(1)">↑</button>
+    </div>
+
+  </article>
+
+  <!-- NOW 2 -->
+
+  <article class="nowSlide">
+
+    <div class="nowMedia two">
+      <div class="bigLetter">N</div>
+    </div>
+
+    <div class="nowGradient"></div>
+
+    <div class="nowTopBar">
+      <div class="nowBrand">NOW</div>
+
+      <div class="nowTopActions">
+        <button class="roundIcon" onclick="openAddNow()">＋</button>
+        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
       </div>
     </div>
 
-    <div id="comments2" class="comments"></div>
-  </div>
+    <div class="nowUser">
+      <div class="userLine">
+        <div class="nowAvatar">N</div>
+        <div>
+          <strong>@noe13</strong>
+          <span> · 36 min</span>
+        </div>
+      </div>
+
+      <div class="nowCaption">
+        Aucune explication 💀
+      </div>
+
+      <div class="expire">disparaît dans 23 h</div>
+    </div>
+
+    <div class="sideActions">
+
+      <button class="sideAction" onclick="likeNow(this)">
+        <div class="sideCircle">♥</div>
+        <span>31</span>
+      </button>
+
+      <button class="sideAction" onclick="openComments('Noé')">
+        <div class="sideCircle">◌</div>
+        <span>12</span>
+      </button>
+
+      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
+        <div class="sideCircle">↗</div>
+        <span>Partager</span>
+      </button>
+
+    </div>
+
+    <div class="nowCommentBar">
+      <input id="quick2" placeholder="Commenter ce NOW...">
+      <button onclick="quickComment(2)">↑</button>
+    </div>
+
+  </article>
+
+  <!-- NOW 3 -->
+
+  <article class="nowSlide">
+
+    <div class="nowMedia three">
+      <div class="bigLetter">E</div>
+      <div class="fakePlay">▶</div>
+    </div>
+
+    <div class="nowGradient"></div>
+
+    <div class="nowTopBar">
+      <div class="nowBrand">NOW</div>
+
+      <div class="nowTopActions">
+        <button class="roundIcon" onclick="openAddNow()">＋</button>
+        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
+      </div>
+    </div>
+
+    <div class="nowUser">
+      <div class="userLine">
+        <div class="nowAvatar">E</div>
+        <div>
+          <strong>@emma</strong>
+          <span> · 1 h</span>
+        </div>
+      </div>
+
+      <div class="nowCaption">
+        Vous validez ou pas ? 😂
+      </div>
+
+      <div class="expire">disparaît dans 22 h</div>
+    </div>
+
+    <div class="sideActions">
+
+      <button class="sideAction" onclick="likeNow(this)">
+        <div class="sideCircle">♥</div>
+        <span>18</span>
+      </button>
+
+      <button class="sideAction" onclick="openComments('Emma')">
+        <div class="sideCircle">◌</div>
+        <span>5</span>
+      </button>
+
+      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
+        <div class="sideCircle">↗</div>
+        <span>Partager</span>
+      </button>
+
+    </div>
+
+    <div class="nowCommentBar">
+      <input id="quick3" placeholder="Commenter ce NOW...">
+      <button onclick="quickComment(3)">↑</button>
+    </div>
+
+  </article>
+
+  <!-- NOW 4 -->
+
+  <article class="nowSlide">
+
+    <div class="nowMedia four">
+      <div class="bigLetter">I</div>
+    </div>
+
+    <div class="nowGradient"></div>
+
+    <div class="nowTopBar">
+      <div class="nowBrand">NOW</div>
+
+      <div class="nowTopActions">
+        <button class="roundIcon" onclick="openAddNow()">＋</button>
+        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
+      </div>
+    </div>
+
+    <div class="nowUser">
+      <div class="userLine">
+        <div class="nowAvatar">I</div>
+        <div>
+          <strong>@iness</strong>
+          <span> · 2 h</span>
+        </div>
+      </div>
+
+      <div class="nowCaption">
+        Ce soir ça va être quelque chose
+      </div>
+
+      <div class="expire">disparaît dans 21 h</div>
+    </div>
+
+    <div class="sideActions">
+
+      <button class="sideAction" onclick="likeNow(this)">
+        <div class="sideCircle">♥</div>
+        <span>16</span>
+      </button>
+
+      <button class="sideAction" onclick="openComments('Inès')">
+        <div class="sideCircle">◌</div>
+        <span>3</span>
+      </button>
+
+      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
+        <div class="sideCircle">↗</div>
+        <span>Partager</span>
+      </button>
+
+    </div>
+
+    <div class="nowCommentBar">
+      <input id="quick4" placeholder="Commenter ce NOW...">
+      <button onclick="quickComment(4)">↑</button>
+    </div>
+
+  </article>
+
+</div>
 
 </section>
 
 <!-- RANK -->
+
 <section id="rankScreen" class="screen">
 
-  <div class="eyebrow">THE RANK IS OUT</div>
-  <h1>Le classement.</h1>
-  <p class="sub">Qui a le plus d’humour ?</p>
+<div class="eyebrow">THE RANK IS OUT</div>
 
-  <div class="card">
-    <div id="podium" class="podium"></div>
+<h1>Le classement.</h1>
+
+<p class="sub">Qui a le plus d'humour ?</p>
+
+<div class="card">
+  <div id="podium" class="podium"></div>
+</div>
+
+<div class="sectionHead">
+  <h2>Classement complet</h2>
+</div>
+
+<div class="card">
+  <div id="rankingList"></div>
+</div>
+
+<button class="primary blue" onclick="changeScreen('roomScreen')">
+  Ouvrir la ROOM
+</button>
+
+<div class="sectionHead">
+  <h2>Historique</h2>
+  <small>7 jours</small>
+</div>
+
+<div class="card">
+
+  <div class="rankRow">
+    <strong>Hier</strong>
+    <div>Meilleur style</div>
+    <div class="rankVotes">Léna #1</div>
   </div>
 
-  <div class="sectionHead">
-    <h2>Classement complet</h2>
+  <div class="rankRow">
+    <strong>-2j</strong>
+    <div>Meilleure vibe</div>
+    <div class="rankVotes">Lucas #1</div>
   </div>
 
-  <div class="card">
-    <div id="rankingList"></div>
+  <div class="rankRow">
+    <strong>-3j</strong>
+    <div>Toujours en retard</div>
+    <div class="rankVotes">Emma #1</div>
   </div>
 
-  <button class="primary" onclick="changeScreen('roomScreen')">
-    Parler du résultat dans ROOM
-  </button>
-
-  <div class="sectionHead">
-    <h2>Derniers RANKS</h2>
-    <small>7 jours</small>
-  </div>
-
-  <div class="card">
-    <div class="rankRow">
-      <strong>Hier</strong><div>Meilleur style</div><div class="rankVotes">Léna #1</div>
-    </div>
-    <div class="rankRow">
-      <strong>-2j</strong><div>Meilleure vibe</div><div class="rankVotes">Lucas #1</div>
-    </div>
-    <div class="rankRow">
-      <strong>-3j</strong><div>Toujours en retard</div><div class="rankVotes">Emma #1</div>
-    </div>
-  </div>
+</div>
 
 </section>
 
 <!-- ROOM -->
+
 <section id="roomScreen" class="screen">
 
-  <div class="eyebrow">ROOM</div>
+<div class="eyebrow">ROOM</div>
 
-  <div class="roomHeader">
-    <div class="roomTitleLine">
-      <div>
-        <h2>Marseille</h2>
-        <p class="sub" style="font-size:10px;margin-top:3px">8 membres · groupe privé</p>
-      </div>
-      <div class="online">● 8 EN LIGNE</div>
+<h1>Le groupe.</h1>
+
+<p class="sub">Ici, seuls les membres de ton groupe peuvent parler.</p>
+
+<div class="roomHead" style="margin-top:18px">
+
+  <div class="roomTop">
+
+    <div>
+      <h2>Marseille</h2>
+      <p class="sub" style="font-size:9px;margin-top:3px">
+        8 membres · privé
+      </p>
     </div>
 
-    <div class="roomWinner">
-      👑 <strong>Léna est #1 aujourd’hui</strong> · 132 votes
-    </div>
+    <div class="online">● 8 EN LIGNE</div>
+
   </div>
 
-  <div id="messages" class="messages"></div>
-
-  <div class="composer">
-    <div class="composerInner">
-      <input id="messageInput" maxlength="250" placeholder="Message...">
-      <button class="send" onclick="sendMessage()">↑</button>
-    </div>
+  <div class="winnerPin">
+    👑 <strong>Léna est #1 aujourd'hui</strong>
   </div>
+
+</div>
+
+<div id="messages" class="messages"></div>
+
+<div class="roomComposer">
+  <input id="messageInput" maxlength="250" placeholder="Message...">
+  <button onclick="sendMessage()">↑</button>
+</div>
 
 </section>
 
 <!-- RECAP -->
+
 <section id="recapScreen" class="screen">
 
-  <div class="eyebrow">WEEKLY RECAP</div>
-  <h1>Cette semaine.</h1>
-  <p class="sub">Ce qui s’est passé dans ton groupe.</p>
+<div class="eyebrow">WEEKLY RECAP</div>
 
-  <div class="card">
-    <h2>Ton recap</h2>
+<h1>Ta semaine.</h1>
 
-    <div class="statGrid">
-      <div class="stat"><strong>47</strong><span>votes reçus</span></div>
-      <div class="stat"><strong>2</strong><span>podiums</span></div>
-      <div class="stat"><strong>5/7</strong><span>jours joués</span></div>
-      <div class="stat"><strong>+80</strong><span>Predict points</span></div>
+<p class="sub">Tout ce qui s'est passé dans ton groupe.</p>
+
+<div class="card">
+
+  <h2>Ton recap</h2>
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong>47</strong>
+      <span>votes reçus</span>
+    </div>
+
+    <div class="stat">
+      <strong>2</strong>
+      <span>podiums</span>
+    </div>
+
+    <div class="stat">
+      <strong>5/7</strong>
+      <span>jours joués</span>
+    </div>
+
+    <div class="stat">
+      <strong>+80</strong>
+      <span>Predict pts</span>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="card">
+
+  <h2>Personne de la semaine</h2>
+
+  <div style="display:flex;align-items:center;gap:11px;margin-top:15px">
+    <div class="miniAvatar" style="width:54px;height:54px">L</div>
+
+    <div>
+      <strong>Léna</strong>
+      <p class="sub" style="font-size:10px;margin-top:3px">
+        3 premières places
+      </p>
     </div>
   </div>
 
-  <div class="card">
-    <h2>Personne de la semaine</h2>
-    <div style="display:flex;align-items:center;gap:12px;margin-top:15px">
-      <div class="miniAvatar" style="width:55px;height:55px">L</div>
-      <div>
-        <strong>Léna</strong>
-        <p class="sub" style="font-size:11px;margin-top:3px">
-          3 premières places cette semaine
-        </p>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <div class="sectionHead">
-    <h2>Create Question</h2>
-    <small>1× par semaine</small>
-  </div>
+<div class="sectionHead">
+  <h2>Create Question</h2>
+  <small>1× / semaine</small>
+</div>
 
-  <div class="card">
-    <strong>Cette semaine, c’est à vous.</strong>
-    <p class="sub">
-      Propose une question. Les meilleures pourront être choisies pour le groupe.
-    </p>
+<div class="card">
 
-    <textarea id="customQuestion" class="questionInput"
-      placeholder="Ex : Qui serait capable de devenir célèbre ?"></textarea>
+  <strong>À vous de choisir.</strong>
 
-    <button id="createQuestionBtn" class="primary blue" onclick="createQuestion()">
-      Proposer ma question
-    </button>
+  <p class="sub">
+    Propose une question pour un prochain RANK.
+  </p>
 
-    <p id="createStatus" class="sub" style="font-size:10px">
-      Disponible cette semaine.
-    </p>
-  </div>
+  <textarea
+    id="customQuestion"
+    class="questionInput"
+    placeholder="Ex : Qui serait capable de devenir célèbre ?"
+  ></textarea>
+
+  <button
+    id="createQuestionBtn"
+    class="primary blue"
+    onclick="createQuestion()"
+  >
+    Proposer
+  </button>
+
+  <p id="createStatus" class="sub" style="font-size:9px">
+    Disponible cette semaine.
+  </p>
+
+</div>
 
 </section>
 
 <!-- PROFILE -->
+
 <section id="profileScreen" class="screen">
 
-  <div class="eyebrow">PROFILE</div>
+<div class="eyebrow">PROFILE</div>
 
-  <div class="profileHero">
-    <div class="profileTop">
-      <div class="profileAvatar">JT</div>
-      <div>
-        <h2 style="font-size:25px">Jonathan</h2>
-        <p class="sub" style="margin-top:3px">@jonathan</p>
-      </div>
+<div class="card">
+
+  <div class="profile">
+
+    <div class="profileAvatar">JT</div>
+
+    <div>
+      <h2 style="font-size:25px">Jonathan</h2>
+      <p class="sub" style="margin-top:3px">@jonathan</p>
     </div>
 
-    <div class="statGrid">
-      <div class="stat"><strong>12</strong><span>streak</span></div>
-      <div class="stat"><strong>5</strong><span>podiums</span></div>
-      <div class="stat"><strong>340</strong><span>Predict pts</span></div>
-      <div class="stat"><strong>8</strong><span>membres</span></div>
-    </div>
   </div>
 
-  <div class="card">
-    <h2>Mon groupe</h2>
-    <p class="sub">Marseille · privé · 8 membres</p>
-    <button class="secondary" onclick="toast('Liste des membres · démo')">
-      Voir les membres
-    </button>
+  <div class="stats">
+
+    <div class="stat">
+      <strong>12</strong>
+      <span>streak</span>
+    </div>
+
+    <div class="stat">
+      <strong>5</strong>
+      <span>podiums</span>
+    </div>
+
+    <div class="stat">
+      <strong>340</strong>
+      <span>Predict pts</span>
+    </div>
+
+    <div class="stat">
+      <strong>8</strong>
+      <span>amis</span>
+    </div>
+
   </div>
+
+</div>
+
+<div class="card">
+
+  <h2>Mon groupe</h2>
+
+  <p class="sub">Marseille · 8 membres · privé</p>
+
+  <button class="secondary" onclick="toast('Membres du groupe · démo')">
+    Voir les membres
+  </button>
+
+</div>
 
 </section>
 
 </main>
 
-<nav class="bottomNav">
+<nav id="bottomNav" class="bottomNav">
 
-  <button class="navBtn active" data-screen="todayScreen">
-    <span class="navIcon">⌂</span>
-    <span class="navLabel">TODAY</span>
-  </button>
+<button class="navBtn active" data-screen="todayScreen">
+  <span class="navIcon">⌂</span>
+  <span class="navLabel">TODAY</span>
+</button>
 
-  <button class="navBtn nowNav" data-screen="nowScreen">
-    <span class="navIcon">▶</span>
-    <span class="navLabel">NOW</span>
-  </button>
+<button class="navBtn nowNav" data-screen="nowScreen">
+  <span class="navIcon">▶</span>
+  <span class="navLabel">NOW</span>
+</button>
 
-  <button class="navBtn" data-screen="rankScreen">
-    <span class="navIcon">▥</span>
-    <span class="navLabel">RANK</span>
-  </button>
+<button class="navBtn" data-screen="rankScreen">
+  <span class="navIcon">▥</span>
+  <span class="navLabel">RANK</span>
+</button>
 
-  <button class="navBtn" data-screen="roomScreen">
-    <span class="navIcon">◌</span>
-    <span class="navLabel">ROOM</span>
-  </button>
+<button class="navBtn" data-screen="roomScreen">
+  <span class="navIcon">◌</span>
+  <span class="navLabel">ROOM</span>
+</button>
 
-  <button class="navBtn" data-screen="recapScreen">
-    <span class="navIcon">↻</span>
-    <span class="navLabel">RECAP</span>
-  </button>
+<button class="navBtn" data-screen="recapScreen">
+  <span class="navIcon">↻</span>
+  <span class="navLabel">RECAP</span>
+</button>
 
 </nav>
+
 </div>
 
-<!-- STORY VIEWER -->
-<div id="storyViewer" class="storyViewer">
+<!-- COMMENTS -->
 
-  <div class="storyProgress">
-    <div class="progressBar active"></div>
-    <div class="progressBar"></div>
-    <div class="progressBar"></div>
-    <div class="progressBar"></div>
+<div id="commentsOverlay" class="commentsOverlay" onclick="commentsBackground(event)">
+
+<div class="commentsSheet">
+
+  <div class="handle"></div>
+
+  <div class="commentHeader">
+    <h2>Commentaires</h2>
+    <button onclick="closeComments()">×</button>
   </div>
 
-  <div class="storyViewerHead">
-    <div id="storyAvatar" class="miniAvatar">L</div>
-    <div>
-      <strong id="storyName">Léna</strong>
-      <span id="storyTime">12 min</span>
-    </div>
-    <button class="closeStory" onclick="closeStory()">×</button>
-  </div>
+  <div id="commentsList" class="commentsList"></div>
 
-  <div id="storyVisual" class="storyVisual">
-    <div id="storyLetter" class="mediaLetter">L</div>
-  </div>
-
-  <div class="storyBottom">
-    <div id="storyCaption" class="storyCaption">journée terminée 😭</div>
-
-    <div class="storyReply">
-      <input id="storyReplyInput" placeholder="Écrire un commentaire...">
-      <button onclick="sendStoryReply()">↑</button>
-    </div>
+  <div class="drawerComposer">
+    <input id="drawerComment" placeholder="Ajouter un commentaire...">
+    <button onclick="sendDrawerComment()">↑</button>
   </div>
 
 </div>
 
-<!-- CREATE NOW -->
-<div id="createNowModal" class="modal" onclick="closeModalBackground(event)">
-  <div class="sheet">
-    <div class="sheetHandle"></div>
+</div>
 
-    <h2>Nouveau NOW</h2>
-    <p class="sub">Visible uniquement par ton groupe pendant 24 h.</p>
+<!-- ADD NOW -->
 
-    <div class="uploadBox">
-      <strong>Photo ou vidéo</strong>
-      <small>Vidéo jusqu’à 1 minute</small>
+<div id="addOverlay" class="addOverlay">
 
-      <label class="uploadButton">
-        Choisir
-        <input id="nowFile" class="fileInput" type="file" accept="image/*,video/*"
-          onchange="fileSelected(event)">
-      </label>
-    </div>
+<div class="addHeader">
+  <button onclick="closeAddNow()">×</button>
+  <strong>Nouveau NOW</strong>
+  <div style="width:24px"></div>
+</div>
 
-    <input id="nowCaptionInput" class="commentInput"
-      style="width:100%;margin-top:13px;border-radius:14px"
-      placeholder="Ajouter quelques mots...">
+<div class="uploadArea">
 
-    <button class="primary blue" onclick="publishNow()">Publier mon NOW</button>
-    <button class="secondary" onclick="closeCreateNow()">Annuler</button>
-  </div>
+  <div class="uploadIcon">＋</div>
+
+  <h2>Photo ou vidéo</h2>
+
+  <p class="sub">
+    Une vidéo peut durer jusqu'à 1 minute.<br>
+    Ton NOW disparaît après 24 heures.
+  </p>
+
+  <label class="chooseFile">
+    Choisir
+    <input
+      id="nowFile"
+      class="fileInput"
+      type="file"
+      accept="image/*,video/*"
+      onchange="selectNowFile(event)"
+    >
+  </label>
+
+</div>
+
+<div class="addCaption">
+
+  <input
+    id="nowCaption"
+    placeholder="Ajouter une légende..."
+  >
+
+  <button class="primary blue" onclick="publishNow()">
+    Publier mon NOW
+  </button>
+
+</div>
+
 </div>
 
 <!-- MESSAGE MENU -->
-<div id="menuOverlay" class="menuOverlay" onclick="closeMenuBackground(event)">
-  <div class="menuSheet">
-    <button id="replyAction" class="sheetAction">Répondre</button>
-    <button id="reportAction" class="sheetAction">Signaler le message</button>
-    <button id="blockAction" class="sheetAction">Bloquer cette personne</button>
-    <button id="deleteAction" class="sheetAction danger">Supprimer mon message</button>
-    <button class="sheetAction" onclick="closeMessageMenu()">Annuler</button>
-  </div>
+
+<div id="menuOverlay" class="menuOverlay" onclick="menuBackground(event)">
+
+<div class="menuSheet">
+
+  <button id="replyAction" class="menuAction">
+    Répondre
+  </button>
+
+  <button id="reportAction" class="menuAction">
+    Signaler le message
+  </button>
+
+  <button id="blockAction" class="menuAction">
+    Bloquer cette personne
+  </button>
+
+  <button id="deleteAction" class="menuAction danger">
+    Supprimer mon message
+  </button>
+
+  <button class="menuAction" onclick="closeMessageMenu()">
+    Annuler
+  </button>
+
+</div>
+
 </div>
 
 <script>
+
+/* DATA */
+
 const members=[
   {id:1,name:"Léna",username:"@lenaa",initial:"L",votes:132},
   {id:2,name:"Noé",username:"@noe13",initial:"N",votes:98},
@@ -1636,255 +1939,242 @@ const members=[
   {id:6,name:"Mathis",username:"@mathis",initial:"M",votes:41}
 ];
 
-const storyData=[
-  {name:"Léna",initial:"L",time:"12 min",caption:"journée terminée 😭"},
-  {name:"Noé",initial:"N",time:"36 min",caption:"aucune explication 💀"},
-  {name:"Emma",initial:"E",time:"1 h",caption:"vous validez ?"},
-  {name:"Lucas",initial:"L",time:"2 h",caption:"ça part"},
-  {name:"Inès",initial:"I",time:"3 h",caption:"today"}
-];
-
 let selectedVotes=new Set();
 let prediction=null;
+let selectedNowFile=null;
 let activeMessageId=null;
-let blockedUsers=new Set();
 let replyTo=null;
-let selectedFile=null;
+let blockedUsers=new Set();
+let currentCommentUser="";
 
 const starterMessages=[
-  {id:101,username:"@lenaa",initial:"L",time:"19:31",text:"Merciii vous êtes des fous 😭",mine:false},
-  {id:102,username:"@noe13",initial:"N",time:"19:31",text:"Je demande recompte officiel",mine:false},
-  {id:103,username:"@emma",initial:"E",time:"19:32",text:"Franchement Léna c'était mérité",mine:false},
-  {id:104,username:"@lucas",initial:"L",time:"19:33",text:"Demain je prends le #1",mine:false}
+  {
+    id:101,
+    username:"@lenaa",
+    initial:"L",
+    time:"19:31",
+    text:"Merciii vous êtes des fous 😭",
+    mine:false
+  },
+  {
+    id:102,
+    username:"@noe13",
+    initial:"N",
+    time:"19:31",
+    text:"Je demande recompte officiel",
+    mine:false
+  },
+  {
+    id:103,
+    username:"@emma",
+    initial:"E",
+    time:"19:32",
+    text:"Franchement Léna c'était mérité",
+    mine:false
+  },
+  {
+    id:104,
+    username:"@lucas",
+    initial:"L",
+    time:"19:33",
+    text:"Demain je prends le #1",
+    mine:false
+  }
 ];
 
 let chatMessages;
+
 try{
-  chatMessages=JSON.parse(localStorage.getItem("rank-v5-chat"))||starterMessages;
+  chatMessages=
+    JSON.parse(localStorage.getItem("rank-v6-chat"))
+    ||starterMessages;
 }catch{
   chatMessages=[...starterMessages];
 }
 
+/* GENERAL */
+
 function toast(text){
-  const el=document.getElementById("toast");
-  el.textContent=text;
-  el.classList.add("show");
-  setTimeout(()=>el.classList.remove("show"),2200);
+  const t=document.getElementById("toast");
+
+  t.textContent=text;
+  t.classList.add("show");
+
+  setTimeout(()=>{
+    t.classList.remove("show");
+  },2100);
 }
 
 function changeScreen(id){
-  document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen=>screen.classList.remove("active"));
+
   document.getElementById(id).classList.add("active");
 
   document.querySelectorAll(".navBtn").forEach(btn=>{
-    btn.classList.toggle("active",btn.dataset.screen===id);
+    btn.classList.toggle(
+      "active",
+      btn.dataset.screen===id
+    );
   });
 
-  if(id==="roomScreen") renderMessages();
+  const isNow=id==="nowScreen";
 
-  window.scrollTo({top:0,behavior:"smooth"});
+  document.getElementById("mainHeader").style.display=
+    isNow?"none":"flex";
+
+  document.getElementById("mainContent").style.padding=
+    isNow?"0":"15px 16px 100px";
+
+  document.getElementById("bottomNav").style.display=
+    isNow?"none":"grid";
+
+  if(id==="roomScreen"){
+    renderMessages();
+  }
+
+  if(!isNow){
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
 }
 
 document.querySelectorAll(".navBtn").forEach(btn=>{
-  btn.onclick=()=>changeScreen(btn.dataset.screen);
+  btn.onclick=()=>{
+    changeScreen(btn.dataset.screen);
+  };
 });
 
 /* VOTE */
 
 function renderPeople(){
-  document.getElementById("peopleGrid").innerHTML=members.map(m=>`
-    <button class="person ${selectedVotes.has(m.id)?"selected":""}" onclick="toggleVote(${m.id})">
-      <div class="avatar">${m.initial}</div>
-      <strong>${m.name}</strong>
-      <small>${m.username}</small>
-    </button>
-  `).join("");
 
-  document.getElementById("voteBtn").disabled=selectedVotes.size===0;
+  document.getElementById("peopleGrid").innerHTML=
+    members.map(member=>`
+
+      <button
+        class="person ${selectedVotes.has(member.id)?"selected":""}"
+        onclick="toggleVote(${member.id})"
+      >
+
+        <div class="avatar">
+          ${member.initial}
+        </div>
+
+        <strong>${member.name}</strong>
+        <small>${member.username}</small>
+
+      </button>
+
+    `).join("");
+
+  document.getElementById("voteBtn").disabled=
+    selectedVotes.size===0;
 }
 
 function toggleVote(id){
+
   if(selectedVotes.has(id)){
     selectedVotes.delete(id);
   }else{
+
     if(selectedVotes.size>=3){
       toast("3 choix maximum");
       return;
     }
+
     selectedVotes.add(id);
   }
+
   renderPeople();
 }
 
 document.getElementById("voteBtn").onclick=()=>{
-  localStorage.setItem("rank-v5-vote",JSON.stringify([...selectedVotes]));
-  document.getElementById("voteSuccess").style.display="block";
+
+  localStorage.setItem(
+    "rank-v6-vote",
+    JSON.stringify([...selectedVotes])
+  );
+
+  document.getElementById("voteSuccess")
+    .style.display="block";
+
   toast("Vote enregistré ✓");
 };
 
 /* COUNTDOWN */
 
 function updateCountdown(){
+
   const now=new Date();
   const reveal=new Date();
+
   reveal.setHours(19,30,0,0);
 
   if(now>=reveal){
-    document.getElementById("countdown").textContent="DISPONIBLE";
+    document.getElementById("countdown")
+      .textContent="DISPONIBLE";
     return;
   }
 
-  const d=reveal-now;
-  const h=Math.floor(d/3600000);
-  const m=Math.floor((d%3600000)/60000);
-  const s=Math.floor((d%60000)/1000);
+  const diff=reveal-now;
+
+  const h=Math.floor(diff/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
 
   document.getElementById("countdown").textContent=
-    `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-}
-
-/* NOW */
-
-function renderStories(){
-  document.getElementById("stories").innerHTML=storyData.map((s,i)=>`
-    <button class="storyBubble" onclick="openStory(${i})">
-      <div class="storyRing">
-        <div class="storyInner">${s.initial}</div>
-      </div>
-      <span>${s.name}</span>
-    </button>
-  `).join("");
-}
-
-function openStory(index){
-  const s=storyData[index];
-  document.getElementById("storyAvatar").textContent=s.initial;
-  document.getElementById("storyName").textContent=s.name;
-  document.getElementById("storyTime").textContent="il y a "+s.time;
-  document.getElementById("storyLetter").textContent=s.initial;
-  document.getElementById("storyCaption").textContent=s.caption;
-  document.getElementById("storyViewer").classList.add("show");
-}
-
-function closeStory(){
-  document.getElementById("storyViewer").classList.remove("show");
-}
-
-function sendStoryReply(){
-  const input=document.getElementById("storyReplyInput");
-  if(!input.value.trim())return;
-  input.value="";
-  toast("Commentaire envoyé");
-}
-
-function react(button){
-  button.style.background="#edf1ff";
-  button.style.borderColor="#cbd4ff";
-  toast("Réaction envoyée");
-}
-
-function addComment(id){
-  const input=document.getElementById("comment"+id);
-  const text=input.value.trim();
-  if(!text)return;
-
-  const line=document.createElement("div");
-  line.className="comment";
-
-  const strong=document.createElement("strong");
-  strong.textContent="@jonathan";
-
-  line.appendChild(strong);
-  line.appendChild(document.createTextNode(" "+text));
-
-  document.getElementById("comments"+id).appendChild(line);
-  input.value="";
-}
-
-function openCreateNow(){
-  document.getElementById("createNowModal").classList.add("show");
-}
-
-function closeCreateNow(){
-  document.getElementById("createNowModal").classList.remove("show");
-}
-
-function closeModalBackground(e){
-  if(e.target.id==="createNowModal")closeCreateNow();
-}
-
-function fileSelected(e){
-  selectedFile=e.target.files[0]||null;
-
-  if(selectedFile && selectedFile.type.startsWith("video/")){
-    const video=document.createElement("video");
-    video.preload="metadata";
-
-    video.onloadedmetadata=()=>{
-      URL.revokeObjectURL(video.src);
-
-      if(video.duration>60){
-        selectedFile=null;
-        document.getElementById("nowFile").value="";
-        toast("La vidéo doit durer 1 minute maximum");
-      }else{
-        toast("Vidéo prête ✓");
-      }
-    };
-
-    video.src=URL.createObjectURL(selectedFile);
-  }else if(selectedFile){
-    toast("Photo prête ✓");
-  }
-}
-
-function publishNow(){
-  if(!selectedFile){
-    toast("Choisis d'abord une photo ou une vidéo");
-    return;
-  }
-
-  const caption=document.getElementById("nowCaptionInput").value.trim();
-
-  storyData.unshift({
-    name:"Moi",
-    initial:"J",
-    time:"maintenant",
-    caption:caption||"Mon NOW"
-  });
-
-  renderStories();
-  selectedFile=null;
-  document.getElementById("nowFile").value="";
-  document.getElementById("nowCaptionInput").value="";
-  closeCreateNow();
-  toast("NOW publié · visible 24 h");
+    `${String(h).padStart(2,"0")}:`+
+    `${String(m).padStart(2,"0")}:`+
+    `${String(s).padStart(2,"0")}`;
 }
 
 /* PREDICT */
 
-function openPredict(){
-  const area=document.getElementById("predictArea");
-  area.style.display=area.style.display==="none"?"block":"none";
+function togglePredict(){
 
-  setTimeout(()=>{
-    if(area.style.display==="block"){
-      area.scrollIntoView({behavior:"smooth",block:"start"});
-    }
-  },50);
+  const area=document.getElementById("predictArea");
+
+  area.style.display=
+    area.style.display==="none"
+      ?"block"
+      :"none";
+
+  if(area.style.display==="block"){
+    setTimeout(()=>{
+      area.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+    },80);
+  }
 }
 
 function renderPredict(){
-  document.getElementById("predictOptions").innerHTML=members.slice(0,4).map(m=>`
-    <button class="predictOption ${prediction===m.id?"selected":""}"
-      onclick="choosePrediction(${m.id})">
-      <div class="miniAvatar">${m.initial}</div>
-      <strong>${m.name}</strong>
-      <span>${m.username}</span>
-    </button>
-  `).join("");
 
-  document.getElementById("predictBtn").disabled=!prediction;
+  document.getElementById("predictOptions").innerHTML=
+    members.slice(0,4).map(member=>`
+
+      <button
+        class="predictOption ${prediction===member.id?"selected":""}"
+        onclick="choosePrediction(${member.id})"
+      >
+
+        <div class="miniAvatar">
+          ${member.initial}
+        </div>
+
+        <strong>${member.name}</strong>
+
+        <span>${member.username}</span>
+
+      </button>
+
+    `).join("");
+
+  document.getElementById("predictBtn").disabled=
+    !prediction;
 }
 
 function choosePrediction(id){
@@ -1893,202 +2183,90 @@ function choosePrediction(id){
 }
 
 document.getElementById("predictBtn").onclick=()=>{
-  localStorage.setItem("rank-v5-prediction",prediction);
+
+  if(!prediction)return;
+
+  localStorage.setItem(
+    "rank-v6-predict",
+    prediction
+  );
+
   toast("Prédiction enregistrée ✓");
 };
 
 /* RANK */
 
 function renderRanking(){
-  const ranking=[...members].sort((a,b)=>b.votes-a.votes);
-  const podium=[ranking[1],ranking[0],ranking[2]];
 
-  document.getElementById("podium").innerHTML=podium.map((m,i)=>{
-    const pos=i===1?1:i===0?2:3;
+  const ranking=[...members]
+    .sort((a,b)=>b.votes-a.votes);
 
-    return `
-      <div class="podiumPerson ${pos===1?"first":""}">
-        <div class="podiumAvatar">${m.initial}</div>
-        <strong>${pos===1?"👑 ":""}#${pos} ${m.name}</strong>
-        <small>${m.votes} votes</small>
+  const podium=[
+    ranking[1],
+    ranking[0],
+    ranking[2]
+  ];
+
+  document.getElementById("podium").innerHTML=
+    podium.map((member,index)=>{
+
+      const position=
+        index===1
+          ?1
+          :index===0
+            ?2
+            :3;
+
+      return`
+
+        <div class="podiumItem ${position===1?"first":""}">
+
+          <div class="podiumAvatar">
+            ${member.initial}
+          </div>
+
+          <strong>
+            ${position===1?"♛ ":""}#${position} ${member.name}
+          </strong>
+
+          <small>
+            ${member.votes} votes
+          </small>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+  document.getElementById("rankingList").innerHTML=
+    ranking.map((member,index)=>`
+
+      <div class="rankRow">
+
+        <strong>
+          #${index+1}
+        </strong>
+
+        <div class="rankUser">
+
+          <div class="miniAvatar">
+            ${member.initial}
+          </div>
+
+          ${member.name}
+
+        </div>
+
+        <div class="rankVotes">
+          ${member.votes}
+        </div>
+
       </div>
-    `;
-  }).join("");
 
-  document.getElementById("rankingList").innerHTML=ranking.map((m,i)=>`
-    <div class="rankRow">
-      <strong>#${i+1}</strong>
-      <div class="rankName">
-        <div class="miniAvatar">${m.initial}</div>
-        ${m.name}
-      </div>
-      <div class="rankVotes">${m.votes}</div>
-    </div>
-  `).join("");
+    `).join("");
 }
 
 function showResultsDemo(){
   renderRanking();
-  changeScreen("rankScreen");
-}
-
-/* ROOM */
-
-function escapeHTML(text){
-  const d=document.createElement("div");
-  d.textContent=text;
-  return d.innerHTML;
-}
-
-function renderMessages(){
-  const visible=chatMessages.filter(m=>!blockedUsers.has(m.username));
-
-  document.getElementById("messages").innerHTML=visible.map(m=>`
-    <div class="message ${m.mine?"mine":""}">
-      ${m.mine?"":`<div class="miniAvatar">${m.initial}</div>`}
-
-      <div class="messageBody">
-        ${m.mine?"":`<div class="messageMeta">${m.username} · ${m.time}</div>`}
-        <div class="bubble">${escapeHTML(m.text)}</div>
-        <button class="messageDots" onclick="openMessageMenu(${m.id})">•••</button>
-      </div>
-    </div>
-  `).join("");
-}
-
-function sendMessage(){
-  const input=document.getElementById("messageInput");
-  let text=input.value.trim();
-  if(!text)return;
-
-  if(replyTo){
-    text="↳ "+replyTo.username+" · "+text;
-  }
-
-  const now=new Date();
-
-  chatMessages.push({
-    id:Date.now(),
-    username:"@jonathan",
-    initial:"J",
-    time:String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0"),
-    text,
-    mine:true
-  });
-
-  localStorage.setItem("rank-v5-chat",JSON.stringify(chatMessages));
-
-  input.value="";
-  replyTo=null;
-  renderMessages();
-}
-
-document.getElementById("messageInput").addEventListener("keydown",e=>{
-  if(e.key==="Enter")sendMessage();
-});
-
-function openMessageMenu(id){
-  activeMessageId=id;
-
-  const msg=chatMessages.find(m=>m.id===id);
-  if(!msg)return;
-
-  document.getElementById("deleteAction").style.display=msg.mine?"block":"none";
-  document.getElementById("reportAction").style.display=msg.mine?"none":"block";
-  document.getElementById("blockAction").style.display=msg.mine?"none":"block";
-
-  document.getElementById("menuOverlay").classList.add("show");
-}
-
-function closeMessageMenu(){
-  document.getElementById("menuOverlay").classList.remove("show");
-  activeMessageId=null;
-}
-
-function closeMenuBackground(e){
-  if(e.target.id==="menuOverlay")closeMessageMenu();
-}
-
-document.getElementById("replyAction").onclick=()=>{
-  const msg=chatMessages.find(m=>m.id===activeMessageId);
-  if(msg){
-    replyTo=msg;
-    toast("Réponse à "+msg.username);
-    document.getElementById("messageInput").focus();
-  }
-  closeMessageMenu();
-};
-
-document.getElementById("reportAction").onclick=()=>{
-  closeMessageMenu();
-  toast("Message signalé. Merci.");
-};
-
-document.getElementById("blockAction").onclick=()=>{
-  const msg=chatMessages.find(m=>m.id===activeMessageId);
-
-  if(msg){
-    blockedUsers.add(msg.username);
-    toast(msg.username+" a été bloqué");
-  }
-
-  closeMessageMenu();
-  renderMessages();
-};
-
-document.getElementById("deleteAction").onclick=()=>{
-  chatMessages=chatMessages.filter(m=>m.id!==activeMessageId);
-  localStorage.setItem("rank-v5-chat",JSON.stringify(chatMessages));
-  closeMessageMenu();
-  renderMessages();
-};
-
-/* CREATE QUESTION */
-
-function createQuestion(){
-  const input=document.getElementById("customQuestion");
-  const text=input.value.trim();
-
-  if(text.length<8){
-    toast("Écris une vraie question");
-    return;
-  }
-
-  localStorage.setItem("rank-v5-week-question",text);
-
-  input.value="";
-  document.getElementById("createStatus").textContent=
-    "Question proposée ✓ · prochaine proposition la semaine prochaine.";
-
-  document.getElementById("createQuestionBtn").disabled=true;
-
-  toast("Question proposée ✓");
-}
-
-/* RESTORE */
-
-try{
-  const oldVotes=JSON.parse(localStorage.getItem("rank-v5-vote")||"[]");
-  oldVotes.forEach(id=>selectedVotes.add(id));
-
-  if(oldVotes.length){
-    document.getElementById("voteSuccess").style.display="block";
-  }
-}catch{}
-
-const savedPrediction=Number(localStorage.getItem("rank-v5-prediction"));
-if(savedPrediction)prediction=savedPrediction;
-
-/* INIT */
-
-renderPeople();
-renderStories();
-renderPredict();
-renderRanking();
-renderMessages();
-updateCountdown();
-setInterval(updateCountdown,1000);
-</script>
-
-</body>
-</html>
+  changeScreen("
