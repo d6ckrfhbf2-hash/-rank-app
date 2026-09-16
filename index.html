@@ -3,38 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0a0a0b">
-<title>RANK — V6</title>
+<meta name="theme-color" content="#ffffff">
+<title>RANK — V7</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
 
 :root{
-  --bg:#0a0a0b;
-  --surface:#151517;
-  --surface2:#1d1d20;
-  --white:#fff;
-  --text:#f7f7f8;
-  --muted:#99999f;
-  --line:#29292d;
-  --blue:#3974ff;
-  --red:#ff3b5c;
-  --green:#25c783;
-  --gold:#ffca4b;
+  --bg:#f7f8fc;
+  --card:#ffffff;
+  --text:#111318;
+  --muted:#858995;
+  --line:#e9eaf0;
+  --blue:#2864ff;
+  --blue2:#5c8cff;
+  --yellow:#ffd633;
+  --coral:#ff526d;
+  --purple:#8c52ff;
+  --green:#27c98b;
 }
 
 html,body{
   margin:0;
-  width:100%;
+  padding:0;
   min-height:100%;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  overscroll-behavior:none;
 }
 
-button,input,textarea{font:inherit}
-button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+button,input,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
 
 .app{
   width:min(100%,560px);
@@ -44,26 +51,30 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
   position:relative;
 }
 
+/* HEADER */
+
 .header{
-  height:64px;
+  height:66px;
   padding:0 17px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   position:sticky;
   top:0;
-  z-index:50;
-  background:rgba(10,10,11,.9);
-  backdrop-filter:blur(20px);
+  z-index:40;
+  background:rgba(247,248,252,.94);
+  backdrop-filter:blur(18px);
 }
 
 .logo{
-  font-size:25px;
+  font-size:26px;
   font-weight:950;
-  letter-spacing:-1.3px;
+  letter-spacing:-1.4px;
 }
 
-.logo span{color:var(--blue)}
+.logoDot{
+  color:var(--blue);
+}
 
 .headerRight{
   display:flex;
@@ -72,42 +83,50 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 }
 
 .streak{
+  background:white;
+  border:1px solid var(--line);
+  padding:8px 11px;
+  border-radius:999px;
   font-size:11px;
   font-weight:850;
-  padding:8px 10px;
-  border:1px solid var(--line);
-  border-radius:999px;
 }
 
 .profileBtn{
-  width:37px;
-  height:37px;
+  width:38px;
+  height:38px;
   border:0;
   border-radius:50%;
-  background:white;
+  background:linear-gradient(135deg,var(--yellow),#ff9e3d);
   color:#111;
-  font-weight:900;
+  font-weight:950;
 }
+
+/* GENERAL */
 
 main{
-  padding:15px 16px 100px;
+  padding:12px 15px 100px;
 }
 
-.screen{display:none}
-.screen.active{display:block}
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
 
 .eyebrow{
-  color:#777b84;
   font-size:10px;
   font-weight:900;
-  letter-spacing:1.5px;
-  margin-bottom:8px;
+  letter-spacing:1.3px;
+  color:var(--blue);
+  margin-bottom:7px;
 }
 
 h1{
   margin:0;
-  font-size:34px;
-  line-height:1.03;
+  font-size:33px;
+  line-height:1.04;
   letter-spacing:-1.5px;
 }
 
@@ -117,49 +136,49 @@ h2{
   letter-spacing:-.5px;
 }
 
-p{margin:0}
+p{
+  margin:0;
+}
 
 .sub{
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
   line-height:1.5;
-  margin-top:8px;
+  margin-top:7px;
 }
 
 .card{
-  background:var(--surface);
+  background:var(--card);
   border:1px solid var(--line);
-  border-radius:20px;
+  border-radius:22px;
   padding:17px;
-  margin-top:14px;
+  margin-top:13px;
+  box-shadow:0 7px 25px rgba(20,30,60,.04);
 }
 
 .primary{
   width:100%;
-  border:0;
   min-height:50px;
-  border-radius:14px;
-  background:white;
-  color:#111;
+  border:0;
+  border-radius:15px;
+  background:var(--blue);
+  color:white;
   font-weight:900;
   margin-top:14px;
 }
 
-.primary.blue{
-  background:var(--blue);
-  color:white;
+.primary:disabled{
+  opacity:.35;
 }
-
-.primary:disabled{opacity:.3}
 
 .secondary{
   width:100%;
+  min-height:47px;
   border:1px solid var(--line);
-  min-height:48px;
   border-radius:14px;
-  background:var(--surface2);
-  color:white;
-  font-weight:800;
+  background:#f5f6f9;
+  color:var(--text);
+  font-weight:850;
   margin-top:9px;
 }
 
@@ -167,39 +186,114 @@ p{margin:0}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin:26px 2px 10px;
+  margin:24px 2px 9px;
 }
 
 .sectionHead small{
   color:var(--muted);
-  font-size:10px;
+  font-size:9px;
+}
+
+/* STORIES */
+
+.stories{
+  display:flex;
+  gap:13px;
+  overflow-x:auto;
+  padding:5px 1px 13px;
+  scrollbar-width:none;
+}
+
+.stories::-webkit-scrollbar{
+  display:none;
+}
+
+.story{
+  min-width:64px;
+  border:0;
+  background:none;
+  padding:0;
+  text-align:center;
+  color:var(--text);
+}
+
+.storyRing{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  padding:3px;
+  margin:auto;
+  background:
+    linear-gradient(
+      135deg,
+      #ffcf33 0%,
+      #ff6a55 30%,
+      #f13e96 55%,
+      #8a4dff 78%,
+      #3478ff 100%
+    );
+}
+
+.storyInner{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:3px solid white;
+  background:#eef0f5;
+  display:grid;
+  place-items:center;
+  font-weight:950;
+  font-size:15px;
+}
+
+.story.me .storyRing{
+  background:linear-gradient(135deg,#2f6bff,#54b6ff);
+}
+
+.storyName{
+  display:block;
+  margin-top:5px;
+  font-size:9px;
+  white-space:nowrap;
 }
 
 /* TODAY */
 
-.todayQuestion{
-  margin-top:20px;
-  background:linear-gradient(145deg,#17191e,#101114);
-  border:1px solid #292b32;
-  border-radius:23px;
-  padding:19px;
+.questionCard{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(62,112,255,.13),transparent 37%),
+    white;
+}
+
+.questionTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .questionTag{
   display:inline-flex;
-  background:white;
-  color:#111;
-  padding:6px 9px;
+  align-items:center;
+  gap:5px;
+  background:#edf3ff;
+  color:var(--blue);
   border-radius:999px;
+  padding:6px 9px;
   font-size:9px;
   font-weight:950;
-  margin-bottom:14px;
+}
+
+.questionNumber{
+  font-size:9px;
+  color:var(--muted);
+  font-weight:800;
 }
 
 .question{
-  font-size:28px;
+  margin-top:15px;
+  font-size:26px;
+  line-height:1.12;
   font-weight:950;
-  line-height:1.1;
   letter-spacing:-.8px;
 }
 
@@ -207,21 +301,21 @@ p{margin:0}
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  margin-top:18px;
+  margin-top:17px;
 }
 
 .person{
-  border:1px solid var(--line);
-  background:var(--surface2);
-  color:white;
-  border-radius:16px;
-  padding:11px 5px;
   position:relative;
+  border:1.5px solid var(--line);
+  background:#fafbfc;
+  border-radius:17px;
+  padding:11px 4px;
+  color:var(--text);
 }
 
 .person.selected{
   border-color:var(--blue);
-  background:#162344;
+  background:#edf3ff;
 }
 
 .person.selected:after{
@@ -229,94 +323,135 @@ p{margin:0}
   position:absolute;
   right:6px;
   top:6px;
-  width:19px;
-  height:19px;
+  width:18px;
+  height:18px;
   border-radius:50%;
+  background:var(--blue);
+  color:white;
   display:grid;
   place-items:center;
-  background:var(--blue);
   font-size:9px;
+  font-weight:900;
 }
 
-.avatar{
+.personAvatar{
   width:45px;
   height:45px;
-  margin:0 auto 7px;
   border-radius:50%;
-  background:#303034;
+  margin:0 auto 7px;
   display:grid;
   place-items:center;
-  font-weight:900;
+  color:white;
+  font-weight:950;
+}
+
+.person:nth-child(1) .personAvatar{
+  background:linear-gradient(135deg,#ff5470,#ff8d4d);
+}
+
+.person:nth-child(2) .personAvatar{
+  background:linear-gradient(135deg,#3977ff,#58b7ff);
+}
+
+.person:nth-child(3) .personAvatar{
+  background:linear-gradient(135deg,#9656ff,#e55bd3);
+}
+
+.person:nth-child(4) .personAvatar{
+  background:linear-gradient(135deg,#20b989,#63d870);
+}
+
+.person:nth-child(5) .personAvatar{
+  background:linear-gradient(135deg,#ffb329,#ff6c3e);
+}
+
+.person:nth-child(6) .personAvatar{
+  background:linear-gradient(135deg,#5163ff,#894cff);
 }
 
 .person strong{
   display:block;
-  font-size:12px;
+  font-size:11px;
 }
 
 .person small{
+  color:var(--muted);
   font-size:8px;
-  color:#8d8d93;
 }
 
 .voteSuccess{
   display:none;
-  background:#10251d;
-  color:#65dda9;
-  border-radius:12px;
-  padding:11px;
   margin-top:9px;
-  font-size:11px;
+  padding:11px;
+  border-radius:12px;
+  background:#eafaf4;
+  color:#16855c;
+  font-size:10px;
   font-weight:850;
 }
 
 .reveal{
   display:flex;
+  align-items:flex-end;
   justify-content:space-between;
   border-top:1px solid var(--line);
-  padding-top:15px;
   margin-top:17px;
+  padding-top:14px;
 }
 
 .reveal small{
   display:block;
-  color:#777b82;
-  font-size:9px;
-  margin-bottom:3px;
+  color:var(--muted);
+  font-size:8px;
+  margin-bottom:2px;
 }
 
-.reveal strong{font-size:18px}
+.reveal strong{
+  font-size:19px;
+}
 
 #countdown{
-  color:#6e96ff;
+  color:var(--blue);
   font-size:11px;
-  font-weight:850;
+  font-weight:900;
 }
 
-.socialShortcut{
+/* SHORTCUTS */
+
+.shortcut{
   display:flex;
   align-items:center;
-  gap:13px;
+  gap:12px;
+  cursor:pointer;
 }
 
 .shortcutIcon{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  background:white;
-  color:#111;
+  width:50px;
+  height:50px;
+  flex:0 0 auto;
+  border-radius:16px;
   display:grid;
   place-items:center;
-  font-weight:950;
-  font-size:17px;
-}
-
-.socialShortcut.nowShortcut .shortcutIcon{
-  background:var(--blue);
   color:white;
+  font-size:18px;
+  font-weight:950;
 }
 
-.shortcutText{flex:1}
+.nowIcon{
+  background:linear-gradient(135deg,#ff526d,#ff9f40);
+}
+
+.predictIcon{
+  background:linear-gradient(135deg,#8b52ff,#476cff);
+}
+
+.roomIcon{
+  background:linear-gradient(135deg,#24c596,#39a8ff);
+}
+
+.shortcutText{
+  flex:1;
+}
 
 .shortcutText strong{
   font-size:14px;
@@ -329,485 +464,265 @@ p{margin:0}
   margin-top:3px;
 }
 
-.badge{
-  display:inline-block !important;
-  background:var(--red);
-  color:white !important;
-  border-radius:999px;
-  padding:3px 6px;
-  font-size:8px !important;
-  margin-left:4px;
-}
-
-/* NOW FULL SCREEN FEED */
-
-#nowScreen{
-  position:fixed;
-  inset:0;
-  z-index:70;
-  background:#000;
-  width:min(100%,560px);
-  left:50%;
-  transform:translateX(-50%);
-}
-
-#nowScreen:not(.active){display:none}
-
-.nowFeed{
-  height:100dvh;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  scrollbar-width:none;
-}
-
-.nowFeed::-webkit-scrollbar{display:none}
-
-.nowSlide{
-  height:100dvh;
-  width:100%;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  position:relative;
-  overflow:hidden;
-  background:#111;
-}
-
-.nowMedia{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-}
-
-.nowMedia.one{
-  background:
-    radial-gradient(circle at 70% 15%,#5875b9,transparent 30%),
-    linear-gradient(145deg,#253250,#111827);
-}
-
-.nowMedia.two{
-  background:
-    radial-gradient(circle at 25% 20%,#b37e5b,transparent 25%),
-    linear-gradient(145deg,#59463b,#191613);
-}
-
-.nowMedia.three{
-  background:
-    radial-gradient(circle at 70% 70%,#4f9676,transparent 27%),
-    linear-gradient(145deg,#29493d,#101814);
-}
-
-.nowMedia.four{
-  background:
-    radial-gradient(circle at 40% 20%,#9b6171,transparent 28%),
-    linear-gradient(145deg,#55313b,#171013);
-}
-
-.bigLetter{
-  font-size:160px;
-  font-weight:950;
-  color:rgba(255,255,255,.08);
-}
-
-.fakePlay{
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  background:rgba(0,0,0,.3);
-  backdrop-filter:blur(5px);
-  display:grid;
-  place-items:center;
-  position:absolute;
-  font-size:22px;
-}
-
-.nowGradient{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(to bottom,rgba(0,0,0,.55),transparent 20%,transparent 52%,rgba(0,0,0,.75));
-  pointer-events:none;
-}
-
-.nowTopBar{
-  position:absolute;
-  z-index:4;
-  top:0;
-  left:0;
-  right:0;
-  padding:14px 15px;
-  padding-top:max(14px,env(safe-area-inset-top));
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.nowBrand{
-  font-weight:950;
-  font-size:20px;
-  letter-spacing:-.8px;
-}
-
-.nowTopActions{
-  display:flex;
-  gap:9px;
-}
-
-.roundIcon{
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:50%;
-  background:rgba(20,20,20,.48);
-  color:white;
-  backdrop-filter:blur(8px);
-  font-size:18px;
-}
-
-.nowUser{
-  position:absolute;
-  left:15px;
-  right:85px;
-  bottom:92px;
-  z-index:4;
-}
-
-.userLine{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin-bottom:9px;
-}
-
-.nowAvatar{
-  width:39px;
-  height:39px;
-  border-radius:50%;
-  border:2px solid white;
-  display:grid;
-  place-items:center;
-  background:#252525;
-  font-size:12px;
-  font-weight:900;
-}
-
-.userLine strong{font-size:13px}
-
-.userLine span{
-  font-size:10px;
-  color:#ddd;
-}
-
-.nowCaption{
-  font-size:13px;
-  line-height:1.45;
-}
-
-.expire{
-  margin-top:7px;
-  font-size:9px;
-  color:#bbb;
-}
-
-.sideActions{
-  position:absolute;
-  z-index:5;
-  right:10px;
-  bottom:92px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:17px;
-}
-
-.sideAction{
-  background:none;
-  border:0;
-  color:white;
-  text-align:center;
-  padding:0;
-}
-
-.sideCircle{
-  width:47px;
-  height:47px;
-  border-radius:50%;
-  background:rgba(20,20,20,.46);
-  backdrop-filter:blur(8px);
-  display:grid;
-  place-items:center;
-  font-size:20px;
-}
-
-.sideAction span{
-  display:block;
-  font-size:9px;
-  margin-top:4px;
-  text-shadow:0 1px 4px #000;
-}
-
-.nowCommentBar{
-  position:absolute;
-  z-index:6;
-  bottom:19px;
-  left:13px;
-  right:13px;
-  display:flex;
-  gap:7px;
-}
-
-.nowCommentBar input{
-  flex:1;
-  min-width:0;
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(15,15,15,.46);
-  backdrop-filter:blur(9px);
-  color:white;
-  border-radius:999px;
-  padding:12px 15px;
-  outline:none;
-}
-
-.nowCommentBar input::placeholder{color:#ddd}
-
-.nowCommentBar button{
-  width:43px;
-  height:43px;
-  border:0;
-  border-radius:50%;
-  background:white;
-  color:#111;
-  font-weight:900;
-}
-
-.scrollHint{
-  position:absolute;
-  z-index:4;
-  top:76px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:9px;
-  color:rgba(255,255,255,.7);
-  background:rgba(0,0,0,.28);
-  border-radius:999px;
-  padding:6px 9px;
-  pointer-events:none;
-}
-
-/* COMMENTS DRAWER */
-
-.commentsOverlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:150;
-  background:rgba(0,0,0,.48);
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.commentsOverlay.show{display:flex}
-
-.commentsSheet{
-  width:min(100%,560px);
-  height:min(68vh,610px);
-  background:#171719;
-  border-radius:25px 25px 0 0;
-  padding:12px 16px 82px;
-  position:relative;
-}
-
-.handle{
-  width:38px;
-  height:4px;
-  border-radius:99px;
-  background:#444;
-  margin:0 auto 14px;
-}
-
-.commentHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.commentHeader button{
-  border:0;
-  background:none;
-  color:white;
-  font-size:25px;
-}
-
-.commentsList{
-  overflow:auto;
-  max-height:calc(100% - 55px);
-  margin-top:12px;
-}
-
-.commentItem{
-  display:flex;
-  gap:9px;
-  margin:15px 0;
-}
-
-.commentAvatar{
-  width:34px;
-  height:34px;
-  flex:0 0 auto;
-  border-radius:50%;
-  background:#303034;
-  display:grid;
-  place-items:center;
-  font-size:10px;
-  font-weight:900;
-}
-
-.commentBody strong{
-  display:block;
-  font-size:11px;
-}
-
-.commentBody p{
-  margin-top:3px;
-  font-size:12px;
-  line-height:1.4;
-}
-
-.commentBody small{
-  color:#777;
-  font-size:9px;
-}
-
-.drawerComposer{
-  position:absolute;
-  bottom:20px;
-  left:15px;
-  right:15px;
-  display:flex;
-  gap:7px;
-}
-
-.drawerComposer input{
-  flex:1;
-  border:1px solid var(--line);
-  background:#222225;
-  color:white;
-  border-radius:999px;
-  padding:12px 14px;
-  outline:none;
-}
-
-.drawerComposer button{
-  width:43px;
-  border:0;
-  border-radius:50%;
-  background:white;
-  color:#111;
-}
-
-/* ADD NOW */
-
-.addOverlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:170;
-  background:#0b0b0c;
-  color:white;
-}
-
-.addOverlay.show{display:block}
-
-.addHeader{
-  height:65px;
-  padding:0 16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.addHeader button{
-  border:0;
-  background:none;
-  color:white;
+.arrow{
   font-size:24px;
+  color:#b0b3bc;
 }
 
-.uploadArea{
-  margin:15px;
-  height:55vh;
-  border-radius:24px;
-  border:1px dashed #414146;
-  background:#171719;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
-
-.uploadIcon{
-  font-size:42px;
-  margin-bottom:12px;
-}
-
-.fileInput{display:none}
-
-.chooseFile{
-  margin-top:15px;
-  display:inline-block;
-  background:white;
-  color:#111;
-  border-radius:999px;
-  padding:11px 17px;
-  font-size:12px;
-  font-weight:900;
-}
-
-.addCaption{
-  margin:15px;
-}
-
-.addCaption input{
-  width:100%;
-  border:1px solid var(--line);
-  background:#171719;
+.redBadge{
+  background:var(--coral);
   color:white;
-  padding:14px;
-  border-radius:14px;
-  outline:none;
+  border-radius:999px;
+  padding:2px 6px;
+  font-size:8px;
 }
 
 /* PREDICT */
 
+.predictArea{
+  display:none;
+}
+
 .predictOptions{
   display:grid;
   gap:8px;
-  margin-top:14px;
+  margin-top:13px;
 }
 
 .predictOption{
-  border:1px solid var(--line);
-  background:var(--surface2);
-  color:white;
-  padding:11px;
-  border-radius:14px;
+  width:100%;
   display:flex;
-  gap:9px;
   align-items:center;
+  gap:9px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:9px;
+  background:#fafbfc;
+  color:var(--text);
 }
 
 .predictOption.selected{
-  border-color:var(--blue);
-  background:#172342;
+  border-color:var(--purple);
+  background:#f3efff;
 }
 
-.predictOption span:last-child{
-  margin-left:auto;
-  color:#888;
+.miniAvatar{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#4b75ff,#9b52ff);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  font-weight:950;
+}
+
+/* NOW */
+
+.nowHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.addNowBtn{
+  border:0;
+  background:var(--blue);
+  color:white;
+  border-radius:999px;
+  padding:9px 13px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.nowFeed{
+  height:calc(100dvh - 190px);
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  scrollbar-width:none;
+  margin:13px -15px -100px;
+  padding-bottom:72px;
+}
+
+.nowFeed::-webkit-scrollbar{
+  display:none;
+}
+
+.nowPost{
+  min-height:calc(100dvh - 190px);
+  scroll-snap-align:start;
+  padding:0 15px 14px;
+  display:flex;
+  flex-direction:column;
+}
+
+.nowMedia{
+  position:relative;
+  flex:1;
+  min-height:430px;
+  border-radius:28px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  box-shadow:0 12px 35px rgba(20,30,70,.12);
+}
+
+.media1{
+  background:
+    radial-gradient(circle at 75% 20%,#ffd65c 0,transparent 26%),
+    linear-gradient(145deg,#ff6b76,#ff9e62);
+}
+
+.media2{
+  background:
+    radial-gradient(circle at 20% 25%,#6bdcff 0,transparent 25%),
+    linear-gradient(145deg,#396dff,#7654e8);
+}
+
+.media3{
+  background:
+    radial-gradient(circle at 80% 20%,#a4ff9c 0,transparent 26%),
+    linear-gradient(145deg,#1cbf93,#52a9ef);
+}
+
+.media4{
+  background:
+    radial-gradient(circle at 25% 15%,#ffc7ef 0,transparent 27%),
+    linear-gradient(145deg,#a25aff,#ff5f8f);
+}
+
+.mediaLetter{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:rgba(255,255,255,.22);
+  font-size:150px;
+  font-weight:950;
+}
+
+.play{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:rgba(255,255,255,.9);
+  color:#111;
+  display:grid;
+  place-items:center;
+  padding-left:3px;
+  font-size:19px;
+}
+
+.nowOverlay{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:65px 15px 15px;
+  color:white;
+  background:linear-gradient(transparent,rgba(0,0,0,.66));
+}
+
+.nowProfile{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.nowProfileRing{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  padding:2px;
+  background:linear-gradient(135deg,#ffd736,#ff536f,#9253ff);
+}
+
+.nowProfileInner{
+  width:100%;
+  height:100%;
+  border:2px solid white;
+  border-radius:50%;
+  background:#fff;
+  color:#111;
+  display:grid;
+  place-items:center;
+  font-size:11px;
+  font-weight:950;
+}
+
+.nowProfile strong{
+  font-size:12px;
+}
+
+.nowProfile small{
+  display:block;
+  opacity:.8;
   font-size:9px;
+  margin-top:2px;
+}
+
+.caption{
+  font-size:13px;
+  margin-top:10px;
+}
+
+.nowActions{
+  display:flex;
+  gap:8px;
+  margin-top:11px;
+}
+
+.nowAction{
+  border:0;
+  background:rgba(255,255,255,.9);
+  color:#111;
+  border-radius:999px;
+  padding:9px 12px;
+  font-size:10px;
+  font-weight:850;
+}
+
+.nowAction.liked{
+  background:var(--coral);
+  color:white;
+}
+
+.commentBar{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+.commentBar input{
+  flex:1;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.65);
+  background:rgba(255,255,255,.94);
+  color:#111;
+  border-radius:999px;
+  padding:11px 13px;
+  outline:none;
+}
+
+.commentBar button{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:white;
+  color:var(--blue);
+  font-weight:950;
+}
+
+.swipeHint{
+  text-align:center;
+  font-size:9px;
+  color:var(--muted);
+  padding:7px 0 0;
 }
 
 /* RANK */
@@ -816,49 +731,57 @@ p{margin:0}
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   align-items:end;
-  padding-top:30px;
+  padding:28px 0 5px;
 }
 
-.podiumItem{text-align:center}
-.podiumItem.first{transform:translateY(-18px)}
+.podiumItem{
+  text-align:center;
+}
+
+.podiumItem.first{
+  transform:translateY(-18px);
+}
 
 .podiumAvatar{
-  width:64px;
-  height:64px;
-  margin:auto auto 7px;
+  width:62px;
+  height:62px;
   border-radius:50%;
-  background:#29292d;
+  margin:auto auto 7px;
+  background:linear-gradient(135deg,#5c8cff,#9256ff);
+  color:white;
   display:grid;
   place-items:center;
   font-weight:950;
 }
 
 .first .podiumAvatar{
-  width:78px;
-  height:78px;
-  border:2px solid var(--gold);
+  width:76px;
+  height:76px;
+  background:linear-gradient(135deg,#ffd72f,#ff9148);
 }
 
 .podiumItem strong{
   display:block;
-  font-size:12px;
+  font-size:11px;
 }
 
 .podiumItem small{
-  color:#888;
+  color:var(--muted);
   font-size:9px;
 }
 
 .rankRow{
-  min-height:55px;
+  min-height:57px;
   display:grid;
-  grid-template-columns:35px 1fr auto;
-  align-items:center;
+  grid-template-columns:34px 1fr auto;
   gap:8px;
+  align-items:center;
   border-bottom:1px solid var(--line);
 }
 
-.rankRow:last-child{border:0}
+.rankRow:last-child{
+  border:0;
+}
 
 .rankUser{
   display:flex;
@@ -868,34 +791,17 @@ p{margin:0}
   font-weight:800;
 }
 
-.miniAvatar{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:#303034;
-  display:grid;
-  place-items:center;
-  font-size:10px;
-  font-weight:900;
-}
-
 .rankVotes{
-  color:#888;
+  color:var(--muted);
   font-size:10px;
 }
 
 /* ROOM */
 
-.roomHead{
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:16px;
-}
-
 .roomTop{
   display:flex;
   justify-content:space-between;
+  align-items:flex-start;
 }
 
 .online{
@@ -904,53 +810,59 @@ p{margin:0}
   font-weight:900;
 }
 
-.winnerPin{
-  background:#222225;
+.winner{
+  background:#fff8db;
+  color:#6b5410;
+  border-radius:13px;
   padding:10px;
-  border-radius:12px;
   margin-top:12px;
-  font-size:11px;
+  font-size:10px;
 }
 
 .messages{
-  padding:18px 0 75px;
+  padding:18px 0 80px;
 }
 
 .message{
   display:flex;
   gap:8px;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 
-.message.mine{justify-content:flex-end}
+.message.mine{
+  justify-content:flex-end;
+}
 
-.messageContent{max-width:78%}
+.messageContent{
+  max-width:78%;
+}
 
 .messageMeta{
-  color:#777;
-  font-size:9px;
-  margin:0 0 4px 4px;
+  color:var(--muted);
+  font-size:8px;
+  margin:0 0 4px 5px;
 }
 
 .bubble{
-  background:#1d1d20;
-  border:1px solid #2b2b2e;
+  background:white;
+  border:1px solid var(--line);
   padding:11px 13px;
   border-radius:17px 17px 17px 5px;
-  font-size:13px;
+  font-size:12px;
   line-height:1.4;
 }
 
 .mine .bubble{
-  background:#3165e6;
+  background:var(--blue);
+  color:white;
   border:0;
   border-radius:17px 17px 5px 17px;
 }
 
-.dots{
+.messageMenuBtn{
   border:0;
   background:none;
-  color:#777;
+  color:#aaa;
   padding:3px;
 }
 
@@ -960,20 +872,19 @@ p{margin:0}
   left:50%;
   transform:translateX(-50%);
   width:min(100%,560px);
-  background:rgba(10,10,11,.94);
-  backdrop-filter:blur(15px);
-  padding:9px 15px;
+  padding:8px 14px;
   display:flex;
   gap:7px;
-  z-index:35;
+  background:rgba(247,248,252,.95);
+  backdrop-filter:blur(15px);
+  z-index:30;
 }
 
 .roomComposer input{
   flex:1;
   min-width:0;
   border:1px solid var(--line);
-  background:#1c1c1f;
-  color:white;
+  background:white;
   border-radius:999px;
   padding:12px 14px;
   outline:none;
@@ -984,8 +895,9 @@ p{margin:0}
   height:43px;
   border:0;
   border-radius:50%;
-  background:white;
-  color:#111;
+  background:var(--blue);
+  color:white;
+  font-weight:950;
 }
 
 /* RECAP */
@@ -994,13 +906,29 @@ p{margin:0}
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  margin-top:14px;
+  margin-top:13px;
 }
 
 .stat{
-  background:#1d1d20;
-  border-radius:14px;
+  border-radius:15px;
   padding:14px;
+  background:#f6f7fa;
+}
+
+.stat:nth-child(1){
+  background:#edf3ff;
+}
+
+.stat:nth-child(2){
+  background:#fff4df;
+}
+
+.stat:nth-child(3){
+  background:#eefaf5;
+}
+
+.stat:nth-child(4){
+  background:#f5efff;
 }
 
 .stat strong{
@@ -1009,18 +937,17 @@ p{margin:0}
 }
 
 .stat span{
-  color:#888;
+  color:var(--muted);
   font-size:9px;
 }
 
 .questionInput{
   width:100%;
   min-height:90px;
-  margin-top:13px;
+  margin-top:12px;
   resize:none;
   border:1px solid var(--line);
-  background:#1d1d20;
-  color:white;
+  background:#f8f9fb;
   border-radius:14px;
   padding:12px;
   outline:none;
@@ -1028,126 +955,236 @@ p{margin:0}
 
 /* PROFILE */
 
-.profile{
+.profileRow{
   display:flex;
-  align-items:center;
   gap:13px;
+  align-items:center;
 }
 
-.profileAvatar{
+.bigAvatar{
   width:72px;
   height:72px;
   border-radius:50%;
-  background:white;
-  color:#111;
+  background:linear-gradient(135deg,#ffd52f,#ff7857,#8c52ff);
+  color:white;
   display:grid;
   place-items:center;
   font-size:20px;
   font-weight:950;
 }
 
-/* NAV */
+/* BOTTOM NAV */
 
 .bottomNav{
   position:fixed;
-  left:50%;
   bottom:0;
+  left:50%;
   transform:translateX(-50%);
   width:min(100%,560px);
   height:70px;
-  background:rgba(10,10,11,.96);
-  backdrop-filter:blur(20px);
-  border-top:1px solid #222;
+  z-index:50;
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  z-index:60;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--line);
 }
 
 .navBtn{
   border:0;
   background:none;
-  color:#727278;
+  color:#9a9da6;
   display:flex;
   flex-direction:column;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   gap:4px;
 }
 
-.navBtn.active{color:white}
+.navBtn.active{
+  color:var(--blue);
+}
 
 .navIcon{
-  font-size:18px;
-  height:21px;
+  font-size:19px;
+  height:22px;
+}
+
+.navLabel{
+  font-size:8px;
+  font-weight:900;
 }
 
 .nowNav .navIcon{
   width:35px;
   height:29px;
+  border-radius:10px;
   display:grid;
   place-items:center;
-  border-radius:9px;
-  background:white;
-  color:#111;
+  background:linear-gradient(135deg,#ff5a6e,#ffab3d);
+  color:white;
 }
 
-.navLabel{
-  font-size:8px;
-  font-weight:850;
-}
+/* MODAL */
 
-/* MESSAGE MENU */
-
-.menuOverlay{
+.overlay{
   display:none;
   position:fixed;
   inset:0;
-  z-index:200;
-  background:rgba(0,0,0,.55);
+  z-index:150;
+  background:rgba(25,28,38,.35);
   align-items:flex-end;
   justify-content:center;
 }
 
-.menuOverlay.show{display:flex}
-
-.menuSheet{
-  width:min(100%,560px);
-  background:#19191b;
-  border-radius:24px 24px 0 0;
-  padding:13px 17px 24px;
+.overlay.show{
+  display:flex;
 }
+
+.sheet{
+  width:min(100%,560px);
+  background:white;
+  border-radius:26px 26px 0 0;
+  padding:12px 16px 25px;
+  max-height:75vh;
+  overflow:auto;
+}
+
+.handle{
+  width:38px;
+  height:4px;
+  border-radius:99px;
+  background:#ddd;
+  margin:0 auto 14px;
+}
+
+.sheetHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.closeBtn{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:#f1f2f5;
+  font-size:20px;
+}
+
+.commentItem{
+  display:flex;
+  gap:9px;
+  margin:15px 0;
+}
+
+.commentBody strong{
+  font-size:10px;
+}
+
+.commentBody p{
+  font-size:12px;
+  margin-top:3px;
+}
+
+.commentBody small{
+  color:var(--muted);
+  font-size:8px;
+}
+
+.drawerComposer{
+  display:flex;
+  gap:7px;
+  margin-top:14px;
+}
+
+.drawerComposer input{
+  flex:1;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:11px 13px;
+  outline:none;
+}
+
+.drawerComposer button{
+  width:42px;
+  border:0;
+  border-radius:50%;
+  background:var(--blue);
+  color:white;
+}
+
+/* UPLOAD */
+
+.uploadBox{
+  margin-top:16px;
+  border:2px dashed #dce0e9;
+  background:#f8f9fc;
+  border-radius:22px;
+  padding:35px 20px;
+  text-align:center;
+}
+
+.uploadButton{
+  display:inline-block;
+  margin-top:14px;
+  background:var(--blue);
+  color:white;
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+}
+
+.uploadButton input{
+  display:none;
+}
+
+.captionInput{
+  width:100%;
+  margin-top:12px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:13px;
+  outline:none;
+}
+
+/* MESSAGE MENU */
 
 .menuAction{
   width:100%;
-  min-height:50px;
-  text-align:left;
   border:0;
   border-bottom:1px solid var(--line);
-  background:none;
-  color:white;
-  font-weight:750;
+  background:white;
+  text-align:left;
+  padding:15px 4px;
+  color:var(--text);
+  font-weight:800;
 }
 
-.menuAction.danger{color:#ff6579}
+.menuAction.danger{
+  color:var(--coral);
+}
 
 /* TOAST */
 
 .toast{
   position:fixed;
-  top:75px;
+  z-index:300;
+  top:72px;
   left:50%;
   transform:translate(-50%,-10px);
   width:min(calc(100% - 30px),520px);
-  background:white;
-  color:#111;
-  border-radius:13px;
+  background:#16181d;
+  color:white;
+  border-radius:14px;
   padding:12px 14px;
-  z-index:300;
+  font-size:10px;
+  font-weight:850;
   opacity:0;
   pointer-events:none;
   transition:.2s;
-  font-size:11px;
-  font-weight:850;
 }
 
 .toast.show{
@@ -1156,9 +1193,12 @@ p{margin:0}
 }
 
 @media(min-width:700px){
-  body{background:#151517}
+  body{
+    background:#eceef3;
+  }
+
   .app{
-    box-shadow:0 0 80px rgba(0,0,0,.4);
+    box-shadow:0 0 70px rgba(30,40,70,.1);
   }
 }
 </style>
@@ -1170,119 +1210,175 @@ p{margin:0}
 
 <div class="app">
 
-<header id="mainHeader" class="header">
-  <div class="logo">RANK<span>.</span></div>
+<header class="header">
+  <div class="logo">RANK<span class="logoDot">.</span></div>
 
   <div class="headerRight">
     <div class="streak">🔥 12</div>
-    <button class="profileBtn" onclick="changeScreen('profileScreen')">JT</button>
+    <button class="profileBtn" data-go="profileScreen">JT</button>
   </div>
 </header>
 
-<main id="mainContent">
+<main>
 
 <!-- TODAY -->
 
 <section id="todayScreen" class="screen active">
 
-<div class="eyebrow">TODAY · RANK #27</div>
-<h1>Qu'est-ce qui<br>se passe aujourd'hui ?</h1>
-<p class="sub">Vote. Regarde ton groupe. Reviens pour le reveal.</p>
+  <div class="stories">
 
-<div class="todayQuestion">
+    <button class="story me" id="addStoryTop">
+      <div class="storyRing">
+        <div class="storyInner">＋</div>
+      </div>
+      <span class="storyName">Ton NOW</span>
+    </button>
 
-  <div class="questionTag">QUESTION DU JOUR</div>
+    <button class="story" data-now-index="0">
+      <div class="storyRing">
+        <div class="storyInner">L</div>
+      </div>
+      <span class="storyName">Léna</span>
+    </button>
 
-  <div class="question">Qui a le plus d'humour ?</div>
+    <button class="story" data-now-index="1">
+      <div class="storyRing">
+        <div class="storyInner">N</div>
+      </div>
+      <span class="storyName">Noé</span>
+    </button>
 
-  <p class="sub" style="font-size:10px">
-    Jusqu'à 3 personnes · vote anonyme
-  </p>
+    <button class="story" data-now-index="2">
+      <div class="storyRing">
+        <div class="storyInner">E</div>
+      </div>
+      <span class="storyName">Emma</span>
+    </button>
 
-  <div id="peopleGrid" class="people"></div>
-
-  <button id="voteBtn" class="primary blue" disabled>
-    Valider mon vote
-  </button>
-
-  <div id="voteSuccess" class="voteSuccess">
-    Vote envoyé ✓
-  </div>
-
-  <div class="reveal">
-    <div>
-      <small>REVEAL</small>
-      <strong>19:30</strong>
-    </div>
-
-    <div style="text-align:right">
-      <small>THE RANK IS OUT</small>
-      <div id="countdown">--</div>
-    </div>
-  </div>
-
-  <button class="secondary" onclick="showResultsDemo()">
-    Voir le reveal · démo
-  </button>
-
-</div>
-
-<div class="sectionHead">
-  <h2>Ton groupe</h2>
-  <small>maintenant</small>
-</div>
-
-<div class="card socialShortcut nowShortcut" onclick="changeScreen('nowScreen')">
-  <div class="shortcutIcon">▶</div>
-
-  <div class="shortcutText">
-    <strong>NOW <span class="badge">6</span></strong>
-    <span>Regarde ce que tes amis ont posté</span>
-  </div>
-
-  <div>›</div>
-</div>
-
-<div class="card socialShortcut" onclick="togglePredict()">
-  <div class="shortcutIcon">◎</div>
-
-  <div class="shortcutText">
-    <strong>PREDICT</strong>
-    <span>Qui sera #1 ce soir ?</span>
-  </div>
-
-  <div>›</div>
-</div>
-
-<div id="predictArea" style="display:none">
-
-  <div class="card">
-
-    <div style="display:flex;justify-content:space-between">
-      <strong>Qui sera #1 ?</strong>
-      <strong style="color:var(--gold)">340 pts</strong>
-    </div>
-
-    <div id="predictOptions" class="predictOptions"></div>
-
-    <button id="predictBtn" class="primary" disabled>
-      Valider ma prédiction
+    <button class="story" data-now-index="3">
+      <div class="storyRing">
+        <div class="storyInner">I</div>
+      </div>
+      <span class="storyName">Inès</span>
     </button>
 
   </div>
 
-</div>
+  <div class="eyebrow">TODAY · RANK #27</div>
 
-<div class="card socialShortcut" onclick="changeScreen('roomScreen')">
-  <div class="shortcutIcon">↗</div>
+  <h1>À toi de voter.</h1>
 
-  <div class="shortcutText">
-    <strong>ROOM <span class="badge">8</span></strong>
-    <span>Ton groupe parle maintenant</span>
+  <p class="sub">
+    Une question. Ton groupe. Le résultat ce soir.
+  </p>
+
+  <div class="card questionCard">
+
+    <div class="questionTop">
+      <div class="questionTag">● QUESTION DU JOUR</div>
+      <div class="questionNumber">#27</div>
+    </div>
+
+    <div class="question">
+      Qui a le plus d'humour ?
+    </div>
+
+    <p class="sub">
+      Choisis jusqu'à 3 personnes · vote anonyme
+    </p>
+
+    <div id="peopleGrid" class="people"></div>
+
+    <button id="voteBtn" class="primary" disabled>
+      Valider mon vote
+    </button>
+
+    <div id="voteSuccess" class="voteSuccess">
+      Ton vote est enregistré ✓
+    </div>
+
+    <div class="reveal">
+
+      <div>
+        <small>REVEAL</small>
+        <strong>19:30</strong>
+      </div>
+
+      <div style="text-align:right">
+        <small>RÉSULTATS DANS</small>
+        <div id="countdown">--:--:--</div>
+      </div>
+
+    </div>
+
+    <button id="demoReveal" class="secondary">
+      Voir le reveal · démo
+    </button>
+
   </div>
 
-  <div>›</div>
-</div>
+  <div class="sectionHead">
+    <h2>Dans ton groupe</h2>
+    <small>maintenant</small>
+  </div>
+
+  <div class="card shortcut" data-go="nowScreen">
+
+    <div class="shortcutIcon nowIcon">▶</div>
+
+    <div class="shortcutText">
+      <strong>NOW <span class="redBadge">4</span></strong>
+      <span>Les stories de ton groupe · 24 h</span>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </div>
+
+  <div id="predictShortcut" class="card shortcut">
+
+    <div class="shortcutIcon predictIcon">◎</div>
+
+    <div class="shortcutText">
+      <strong>PREDICT</strong>
+      <span>Devine qui sera #1 ce soir</span>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </div>
+
+  <div id="predictArea" class="predictArea">
+
+    <div class="card">
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong>Qui sera #1 ?</strong>
+        <strong style="color:var(--purple)">340 pts</strong>
+      </div>
+
+      <div id="predictOptions" class="predictOptions"></div>
+
+      <button id="predictBtn" class="primary" disabled>
+        Valider ma prédiction
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="card shortcut" data-go="roomScreen">
+
+    <div class="shortcutIcon roomIcon">◌</div>
+
+    <div class="shortcutText">
+      <strong>ROOM <span class="redBadge">8</span></strong>
+      <span>Le chat privé de ton groupe</span>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </div>
 
 </section>
 
@@ -1290,257 +1386,248 @@ p{margin:0}
 
 <section id="nowScreen" class="screen">
 
-<div id="nowFeed" class="nowFeed">
+  <div class="nowHeader">
 
-  <!-- NOW 1 -->
-
-  <article class="nowSlide">
-
-    <div class="nowMedia one">
-      <div class="bigLetter">L</div>
-      <div class="fakePlay">▶</div>
+    <div>
+      <div class="eyebrow">NOW · 24 H</div>
+      <h1>Ton groupe.</h1>
     </div>
 
-    <div class="nowGradient"></div>
+    <button id="addNowBtn" class="addNowBtn">
+      ＋ Ajouter
+    </button>
 
-    <div class="nowTopBar">
-      <div class="nowBrand">NOW</div>
+  </div>
 
-      <div class="nowTopActions">
-        <button class="roundIcon" onclick="openAddNow()">＋</button>
-        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
-      </div>
-    </div>
+  <p class="sub">
+    Glisse vers le haut pour passer au NOW suivant.
+  </p>
 
-    <div class="scrollHint">Glisse vers le haut ↑</div>
+  <div id="nowFeed" class="nowFeed">
 
-    <div class="nowUser">
-      <div class="userLine">
-        <div class="nowAvatar">L</div>
-        <div>
-          <strong>@lenaa</strong>
-          <span> · 12 min</span>
+    <article class="nowPost" data-post="0">
+
+      <div class="nowMedia media1">
+
+        <div class="mediaLetter">L</div>
+        <div class="play">▶</div>
+
+        <div class="nowOverlay">
+
+          <div class="nowProfile">
+
+            <div class="nowProfileRing">
+              <div class="nowProfileInner">L</div>
+            </div>
+
+            <div>
+              <strong>@lenaa</strong>
+              <small>12 min · disparaît dans 23 h</small>
+            </div>
+
+          </div>
+
+          <div class="caption">
+            Journée terminée 😭
+          </div>
+
+          <div class="nowActions">
+
+            <button class="nowAction likeButton">
+              ♡ <span>24</span>
+            </button>
+
+            <button class="nowAction commentButton" data-user="Léna">
+              ◌ 8 commentaires
+            </button>
+
+            <button class="nowAction shareButton">
+              ↗
+            </button>
+
+          </div>
+
+          <div class="commentBar">
+            <input placeholder="Répondre à Léna...">
+            <button class="quickSend">↑</button>
+          </div>
+
         </div>
+
       </div>
 
-      <div class="nowCaption">
-        Journée terminée 😭
+      <div class="swipeHint">
+        ↑ NOW suivant
       </div>
 
-      <div class="expire">disparaît dans 23 h</div>
-    </div>
+    </article>
 
-    <div class="sideActions">
+    <article class="nowPost" data-post="1">
 
-      <button class="sideAction" onclick="likeNow(this)">
-        <div class="sideCircle">♥</div>
-        <span>24</span>
-      </button>
+      <div class="nowMedia media2">
 
-      <button class="sideAction" onclick="openComments('Léna')">
-        <div class="sideCircle">◌</div>
-        <span>8</span>
-      </button>
+        <div class="mediaLetter">N</div>
 
-      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
-        <div class="sideCircle">↗</div>
-        <span>Partager</span>
-      </button>
+        <div class="nowOverlay">
 
-    </div>
+          <div class="nowProfile">
 
-    <div class="nowCommentBar">
-      <input id="quick1" placeholder="Commenter ce NOW...">
-      <button onclick="quickComment(1)">↑</button>
-    </div>
+            <div class="nowProfileRing">
+              <div class="nowProfileInner">N</div>
+            </div>
 
-  </article>
+            <div>
+              <strong>@noe13</strong>
+              <small>36 min · disparaît dans 23 h</small>
+            </div>
 
-  <!-- NOW 2 -->
+          </div>
 
-  <article class="nowSlide">
+          <div class="caption">
+            Je ne donnerai aucune explication 💀
+          </div>
 
-    <div class="nowMedia two">
-      <div class="bigLetter">N</div>
-    </div>
+          <div class="nowActions">
 
-    <div class="nowGradient"></div>
+            <button class="nowAction likeButton">
+              ♡ <span>31</span>
+            </button>
 
-    <div class="nowTopBar">
-      <div class="nowBrand">NOW</div>
+            <button class="nowAction commentButton" data-user="Noé">
+              ◌ 12 commentaires
+            </button>
 
-      <div class="nowTopActions">
-        <button class="roundIcon" onclick="openAddNow()">＋</button>
-        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
-      </div>
-    </div>
+            <button class="nowAction shareButton">
+              ↗
+            </button>
 
-    <div class="nowUser">
-      <div class="userLine">
-        <div class="nowAvatar">N</div>
-        <div>
-          <strong>@noe13</strong>
-          <span> · 36 min</span>
+          </div>
+
+          <div class="commentBar">
+            <input placeholder="Répondre à Noé...">
+            <button class="quickSend">↑</button>
+          </div>
+
         </div>
+
       </div>
 
-      <div class="nowCaption">
-        Aucune explication 💀
+      <div class="swipeHint">
+        ↑ NOW suivant
       </div>
 
-      <div class="expire">disparaît dans 23 h</div>
-    </div>
+    </article>
 
-    <div class="sideActions">
+    <article class="nowPost" data-post="2">
 
-      <button class="sideAction" onclick="likeNow(this)">
-        <div class="sideCircle">♥</div>
-        <span>31</span>
-      </button>
+      <div class="nowMedia media3">
 
-      <button class="sideAction" onclick="openComments('Noé')">
-        <div class="sideCircle">◌</div>
-        <span>12</span>
-      </button>
+        <div class="mediaLetter">E</div>
+        <div class="play">▶</div>
 
-      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
-        <div class="sideCircle">↗</div>
-        <span>Partager</span>
-      </button>
+        <div class="nowOverlay">
 
-    </div>
+          <div class="nowProfile">
 
-    <div class="nowCommentBar">
-      <input id="quick2" placeholder="Commenter ce NOW...">
-      <button onclick="quickComment(2)">↑</button>
-    </div>
+            <div class="nowProfileRing">
+              <div class="nowProfileInner">E</div>
+            </div>
 
-  </article>
+            <div>
+              <strong>@emma</strong>
+              <small>1 h · disparaît dans 22 h</small>
+            </div>
 
-  <!-- NOW 3 -->
+          </div>
 
-  <article class="nowSlide">
+          <div class="caption">
+            Vous validez ou pas ? 😂
+          </div>
 
-    <div class="nowMedia three">
-      <div class="bigLetter">E</div>
-      <div class="fakePlay">▶</div>
-    </div>
+          <div class="nowActions">
 
-    <div class="nowGradient"></div>
+            <button class="nowAction likeButton">
+              ♡ <span>18</span>
+            </button>
 
-    <div class="nowTopBar">
-      <div class="nowBrand">NOW</div>
+            <button class="nowAction commentButton" data-user="Emma">
+              ◌ 5 commentaires
+            </button>
 
-      <div class="nowTopActions">
-        <button class="roundIcon" onclick="openAddNow()">＋</button>
-        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
-      </div>
-    </div>
+            <button class="nowAction shareButton">
+              ↗
+            </button>
 
-    <div class="nowUser">
-      <div class="userLine">
-        <div class="nowAvatar">E</div>
-        <div>
-          <strong>@emma</strong>
-          <span> · 1 h</span>
+          </div>
+
+          <div class="commentBar">
+            <input placeholder="Répondre à Emma...">
+            <button class="quickSend">↑</button>
+          </div>
+
         </div>
+
       </div>
 
-      <div class="nowCaption">
-        Vous validez ou pas ? 😂
+      <div class="swipeHint">
+        ↑ NOW suivant
       </div>
 
-      <div class="expire">disparaît dans 22 h</div>
-    </div>
+    </article>
 
-    <div class="sideActions">
+    <article class="nowPost" data-post="3">
 
-      <button class="sideAction" onclick="likeNow(this)">
-        <div class="sideCircle">♥</div>
-        <span>18</span>
-      </button>
+      <div class="nowMedia media4">
 
-      <button class="sideAction" onclick="openComments('Emma')">
-        <div class="sideCircle">◌</div>
-        <span>5</span>
-      </button>
+        <div class="mediaLetter">I</div>
 
-      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
-        <div class="sideCircle">↗</div>
-        <span>Partager</span>
-      </button>
+        <div class="nowOverlay">
 
-    </div>
+          <div class="nowProfile">
 
-    <div class="nowCommentBar">
-      <input id="quick3" placeholder="Commenter ce NOW...">
-      <button onclick="quickComment(3)">↑</button>
-    </div>
+            <div class="nowProfileRing">
+              <div class="nowProfileInner">I</div>
+            </div>
 
-  </article>
+            <div>
+              <strong>@iness</strong>
+              <small>2 h · disparaît dans 21 h</small>
+            </div>
 
-  <!-- NOW 4 -->
+          </div>
 
-  <article class="nowSlide">
+          <div class="caption">
+            Ce soir ça va être quelque chose
+          </div>
 
-    <div class="nowMedia four">
-      <div class="bigLetter">I</div>
-    </div>
+          <div class="nowActions">
 
-    <div class="nowGradient"></div>
+            <button class="nowAction likeButton">
+              ♡ <span>16</span>
+            </button>
 
-    <div class="nowTopBar">
-      <div class="nowBrand">NOW</div>
+            <button class="nowAction commentButton" data-user="Inès">
+              ◌ 3 commentaires
+            </button>
 
-      <div class="nowTopActions">
-        <button class="roundIcon" onclick="openAddNow()">＋</button>
-        <button class="roundIcon" onclick="changeScreen('todayScreen')">×</button>
-      </div>
-    </div>
+            <button class="nowAction shareButton">
+              ↗
+            </button>
 
-    <div class="nowUser">
-      <div class="userLine">
-        <div class="nowAvatar">I</div>
-        <div>
-          <strong>@iness</strong>
-          <span> · 2 h</span>
+          </div>
+
+          <div class="commentBar">
+            <input placeholder="Répondre à Inès...">
+            <button class="quickSend">↑</button>
+          </div>
+
         </div>
+
       </div>
 
-      <div class="nowCaption">
-        Ce soir ça va être quelque chose
-      </div>
+    </article>
 
-      <div class="expire">disparaît dans 21 h</div>
-    </div>
-
-    <div class="sideActions">
-
-      <button class="sideAction" onclick="likeNow(this)">
-        <div class="sideCircle">♥</div>
-        <span>16</span>
-      </button>
-
-      <button class="sideAction" onclick="openComments('Inès')">
-        <div class="sideCircle">◌</div>
-        <span>3</span>
-      </button>
-
-      <button class="sideAction" onclick="toast('NOW partagé dans le groupe')">
-        <div class="sideCircle">↗</div>
-        <span>Partager</span>
-      </button>
-
-    </div>
-
-    <div class="nowCommentBar">
-      <input id="quick4" placeholder="Commenter ce NOW...">
-      <button onclick="quickComment(4)">↑</button>
-    </div>
-
-  </article>
-
-</div>
+  </div>
 
 </section>
 
@@ -1548,54 +1635,29 @@ p{margin:0}
 
 <section id="rankScreen" class="screen">
 
-<div class="eyebrow">THE RANK IS OUT</div>
+  <div class="eyebrow">THE RANK IS OUT</div>
 
-<h1>Le classement.</h1>
+  <h1>Le classement.</h1>
 
-<p class="sub">Qui a le plus d'humour ?</p>
+  <p class="sub">
+    Qui a le plus d'humour ?
+  </p>
 
-<div class="card">
-  <div id="podium" class="podium"></div>
-</div>
-
-<div class="sectionHead">
-  <h2>Classement complet</h2>
-</div>
-
-<div class="card">
-  <div id="rankingList"></div>
-</div>
-
-<button class="primary blue" onclick="changeScreen('roomScreen')">
-  Ouvrir la ROOM
-</button>
-
-<div class="sectionHead">
-  <h2>Historique</h2>
-  <small>7 jours</small>
-</div>
-
-<div class="card">
-
-  <div class="rankRow">
-    <strong>Hier</strong>
-    <div>Meilleur style</div>
-    <div class="rankVotes">Léna #1</div>
+  <div class="card">
+    <div id="podium" class="podium"></div>
   </div>
 
-  <div class="rankRow">
-    <strong>-2j</strong>
-    <div>Meilleure vibe</div>
-    <div class="rankVotes">Lucas #1</div>
+  <div class="sectionHead">
+    <h2>Classement complet</h2>
   </div>
 
-  <div class="rankRow">
-    <strong>-3j</strong>
-    <div>Toujours en retard</div>
-    <div class="rankVotes">Emma #1</div>
+  <div class="card">
+    <div id="rankingList"></div>
   </div>
 
-</div>
+  <button class="primary" data-go="roomScreen">
+    Parler du résultat dans ROOM
+  </button>
 
 </section>
 
@@ -1603,39 +1665,50 @@ p{margin:0}
 
 <section id="roomScreen" class="screen">
 
-<div class="eyebrow">ROOM</div>
+  <div class="eyebrow">ROOM · PRIVÉ</div>
 
-<h1>Le groupe.</h1>
+  <h1>Le groupe.</h1>
 
-<p class="sub">Ici, seuls les membres de ton groupe peuvent parler.</p>
+  <p class="sub">
+    Seulement les membres du groupe.
+  </p>
 
-<div class="roomHead" style="margin-top:18px">
+  <div class="card">
 
-  <div class="roomTop">
+    <div class="roomTop">
 
-    <div>
-      <h2>Marseille</h2>
-      <p class="sub" style="font-size:9px;margin-top:3px">
-        8 membres · privé
-      </p>
+      <div>
+        <h2>Marseille</h2>
+        <p class="sub">8 membres</p>
+      </div>
+
+      <div class="online">
+        ● EN LIGNE
+      </div>
+
     </div>
 
-    <div class="online">● 8 EN LIGNE</div>
+    <div class="winner">
+      🏆 Léna est #1 aujourd'hui
+    </div>
 
   </div>
 
-  <div class="winnerPin">
-    👑 <strong>Léna est #1 aujourd'hui</strong>
+  <div id="messages" class="messages"></div>
+
+  <div class="roomComposer">
+
+    <input
+      id="messageInput"
+      maxlength="250"
+      placeholder="Écris un message..."
+    >
+
+    <button id="sendMessageBtn">
+      ↑
+    </button>
+
   </div>
-
-</div>
-
-<div id="messages" class="messages"></div>
-
-<div class="roomComposer">
-  <input id="messageInput" maxlength="250" placeholder="Message...">
-  <button onclick="sendMessage()">↑</button>
-</div>
 
 </section>
 
@@ -1643,91 +1716,88 @@ p{margin:0}
 
 <section id="recapScreen" class="screen">
 
-<div class="eyebrow">WEEKLY RECAP</div>
+  <div class="eyebrow">WEEKLY RECAP</div>
 
-<h1>Ta semaine.</h1>
-
-<p class="sub">Tout ce qui s'est passé dans ton groupe.</p>
-
-<div class="card">
-
-  <h2>Ton recap</h2>
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong>47</strong>
-      <span>votes reçus</span>
-    </div>
-
-    <div class="stat">
-      <strong>2</strong>
-      <span>podiums</span>
-    </div>
-
-    <div class="stat">
-      <strong>5/7</strong>
-      <span>jours joués</span>
-    </div>
-
-    <div class="stat">
-      <strong>+80</strong>
-      <span>Predict pts</span>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="card">
-
-  <h2>Personne de la semaine</h2>
-
-  <div style="display:flex;align-items:center;gap:11px;margin-top:15px">
-    <div class="miniAvatar" style="width:54px;height:54px">L</div>
-
-    <div>
-      <strong>Léna</strong>
-      <p class="sub" style="font-size:10px;margin-top:3px">
-        3 premières places
-      </p>
-    </div>
-  </div>
-
-</div>
-
-<div class="sectionHead">
-  <h2>Create Question</h2>
-  <small>1× / semaine</small>
-</div>
-
-<div class="card">
-
-  <strong>À vous de choisir.</strong>
+  <h1>Ta semaine.</h1>
 
   <p class="sub">
-    Propose une question pour un prochain RANK.
+    Tes moments RANK de la semaine.
   </p>
 
-  <textarea
-    id="customQuestion"
-    class="questionInput"
-    placeholder="Ex : Qui serait capable de devenir célèbre ?"
-  ></textarea>
+  <div class="card">
 
-  <button
-    id="createQuestionBtn"
-    class="primary blue"
-    onclick="createQuestion()"
-  >
-    Proposer
-  </button>
+    <h2>Ton recap</h2>
 
-  <p id="createStatus" class="sub" style="font-size:9px">
-    Disponible cette semaine.
-  </p>
+    <div class="stats">
 
-</div>
+      <div class="stat">
+        <strong>47</strong>
+        <span>votes reçus</span>
+      </div>
+
+      <div class="stat">
+        <strong>2</strong>
+        <span>podiums</span>
+      </div>
+
+      <div class="stat">
+        <strong>5/7</strong>
+        <span>jours joués</span>
+      </div>
+
+      <div class="stat">
+        <strong>+80</strong>
+        <span>Predict pts</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Personne de la semaine</h2>
+
+    <div style="display:flex;gap:11px;align-items:center;margin-top:14px">
+
+      <div class="miniAvatar" style="width:54px;height:54px">
+        L
+      </div>
+
+      <div>
+        <strong>Léna</strong>
+        <p class="sub">3 premières places</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="sectionHead">
+    <h2>Create Question</h2>
+    <small>1× par semaine</small>
+  </div>
+
+  <div class="card">
+
+    <strong>Ta question pour le groupe.</strong>
+
+    <textarea
+      id="customQuestion"
+      class="questionInput"
+      maxlength="100"
+      placeholder="Ex : Qui serait capable de devenir célèbre ?"
+    ></textarea>
+
+    <button id="createQuestionBtn" class="primary">
+      Proposer la question
+    </button>
+
+    <p id="questionStatus" class="sub">
+      Une proposition disponible cette semaine.
+    </p>
+
+  </div>
 
 </section>
 
@@ -1735,202 +1805,208 @@ p{margin:0}
 
 <section id="profileScreen" class="screen">
 
-<div class="eyebrow">PROFILE</div>
+  <div class="eyebrow">PROFILE</div>
 
-<div class="card">
+  <div class="card">
 
-  <div class="profile">
+    <div class="profileRow">
 
-    <div class="profileAvatar">JT</div>
+      <div class="bigAvatar">
+        JT
+      </div>
 
-    <div>
-      <h2 style="font-size:25px">Jonathan</h2>
-      <p class="sub" style="margin-top:3px">@jonathan</p>
+      <div>
+        <h1 style="font-size:27px">Jonathan</h1>
+        <p class="sub">@jonathan</p>
+      </div>
+
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong>12</strong>
+        <span>streak</span>
+      </div>
+
+      <div class="stat">
+        <strong>5</strong>
+        <span>podiums</span>
+      </div>
+
+      <div class="stat">
+        <strong>340</strong>
+        <span>Predict pts</span>
+      </div>
+
+      <div class="stat">
+        <strong>8</strong>
+        <span>amis</span>
+      </div>
+
     </div>
 
   </div>
 
-  <div class="stats">
-
-    <div class="stat">
-      <strong>12</strong>
-      <span>streak</span>
-    </div>
-
-    <div class="stat">
-      <strong>5</strong>
-      <span>podiums</span>
-    </div>
-
-    <div class="stat">
-      <strong>340</strong>
-      <span>Predict pts</span>
-    </div>
-
-    <div class="stat">
-      <strong>8</strong>
-      <span>amis</span>
-    </div>
-
+  <div class="card">
+    <h2>Mon groupe</h2>
+    <p class="sub">Marseille · 8 membres · privé</p>
   </div>
-
-</div>
-
-<div class="card">
-
-  <h2>Mon groupe</h2>
-
-  <p class="sub">Marseille · 8 membres · privé</p>
-
-  <button class="secondary" onclick="toast('Membres du groupe · démo')">
-    Voir les membres
-  </button>
-
-</div>
 
 </section>
 
 </main>
 
-<nav id="bottomNav" class="bottomNav">
+<!-- NAVIGATION -->
 
-<button class="navBtn active" data-screen="todayScreen">
-  <span class="navIcon">⌂</span>
-  <span class="navLabel">TODAY</span>
-</button>
+<nav class="bottomNav">
 
-<button class="navBtn nowNav" data-screen="nowScreen">
-  <span class="navIcon">▶</span>
-  <span class="navLabel">NOW</span>
-</button>
+  <button class="navBtn active" data-go="todayScreen">
+    <span class="navIcon">⌂</span>
+    <span class="navLabel">TODAY</span>
+  </button>
 
-<button class="navBtn" data-screen="rankScreen">
-  <span class="navIcon">▥</span>
-  <span class="navLabel">RANK</span>
-</button>
+  <button class="navBtn nowNav" data-go="nowScreen">
+    <span class="navIcon">▶</span>
+    <span class="navLabel">NOW</span>
+  </button>
 
-<button class="navBtn" data-screen="roomScreen">
-  <span class="navIcon">◌</span>
-  <span class="navLabel">ROOM</span>
-</button>
+  <button class="navBtn" data-go="rankScreen">
+    <span class="navIcon">▥</span>
+    <span class="navLabel">RANK</span>
+  </button>
 
-<button class="navBtn" data-screen="recapScreen">
-  <span class="navIcon">↻</span>
-  <span class="navLabel">RECAP</span>
-</button>
+  <button class="navBtn" data-go="roomScreen">
+    <span class="navIcon">◌</span>
+    <span class="navLabel">ROOM</span>
+  </button>
+
+  <button class="navBtn" data-go="recapScreen">
+    <span class="navIcon">↻</span>
+    <span class="navLabel">RECAP</span>
+  </button>
 
 </nav>
 
 </div>
 
-<!-- COMMENTS -->
+<!-- COMMENTS MODAL -->
 
-<div id="commentsOverlay" class="commentsOverlay" onclick="commentsBackground(event)">
+<div id="commentsOverlay" class="overlay">
 
-<div class="commentsSheet">
+  <div class="sheet">
 
-  <div class="handle"></div>
+    <div class="handle"></div>
 
-  <div class="commentHeader">
-    <h2>Commentaires</h2>
-    <button onclick="closeComments()">×</button>
+    <div class="sheetHead">
+      <h2>Commentaires</h2>
+      <button class="closeBtn" data-close="commentsOverlay">×</button>
+    </div>
+
+    <div id="commentsList"></div>
+
+    <div class="drawerComposer">
+      <input id="drawerComment" placeholder="Ajouter un commentaire...">
+      <button id="sendDrawerComment">↑</button>
+    </div>
+
   </div>
 
-  <div id="commentsList" class="commentsList"></div>
-
-  <div class="drawerComposer">
-    <input id="drawerComment" placeholder="Ajouter un commentaire...">
-    <button onclick="sendDrawerComment()">↑</button>
-  </div>
-
 </div>
 
-</div>
+<!-- ADD NOW MODAL -->
 
-<!-- ADD NOW -->
+<div id="addNowOverlay" class="overlay">
 
-<div id="addOverlay" class="addOverlay">
+  <div class="sheet">
 
-<div class="addHeader">
-  <button onclick="closeAddNow()">×</button>
-  <strong>Nouveau NOW</strong>
-  <div style="width:24px"></div>
-</div>
+    <div class="handle"></div>
 
-<div class="uploadArea">
+    <div class="sheetHead">
+      <h2>Nouveau NOW</h2>
+      <button class="closeBtn" data-close="addNowOverlay">×</button>
+    </div>
 
-  <div class="uploadIcon">＋</div>
+    <p class="sub">
+      Photo ou vidéo jusqu'à 1 minute · visible 24 h.
+    </p>
 
-  <h2>Photo ou vidéo</h2>
+    <div class="uploadBox">
 
-  <p class="sub">
-    Une vidéo peut durer jusqu'à 1 minute.<br>
-    Ton NOW disparaît après 24 heures.
-  </p>
+      <div style="font-size:37px">＋</div>
 
-  <label class="chooseFile">
-    Choisir
+      <strong>Choisis ton contenu</strong>
+
+      <p id="selectedFileName" class="sub">
+        Aucune photo ou vidéo choisie
+      </p>
+
+      <label class="uploadButton">
+        Choisir une photo / vidéo
+        <input
+          id="nowFile"
+          type="file"
+          accept="image/*,video/*"
+        >
+      </label>
+
+    </div>
+
     <input
-      id="nowFile"
-      class="fileInput"
-      type="file"
-      accept="image/*,video/*"
-      onchange="selectNowFile(event)"
+      id="nowCaptionInput"
+      class="captionInput"
+      maxlength="100"
+      placeholder="Ajouter une légende..."
     >
-  </label>
 
-</div>
+    <button id="publishNowBtn" class="primary">
+      Publier mon NOW
+    </button>
 
-<div class="addCaption">
-
-  <input
-    id="nowCaption"
-    placeholder="Ajouter une légende..."
-  >
-
-  <button class="primary blue" onclick="publishNow()">
-    Publier mon NOW
-  </button>
-
-</div>
+  </div>
 
 </div>
 
 <!-- MESSAGE MENU -->
 
-<div id="menuOverlay" class="menuOverlay" onclick="menuBackground(event)">
+<div id="messageMenuOverlay" class="overlay">
 
-<div class="menuSheet">
+  <div class="sheet">
 
-  <button id="replyAction" class="menuAction">
-    Répondre
-  </button>
+    <div class="handle"></div>
 
-  <button id="reportAction" class="menuAction">
-    Signaler le message
-  </button>
+    <button id="replyMessageBtn" class="menuAction">
+      ↩ Répondre
+    </button>
 
-  <button id="blockAction" class="menuAction">
-    Bloquer cette personne
-  </button>
+    <button id="reportMessageBtn" class="menuAction">
+      ⚑ Signaler
+    </button>
 
-  <button id="deleteAction" class="menuAction danger">
-    Supprimer mon message
-  </button>
+    <button id="blockMessageBtn" class="menuAction">
+      ⊘ Bloquer cette personne
+    </button>
 
-  <button class="menuAction" onclick="closeMessageMenu()">
-    Annuler
-  </button>
+    <button id="deleteMessageBtn" class="menuAction danger">
+      Supprimer mon message
+    </button>
 
-</div>
+    <button class="menuAction" data-close="messageMenuOverlay">
+      Annuler
+    </button>
+
+  </div>
 
 </div>
 
 <script>
+"use strict";
 
-/* DATA */
+/* =========================
+   DATA
+========================= */
 
-const members=[
+const members = [
   {id:1,name:"Léna",username:"@lenaa",initial:"L",votes:132},
   {id:2,name:"Noé",username:"@noe13",initial:"N",votes:98},
   {id:3,name:"Emma",username:"@emma",initial:"E",votes:78},
@@ -1939,15 +2015,14 @@ const members=[
   {id:6,name:"Mathis",username:"@mathis",initial:"M",votes:41}
 ];
 
-let selectedVotes=new Set();
-let prediction=null;
-let selectedNowFile=null;
-let activeMessageId=null;
-let replyTo=null;
-let blockedUsers=new Set();
-let currentCommentUser="";
+let selectedVotes = new Set();
+let prediction = null;
+let selectedFile = null;
+let activeMessageId = null;
+let replyTo = null;
+let currentCommentUser = "";
 
-const starterMessages=[
+const starterMessages = [
   {
     id:101,
     username:"@lenaa",
@@ -1961,7 +2036,7 @@ const starterMessages=[
     username:"@noe13",
     initial:"N",
     time:"19:31",
-    text:"Je demande recompte officiel",
+    text:"Je demande un recompte officiel 😂",
     mine:false
   },
   {
@@ -1969,196 +2044,227 @@ const starterMessages=[
     username:"@emma",
     initial:"E",
     time:"19:32",
-    text:"Franchement Léna c'était mérité",
-    mine:false
-  },
-  {
-    id:104,
-    username:"@lucas",
-    initial:"L",
-    time:"19:33",
-    text:"Demain je prends le #1",
+    text:"Franchement c'était mérité",
     mine:false
   }
 ];
 
-let chatMessages;
+let messages;
 
 try{
-  chatMessages=
-    JSON.parse(localStorage.getItem("rank-v6-chat"))
-    ||starterMessages;
-}catch{
-  chatMessages=[...starterMessages];
+  messages = JSON.parse(localStorage.getItem("rank-v7-chat")) || starterMessages;
+}catch(e){
+  messages = [...starterMessages];
 }
 
-/* GENERAL */
+/* =========================
+   UTILITIES
+========================= */
 
 function toast(text){
-  const t=document.getElementById("toast");
+  const element = document.getElementById("toast");
 
-  t.textContent=text;
-  t.classList.add("show");
+  element.textContent = text;
+  element.classList.add("show");
 
-  setTimeout(()=>{
-    t.classList.remove("show");
-  },2100);
+  setTimeout(function(){
+    element.classList.remove("show");
+  },1800);
 }
 
-function changeScreen(id){
+function escapeHTML(text){
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
 
-  document
-    .querySelectorAll(".screen")
-    .forEach(screen=>screen.classList.remove("active"));
+/* =========================
+   NAVIGATION
+========================= */
 
-  document.getElementById(id).classList.add("active");
+function goTo(screenId){
 
-  document.querySelectorAll(".navBtn").forEach(btn=>{
-    btn.classList.toggle(
+  document.querySelectorAll(".screen").forEach(function(screen){
+    screen.classList.remove("active");
+  });
+
+  const target = document.getElementById(screenId);
+
+  if(!target){
+    return;
+  }
+
+  target.classList.add("active");
+
+  document.querySelectorAll(".navBtn").forEach(function(button){
+    button.classList.toggle(
       "active",
-      btn.dataset.screen===id
+      button.dataset.go === screenId
     );
   });
 
-  const isNow=id==="nowScreen";
-
-  document.getElementById("mainHeader").style.display=
-    isNow?"none":"flex";
-
-  document.getElementById("mainContent").style.padding=
-    isNow?"0":"15px 16px 100px";
-
-  document.getElementById("bottomNav").style.display=
-    isNow?"none":"grid";
-
-  if(id==="roomScreen"){
+  if(screenId === "roomScreen"){
     renderMessages();
   }
 
-  if(!isNow){
-    window.scrollTo({top:0,behavior:"smooth"});
+  if(screenId !== "nowScreen"){
+    window.scrollTo(0,0);
   }
 }
 
-document.querySelectorAll(".navBtn").forEach(btn=>{
-  btn.onclick=()=>{
-    changeScreen(btn.dataset.screen);
-  };
+document.querySelectorAll("[data-go]").forEach(function(element){
+
+  element.addEventListener("click",function(){
+
+    goTo(this.dataset.go);
+
+  });
+
 });
 
-/* VOTE */
+/* =========================
+   PEOPLE / VOTE
+========================= */
 
 function renderPeople(){
 
-  document.getElementById("peopleGrid").innerHTML=
-    members.map(member=>`
+  const grid = document.getElementById("peopleGrid");
 
+  grid.innerHTML = members.map(function(member){
+
+    const selected = selectedVotes.has(member.id);
+
+    return `
       <button
-        class="person ${selectedVotes.has(member.id)?"selected":""}"
-        onclick="toggleVote(${member.id})"
+        class="person ${selected ? "selected" : ""}"
+        data-person-id="${member.id}"
       >
 
-        <div class="avatar">
+        <div class="personAvatar">
           ${member.initial}
         </div>
 
         <strong>${member.name}</strong>
+
         <small>${member.username}</small>
 
       </button>
+    `;
 
-    `).join("");
+  }).join("");
 
-  document.getElementById("voteBtn").disabled=
-    selectedVotes.size===0;
+  grid.querySelectorAll(".person").forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+      const id = Number(this.dataset.personId);
+
+      if(selectedVotes.has(id)){
+        selectedVotes.delete(id);
+      }else{
+
+        if(selectedVotes.size >= 3){
+          toast("3 personnes maximum");
+          return;
+        }
+
+        selectedVotes.add(id);
+      }
+
+      renderPeople();
+
+    });
+
+  });
+
+  document.getElementById("voteBtn").disabled =
+    selectedVotes.size === 0;
 }
 
-function toggleVote(id){
-
-  if(selectedVotes.has(id)){
-    selectedVotes.delete(id);
-  }else{
-
-    if(selectedVotes.size>=3){
-      toast("3 choix maximum");
-      return;
-    }
-
-    selectedVotes.add(id);
-  }
-
-  renderPeople();
-}
-
-document.getElementById("voteBtn").onclick=()=>{
+document.getElementById("voteBtn").addEventListener("click",function(){
 
   localStorage.setItem(
-    "rank-v6-vote",
-    JSON.stringify([...selectedVotes])
+    "rank-v7-votes",
+    JSON.stringify(Array.from(selectedVotes))
   );
 
-  document.getElementById("voteSuccess")
-    .style.display="block";
+  document.getElementById("voteSuccess").style.display = "block";
 
   toast("Vote enregistré ✓");
-};
 
-/* COUNTDOWN */
+});
+
+/* =========================
+   COUNTDOWN
+========================= */
 
 function updateCountdown(){
 
-  const now=new Date();
-  const reveal=new Date();
+  const now = new Date();
+
+  const reveal = new Date();
 
   reveal.setHours(19,30,0,0);
 
-  if(now>=reveal){
-    document.getElementById("countdown")
-      .textContent="DISPONIBLE";
+  const display = document.getElementById("countdown");
+
+  if(now >= reveal){
+    display.textContent = "DISPONIBLE";
     return;
   }
 
-  const diff=reveal-now;
+  const difference = reveal.getTime() - now.getTime();
 
-  const h=Math.floor(diff/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
+  const hours = Math.floor(difference / 3600000);
 
-  document.getElementById("countdown").textContent=
-    `${String(h).padStart(2,"0")}:`+
-    `${String(m).padStart(2,"0")}:`+
-    `${String(s).padStart(2,"0")}`;
+  const minutes = Math.floor(
+    (difference % 3600000) / 60000
+  );
+
+  const seconds = Math.floor(
+    (difference % 60000) / 1000
+  );
+
+  display.textContent =
+    String(hours).padStart(2,"0") + ":" +
+    String(minutes).padStart(2,"0") + ":" +
+    String(seconds).padStart(2,"0");
 }
 
-/* PREDICT */
+/* =========================
+   PREDICT
+========================= */
 
-function togglePredict(){
+document.getElementById("predictShortcut")
+.addEventListener("click",function(){
 
-  const area=document.getElementById("predictArea");
+  const area = document.getElementById("predictArea");
 
-  area.style.display=
-    area.style.display==="none"
-      ?"block"
-      :"none";
+  const open = area.style.display === "block";
 
-  if(area.style.display==="block"){
-    setTimeout(()=>{
+  area.style.display = open ? "none" : "block";
+
+  if(!open){
+    setTimeout(function(){
       area.scrollIntoView({
         behavior:"smooth",
         block:"center"
       });
-    },80);
+    },100);
   }
-}
+
+});
 
 function renderPredict(){
 
-  document.getElementById("predictOptions").innerHTML=
-    members.slice(0,4).map(member=>`
+  const container = document.getElementById("predictOptions");
 
+  container.innerHTML = members.slice(0,4).map(function(member){
+
+    return `
       <button
-        class="predictOption ${prediction===member.id?"selected":""}"
-        onclick="choosePrediction(${member.id})"
+        class="predictOption ${prediction === member.id ? "selected" : ""}"
+        data-predict-id="${member.id}"
       >
 
         <div class="miniAvatar">
@@ -2167,66 +2273,75 @@ function renderPredict(){
 
         <strong>${member.name}</strong>
 
-        <span>${member.username}</span>
-
       </button>
+    `;
 
-    `).join("");
+  }).join("");
 
-  document.getElementById("predictBtn").disabled=
-    !prediction;
+  container.querySelectorAll(".predictOption")
+  .forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+      prediction = Number(this.dataset.predictId);
+
+      renderPredict();
+
+    });
+
+  });
+
+  document.getElementById("predictBtn").disabled = !prediction;
 }
 
-function choosePrediction(id){
-  prediction=id;
-  renderPredict();
-}
+document.getElementById("predictBtn")
+.addEventListener("click",function(){
 
-document.getElementById("predictBtn").onclick=()=>{
-
-  if(!prediction)return;
+  if(!prediction){
+    return;
+  }
 
   localStorage.setItem(
-    "rank-v6-predict",
-    prediction
+    "rank-v7-predict",
+    String(prediction)
   );
 
   toast("Prédiction enregistrée ✓");
-};
 
-/* RANK */
+});
 
-function renderRanking(){
+/* =========================
+   RANK
+========================= */
 
-  const ranking=[...members]
-    .sort((a,b)=>b.votes-a.votes);
+function renderRank(){
 
-  const podium=[
+  const ranking = [...members].sort(function(a,b){
+    return b.votes - a.votes;
+  });
+
+  const podiumOrder = [
     ranking[1],
     ranking[0],
     ranking[2]
   ];
 
-  document.getElementById("podium").innerHTML=
-    podium.map((member,index)=>{
+  document.getElementById("podium").innerHTML =
+    podiumOrder.map(function(member,index){
 
-      const position=
-        index===1
-          ?1
-          :index===0
-            ?2
-            :3;
+      const place =
+        index === 1 ? 1 :
+        index === 0 ? 2 : 3;
 
-      return`
-
-        <div class="podiumItem ${position===1?"first":""}">
+      return `
+        <div class="podiumItem ${place === 1 ? "first" : ""}">
 
           <div class="podiumAvatar">
             ${member.initial}
           </div>
 
           <strong>
-            ${position===1?"♛ ":""}#${position} ${member.name}
+            #${place} ${member.name}
           </strong>
 
           <small>
@@ -2234,39 +2349,727 @@ function renderRanking(){
           </small>
 
         </div>
-
       `;
 
     }).join("");
 
-  document.getElementById("rankingList").innerHTML=
-    ranking.map((member,index)=>`
+  document.getElementById("rankingList").innerHTML =
+    ranking.map(function(member,index){
 
-      <div class="rankRow">
+      return `
+        <div class="rankRow">
 
-        <strong>
-          #${index+1}
-        </strong>
+          <strong>#${index + 1}</strong>
 
-        <div class="rankUser">
+          <div class="rankUser">
 
-          <div class="miniAvatar">
-            ${member.initial}
+            <div class="miniAvatar">
+              ${member.initial}
+            </div>
+
+            ${member.name}
+
           </div>
 
-          ${member.name}
+          <div class="rankVotes">
+            ${member.votes}
+          </div>
 
         </div>
+      `;
 
-        <div class="rankVotes">
-          ${member.votes}
+    }).join("");
+}
+
+document.getElementById("demoReveal")
+.addEventListener("click",function(){
+
+  renderRank();
+
+  goTo("rankScreen");
+
+});
+
+/* =========================
+   STORIES
+========================= */
+
+document.querySelectorAll("[data-now-index]")
+.forEach(function(story){
+
+  story.addEventListener("click",function(){
+
+    const index = Number(this.dataset.nowIndex);
+
+    goTo("nowScreen");
+
+    setTimeout(function(){
+
+      const posts = document.querySelectorAll(".nowPost");
+
+      if(posts[index]){
+        posts[index].scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+      }
+
+    },100);
+
+  });
+
+});
+
+/* =========================
+   NOW LIKES
+========================= */
+
+document.querySelectorAll(".likeButton")
+.forEach(function(button){
+
+  button.addEventListener("click",function(){
+
+    const countElement = this.querySelector("span");
+
+    let count = Number(countElement.textContent);
+
+    const liked = this.classList.contains("liked");
+
+    if(liked){
+
+      this.classList.remove("liked");
+      this.firstChild.textContent = "♡ ";
+      count--;
+
+    }else{
+
+      this.classList.add("liked");
+      this.firstChild.textContent = "♥ ";
+      count++;
+
+    }
+
+    countElement.textContent = count;
+
+  });
+
+});
+
+/* =========================
+   NOW COMMENTS
+========================= */
+
+const exampleComments = [
+  {
+    initial:"E",
+    username:"@emma",
+    text:"Mais non 😭😭"
+  },
+  {
+    initial:"N",
+    username:"@noe13",
+    text:"J'étais pas prêt 😂"
+  },
+  {
+    initial:"L",
+    username:"@lucas",
+    text:"Incroyable"
+  }
+];
+
+function openComments(user){
+
+  currentCommentUser = user;
+
+  const list = document.getElementById("commentsList");
+
+  list.innerHTML = exampleComments.map(function(comment){
+
+    return `
+      <div class="commentItem">
+
+        <div class="miniAvatar">
+          ${comment.initial}
+        </div>
+
+        <div class="commentBody">
+          <strong>${comment.username}</strong>
+          <p>${comment.text}</p>
+          <small>il y a quelques minutes</small>
         </div>
 
       </div>
+    `;
 
-    `).join("");
+  }).join("");
+
+  document.getElementById("commentsOverlay")
+    .classList.add("show");
 }
 
-function showResultsDemo(){
-  renderRanking();
-  changeScreen("
+document.querySelectorAll(".commentButton")
+.forEach(function(button){
+
+  button.addEventListener("click",function(){
+
+    openComments(this.dataset.user);
+
+  });
+
+});
+
+document.getElementById("sendDrawerComment")
+.addEventListener("click",function(){
+
+  const input = document.getElementById("drawerComment");
+
+  const text = input.value.trim();
+
+  if(!text){
+    return;
+  }
+
+  const item = document.createElement("div");
+
+  item.className = "commentItem";
+
+  item.innerHTML = `
+    <div class="miniAvatar">J</div>
+
+    <div class="commentBody">
+      <strong>@jonathan</strong>
+      <p>${escapeHTML(text)}</p>
+      <small>maintenant</small>
+    </div>
+  `;
+
+  document.getElementById("commentsList")
+    .appendChild(item);
+
+  input.value = "";
+
+  toast("Commentaire envoyé ✓");
+
+});
+
+/* QUICK COMMENTS */
+
+document.querySelectorAll(".quickSend")
+.forEach(function(button){
+
+  button.addEventListener("click",function(){
+
+    const input = this.parentElement.querySelector("input");
+
+    if(!input.value.trim()){
+      return;
+    }
+
+    input.value = "";
+
+    toast("Réponse envoyée ✓");
+
+  });
+
+});
+
+/* SHARE */
+
+document.querySelectorAll(".shareButton")
+.forEach(function(button){
+
+  button.addEventListener("click",function(){
+
+    toast("NOW partagé dans le groupe ✓");
+
+  });
+
+});
+
+/* =========================
+   ADD NOW
+========================= */
+
+function showAddNow(){
+
+  document.getElementById("addNowOverlay")
+    .classList.add("show");
+
+}
+
+document.getElementById("addNowBtn")
+.addEventListener("click",showAddNow);
+
+document.getElementById("addStoryTop")
+.addEventListener("click",showAddNow);
+
+document.getElementById("nowFile")
+.addEventListener("change",function(){
+
+  selectedFile = this.files[0] || null;
+
+  if(!selectedFile){
+    return;
+  }
+
+  document.getElementById("selectedFileName").textContent =
+    selectedFile.name;
+
+  if(selectedFile.type.startsWith("video/")){
+
+    const video = document.createElement("video");
+
+    const objectURL = URL.createObjectURL(selectedFile);
+
+    video.preload = "metadata";
+
+    video.onloadedmetadata = function(){
+
+      URL.revokeObjectURL(objectURL);
+
+      if(video.duration > 60){
+
+        selectedFile = null;
+
+        document.getElementById("nowFile").value = "";
+
+        document.getElementById("selectedFileName").textContent =
+          "Vidéo trop longue";
+
+        toast("1 minute maximum");
+
+      }else{
+
+        toast("Vidéo prête ✓");
+
+      }
+
+    };
+
+    video.src = objectURL;
+
+  }else{
+
+    toast("Photo prête ✓");
+
+  }
+
+});
+
+document.getElementById("publishNowBtn")
+.addEventListener("click",function(){
+
+  if(!selectedFile){
+
+    toast("Choisis d'abord une photo ou une vidéo");
+
+    return;
+  }
+
+  selectedFile = null;
+
+  document.getElementById("nowFile").value = "";
+
+  document.getElementById("nowCaptionInput").value = "";
+
+  document.getElementById("selectedFileName").textContent =
+    "Aucune photo ou vidéo choisie";
+
+  document.getElementById("addNowOverlay")
+    .classList.remove("show");
+
+  toast("Ton NOW est publié pour 24 h ✓");
+
+});
+
+/* =========================
+   ROOM
+========================= */
+
+function renderMessages(){
+
+  const container = document.getElementById("messages");
+
+  container.innerHTML = messages.map(function(message){
+
+    return `
+      <div class="message ${message.mine ? "mine" : ""}">
+
+        ${
+          message.mine
+          ? ""
+          : `<div class="miniAvatar">${message.initial}</div>`
+        }
+
+        <div class="messageContent">
+
+          ${
+            message.mine
+            ? ""
+            : `
+              <div class="messageMeta">
+                ${message.username} · ${message.time}
+              </div>
+            `
+          }
+
+          <div class="bubble">
+            ${escapeHTML(message.text)}
+          </div>
+
+          <button
+            class="messageMenuBtn"
+            data-message-id="${message.id}"
+          >
+            •••
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+
+  container.querySelectorAll("[data-message-id]")
+  .forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+      activeMessageId = Number(this.dataset.messageId);
+
+      const message = messages.find(function(item){
+        return item.id === activeMessageId;
+      });
+
+      if(!message){
+        return;
+      }
+
+      document.getElementById("deleteMessageBtn").style.display =
+        message.mine ? "block" : "none";
+
+      document.getElementById("reportMessageBtn").style.display =
+        message.mine ? "none" : "block";
+
+      document.getElementById("blockMessageBtn").style.display =
+        message.mine ? "none" : "block";
+
+      document.getElementById("messageMenuOverlay")
+        .classList.add("show");
+
+    });
+
+  });
+
+}
+
+function sendMessage(){
+
+  const input = document.getElementById("messageInput");
+
+  let text = input.value.trim();
+
+  if(!text){
+    return;
+  }
+
+  if(replyTo){
+    text = "↳ " + replyTo.username + " · " + text;
+  }
+
+  const now = new Date();
+
+  messages.push({
+    id:Date.now(),
+    username:"@jonathan",
+    initial:"J",
+    time:
+      String(now.getHours()).padStart(2,"0")
+      + ":"
+      + String(now.getMinutes()).padStart(2,"0"),
+    text:text,
+    mine:true
+  });
+
+  localStorage.setItem(
+    "rank-v7-chat",
+    JSON.stringify(messages)
+  );
+
+  input.value = "";
+
+  replyTo = null;
+
+  renderMessages();
+
+}
+
+document.getElementById("sendMessageBtn")
+.addEventListener("click",sendMessage);
+
+document.getElementById("messageInput")
+.addEventListener("keydown",function(event){
+
+  if(event.key === "Enter"){
+    event.preventDefault();
+    sendMessage();
+  }
+
+});
+
+/* REPLY */
+
+document.getElementById("replyMessageBtn")
+.addEventListener("click",function(){
+
+  const message = messages.find(function(item){
+    return item.id === activeMessageId;
+  });
+
+  if(message){
+
+    replyTo = message;
+
+    document.getElementById("messageInput").placeholder =
+      "Répondre à " + message.username + "...";
+
+    toast("Tu réponds à " + message.username);
+
+  }
+
+  document.getElementById("messageMenuOverlay")
+    .classList.remove("show");
+
+});
+
+/* REPORT */
+
+document.getElementById("reportMessageBtn")
+.addEventListener("click",function(){
+
+  document.getElementById("messageMenuOverlay")
+    .classList.remove("show");
+
+  toast("Message signalé ✓");
+
+});
+
+/* BLOCK */
+
+document.getElementById("blockMessageBtn")
+.addEventListener("click",function(){
+
+  const message = messages.find(function(item){
+    return item.id === activeMessageId;
+  });
+
+  if(message){
+
+    messages = messages.filter(function(item){
+      return item.username !== message.username;
+    });
+
+    renderMessages();
+
+    toast(message.username + " bloqué");
+
+  }
+
+  document.getElementById("messageMenuOverlay")
+    .classList.remove("show");
+
+});
+
+/* DELETE */
+
+document.getElementById("deleteMessageBtn")
+.addEventListener("click",function(){
+
+  messages = messages.filter(function(item){
+    return item.id !== activeMessageId;
+  });
+
+  localStorage.setItem(
+    "rank-v7-chat",
+    JSON.stringify(messages)
+  );
+
+  renderMessages();
+
+  document.getElementById("messageMenuOverlay")
+    .classList.remove("show");
+
+  toast("Message supprimé");
+
+});
+
+/* =========================
+   CREATE QUESTION
+========================= */
+
+document.getElementById("createQuestionBtn")
+.addEventListener("click",function(){
+
+  const input = document.getElementById("customQuestion");
+
+  const question = input.value.trim();
+
+  if(question.length < 8){
+
+    toast("Écris une vraie question");
+
+    return;
+  }
+
+  const now = Date.now();
+
+  localStorage.setItem(
+    "rank-v7-week-question",
+    JSON.stringify({
+      text:question,
+      createdAt:now
+    })
+  );
+
+  input.value = "";
+
+  updateQuestionAvailability();
+
+  toast("Question proposée ✓");
+
+});
+
+function updateQuestionAvailability(){
+
+  const button = document.getElementById("createQuestionBtn");
+
+  const status = document.getElementById("questionStatus");
+
+  const saved = localStorage.getItem("rank-v7-week-question");
+
+  if(!saved){
+    button.disabled = false;
+    status.textContent =
+      "Une proposition disponible cette semaine.";
+    return;
+  }
+
+  try{
+
+    const data = JSON.parse(saved);
+
+    const sevenDays =
+      7 * 24 * 60 * 60 * 1000;
+
+    const remaining =
+      sevenDays - (Date.now() - data.createdAt);
+
+    if(remaining <= 0){
+
+      localStorage.removeItem("rank-v7-week-question");
+
+      button.disabled = false;
+
+      status.textContent =
+        "Une proposition disponible cette semaine.";
+
+    }else{
+
+      const days =
+        Math.ceil(remaining / (24 * 60 * 60 * 1000));
+
+      button.disabled = true;
+
+      status.textContent =
+        "Question envoyée ✓ · prochaine proposition dans environ "
+        + days
+        + " jour"
+        + (days > 1 ? "s." : ".");
+
+    }
+
+  }catch(e){
+
+    localStorage.removeItem("rank-v7-week-question");
+
+  }
+
+}
+
+/* =========================
+   MODALS
+========================= */
+
+document.querySelectorAll("[data-close]")
+.forEach(function(button){
+
+  button.addEventListener("click",function(){
+
+    const overlay = document.getElementById(this.dataset.close);
+
+    if(overlay){
+      overlay.classList.remove("show");
+    }
+
+  });
+
+});
+
+document.querySelectorAll(".overlay")
+.forEach(function(overlay){
+
+  overlay.addEventListener("click",function(event){
+
+    if(event.target === this){
+      this.classList.remove("show");
+    }
+
+  });
+
+});
+
+/* =========================
+   RESTORE
+========================= */
+
+try{
+
+  const savedVotes = JSON.parse(
+    localStorage.getItem("rank-v7-votes") || "[]"
+  );
+
+  savedVotes.forEach(function(id){
+    selectedVotes.add(id);
+  });
+
+  if(savedVotes.length){
+    document.getElementById("voteSuccess").style.display = "block";
+  }
+
+}catch(e){}
+
+const savedPrediction =
+  Number(localStorage.getItem("rank-v7-predict"));
+
+if(savedPrediction){
+  prediction = savedPrediction;
+}
+
+/* =========================
+   START
+========================= */
+
+renderPeople();
+renderPredict();
+renderRank();
+renderMessages();
+updateQuestionAvailability();
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
