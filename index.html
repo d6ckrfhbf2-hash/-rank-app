@@ -3,693 +3,1156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RANK — Prototype V2</title>
+<title>RANK — Prototype V4</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 :root{
---purple:#6847ff;
---purple2:#4e31d9;
---pink:#ff5f9e;
---orange:#ff9958;
---dark:#191827;
---grey:#77758a;
---light:#f7f6fb;
---white:#fff;
---line:#ebe9f3;
+  --bg:#080912;
+  --surface:#10121d;
+  --surface2:#151827;
+  --surface3:#1b1e31;
+  --line:#262a40;
+
+  --text:#f7f7fb;
+  --muted:#9398ad;
+
+  --purple:#7357ff;
+  --purple2:#9b6cff;
+  --pink:#ff5f9e;
+  --orange:#ff9c63;
+  --green:#38d892;
+  --red:#ff5d68;
+  --gold:#ffc95d;
+
+  --gradient:linear-gradient(120deg,#7357ff,#b159f4,#ff647f);
+}
+
+html{
+  background:var(--bg);
 }
 
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-color:var(--dark);
-min-height:100vh;
-background:
-radial-gradient(circle at 10% 5%,rgba(104,71,255,.18),transparent 25%),
-radial-gradient(circle at 90% 15%,rgba(255,95,158,.16),transparent 27%),
-#f7f6fb;
+  margin:0;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 0%,rgba(115,87,255,.22),transparent 28%),
+    radial-gradient(circle at 90% 15%,rgba(255,95,158,.10),transparent 25%),
+    #080912;
 }
 
-button,input{
-font-family:inherit;
+button,
+input,
+textarea{
+  font:inherit;
 }
 
-.phone{
-width:min(100%,520px);
-margin:24px auto;
-min-height:900px;
-background:rgba(255,255,255,.97);
-border-radius:38px;
-overflow:hidden;
-position:relative;
-box-shadow:0 30px 80px rgba(50,30,110,.18);
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.app{
+  width:min(100%,520px);
+  min-height:100vh;
+  margin:0 auto;
+  position:relative;
+  background:rgba(8,9,18,.96);
+  overflow:hidden;
 }
 
 .header{
-height:74px;
-padding:18px 22px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-background:rgba(255,255,255,.96);
-border-bottom:1px solid #f1eff6;
-position:sticky;
-top:0;
-z-index:20;
+  height:72px;
+  padding:17px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(8,9,18,.88);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(255,255,255,.04);
 }
 
 .logo{
-font-size:24px;
-font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:23px;
+  font-weight:950;
+  letter-spacing:-.6px;
 }
 
-.logo span{
-color:var(--purple);
+.logoMark{
+  width:29px;
+  height:29px;
+  border-radius:9px;
+  background:var(--gradient);
+  display:grid;
+  place-items:center;
+  font-size:16px;
 }
 
-.demo{
-font-size:11px;
-font-weight:800;
-background:#eeeaff;
-color:var(--purple);
-padding:8px 10px;
-border-radius:999px;
+.headerRight{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.iconBtn{
+  width:38px;
+  height:38px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.streak{
+  padding:9px 11px;
+  border-radius:999px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  font-size:12px;
+  font-weight:800;
 }
 
 main{
-padding:24px 22px 112px;
+  padding:20px 17px 110px;
 }
 
 .screen{
-display:none;
+  display:none;
+  animation:fade .18s ease;
 }
 
 .screen.active{
-display:block;
+  display:block;
 }
 
-.tag{
-display:inline-block;
-background:#eeeaff;
-color:var(--purple);
-padding:8px 12px;
-border-radius:999px;
-font-size:12px;
-font-weight:800;
-margin-bottom:13px;
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(4px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.kicker{
+  color:#a79aff;
+  font-weight:900;
+  font-size:11px;
+  letter-spacing:1.25px;
+  margin-bottom:9px;
 }
 
 h1{
-margin:0 0 9px;
-font-size:34px;
-line-height:1.08;
-letter-spacing:-1.1px;
+  font-size:32px;
+  letter-spacing:-1.2px;
+  line-height:1.04;
+  margin:0 0 9px;
 }
 
-h2,h3{
-margin-top:0;
+h2{
+  margin:0 0 8px;
+  font-size:20px;
+  letter-spacing:-.4px;
 }
 
-.subtitle{
-color:var(--grey);
-line-height:1.5;
-margin-top:0;
+h3{
+  margin:0;
 }
 
-.people{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:13px;
-margin:24px 0;
+p{
+  margin-top:0;
 }
 
-.person{
-border:2px solid transparent;
-background:white;
-border-radius:22px;
-padding:14px;
-cursor:pointer;
-position:relative;
-box-shadow:0 8px 25px rgba(40,30,80,.07);
-transition:.18s;
-}
-
-.person.selected{
-border-color:var(--purple);
-box-shadow:0 0 0 4px rgba(104,71,255,.08);
-}
-
-.avatar{
-width:80px;
-height:80px;
-border-radius:50%;
-margin:auto;
-display:grid;
-place-items:center;
-font-size:38px;
-background:linear-gradient(135deg,#ece8ff,#ffe8f0);
-}
-
-.name{
-text-align:center;
-font-weight:800;
-margin-top:10px;
-}
-
-.check{
-display:none;
-position:absolute;
-top:10px;
-right:10px;
-width:28px;
-height:28px;
-border-radius:50%;
-background:linear-gradient(135deg,var(--purple),var(--pink));
-color:white;
-place-items:center;
-font-weight:900;
-}
-
-.person.selected .check{
-display:grid;
-}
-
-.btn{
-width:100%;
-border:0;
-border-radius:18px;
-padding:17px;
-font-size:16px;
-font-weight:850;
-cursor:pointer;
-}
-
-.btn-primary{
-background:linear-gradient(90deg,var(--purple),var(--pink),var(--orange));
-color:white;
-box-shadow:0 14px 30px rgba(104,71,255,.22);
-}
-
-.btn-primary:disabled{
-opacity:.4;
-cursor:not-allowed;
-}
-
-.btn-secondary{
-margin-top:12px;
-background:#f1eff6;
-color:var(--dark);
-}
-
-.success{
-display:none;
-margin-top:12px;
-background:#e8faf2;
-color:#147a54;
-padding:13px;
-border-radius:14px;
-font-weight:800;
-font-size:14px;
-}
-
-.countdown{
-margin-top:17px;
-padding:18px;
-background:linear-gradient(135deg,#f0ecff,#fff0f6);
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border:1px solid #e7e0ff;
-}
-
-.countdown small{
-display:block;
-color:var(--grey);
-margin-bottom:4px;
-}
-
-.countdown strong{
-font-size:27px;
-}
-
-.resultHero{
-background:linear-gradient(145deg,#21174b,#5636bb,#7748eb);
-border-radius:25px;
-color:white;
-padding:20px;
-margin-top:22px;
-box-shadow:0 18px 40px rgba(50,30,130,.24);
-}
-
-.resultHeader{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-gap:10px;
-}
-
-.resultHeader small{
-color:#cbc2ef;
-font-size:10px;
-font-weight:900;
-letter-spacing:1px;
-}
-
-.time{
-background:rgba(255,255,255,.14);
-padding:8px 10px;
-border-radius:30px;
-font-size:12px;
-font-weight:800;
-}
-
-.podium{
-display:grid;
-grid-template-columns:1fr 1.1fr 1fr;
-align-items:end;
-gap:5px;
-margin:35px 0 8px;
-}
-
-.podiumItem{
-text-align:center;
-}
-
-.podiumItem.first{
-transform:translateY(-18px);
-}
-
-.podiumAvatar{
-width:68px;
-height:68px;
-border-radius:50%;
-margin:auto auto 7px;
-display:grid;
-place-items:center;
-background:rgba(255,255,255,.16);
-border:3px solid rgba(255,255,255,.35);
-font-size:32px;
-}
-
-.podiumItem.first .podiumAvatar{
-width:84px;
-height:84px;
-border-color:#ffd45f;
-}
-
-.podiumRank{
-font-weight:900;
-display:block;
-}
-
-.votes{
-font-size:11px;
-color:#d9d2f4;
-margin-top:3px;
+.muted{
+  color:var(--muted);
+  line-height:1.5;
 }
 
 .card{
-margin-top:15px;
-padding:18px;
-background:white;
-border:1px solid var(--line);
-border-radius:22px;
-box-shadow:0 8px 25px rgba(30,20,60,.05);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:23px;
+  padding:17px;
+  margin-top:14px;
 }
 
-.rankingRow{
-display:grid;
-grid-template-columns:40px 1fr auto;
-gap:8px;
-align-items:center;
-padding:12px 0;
-border-bottom:1px solid var(--line);
+.heroCard{
+  padding:19px;
+  background:
+    linear-gradient(145deg,rgba(115,87,255,.20),rgba(255,95,158,.07)),
+    var(--surface);
+  border:1px solid #332c65;
+  border-radius:25px;
 }
 
-.rankingRow:last-child{
-border:0;
+.questionLabel{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#b3aaff;
+  background:rgba(115,87,255,.11);
+  border:1px solid rgba(115,87,255,.25);
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:850;
+  margin-bottom:15px;
 }
 
-.rankPerson{
-display:flex;
-align-items:center;
-gap:9px;
-font-weight:750;
+.questionTitle{
+  font-size:29px;
+  margin-bottom:6px;
 }
 
-.miniAvatar{
-width:37px;
-height:37px;
-border-radius:50%;
-background:#f0edfb;
-display:grid;
-place-items:center;
+.questionMeta{
+  color:var(--muted);
+  font-size:13px;
 }
 
-.chatLaunch{
-margin-top:16px;
-padding:18px;
-border-radius:22px;
-background:linear-gradient(135deg,#f2eeff,#fff0f5);
-border:1px solid #e5defc;
-text-align:center;
+.peopleGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:18px;
 }
 
-.chatLaunch h2{
-margin-bottom:7px;
+.personCard{
+  position:relative;
+  background:var(--surface2);
+  border:1px solid var(--line);
+  color:var(--text);
+  border-radius:18px;
+  padding:13px;
+  cursor:pointer;
+  transition:.16s ease;
+}
+
+.personCard.selected{
+  border-color:#8974ff;
+  box-shadow:0 0 0 2px rgba(115,87,255,.17);
+  background:linear-gradient(145deg,#19192d,#17172b);
+}
+
+.avatar{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  margin:0 auto 9px;
+  display:grid;
+  place-items:center;
+  background:
+    linear-gradient(135deg,#5741c0,#c4568e);
+  font-size:22px;
+}
+
+.personName{
+  text-align:center;
+  font-weight:800;
+}
+
+.personUser{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:2px;
+}
+
+.check{
+  display:none;
+  position:absolute;
+  top:9px;
+  right:9px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:var(--gradient);
+  color:white;
+  place-items:center;
+  font-size:12px;
+  font-weight:900;
+}
+
+.personCard.selected .check{
+  display:grid;
+}
+
+.btn{
+  border:0;
+  width:100%;
+  min-height:51px;
+  border-radius:16px;
+  padding:14px 16px;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.btnPrimary{
+  color:white;
+  background:var(--gradient);
+  margin-top:14px;
+}
+
+.btnPrimary:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+
+.btnSecondary{
+  color:var(--text);
+  background:var(--surface2);
+  border:1px solid var(--line);
+  margin-top:10px;
+}
+
+.btnDanger{
+  background:rgba(255,93,104,.08);
+  border:1px solid rgba(255,93,104,.25);
+  color:#ff8188;
+}
+
+.voteDone{
+  display:none;
+  margin-top:13px;
+  padding:14px;
+  border-radius:16px;
+  color:#81e7ba;
+  background:rgba(56,216,146,.08);
+  border:1px solid rgba(56,216,146,.19);
+  font-size:13px;
+  font-weight:800;
+}
+
+.reveal{
+  margin-top:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px;
+  border-radius:18px;
+  background:#111422;
+  border:1px solid var(--line);
+}
+
+.revealLeft small{
+  display:block;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+
+.revealTime{
+  font-size:20px;
+  font-weight:900;
+}
+
+#countdown{
+  color:#a99fff;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.revealIcon{
+  font-size:26px;
+}
+
+.sectionTitle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:22px 0 10px;
+}
+
+.sectionTitle h2{
+  margin:0;
+}
+
+.smallLink{
+  color:#9a8cff;
+  font-size:12px;
+  font-weight:800;
+}
+
+.podiumCard{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(115,87,255,.28),transparent 42%),
+    #111321;
+  border:1px solid #302c54;
+  border-radius:24px;
+  padding:19px;
+}
+
+.podium{
+  display:grid;
+  grid-template-columns:1fr 1.08fr 1fr;
+  align-items:end;
+  gap:7px;
+  margin-top:25px;
+}
+
+.podiumItem{
+  text-align:center;
+}
+
+.podiumItem.first{
+  transform:translateY(-17px);
+}
+
+.podiumAvatar{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  margin:auto auto 7px;
+  display:grid;
+  place-items:center;
+  background:#23243a;
+  border:2px solid #444662;
+  font-size:28px;
+}
+
+.first .podiumAvatar{
+  width:78px;
+  height:78px;
+  border:3px solid var(--gold);
+  box-shadow:0 0 35px rgba(255,201,93,.15);
+}
+
+.position{
+  font-weight:950;
+}
+
+.positionGold{
+  color:var(--gold);
+}
+
+.voteCount{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.rankRow{
+  display:grid;
+  grid-template-columns:35px 1fr auto;
+  align-items:center;
+  gap:10px;
+  min-height:56px;
+  border-bottom:1px solid var(--line);
+}
+
+.rankRow:last-child{
+  border-bottom:0;
+}
+
+.rankUser{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:750;
+}
+
+.tinyAvatar{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#23253a;
+}
+
+.rankVotes{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.predictCard{
+  position:relative;
+  overflow:hidden;
+}
+
+.predictScore{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.points{
+  color:var(--gold);
+  font-weight:900;
+}
+
+.predictChoices{
+  display:grid;
+  gap:8px;
+}
+
+.predictOption{
+  border:1px solid var(--line);
+  background:var(--surface2);
+  color:var(--text);
+  padding:13px;
+  border-radius:15px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.predictOption.selected{
+  border-color:#7b66ff;
+  background:#1d1c35;
+}
+
+.predictOption span:last-child{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.predictConfirmation{
+  display:none;
+  margin-top:12px;
+  color:#9ae7c2;
+  font-size:13px;
+  font-weight:800;
+}
+
+.roomHeader{
+  background:
+    linear-gradient(145deg,rgba(115,87,255,.22),rgba(160,87,255,.08)),
+    var(--surface);
+  border:1px solid #332e5c;
+  border-radius:23px;
+  padding:17px;
+}
+
+.roomTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.roomName{
+  font-weight:900;
+  font-size:20px;
 }
 
 .online{
-font-size:12px;
-color:#19865e;
-font-weight:800;
-margin-bottom:13px;
+  color:#65e3a8;
+  font-size:11px;
+  font-weight:800;
 }
 
-.chatHeader{
-padding:18px;
-border-radius:22px;
-background:linear-gradient(135deg,#4c31b4,#7047e9);
-color:white;
-margin-bottom:15px;
+.roomSub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
 }
 
-.chatHeaderTop{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:12px;
+.pinnedWinner{
+  margin-top:13px;
+  background:rgba(255,255,255,.05);
+  border-radius:15px;
+  padding:12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
 
-.chatHeader h2{
-margin-bottom:5px;
-}
-
-.chatHeader p{
-margin:0;
-color:#ddd6ff;
-font-size:13px;
-}
-
-.winnerBox{
-margin-top:13px;
-padding:12px;
-background:rgba(255,255,255,.12);
-border-radius:16px;
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.chatMessages{
-height:430px;
-overflow-y:auto;
-padding:5px 2px 15px;
+.messages{
+  padding:17px 0 75px;
 }
 
 .message{
-display:flex;
-gap:9px;
-margin-bottom:16px;
-align-items:flex-end;
+  display:flex;
+  gap:9px;
+  margin-bottom:17px;
+  position:relative;
 }
 
 .message.mine{
-justify-content:flex-end;
+  justify-content:flex-end;
 }
 
 .messageAvatar{
-width:36px;
-height:36px;
-border-radius:50%;
-background:#eeeaff;
-display:grid;
-place-items:center;
-flex:0 0 auto;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#25273b;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
 }
 
-.messageBody{
-max-width:78%;
+.messageContent{
+  max-width:76%;
+}
+
+.messageMeta{
+  margin:0 0 4px 4px;
+  display:flex;
+  gap:6px;
+  align-items:center;
 }
 
 .messageName{
-font-size:11px;
-font-weight:800;
-color:#77758a;
-margin:0 0 4px 5px;
+  font-size:11px;
+  font-weight:850;
+}
+
+.messageTime{
+  color:#777c93;
+  font-size:10px;
 }
 
 .bubble{
-padding:11px 13px;
-border-radius:17px 17px 17px 5px;
-background:#f1eff7;
-font-size:14px;
-line-height:1.42;
+  background:var(--surface2);
+  border:1px solid var(--line);
+  border-radius:17px 17px 17px 5px;
+  padding:11px 13px;
+  line-height:1.42;
+  font-size:14px;
 }
 
 .mine .bubble{
-background:linear-gradient(135deg,var(--purple),#805fff);
-color:white;
-border-radius:17px 17px 5px 17px;
+  background:linear-gradient(135deg,#6243e3,#7d55ff);
+  border-color:transparent;
+  border-radius:17px 17px 5px 17px;
 }
 
-.chatComposer{
-display:flex;
-gap:8px;
-position:sticky;
-bottom:82px;
-background:white;
-padding:12px 0 4px;
+.messageMenu{
+  margin-top:5px;
+  display:flex;
+  gap:8px;
+  opacity:.8;
 }
 
-.chatComposer input{
-flex:1;
-min-width:0;
-border:1px solid var(--line);
-border-radius:999px;
-padding:14px 16px;
-outline:none;
-background:#f8f7fb;
+.messageAction{
+  border:0;
+  background:none;
+  color:#84899e;
+  padding:0;
+  font-size:10px;
+  cursor:pointer;
+}
+
+.messageAction:hover{
+  color:white;
+}
+
+.replyBox{
+  display:none;
+  padding:9px 12px;
+  background:#171a29;
+  border-left:3px solid var(--purple);
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:8px;
+  border-radius:8px;
+}
+
+.composer{
+  position:fixed;
+  bottom:73px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(calc(100% - 28px),492px);
+  background:rgba(8,9,18,.92);
+  backdrop-filter:blur(18px);
+  padding:9px 0;
+  z-index:25;
+}
+
+.composerInner{
+  display:flex;
+  gap:8px;
+}
+
+.messageInput{
+  flex:1;
+  min-width:0;
+  border:1px solid var(--line);
+  background:#141624;
+  color:white;
+  padding:13px 15px;
+  border-radius:999px;
+  outline:none;
+}
+
+.messageInput::placeholder{
+  color:#6f7388;
 }
 
 .sendBtn{
-width:48px;
-height:48px;
-border:0;
-border-radius:50%;
-background:linear-gradient(135deg,var(--purple),var(--pink));
-color:white;
-font-size:19px;
-cursor:pointer;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:0;
+  color:white;
+  background:var(--gradient);
+  cursor:pointer;
 }
 
-.historyItem,.friend{
-display:flex;
-align-items:center;
-gap:12px;
-padding:15px;
-border-radius:19px;
-border:1px solid var(--line);
-background:white;
-margin-bottom:10px;
+.roomSettings{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
 }
 
-.historyEmoji,.friendAvatar{
-width:48px;
-height:48px;
-border-radius:15px;
-display:grid;
-place-items:center;
-background:#eeeaff;
-font-size:22px;
-flex:0 0 auto;
+.leaveRoom{
+  border:0;
+  background:none;
+  color:#ff7c86;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.historyText,.friendText{
-flex:1;
+.recapHero{
+  background:
+    linear-gradient(145deg,rgba(115,87,255,.20),rgba(255,95,158,.08)),
+    var(--surface);
+  border:1px solid #332c61;
+  border-radius:24px;
+  padding:19px;
 }
 
-.historyText strong,
-.historyText small,
-.friendText strong,
-.friendText small{
-display:block;
+.recapNumber{
+  font-size:40px;
+  font-weight:950;
+  letter-spacing:-2px;
+  margin:7px 0 0;
 }
 
-.historyText small,.friendText small{
-color:var(--grey);
-margin-top:3px;
+.recapLabel{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.recapGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:13px;
+}
+
+.recapStat{
+  background:var(--surface2);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:15px;
+}
+
+.recapStat strong{
+  display:block;
+  font-size:21px;
+  margin-bottom:4px;
+}
+
+.recapStat span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.weekWinner{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.bigMiniAvatar{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#27283d;
+  font-size:26px;
+}
+
+.createQuestion{
+  border:1px solid #4e3b78;
+  background:
+    linear-gradient(145deg,rgba(115,87,255,.14),rgba(255,95,158,.06)),
+    var(--surface);
+}
+
+.rareBadge{
+  display:inline-block;
+  background:#32284c;
+  color:#d5caff;
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+  margin-bottom:9px;
+}
+
+.questionInput{
+  width:100%;
+  min-height:92px;
+  resize:none;
+  border:1px solid var(--line);
+  background:var(--surface2);
+  color:white;
+  border-radius:15px;
+  padding:13px;
+  outline:none;
+}
+
+.createStatus{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:11px;
 }
 
 .profileHero{
-padding:22px;
-border-radius:25px;
-background:linear-gradient(135deg,#4b30af,#784bec,#b64fda);
-color:white;
-display:flex;
-gap:16px;
-align-items:center;
+  background:
+    linear-gradient(145deg,#2f2368,#4f35a8 55%,#773e85);
+  border-radius:25px;
+  padding:20px;
 }
 
-.bigAvatar{
-width:90px;
-height:90px;
-border-radius:50%;
-background:rgba(255,255,255,.16);
-border:3px solid rgba(255,255,255,.5);
-display:grid;
-place-items:center;
-font-size:42px;
+.profileTop{
+  display:flex;
+  gap:14px;
+  align-items:center;
 }
 
-.profileHero p{
-color:#e3dcfa;
-margin-bottom:0;
+.profileAvatar{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:#ffffff14;
+  border:2px solid #ffffff3b;
+  display:grid;
+  place-items:center;
+  font-size:32px;
 }
 
-.stats{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px;
-margin-top:14px;
+.username{
+  color:#c7c0e1;
+  font-size:12px;
 }
 
-.stat{
-border:1px solid var(--line);
-background:white;
-border-radius:18px;
-padding:15px 6px;
-text-align:center;
+.profileStats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:15px;
 }
 
-.stat strong,.stat small{
-display:block;
+.profileStat{
+  text-align:center;
+  padding:12px 5px;
+  background:#ffffff10;
+  border-radius:14px;
 }
 
-.stat small{
-color:var(--grey);
-margin-top:5px;
+.profileStat strong{
+  display:block;
+  font-size:19px;
 }
 
-.nav{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-height:84px;
-background:rgba(255,255,255,.98);
-border-top:1px solid var(--line);
-display:grid;
-grid-template-columns:repeat(5,1fr);
-padding:8px 4px;
-z-index:30;
+.profileStat span{
+  color:#d3cfea;
+  font-size:9px;
+}
+
+.menuOverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.68);
+  z-index:90;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.menuOverlay.show{
+  display:flex;
+}
+
+.menuSheet{
+  width:min(100%,520px);
+  background:#151725;
+  border-radius:24px 24px 0 0;
+  padding:12px 16px 25px;
+  border-top:1px solid var(--line);
+}
+
+.menuHandle{
+  width:42px;
+  height:4px;
+  border-radius:999px;
+  background:#45485e;
+  margin:0 auto 14px;
+}
+
+.sheetAction{
+  width:100%;
+  min-height:48px;
+  background:none;
+  border:0;
+  border-bottom:1px solid var(--line);
+  color:white;
+  text-align:left;
+  font-weight:750;
+  cursor:pointer;
+}
+
+.sheetAction.danger{
+  color:#ff727c;
+}
+
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(100%,520px);
+  height:74px;
+  background:rgba(10,11,20,.96);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  z-index:40;
 }
 
 .navBtn{
-background:none;
-border:0;
-color:#9995a9;
-display:flex;
-flex-direction:column;
-gap:4px;
-justify-content:center;
-align-items:center;
-cursor:pointer;
+  border:0;
+  background:none;
+  color:#666b80;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:4px;
+  cursor:pointer;
 }
 
 .navBtn.active{
-color:var(--purple);
+  color:#9d8eff;
 }
 
 .navIcon{
-font-size:20px;
+  font-size:18px;
 }
 
-.navBtn small{
-font-size:9px;
-font-weight:700;
+.navLabel{
+  font-size:9px;
+  font-weight:800;
 }
 
-@media(max-width:550px){
-body{background:white}
-.phone{
-margin:0;
-width:100%;
-min-height:100vh;
-border-radius:0;
-box-shadow:none;
+.notification{
+  position:fixed;
+  top:83px;
+  left:50%;
+  transform:translateX(-50%) translateY(-12px);
+  width:min(calc(100% - 30px),490px);
+  padding:12px 14px;
+  background:#1b1e30;
+  border:1px solid var(--line);
+  border-radius:14px;
+  color:white;
+  z-index:100;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s ease;
+  font-size:12px;
+  font-weight:750;
 }
+
+.notification.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media(min-width:600px){
+  .app{
+    margin:20px auto;
+    min-height:900px;
+    border:1px solid #1c1e2c;
+    border-radius:34px;
+    box-shadow:0 30px 100px rgba(0,0,0,.45);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="phone">
+<div class="notification" id="notification"></div>
+
+<div class="app">
 
 <header class="header">
-<div class="logo"><span>♛</span> RANK</div>
-<div class="demo">V2</div>
+
+<div class="logo">
+  <div class="logoMark">R</div>
+  RANK
+</div>
+
+<div class="headerRight">
+  <div class="streak">🔥 12</div>
+  <button class="iconBtn" onclick="changeScreen('profileScreen')">◎</button>
+</div>
+
 </header>
 
 <main>
 
-<section id="today" class="screen active">
+<!-- TODAY -->
 
-<span class="tag">Aujourd’hui</span>
-<h1>Qui a le plus d’humour ?</h1>
-<p class="subtitle">
-Choisis jusqu’à 3 personnes. Ton vote reste anonyme.
+<section id="todayScreen" class="screen active">
+
+<div class="kicker">TODAY · RANK #27</div>
+
+<h1>Une question.<br>Un classement.</h1>
+
+<p class="muted">
+Vote maintenant. Le classement tombe à 19h30.
 </p>
 
-<div id="people" class="people"></div>
+<div class="heroCard">
 
-<button id="voteBtn" class="btn btn-primary" disabled>
-➤ Voter anonymement
-</button>
-
-<div id="success" class="success">
-✓ Ton vote a bien été enregistré.
+<div class="questionLabel">
+  QUESTION DU JOUR
 </div>
 
-<div class="countdown">
+<h2 class="questionTitle">
+Qui a le plus d’humour ?
+</h2>
+
+<div class="questionMeta">
+3 choix maximum · vote anonyme
+</div>
+
+<div id="peopleGrid" class="peopleGrid"></div>
+
+<button
+id="voteBtn"
+class="btn btnPrimary"
+disabled
+>
+Valider mon vote
+</button>
+
+<div
+id="voteDone"
+class="voteDone"
+>
+Vote envoyé ✓
+</div>
+
+<div class="reveal">
+
+<div class="revealLeft">
+
+<small>
+THE RANK IS OUT
+</small>
+
+<div class="revealTime">
+19:30
+</div>
+
+<div id="countdown">
+--
+</div>
+
+</div>
+
+<div class="revealIcon">
+◷
+</div>
+
+</div>
+
+<button
+class="btn btnSecondary"
+onclick="showResultsDemo()"
+>
+Voir le reveal maintenant · démo
+</button>
+
+</div>
+
+
+<div class="sectionTitle">
+
+<h2>Predict</h2>
+
+<span class="smallLink">
++ points
+</span>
+
+</div>
+
+<div class="card predictCard">
+
+<div class="predictScore">
+
 <div>
-<small>Résultats révélés à</small>
-<strong>19h30</strong>
-<small id="timer">Calcul...</small>
+<strong>Qui sera #1 ce soir ?</strong>
+<div class="muted" style="font-size:11px;margin-top:3px">
+Choisis avant 19h30
 </div>
-<div style="font-size:37px">⏰</div>
 </div>
 
-<button id="demoBtn" class="btn btn-secondary">
-Voir les résultats maintenant (démo)
+<div class="points">
+340 pts
+</div>
+
+</div>
+
+<div id="predictMiniChoices" class="predictChoices"></div>
+
+<button
+id="predictMiniBtn"
+class="btn btnPrimary"
+disabled
+>
+Valider ma prédiction
 </button>
+
+</div>
 
 </section>
 
 
 
-<section id="results" class="screen">
+<!-- RANK -->
 
-<span class="tag">Résultats du soir</span>
+<section id="rankScreen" class="screen">
 
-<h1>Le classement est tombé 👑</h1>
+<div class="kicker">THE RANK IS OUT</div>
 
-<p class="subtitle">
-Découvrez comment votre groupe a voté aujourd’hui.
+<h1>Résultats du soir</h1>
+
+<p class="muted">
+Qui a le plus d’humour ?
 </p>
 
-<div class="resultHero">
+<div class="podiumCard">
 
-<div class="resultHeader">
-<div>
-<small>QUESTION DU JOUR</small>
-<h2>Qui a le plus d’humour ?</h2>
-</div>
-
-<div class="time">19h30</div>
+<div style="color:#aaa2c5;font-size:11px;font-weight:900">
+TOP 3
 </div>
 
 <div id="podium" class="podium"></div>
@@ -697,23 +1160,51 @@ Découvrez comment votre groupe a voté aujourd’hui.
 </div>
 
 <div class="card">
+
+<div class="sectionTitle" style="margin-top:0">
 <h2>Classement complet</h2>
-<div id="ranking"></div>
 </div>
 
-<div class="chatLaunch">
+<div id="rankingList"></div>
 
-<div style="font-size:31px">💬</div>
-
-<h2>Le chat du classement est ouvert !</h2>
-
-<div class="online">
-● 84 personnes en ligne
 </div>
 
-<button class="btn btn-primary" onclick="changeScreen('chatScreen')">
-Rejoindre le chat
+<button
+class="btn btnPrimary"
+onclick="changeScreen('roomScreen')"
+>
+Entrer dans la ROOM
 </button>
+
+<div class="sectionTitle">
+
+<h2>Historique</h2>
+
+<span class="smallLink">
+7 jours
+</span>
+
+</div>
+
+<div class="card">
+
+<div class="rankRow">
+<strong>Hier</strong>
+<div>Meilleur style</div>
+<div class="rankVotes">#1 Léna</div>
+</div>
+
+<div class="rankRow">
+<strong>-2j</strong>
+<div>Meilleure vibe</div>
+<div class="rankVotes">#1 Lucas</div>
+</div>
+
+<div class="rankRow">
+<strong>-3j</strong>
+<div>Toujours en retard</div>
+<div class="rankVotes">#1 Emma</div>
+</div>
 
 </div>
 
@@ -721,175 +1212,396 @@ Rejoindre le chat
 
 
 
-<section id="chatScreen" class="screen">
+<!-- ROOM -->
 
-<div class="chatHeader">
+<section id="roomScreen" class="screen">
 
-<div class="chatHeaderTop">
+<div class="roomHeader">
+
+<div class="roomTop">
 
 <div>
-<h2>Chat du classement 💬</h2>
-<p>84 personnes en ligne</p>
+<div class="roomName">ROOM</div>
+<div class="roomSub">
+Groupe Marseille · privé
+</div>
 </div>
 
-<div style="font-size:24px">👑</div>
+<div class="online">
+● 8 en ligne
+</div>
 
 </div>
 
-<div class="winnerBox">
-<div style="font-size:30px">😄</div>
+<div class="pinnedWinner">
+
+<div class="tinyAvatar">
+L
+</div>
+
 <div>
-<strong>Léna est #1 aujourd’hui 👑</strong><br>
-<small>132 votes</small>
+<strong>Léna est #1 aujourd’hui</strong>
+<div class="roomSub">
+Qui a le plus d’humour ?
 </div>
 </div>
 
 </div>
 
-<div id="chatMessages" class="chatMessages"></div>
+</div>
 
-<div class="chatComposer">
+<div class="roomSettings">
+
+<button
+class="leaveRoom"
+onclick="leaveRoom()"
+>
+Quitter le salon
+</button>
+
+</div>
+
+<div id="messages" class="messages"></div>
+
+<div id="replyBox" class="replyBox"></div>
+
+<div class="composer">
+
+<div class="composerInner">
 
 <input
 id="messageInput"
-type="text"
-placeholder="Écrire un message..."
-maxlength="200"
->
+class="messageInput"
+placeholder="Message..."
+maxlength="250"
+/>
 
 <button
 id="sendBtn"
 class="sendBtn"
-aria-label="Envoyer"
 >
 ➤
 </button>
 
 </div>
 
+</div>
+
 </section>
 
 
 
-<section id="rankingScreen" class="screen">
+<!-- PREDICT -->
 
-<span class="tag">Historique</span>
+<section id="predictScreen" class="screen">
 
-<h1>Tes classements</h1>
+<div class="kicker">PREDICT</div>
 
-<p class="subtitle">
-Retrouve les questions des derniers jours.
+<h1>Devine le #1.</h1>
+
+<p class="muted">
+Une bonne prédiction = des points.
 </p>
 
-<div style="margin-top:22px">
+<div class="card">
 
-<div class="historyItem">
-<div class="historyEmoji">😂</div>
-<div class="historyText">
-<strong>Qui a le plus d’humour ?</strong>
-<small>Aujourd’hui</small>
-</div>
-<strong>#2</strong>
-</div>
-
-<div class="historyItem">
-<div class="historyEmoji">✨</div>
-<div class="historyText">
-<strong>Qui a le meilleur style ?</strong>
-<small>Hier</small>
-</div>
-<strong>#1</strong>
-</div>
-
-<div class="historyItem">
-<div class="historyEmoji">😎</div>
-<div class="historyText">
-<strong>Qui a la meilleure vibe ?</strong>
-<small>Il y a 2 jours</small>
-</div>
-<strong>#3</strong>
-</div>
-
-<div class="historyItem">
-<div class="historyEmoji">⏰</div>
-<div class="historyText">
-<strong>Qui arrive toujours en retard ?</strong>
-<small>Il y a 3 jours</small>
-</div>
-<strong>#6</strong>
-</div>
-
-</div>
-
-</section>
-
-
-
-<section id="friendsScreen" class="screen">
-
-<span class="tag">Ton groupe</span>
-
-<h1>Mes amis</h1>
-
-<p class="subtitle">
-Les personnes de ton groupe RANK.
-</p>
-
-<div id="friends" style="margin-top:22px"></div>
-
-<button
-class="btn btn-primary"
-onclick="alert('Plus tard, ce bouton permettra d\\'inviter tes vrais amis sur RANK.')"
->
-+ Inviter des amis
-</button>
-
-</section>
-
-
-
-<section id="profileScreen" class="screen">
-
-<div class="profileHero">
-
-<div class="bigAvatar">😄</div>
+<div class="predictScore">
 
 <div>
-<small>MON PROFIL</small>
-<h1>Jonathan</h1>
-<p>Toujours partant pour rigoler.</p>
+<strong>Question du jour</strong>
+<div class="muted" style="font-size:12px;margin-top:4px">
+Qui a le plus d’humour ?
+</div>
+</div>
+
+<div class="points">
+340 pts
 </div>
 
 </div>
 
-<div class="stats">
+<div id="predictFullChoices" class="predictChoices"></div>
 
-<div class="stat">
-<strong>5</strong>
-<small>Podiums</small>
-</div>
+<button
+id="predictFullBtn"
+class="btn btnPrimary"
+disabled
+>
+Valider ma prédiction
+</button>
 
-<div class="stat">
-<strong>#2,8</strong>
-<small>Rang moyen</small>
-</div>
-
-<div class="stat">
-<strong>12</strong>
-<small>Jours de suite</small>
+<div
+id="predictConfirmation"
+class="predictConfirmation"
+>
+Prédiction enregistrée ✓
 </div>
 
 </div>
 
 <div class="card">
 
-<h2>Ta vibe</h2>
+<h2>Ton score</h2>
 
-<p>
-😄 Drôle &nbsp;
-✨ Stylé &nbsp;
-💜 Bienveillant
+<div class="recapGrid">
+
+<div class="recapStat">
+<strong>7</strong>
+<span>prédictions justes</span>
+</div>
+
+<div class="recapStat">
+<strong>340</strong>
+<span>points</span>
+</div>
+
+<div class="recapStat">
+<strong>3</strong>
+<span>série actuelle</span>
+</div>
+
+<div class="recapStat">
+<strong>#4</strong>
+<span>dans ton groupe</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- RECAP -->
+
+<section id="recapScreen" class="screen">
+
+<div class="kicker">WEEKLY RECAP</div>
+
+<h1>Ta semaine sur RANK.</h1>
+
+<p class="muted">
+Les meilleurs moments de ton groupe.
 </p>
+
+<div class="recapHero">
+
+<div class="recapLabel">
+TES VOTES CETTE SEMAINE
+</div>
+
+<div class="recapNumber">
+47
+</div>
+
+<div class="recapLabel">
+votes reçus
+</div>
+
+<div class="recapGrid">
+
+<div class="recapStat">
+<strong>2</strong>
+<span>podiums</span>
+</div>
+
+<div class="recapStat">
+<strong>#1</strong>
+<span>meilleur rang</span>
+</div>
+
+<div class="recapStat">
+<strong>5/7</strong>
+<span>jours joués</span>
+</div>
+
+<div class="recapStat">
+<strong>+80</strong>
+<span>points Predict</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Personne de la semaine</h2>
+
+<div class="weekWinner">
+
+<div class="bigMiniAvatar">
+L
+</div>
+
+<div>
+<strong>Léna</strong>
+<div class="muted" style="font-size:12px;margin-top:4px">
+3 premières places cette semaine
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Les gagnants</h2>
+
+<div class="rankRow">
+<strong>Lun.</strong>
+<div>Léna</div>
+<div class="rankVotes">Humour</div>
+</div>
+
+<div class="rankRow">
+<strong>Mar.</strong>
+<div>Lucas</div>
+<div class="rankVotes">Vibe</div>
+</div>
+
+<div class="rankRow">
+<strong>Mer.</strong>
+<div>Emma</div>
+<div class="rankVotes">Style</div>
+</div>
+
+<div class="rankRow">
+<strong>Jeu.</strong>
+<div>Noé</div>
+<div class="rankVotes">Sport</div>
+</div>
+
+</div>
+
+
+<div class="card createQuestion">
+
+<div class="rareBadge">
+ÉVÉNEMENT RARE
+</div>
+
+<h2>Create Question</h2>
+
+<p class="muted">
+Une fois tous les deux mois, ton groupe peut proposer sa propre question.
+</p>
+
+<textarea
+id="customQuestion"
+class="questionInput"
+placeholder="Ex : Qui serait capable de devenir célèbre ?"
+></textarea>
+
+<button
+id="createQuestionBtn"
+class="btn btnPrimary"
+>
+Proposer la question
+</button>
+
+<div
+id="createStatus"
+class="createStatus"
+>
+Disponible pour le prototype.
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PROFILE -->
+
+<section id="profileScreen" class="screen">
+
+<div class="kicker">PROFILE</div>
+
+<div class="profileHero">
+
+<div class="profileTop">
+
+<div class="profileAvatar">
+JT
+</div>
+
+<div>
+<h2 style="font-size:25px;margin-bottom:3px">
+Jonathan
+</h2>
+
+<div class="username">
+@jonathan
+</div>
+
+</div>
+
+</div>
+
+<div class="profileStats">
+
+<div class="profileStat">
+<strong>12</strong>
+<span>streak</span>
+</div>
+
+<div class="profileStat">
+<strong>5</strong>
+<span>podiums</span>
+</div>
+
+<div class="profileStat">
+<strong>340</strong>
+<span>Predict pts</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>RANK stats</h2>
+
+<div class="rankRow">
+<div>Humour</div>
+<div></div>
+<strong>#2</strong>
+</div>
+
+<div class="rankRow">
+<div>Style</div>
+<div></div>
+<strong>#1</strong>
+</div>
+
+<div class="rankRow">
+<div>Vibe</div>
+<div></div>
+<strong>#3</strong>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>Mon groupe</h2>
+
+<div class="muted">
+Marseille · 8 membres
+</div>
+
+<button class="btn btnSecondary">
+Voir les membres
+</button>
 
 </div>
 
@@ -898,32 +1610,46 @@ onclick="alert('Plus tard, ce bouton permettra d\\'inviter tes vrais amis sur RA
 </main>
 
 
+<nav class="bottomNav">
 
-<nav class="nav">
-
-<button class="navBtn active" data-screen="today">
+<button
+class="navBtn active"
+data-screen="todayScreen"
+>
 <span class="navIcon">⌂</span>
-<small>Aujourd’hui</small>
+<span class="navLabel">TODAY</span>
 </button>
 
-<button class="navBtn" data-screen="rankingScreen">
+<button
+class="navBtn"
+data-screen="rankScreen"
+>
 <span class="navIcon">▥</span>
-<small>Classement</small>
+<span class="navLabel">RANK</span>
 </button>
 
-<button class="navBtn" data-screen="chatScreen">
-<span class="navIcon">💬</span>
-<small>Chat</small>
+<button
+class="navBtn"
+data-screen="roomScreen"
+>
+<span class="navIcon">◌</span>
+<span class="navLabel">ROOM</span>
 </button>
 
-<button class="navBtn" data-screen="friendsScreen">
-<span class="navIcon">♟</span>
-<small>Amis</small>
+<button
+class="navBtn"
+data-screen="predictScreen"
+>
+<span class="navIcon">◇</span>
+<span class="navLabel">PREDICT</span>
 </button>
 
-<button class="navBtn" data-screen="profileScreen">
-<span class="navIcon">☺</span>
-<small>Profil</small>
+<button
+class="navBtn"
+data-screen="recapScreen"
+>
+<span class="navIcon">↻</span>
+<span class="navLabel">RECAP</span>
 </button>
 
 </nav>
@@ -931,188 +1657,200 @@ onclick="alert('Plus tard, ce bouton permettra d\\'inviter tes vrais amis sur RA
 </div>
 
 
+
+<div
+id="menuOverlay"
+class="menuOverlay"
+onclick="closeMenuBackground(event)"
+>
+
+<div class="menuSheet">
+
+<div class="menuHandle"></div>
+
+<button
+id="replyAction"
+class="sheetAction"
+>
+Répondre
+</button>
+
+<button
+id="reportAction"
+class="sheetAction"
+>
+Signaler le message
+</button>
+
+<button
+id="blockAction"
+class="sheetAction"
+>
+Bloquer cette personne
+</button>
+
+<button
+id="deleteAction"
+class="sheetAction danger"
+style="display:none"
+>
+Supprimer mon message
+</button>
+
+<button
+class="sheetAction"
+onclick="closeMessageMenu()"
+>
+Annuler
+</button>
+
+</div>
+
+</div>
+
+
+
 <script>
 
-const users=[
-{id:1,name:"Léna",emoji:"😄",votes:132},
-{id:2,name:"Noé",emoji:"😎",votes:98},
-{id:3,name:"Emma",emoji:"🤩",votes:78},
-{id:4,name:"Lucas",emoji:"😂",votes:61},
-{id:5,name:"Inès",emoji:"😊",votes:54},
-{id:6,name:"Mathis",emoji:"😁",votes:41}
+const members = [
+
+{
+id:1,
+name:"Léna",
+username:"@lenaa",
+initial:"L",
+votes:132
+},
+
+{
+id:2,
+name:"Noé",
+username:"@noe13",
+initial:"N",
+votes:98
+},
+
+{
+id:3,
+name:"Emma",
+username:"@emma",
+initial:"E",
+votes:78
+},
+
+{
+id:4,
+name:"Lucas",
+username:"@lucas",
+initial:"L",
+votes:61
+},
+
+{
+id:5,
+name:"Inès",
+username:"@iness",
+initial:"I",
+votes:54
+},
+
+{
+id:6,
+name:"Mathis",
+username:"@mathis",
+initial:"M",
+votes:41
+}
+
 ];
 
-const selected=new Set();
 
-const people=document.getElementById("people");
-const voteBtn=document.getElementById("voteBtn");
-const success=document.getElementById("success");
+let selectedVotes = new Set();
 
-function renderPeople(){
+let prediction = null;
 
-people.innerHTML="";
+let activeMenuMessageId = null;
 
-users.forEach(user=>{
+let replyTo = null;
 
-const button=document.createElement("button");
+let blockedUsers = new Set();
 
-button.className="person";
 
-if(selected.has(user.id)){
-button.classList.add("selected");
+const starterMessages = [
+
+{
+id:101,
+name:"Léna",
+username:"@lenaa",
+initial:"L",
+time:"19:31",
+text:"Merciii vous êtes des fous 😭",
+mine:false
+},
+
+{
+id:102,
+name:"Noé",
+username:"@noe13",
+initial:"N",
+time:"19:31",
+text:"Je demande recompte officiel",
+mine:false
+},
+
+{
+id:103,
+name:"Emma",
+username:"@emma",
+initial:"E",
+time:"19:32",
+text:"Franchement Léna c'était mérité",
+mine:false
+},
+
+{
+id:104,
+name:"Lucas",
+username:"@lucas",
+initial:"L",
+time:"19:33",
+text:"Demain je prends le #1",
+mine:false
 }
 
-button.innerHTML=`
-<div class="check">✓</div>
-<div class="avatar">${user.emoji}</div>
-<div class="name">${user.name}</div>
-`;
+];
 
-button.onclick=()=>{
 
-if(selected.has(user.id)){
+let chatMessages;
 
-selected.delete(user.id);
+try{
 
-}else{
+chatMessages =
+JSON.parse(
+localStorage.getItem("rank-v4-chat")
+) || starterMessages;
 
-if(selected.size>=3){
+}catch{
 
-alert("Tu peux sélectionner maximum 3 personnes.");
-return;
-
-}
-
-selected.add(user.id);
-
-}
-
-success.style.display="none";
-
-renderPeople();
-
-};
-
-people.appendChild(button);
-
-});
-
-voteBtn.disabled=selected.size===0;
+chatMessages = [...starterMessages];
 
 }
 
 
 
-voteBtn.onclick=()=>{
+function showNotification(text){
 
-localStorage.setItem(
-"rank-vote",
-JSON.stringify([...selected])
+const n =
+document.getElementById("notification");
+
+n.textContent = text;
+
+n.classList.add("show");
+
+setTimeout(
+()=>n.classList.remove("show"),
+2300
 );
-
-success.style.display="block";
-
-};
-
-
-
-function timer(){
-
-const now=new Date();
-const target=new Date();
-
-target.setHours(19,30,0,0);
-
-if(now>=target){
-target.setDate(target.getDate()+1);
-}
-
-const diff=target-now;
-
-const h=Math.floor(diff/3600000);
-const m=Math.floor((diff%3600000)/60000);
-const s=Math.floor((diff%60000)/1000);
-
-document.getElementById("timer").textContent=
-`Dans ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-
-}
-
-
-
-function renderResults(){
-
-const ranking=[...users].sort((a,b)=>b.votes-a.votes);
-
-const podiumOrder=[
-ranking[1],
-ranking[0],
-ranking[2]
-];
-
-document.getElementById("podium").innerHTML=
-podiumOrder.map((user,index)=>{
-
-let pos;
-
-if(index===1) pos=1;
-else if(index===0) pos=2;
-else pos=3;
-
-return`
-<div class="podiumItem ${pos===1?"first":""}">
-<div class="podiumAvatar">${user.emoji}</div>
-<span class="podiumRank">
-${pos===1?"👑 #1":"#"+pos}
-</span>
-<strong>${user.name}</strong>
-<div class="votes">${user.votes} votes</div>
-</div>
-`;
-
-}).join("");
-
-document.getElementById("ranking").innerHTML=
-ranking.map((user,index)=>`
-
-<div class="rankingRow">
-
-<strong>#${index+1}</strong>
-
-<div class="rankPerson">
-<div class="miniAvatar">${user.emoji}</div>
-${user.name}
-</div>
-
-<strong>${user.votes}</strong>
-
-</div>
-
-`).join("");
-
-}
-
-
-
-function renderFriends(){
-
-document.getElementById("friends").innerHTML=
-users.map(user=>`
-
-<div class="friend">
-
-<div class="friendAvatar">${user.emoji}</div>
-
-<div class="friendText">
-<strong>${user.name}</strong>
-<small>Membre de ton groupe</small>
-</div>
-
-<span>›</span>
-
-</div>
-
-`).join("");
 
 }
 
@@ -1120,18 +1858,35 @@ users.map(user=>`
 
 function changeScreen(screen){
 
-document.querySelectorAll(".screen").forEach(el=>{
-el.classList.remove("active");
-});
-
-document.getElementById(screen).classList.add("active");
-
-document.querySelectorAll(".navBtn").forEach(btn=>{
-btn.classList.toggle(
-"active",
-btn.dataset.screen===screen
+document
+.querySelectorAll(".screen")
+.forEach(
+s=>s.classList.remove("active")
 );
-});
+
+document
+.getElementById(screen)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".navBtn")
+.forEach(
+button=>{
+button.classList.toggle(
+"active",
+button.dataset.screen === screen
+);
+}
+);
+
+
+if(screen === "roomScreen"){
+
+renderMessages();
+
+}
+
 
 window.scrollTo({
 top:0,
@@ -1142,99 +1897,419 @@ behavior:"smooth"
 
 
 
-document.querySelectorAll(".navBtn").forEach(button=>{
+document
+.querySelectorAll(".navBtn")
+.forEach(
+button=>{
 
-button.onclick=()=>{
-changeScreen(button.dataset.screen);
-};
+button.onclick = ()=>{
 
-});
-
-
-
-document.getElementById("demoBtn").onclick=()=>{
-
-renderResults();
-
-changeScreen("results");
+changeScreen(
+button.dataset.screen
+);
 
 };
 
+}
+);
 
 
-const starterMessages=[
 
-{
-name:"Léna",
-emoji:"😄",
-text:"Merciii 😂👑 vous êtes les meilleurs 💜"
-},
+function renderPeople(){
 
-{
-name:"Noé",
-emoji:"😎",
-text:"Ptdrrrr j’étais clairement le plus drôle aujourd’hui 😭"
-},
+const grid =
+document.getElementById("peopleGrid");
 
-{
-name:"Emma",
-emoji:"🤩",
-text:"Troisième ça va, j’accepte 😂"
-},
+grid.innerHTML =
+members.map(member=>`
 
-{
-name:"Lucas",
-emoji:"😂",
-text:"Demain je prends la première place 👀"
+<button
+class="personCard ${selectedVotes.has(member.id) ? "selected" : ""}"
+onclick="toggleVote(${member.id})"
+>
+
+<div class="check">
+✓
+</div>
+
+<div class="avatar">
+${member.initial}
+</div>
+
+<div class="personName">
+${member.name}
+</div>
+
+<div class="personUser">
+${member.username}
+</div>
+
+</button>
+
+`).join("");
+
+
+document.getElementById("voteBtn").disabled =
+selectedVotes.size === 0;
+
 }
 
+
+
+function toggleVote(id){
+
+if(selectedVotes.has(id)){
+
+selectedVotes.delete(id);
+
+}else{
+
+if(selectedVotes.size >= 3){
+
+showNotification(
+"3 choix maximum"
+);
+
+return;
+
+}
+
+selectedVotes.add(id);
+
+}
+
+renderPeople();
+
+}
+
+
+
+document.getElementById("voteBtn").onclick =
+()=>{
+
+localStorage.setItem(
+"rank-v4-vote",
+JSON.stringify([...selectedVotes])
+);
+
+document.getElementById("voteDone")
+.style.display="block";
+
+showNotification(
+"Vote enregistré"
+);
+
+};
+
+
+
+function updateCountdown(){
+
+const now =
+new Date();
+
+const reveal =
+new Date();
+
+reveal.setHours(
+19,
+30,
+0,
+0
+);
+
+if(now >= reveal){
+
+document.getElementById("countdown")
+.textContent = "Disponible";
+
+return;
+
+}
+
+const diff =
+reveal - now;
+
+const h =
+Math.floor(diff / 3600000);
+
+const m =
+Math.floor(
+(diff % 3600000) / 60000
+);
+
+const s =
+Math.floor(
+(diff % 60000) / 1000
+);
+
+document.getElementById("countdown")
+.textContent =
+`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+}
+
+
+
+function renderRanking(){
+
+const ranking =
+[...members]
+.sort((a,b)=>b.votes-a.votes);
+
+
+const podiumOrder = [
+ranking[1],
+ranking[0],
+ranking[2]
 ];
 
 
-let chatMessages=[];
+document.getElementById("podium")
+.innerHTML =
+podiumOrder.map(
+(member,index)=>{
 
-try{
-
-chatMessages=
-JSON.parse(
-localStorage.getItem("rank-chat") || "null"
-) || starterMessages;
-
-}catch{
-
-chatMessages=[...starterMessages];
-
-}
-
-
-
-function renderChat(){
-
-const container=
-document.getElementById("chatMessages");
-
-container.innerHTML=
-chatMessages.map(message=>{
-
-const mine=
-message.name==="Moi";
+const pos =
+index === 1
+? 1
+: index === 0
+? 2
+: 3;
 
 return`
 
-<div class="message ${mine?"mine":""}">
+<div class="podiumItem ${pos===1 ? "first" : ""}">
 
-${mine ? "" :
-`<div class="messageAvatar">${message.emoji}</div>`
+<div class="podiumAvatar">
+${member.initial}
+</div>
+
+<div class="position ${pos===1 ? "positionGold" : ""}">
+${pos === 1 ? "♛ " : ""}#${pos}
+</div>
+
+<strong>
+${member.name}
+</strong>
+
+<div class="voteCount">
+${member.votes} votes
+</div>
+
+</div>
+
+`;
+
+}
+).join("");
+
+
+document.getElementById("rankingList")
+.innerHTML =
+ranking.map(
+(member,index)=>`
+
+<div class="rankRow">
+
+<strong>
+#${index+1}
+</strong>
+
+<div class="rankUser">
+
+<div class="tinyAvatar">
+${member.initial}
+</div>
+
+${member.name}
+
+</div>
+
+<div class="rankVotes">
+${member.votes}
+</div>
+
+</div>
+
+`
+).join("");
+
 }
 
-<div class="messageBody">
 
-${mine ? "" :
-`<div class="messageName">${message.name}</div>`
+
+function showResultsDemo(){
+
+renderRanking();
+
+changeScreen(
+"rankScreen"
+);
+
 }
+
+
+
+function buildPredictChoices(){
+
+const mini =
+document.getElementById("predictMiniChoices");
+
+const full =
+document.getElementById("predictFullChoices");
+
+
+const html =
+members.slice(0,4).map(
+member=>`
+
+<button
+class="predictOption ${prediction===member.id ? "selected" : ""}"
+onclick="choosePrediction(${member.id})"
+>
+
+<div class="tinyAvatar">
+${member.initial}
+</div>
+
+<strong>
+${member.name}
+</strong>
+
+<span>
+${member.username}
+</span>
+
+</button>
+
+`
+).join("");
+
+
+mini.innerHTML = html;
+
+full.innerHTML = html;
+
+
+document.getElementById("predictMiniBtn")
+.disabled = !prediction;
+
+document.getElementById("predictFullBtn")
+.disabled = !prediction;
+
+}
+
+
+
+function choosePrediction(id){
+
+prediction = id;
+
+buildPredictChoices();
+
+}
+
+
+
+function savePrediction(){
+
+if(!prediction) return;
+
+
+localStorage.setItem(
+"rank-v4-prediction",
+prediction
+);
+
+
+document.getElementById("predictConfirmation")
+.style.display="block";
+
+
+showNotification(
+"Prédiction enregistrée"
+);
+
+}
+
+
+
+document.getElementById("predictMiniBtn")
+.onclick = savePrediction;
+
+document.getElementById("predictFullBtn")
+.onclick = savePrediction;
+
+
+
+function renderMessages(){
+
+const container =
+document.getElementById("messages");
+
+
+const visibleMessages =
+chatMessages.filter(
+message=>
+!blockedUsers.has(message.username)
+);
+
+
+container.innerHTML =
+visibleMessages.map(
+message=>{
+
+const mine =
+message.mine === true;
+
+
+return`
+
+<div class="message ${mine ? "mine" : ""}">
+
+${mine ? "" : `
+
+<div class="messageAvatar">
+${message.initial}
+</div>
+
+`}
+
+
+<div class="messageContent">
+
+${mine ? "" : `
+
+<div class="messageMeta">
+
+<span class="messageName">
+${message.username}
+</span>
+
+<span class="messageTime">
+${message.time}
+</span>
+
+</div>
+
+`}
+
 
 <div class="bubble">
 ${escapeHTML(message.text)}
+</div>
+
+
+<div class="messageMenu">
+
+<button
+class="messageAction"
+onclick="openMessageMenu(${message.id})"
+>
+•••
+</button>
+
 </div>
 
 </div>
@@ -1243,10 +2318,8 @@ ${escapeHTML(message.text)}
 
 `;
 
-}).join("");
-
-container.scrollTop=
-container.scrollHeight;
+}
+).join("");
 
 }
 
@@ -1254,10 +2327,10 @@ container.scrollHeight;
 
 function escapeHTML(text){
 
-const div=
+const div =
 document.createElement("div");
 
-div.textContent=text;
+div.textContent = text;
 
 return div.innerHTML;
 
@@ -1267,57 +2340,376 @@ return div.innerHTML;
 
 function sendMessage(){
 
-const input=
+const input =
 document.getElementById("messageInput");
 
-const text=
+const text =
 input.value.trim();
+
 
 if(!text) return;
 
+
+const now =
+new Date();
+
+
 chatMessages.push({
+
+id:Date.now(),
+
 name:"Moi",
-emoji:"🙂",
-text:text
+
+username:"@jonathan",
+
+initial:"J",
+
+time:
+`${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`,
+
+text:
+
+replyTo
+
+? `↳ ${replyTo.username} · ${text}`
+
+: text,
+
+mine:true
+
 });
 
+
 localStorage.setItem(
-"rank-chat",
+"rank-v4-chat",
 JSON.stringify(chatMessages)
 );
 
-input.value="";
 
-renderChat();
+input.value = "";
+
+replyTo = null;
+
+
+document.getElementById("replyBox")
+.style.display="none";
+
+
+renderMessages();
 
 }
 
 
 
-document.getElementById("sendBtn").onclick=
-sendMessage;
+document.getElementById("sendBtn")
+.onclick = sendMessage;
 
 
 
 document.getElementById("messageInput")
-.addEventListener("keydown",event=>{
+.addEventListener(
+"keydown",
+event=>{
 
-if(event.key==="Enter"){
+if(event.key === "Enter"){
+
 sendMessage();
+
 }
 
-});
+}
+);
+
+
+
+function openMessageMenu(id){
+
+activeMenuMessageId = id;
+
+
+const message =
+chatMessages.find(
+m=>m.id === id
+);
+
+
+if(!message) return;
+
+
+document.getElementById("deleteAction")
+.style.display =
+message.mine ? "block" : "none";
+
+
+document.getElementById("blockAction")
+.style.display =
+message.mine ? "none" : "block";
+
+
+document.getElementById("reportAction")
+.style.display =
+message.mine ? "none" : "block";
+
+
+document.getElementById("menuOverlay")
+.classList.add("show");
+
+}
+
+
+
+function closeMessageMenu(){
+
+document.getElementById("menuOverlay")
+.classList.remove("show");
+
+activeMenuMessageId = null;
+
+}
+
+
+
+function closeMenuBackground(event){
+
+if(
+event.target.id === "menuOverlay"
+){
+
+closeMessageMenu();
+
+}
+
+}
+
+
+
+document.getElementById("replyAction")
+.onclick = ()=>{
+
+const message =
+chatMessages.find(
+m=>m.id === activeMenuMessageId
+);
+
+
+if(message){
+
+replyTo = message;
+
+
+const box =
+document.getElementById("replyBox");
+
+
+box.textContent =
+`Réponse à ${message.username}: ${message.text}`;
+
+
+box.style.display =
+"block";
+
+
+document.getElementById("messageInput")
+.focus();
+
+}
+
+
+closeMessageMenu();
+
+};
+
+
+
+document.getElementById("reportAction")
+.onclick = ()=>{
+
+closeMessageMenu();
+
+showNotification(
+"Message signalé. Merci."
+);
+
+};
+
+
+
+document.getElementById("blockAction")
+.onclick = ()=>{
+
+const message =
+chatMessages.find(
+m=>m.id === activeMenuMessageId
+);
+
+
+if(message){
+
+blockedUsers.add(
+message.username
+);
+
+showNotification(
+`${message.username} a été bloqué`
+);
+
+renderMessages();
+
+}
+
+
+closeMessageMenu();
+
+};
+
+
+
+document.getElementById("deleteAction")
+.onclick = ()=>{
+
+chatMessages =
+chatMessages.filter(
+m=>m.id !== activeMenuMessageId
+);
+
+
+localStorage.setItem(
+"rank-v4-chat",
+JSON.stringify(chatMessages)
+);
+
+
+renderMessages();
+
+closeMessageMenu();
+
+};
+
+
+
+function leaveRoom(){
+
+const confirmLeave =
+confirm(
+"Quitter le salon de ce groupe ?"
+);
+
+
+if(confirmLeave){
+
+showNotification(
+"Tu as quitté la ROOM"
+);
+
+changeScreen(
+"todayScreen"
+);
+
+}
+
+}
+
+
+
+document.getElementById("createQuestionBtn")
+.onclick = ()=>{
+
+const text =
+document.getElementById("customQuestion")
+.value.trim();
+
+
+if(text.length < 8){
+
+showNotification(
+"Écris une vraie question"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+"rank-v4-custom-question",
+text
+);
+
+
+document.getElementById("customQuestion")
+.value="";
+
+
+document.getElementById("createStatus")
+.textContent =
+"Question proposée ✓ · prochain accès dans environ 2 mois";
+
+
+document.getElementById("createQuestionBtn")
+.disabled = true;
+
+
+showNotification(
+"Question proposée"
+);
+
+};
+
+
+
+try{
+
+const storedVote =
+JSON.parse(
+localStorage.getItem("rank-v4-vote") || "[]"
+);
+
+
+storedVote.forEach(
+id=>selectedVotes.add(id)
+);
+
+
+if(storedVote.length){
+
+document.getElementById("voteDone")
+.style.display="block";
+
+}
+
+}catch{}
+
+
+
+const savedPrediction =
+Number(
+localStorage.getItem("rank-v4-prediction")
+);
+
+
+if(savedPrediction){
+
+prediction =
+savedPrediction;
+
+}
 
 
 
 renderPeople();
-renderResults();
-renderFriends();
-renderChat();
 
-timer();
+renderRanking();
 
-setInterval(timer,1000);
+buildPredictChoices();
+
+renderMessages();
+
+updateCountdown();
+
+setInterval(
+updateCountdown,
+1000
+);
 
 </script>
 
