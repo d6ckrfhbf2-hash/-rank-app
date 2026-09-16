@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RANK — Prototype</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --purple:#6847ff;
+  --purple-dark:#4f35d5;
+  --pink:#ff5f9e;
+  --orange:#ff9958;
+  --dark:#191827;
+  --grey:#77758a;
+  --light:#f7f6fb;
+  --white:#ffffff;
+  --border:#ebe9f3;
+}
+
+body {
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--dark);
+  min-height:100vh;
+  background:
+  radial-gradient(circle at 10% 5%,rgba(104,71,255,.18),transparent 25%),
+  radial-gradient(circle at 90% 15%,rgba(255,95,158,.16),transparent 27%),
+  #f7f6fb;
+}
+
+button {
+  font-family:inherit;
+}
+
+.phone {
+  width:min(100%,520px);
+  margin:25px auto;
+  min-height:900px;
+  background:rgba(255,255,255,.96);
+  border-radius:38px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 30px 80px rgba(50,30,110,.18);
+  border:1px solid rgba(255,255,255,.8);
+}
+
+.header {
+  height:76px;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid #f1eff6;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.logo {
+  font-size:24px;
+  font-weight:900;
+}
+
+.logo span {
+  color:var(--purple);
+}
+
+.demo-label {
+  background:#eeeaff;
+  color:var(--purple);
+  font-size:11px;
+  padding:8px 10px;
+  border-radius:30px;
+  font-weight:800;
+}
+
+main {
+  padding:25px 22px 110px;
+}
+
+.screen {
+  display:none;
+}
+
+.screen.active {
+  display:block;
+}
+
+.tag {
+  display:inline-block;
+  background:#eeeaff;
+  color:var(--purple);
+  padding:8px 12px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+h1 {
+  margin:0 0 10px;
+  font-size:35px;
+  line-height:1.08;
+  letter-spacing:-1.2px;
+}
+
+.subtitle {
+  margin:0;
+  color:var(--grey);
+  line-height:1.5;
+}
+
+.people {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+  margin:25px 0;
+}
+
+.person {
+  border:2px solid transparent;
+  background:white;
+  border-radius:22px;
+  padding:14px;
+  cursor:pointer;
+  position:relative;
+  box-shadow:0 8px 25px rgba(40,30,80,.07);
+  transition:.2s;
+}
+
+.person:hover {
+  transform:translateY(-2px);
+}
+
+.person.selected {
+  border-color:var(--purple);
+  box-shadow:
+  0 0 0 4px rgba(104,71,255,.08),
+  0 10px 30px rgba(70,45,150,.12);
+}
+
+.avatar {
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  font-size:38px;
+  background:linear-gradient(135deg,#ece8ff,#ffe8f0);
+}
+
+.name {
+  text-align:center;
+  font-weight:800;
+  margin-top:10px;
+  font-size:15px;
+}
+
+.check {
+  display:none;
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  color:white;
+  place-items:center;
+  font-weight:900;
+}
+
+.person.selected .check {
+  display:grid;
+}
+
+.btn {
+  width:100%;
+  border:0;
+  border-radius:18px;
+  padding:17px;
+  font-size:16px;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.btn-primary {
+  background:linear-gradient(
+  90deg,
+  var(--purple),
+  var(--pink),
+  var(--orange)
+  );
+  color:white;
+  box-shadow:0 14px 30px rgba(104,71,255,.22);
+}
+
+.btn-primary:disabled {
+  opacity:.4;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+
+.btn-secondary {
+  margin-top:12px;
+  background:#f1eff6;
+  color:var(--dark);
+}
+
+.success {
+  display:none;
+  margin-top:12px;
+  background:#e8faf2;
+  color:#147a54;
+  padding:13px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:800;
+}
+
+.countdown {
+  margin-top:17px;
+  padding:18px;
+  background:linear-gradient(135deg,#f0ecff,#fff0f6);
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid #e7e0ff;
+}
+
+.countdown small {
+  display:block;
+  color:var(--grey);
+  margin-bottom:4px;
+}
+
+.countdown strong {
+  font-size:27px;
+}
+
+.countdownEmoji {
+  font-size:37px;
+}
+
+.resultHero {
+  background:linear-gradient(145deg,#21174b,#5636bb,#7748eb);
+  border-radius:25px;
+  color:white;
+  padding:20px;
+  margin-top:22px;
+  box-shadow:0 18px 40px rgba(50,30,130,.24);
+}
+
+.resultHeader {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.resultHeader small {
+  color:#c9c0ef;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.2px;
+}
+
+.resultHeader h2 {
+  margin:5px 0;
+}
+
+.time {
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.13);
+  padding:8px 10px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.podium {
+  display:grid;
+  grid-template-columns:1fr 1.1fr 1fr;
+  align-items:end;
+  gap:5px;
+  margin:35px 0 8px;
+}
+
+.podiumItem {
+  text-align:center;
+}
+
+.podiumItem.first {
+  transform:translateY(-18px);
+}
+
+.podiumAvatar {
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  margin:auto auto 7px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.16);
+  border:3px solid rgba(255,255,255,.35);
+  font-size:32px;
+}
+
+.podiumItem.first .podiumAvatar {
+  width:84px;
+  height:84px;
+  border-color:#ffd45f;
+}
+
+.podiumRank {
+  font-weight:900;
+  display:block;
+  margin-bottom:3px;
+}
+
+.votes {
+  font-size:11px;
+  color:#d9d2f4;
+  margin-top:3px;
+}
+
+.card {
+  margin-top:15px;
+  padding:18px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:22px;
+  box-shadow:0 8px 25px rgba(30,20,60,.05);
+}
+
+.card h2 {
+  margin-top:0;
+  margin-bottom:10px;
+}
+
+.rankingRow {
+  display:grid;
+  grid-template-columns:40px 1fr auto;
+  gap:8px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.rankingRow:last-child {
+  border:0;
+}
+
+.rankPerson {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-weight:750;
+}
+
+.miniAvatar {
+  width:37px;
+  height:37px;
+  border-radius:50%;
+  background:#f0edfb;
+  display:grid;
+  place-items:center;
+}
+
+.profileCard {
+  margin-top:15px;
+  padding:18px;
+  border-radius:22px;
+  background:white;
+  border:1px solid var(--border);
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.profileAvatar {
+  width:70px;
+  height:70px;
+  min-width:70px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:32px;
+  background:linear-gradient(135deg,#e9e4ff,#ffe4ef);
+}
+
+.profileCard small {
+  font-weight:900;
+  letter-spacing:1px;
+  color:#8c849e;
+  font-size:10px;
+}
+
+.profileCard h3 {
+  margin:4px 0 9px;
+}
+
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.tags span {
+  padding:7px 10px;
+  border-radius:30px;
+  background:#eeeaff;
+  color:var(--purple-dark);
+  font-size:11px;
+  font-weight:800;
+}
+
+.tags span:nth-child(2) {
+  background:#fff0f5;
+  color:#b94e75;
+}
+
+.tags span:nth-child(3) {
+  background:#fff5e6;
+  color:#9b6423;
+}
+
+.history {
+  display:grid;
+  gap:12px;
+  margin-top:22px;
+}
+
+.historyItem {
+  padding:15px;
+  border-radius:19px;
+  border:1px solid var(--border);
+  background:white;
+  display:grid;
+  grid-template-columns:48px 1fr auto;
+  gap:12px;
+  align-items:center;
+}
+
+.historyEmoji {
+  width:48px;
+  height:48px;
+  background:#eeeaff;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+}
+
+.historyText strong,
+.historyText small {
+  display:block;
+}
+
+.historyText small {
+  margin-top:4px;
+  color:var(--grey);
+}
+
+.historyRank {
+  color:var(--purple);
+  font-size:21px;
+  font-weight:900;
+}
+
+.friend {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:19px;
+  padding:15px;
+  margin-bottom:10px;
+}
+
+.friendAvatar {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:#eeeaff;
+  display:grid;
+  place-items:center;
+  font-size:24px;
+}
+
+.friendText {
+  flex:1;
+}
+
+.friendText strong,
+.friendText small {
+  display:block;
+}
+
+.friendText small {
+  color:var(--grey);
+  margin-top:3px;
+}
+
+.profileHero {
+  padding:22px;
+  border-radius:25px;
+  background:linear-gradient(135deg,#4b30af,#784bec,#b64fda);
+  color:white;
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+.bigAvatar {
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:rgba(255,255,255,.16);
+  border:3px solid rgba(255,255,255,.5);
+  display:grid;
+  place-items:center;
+  font-size:42px;
+}
+
+.profileHero h1 {
+  margin:3px 0 5px;
+}
+
+.profileHero p {
+  margin:0;
+  color:#e3dcfa;
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:14px;
+}
+
+.stat {
+  border:1px solid var(--border);
+  background:white;
+  border-radius:18px;
+  padding:15px 6px;
+  text-align:center;
+}
+
+.stat strong,
+.stat small {
+  display:block;
+}
+
+.stat strong {
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.stat small {
+  color:var(--grey);
+}
+
+.nav {
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:83px;
+  background:rgba(255,255,255,.98);
+  border-top:1px solid var(--border);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:9px;
+}
+
+.navBtn {
+  background:none;
+  border:0;
+  color:#9995a9;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+}
+
+.navBtn.active {
+  color:var(--purple);
+}
+
+.navIcon {
+  font-size:22px;
+}
+
+.navBtn small {
+  font-weight:700;
+}
+
+@media(max-width:550px) {
+  body {
+    background:white;
+  }
+
+  .phone {
+    margin:0;
+    width:100%;
+    min-height:100vh;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  .people {
+    gap:10px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+<header class="header">
+
+<div class="logo">
+<span>♛</span> RANK
+</div>
+
+<div class="demo-label">
+PROTOTYPE
+</div>
+
+</header>
+
+
+<main>
+
+<!-- QUESTION DU JOUR -->
+
+<section id="today" class="screen active">
+
+<span class="tag">Aujourd'hui</span>
+
+<h1>Qui a le plus d'humour ?</h1>
+
+<p class="subtitle">
+Choisis jusqu'à 3 personnes.<br>
+Ton vote reste totalement anonyme.
+</p>
+
+
+<div id="people" class="people"></div>
+
+
+<button
+id="voteBtn"
+class="btn btn-primary"
+disabled
+>
+➤ Voter anonymement
+</button>
+
+
+<div id="success" class="success">
+✓ Ton vote a bien été enregistré.
+</div>
+
+
+<div class="countdown">
+
+<div>
+
+<small>
+Résultats révélés à
+</small>
+
+<strong>
+19h30
+</strong>
+
+<br>
+
+<small id="timer">
+Calcul...
+</small>
+
+</div>
+
+<div class="countdownEmoji">
+⏰
+</div>
+
+</div>
+
+
+<button
+id="demoBtn"
+class="btn btn-secondary"
+>
+Voir les résultats maintenant (démo)
+</button>
+
+</section>
+
+
+
+<!-- RESULTATS -->
+
+<section id="results" class="screen">
+
+<span class="tag">
+Résultats du soir
+</span>
+
+<h1>
+Le classement est tombé 👑
+</h1>
+
+<p class="subtitle">
+Découvre comment ton groupe a voté aujourd'hui.
+</p>
+
+
+<div class="resultHero">
+
+<div class="resultHeader">
+
+<div>
+
+<small>
+QUESTION DU JOUR
+</small>
+
+<h2>
+Qui a le plus d'humour ?
+</h2>
+
+</div>
+
+<div class="time">
+19h30
+</div>
+
+</div>
+
+
+<div id="podium" class="podium">
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Classement complet
+</h2>
+
+<div id="ranking"></div>
+
+</div>
+
+
+<div class="profileCard">
+
+<div class="profileAvatar">
+😄
+</div>
+
+<div>
+
+<small>
+TON PROFIL DU JOUR
+</small>
+
+<h3>
+Tu finis #2 aujourd'hui
+</h3>
+
+<div class="tags">
+<span>Drôle</span>
+<span>Stylé</span>
+<span>Bienveillant</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- HISTORIQUE -->
+
+<section id="rankingScreen" class="screen">
+
+<span class="tag">
+Historique
+</span>
+
+<h1>
+Tes classements
+</h1>
+
+<p class="subtitle">
+Retrouve les questions des derniers jours.
+</p>
+
+<div class="history">
+
+<div class="historyItem">
+
+<div class="historyEmoji">
+😂
+</div>
+
+<div class="historyText">
+<strong>
+Qui a le plus d'humour ?
+</strong>
+
+<small>
+Aujourd'hui
+</small>
+</div>
+
+<div class="historyRank">
+#2
+</div>
+
+</div>
+
+
+<div class="historyItem">
+
+<div class="historyEmoji">
+✨
+</div>
+
+<div class="historyText">
+<strong>
+Qui a le meilleur style ?
+</strong>
+
+<small>
+Hier
+</small>
+</div>
+
+<div class="historyRank">
+#1
+</div>
+
+</div>
+
+
+<div class="historyItem">
+
+<div class="historyEmoji">
+😎
+</div>
+
+<div class="historyText">
+<strong>
+Qui a la meilleure vibe ?
+</strong>
+
+<small>
+Il y a 2 jours
+</small>
+</div>
+
+<div class="historyRank">
+#3
+</div>
+
+</div>
+
+
+<div class="historyItem">
+
+<div class="historyEmoji">
+⏰
+</div>
+
+<div class="historyText">
+<strong>
+Qui arrive toujours en retard ?
+</strong>
+
+<small>
+Il y a 3 jours
+</small>
+</div>
+
+<div class="historyRank">
+#6
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- AMIS -->
+
+<section id="friendsScreen" class="screen">
+
+<span class="tag">
+Ton groupe
+</span>
+
+<h1>
+Mes amis
+</h1>
+
+<p class="subtitle">
+Les personnes qui peuvent apparaître dans tes questions RANK.
+</p>
+
+
+<div
+id="friends"
+style="margin-top:22px"
+>
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="inviteFriends()"
+>
++ Inviter des amis
+</button>
+
+</section>
+
+
+
+<!-- PROFIL -->
+
+<section id="profileScreen" class="screen">
+
+<div class="profileHero">
+
+<div class="bigAvatar">
+😄
+</div>
+
+<div>
+
+<small>
+MON PROFIL
+</small>
+
+<h1>
+Jonathan
+</h1>
+
+<p>
+Toujours partant pour rigoler.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<strong>5</strong>
+<small>Podiums</small>
+</div>
+
+<div class="stat">
+<strong>#2,8</strong>
+<small>Rang moyen</small>
+</div>
+
+<div class="stat">
+<strong>12</strong>
+<small>Jours de suite</small>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Ta vibe
+</h2>
+
+<div class="tags">
+
+<span>
+Drôle
+</span>
+
+<span>
+Solaire
+</span>
+
+<span>
+Stylé
+</span>
+
+<span>
+Bienveillant
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Classements récents
+</h2>
+
+<div class="rankingRow">
+<strong>😂</strong>
+<span>Humour</span>
+<strong>#2</strong>
+</div>
+
+<div class="rankingRow">
+<strong>✨</strong>
+<span>Style</span>
+<strong>#1</strong>
+</div>
+
+<div class="rankingRow">
+<strong>⏰</strong>
+<span>Ponctualité</span>
+<strong>#6</strong>
+</div>
+
+<div class="rankingRow">
+<strong>😎</strong>
+<span>Vibe</span>
+<strong>#3</strong>
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<nav class="nav">
+
+<button
+class="navBtn active"
+data-screen="today"
+>
+
+<span class="navIcon">
+⌂
+</span>
+
+<small>
+Aujourd'hui
+</small>
+
+</button>
+
+
+<button
+class="navBtn"
+data-screen="rankingScreen"
+>
+
+<span class="navIcon">
+▥
+</span>
+
+<small>
+Classement
+</small>
+
+</button>
+
+
+<button
+class="navBtn"
+data-screen="friendsScreen"
+>
+
+<span class="navIcon">
+♟
+</span>
+
+<small>
+Amis
+</small>
+
+</button>
+
+
+<button
+class="navBtn"
+data-screen="profileScreen"
+>
+
+<span class="navIcon">
+☺
+</span>
+
+<small>
+Profil
+</small>
+
+</button>
+
+</nav>
+
+</div>
+
+
+
+<script>
+
+const users = [
+
+{
+id:1,
+name:"Léna",
+emoji:"😄",
+votes:132
+},
+
+{
+id:2,
+name:"Noé",
+emoji:"😎",
+votes:98
+},
+
+{
+id:3,
+name:"Emma",
+emoji:"🤩",
+votes:78
+},
+
+{
+id:4,
+name:"Lucas",
+emoji:"😂",
+votes:61
+},
+
+{
+id:5,
+name:"Inès",
+emoji:"😊",
+votes:54
+},
+
+{
+id:6,
+name:"Mathis",
+emoji:"😁",
+votes:41
+}
+
+];
+
+
+const selected = new Set();
+
+const peopleContainer =
+document.getElementById("people");
+
+const voteBtn =
+document.getElementById("voteBtn");
+
+const success =
+document.getElementById("success");
+
+
+
+function renderPeople(){
+
+peopleContainer.innerHTML="";
+
+users.forEach(user=>{
+
+const button =
+document.createElement("button");
+
+button.className="person";
+
+if(selected.has(user.id)){
+button.classList.add("selected");
+}
+
+button.innerHTML=`
+
+<div class="check">
+✓
+</div>
+
+<div class="avatar">
+${user.emoji}
+</div>
+
+<div class="name">
+${user.name}
+</div>
+
+`;
+
+button.onclick=()=>{
+
+if(selected.has(user.id)){
+
+selected.delete(user.id);
+
+}else{
+
+if(selected.size>=3){
+
+alert(
+"Tu peux sélectionner maximum 3 personnes."
+);
+
+return;
+
+}
+
+selected.add(user.id);
+
+}
+
+success.style.display="none";
+
+renderPeople();
+
+};
+
+peopleContainer.appendChild(button);
+
+});
+
+voteBtn.disabled=
+selected.size===0;
+
+}
+
+
+
+voteBtn.onclick=()=>{
+
+localStorage.setItem(
+"rank-vote",
+JSON.stringify([...selected])
+);
+
+success.style.display="block";
+
+};
+
+
+
+function loadVote(){
+
+try{
+
+const stored =
+JSON.parse(
+localStorage.getItem("rank-vote") || "[]"
+);
+
+stored.forEach(id=>{
+selected.add(id);
+});
+
+if(stored.length){
+
+success.style.display="block";
+
+}
+
+}catch(e){
+
+localStorage.removeItem("rank-vote");
+
+}
+
+}
+
+
+
+function calculateTimer(){
+
+const now =
+new Date();
+
+const target =
+new Date();
+
+target.setHours(
+19,
+30,
+0,
+0
+);
+
+if(now>=target){
+
+target.setDate(
+target.getDate()+1
+);
+
+}
+
+const difference =
+target-now;
+
+const hours =
+Math.floor(
+difference/3600000
+);
+
+const minutes =
+Math.floor(
+(difference%3600000)/60000
+);
+
+const seconds =
+Math.floor(
+(difference%60000)/1000
+);
+
+document.getElementById("timer")
+.textContent =
+`Dans ${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+
+}
+
+
+
+function renderResults(){
+
+const ranking =
+[...users]
+.sort(
+(a,b)=>b.votes-a.votes
+);
+
+
+const podiumOrder = [
+
+ranking[1],
+
+ranking[0],
+
+ranking[2]
+
+];
+
+
+document.getElementById("podium")
+.innerHTML = podiumOrder
+.map((user,index)=>{
+
+let position;
+
+if(index===1){
+
+position=1;
+
+}else if(index===0){
+
+position=2;
+
+}else{
+
+position=3;
+
+}
+
+return`
+
+<div class="podiumItem ${position===1 ? "first" : ""}">
+
+<div class="podiumAvatar">
+${user.emoji}
+</div>
+
+<span class="podiumRank">
+${position===1 ? "👑 #1" : "#"+position}
+</span>
+
+<strong>
+${user.name}
+</strong>
+
+<div class="votes">
+${user.votes} votes
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
+
+document.getElementById("ranking")
+.innerHTML =
+ranking.map((user,index)=>`
+
+<div class="rankingRow">
+
+<strong>
+#${index+1}
+</strong>
+
+<div class="rankPerson">
+
+<div class="miniAvatar">
+${user.emoji}
+</div>
+
+${user.name}
+
+</div>
+
+<strong>
+${user.votes}
+</strong>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+function renderFriends(){
+
+const friends =
+document.getElementById("friends");
+
+friends.innerHTML =
+users.map(user=>`
+
+<div class="friend">
+
+<div class="friendAvatar">
+${user.emoji}
+</div>
+
+<div class="friendText">
+
+<strong>
+${user.name}
+</strong>
+
+<small>
+Membre de ton groupe
+</small>
+
+</div>
+
+<span>
+›
+</span>
+
+</div>
+
+`).join("");
+
+}
+
+
+
+function changeScreen(screen){
+
+document
+.querySelectorAll(".screen")
+.forEach(element=>{
+
+element.classList.remove("active");
+
+});
+
+
+document
+.getElementById(screen)
+.classList.add("active");
+
+
+document
+.querySelectorAll(".navBtn")
+.forEach(button=>{
+
+button.classList.toggle(
+"active",
+button.dataset.screen===screen
+);
+
+});
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+
+document
+.querySelectorAll(".navBtn")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+changeScreen(
+button.dataset.screen
+);
+
+};
+
+});
+
+
+
+document
+.getElementById("demoBtn")
+.onclick=()=>{
+
+renderResults();
+
+changeScreen(
+"results"
+);
+
+};
+
+
+
+function inviteFriends(){
+
+alert(
+"Dans la vraie application, ce bouton permettra d'envoyer un lien RANK à tes amis."
+);
+
+}
+
+
+
+loadVote();
+
+renderPeople();
+
+renderResults();
+
+renderFriends();
+
+calculateTimer();
+
+setInterval(
+calculateTimer,
+1000
+);
+
+</script>
+
+</body>
+</html>
