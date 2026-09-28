@@ -3,2139 +3,664 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>RANK — V8.1</title>
+<title>RANK — V8.2</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#f6f7fb;
-  --white:#ffffff;
-  --text:#101116;
-  --muted:#858895;
-  --line:#ececf2;
-  --pink:#ff2e6e;
-  --purple:#8054ff;
-  --blue:#426bff;
-  --green:#00a884;
+ --bg:#f6f7fb;--card:#fff;--text:#111218;--muted:#898c98;
+ --line:#e9eaf0;--pink:#ff2d72;--purple:#8054ff;--blue:#4169ff;
+ --green:#00a884;--wa:#efeae2;
 }
-
-html,body{
-  margin:0;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-}
-
-button,input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.app{
-  max-width:520px;
-  margin:auto;
-  min-height:100vh;
-  background:var(--bg);
-  padding-bottom:78px;
-}
-
-/* HEADER */
-
-.top{
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 17px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(18px);
-  position:sticky;
-  top:0;
-  z-index:50;
-  border-bottom:1px solid #eee;
-}
-
-.logo{
-  font-size:27px;
-  font-weight:1000;
-  letter-spacing:-1.5px;
-}
-
-.logo span{
-  color:var(--pink);
-}
-
-.streak{
-  background:#111;
-  color:#fff;
-  border-radius:20px;
-  padding:8px 11px;
-  font-size:12px;
-  font-weight:800;
-}
-
-/* SCREENS */
-
-.screen{
-  display:none;
-  padding:15px;
-}
-
-.screen.active{
-  display:block;
-}
-
-.kicker{
-  font-size:11px;
-  font-weight:950;
-  color:var(--pink);
-  letter-spacing:1px;
-}
-
-.title{
-  font-size:35px;
-  font-weight:1000;
-  line-height:1;
-  letter-spacing:-1.5px;
-  margin:6px 0;
-}
-
-.muted{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.card{
-  background:#fff;
-  border-radius:25px;
-  padding:19px;
-  margin-top:14px;
-  box-shadow:0 10px 35px rgba(20,30,70,.05);
-}
+html,body{margin:0;min-height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
+button,input{font:inherit}button{cursor:pointer}
+.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:calc(76px + env(safe-area-inset-bottom));background:var(--bg)}
+.top{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;background:#fffc;backdrop-filter:blur(18px);position:sticky;top:0;z-index:50;border-bottom:1px solid #eee}
+.logo{font-size:28px;font-weight:1000;letter-spacing:-1.5px}.logo i{font-style:normal;color:var(--pink)}
+.streak{background:#111;color:#fff;padding:8px 11px;border-radius:20px;font-size:12px;font-weight:900}
+.screen{display:none;padding:15px}.screen.active{display:block}
+.kicker{font-size:11px;font-weight:950;letter-spacing:1px;color:var(--pink)}
+.title{font-size:35px;font-weight:1000;letter-spacing:-1.5px;line-height:1;margin:6px 0}
+.muted{font-size:12px;color:var(--muted)}
+.card{background:white;border-radius:25px;padding:19px;margin-top:14px;box-shadow:0 10px 35px #15204a0d}
+.primary{width:100%;border:0;border-radius:15px;padding:15px;margin-top:13px;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;font-weight:950}
+.primary:disabled{opacity:.35}
+.secondary{width:100%;border:0;border-radius:15px;padding:14px;margin-top:10px;background:#111;color:#fff;font-weight:900}
 
 /* STORIES */
-
-.stories{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  margin-bottom:18px;
-  scrollbar-width:none;
-}
-
-.stories::-webkit-scrollbar{
-  display:none;
-}
-
-.story{
-  text-align:center;
-  font-size:10px;
-  min-width:59px;
-  border:0;
-  background:none;
-}
-
-.ring{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  padding:3px;
-  background:linear-gradient(
-    135deg,
-    #ffd400,
-    #ff385c,
-    #ff2e93,
-    #754cff,
-    #2684ff
-  );
-  margin:auto auto 5px;
-}
-
-.face{
-  height:100%;
-  border-radius:50%;
-  border:3px solid white;
-  background:#eee;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  font-size:18px;
-}
+.stories{display:flex;gap:12px;overflow-x:auto;margin-bottom:18px;scrollbar-width:none}.stories::-webkit-scrollbar{display:none}
+.story{border:0;background:none;text-align:center;min-width:59px;font-size:10px}
+.ring{width:59px;height:59px;padding:3px;border-radius:50%;margin:auto auto 5px;background:linear-gradient(135deg,#ffd633,#ff385c,#ff2e93,#754cff,#2684ff)}
+.face{height:100%;border-radius:50%;border:3px solid white;background:#eee;display:grid;place-items:center;font-size:18px;font-weight:950}
 
 /* TODAY */
-
-.todayCard{
-  position:relative;
-  overflow:hidden;
-}
-
-.todayCard:before{
-  content:"TODAY";
-  position:absolute;
-  right:-20px;
-  top:30px;
-  font-size:75px;
-  font-weight:1000;
-  color:#10111608;
-  transform:rotate(-8deg);
-}
-
-.question{
-  position:relative;
-  font-size:28px;
-  font-weight:1000;
-  line-height:1.08;
-  letter-spacing:-.8px;
-  margin:15px 0;
-}
-
-.people{
-  position:relative;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:15px;
-}
-
-.person{
-  position:relative;
-  border:1px solid #ececf2;
-  background:#fafafd;
-  border-radius:16px;
-  padding:11px 3px;
-  text-align:center;
-}
-
-.person.sel{
-  border:2px solid var(--pink);
-  background:#fff2f6;
-}
-
-.person.sel:after{
-  content:"✓";
-  position:absolute;
-  right:5px;
-  top:5px;
-  width:18px;
-  height:18px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:var(--pink);
-  color:white;
-  font-size:9px;
-}
-
-.pface{
-  width:43px;
-  height:43px;
-  margin:auto auto 6px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#426bff,#9354ff);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-}
-
-.person:nth-child(even) .pface{
-  background:linear-gradient(135deg,#ff2e6e,#ff874b);
-}
-
-.person b{
-  font-size:11px;
-}
-
-.person small{
-  display:block;
-  color:#999;
-  font-size:8px;
-}
-
-.primary{
-  width:100%;
-  border:0;
-  border-radius:15px;
-  background:linear-gradient(100deg,#ff2e6e,#8054ff);
-  color:#fff;
-  padding:15px;
-  font-weight:950;
-  margin-top:13px;
-}
-
-.primary:disabled{
-  opacity:.35;
-}
-
-.secondary{
-  width:100%;
-  border:0;
-  border-radius:15px;
-  background:#111;
-  color:white;
-  padding:14px;
-  font-weight:900;
-  margin-top:10px;
-}
-
-.reveal{
-  display:flex;
-  justify-content:space-between;
-  margin-top:15px;
-  padding-top:13px;
-  border-top:1px solid #eee;
-}
-
-.reveal b{
-  font-size:19px;
-}
+.question{font-size:28px;font-weight:1000;line-height:1.08;letter-spacing:-.8px;margin:15px 0}
+.people{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.person{position:relative;border:1px solid var(--line);background:#fafafd;border-radius:17px;padding:11px 3px;text-align:center}
+.person.sel{border:2px solid var(--pink);background:#fff1f6}
+.person.sel:after{content:"✓";position:absolute;right:5px;top:5px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--pink);color:#fff;font-size:9px}
+.pface{width:43px;height:43px;border-radius:50%;margin:auto auto 6px;display:grid;place-items:center;color:#fff;font-weight:950;background:linear-gradient(135deg,#4169ff,#9254ff)}
+.person:nth-child(even) .pface{background:linear-gradient(135deg,#ff2d72,#ff874b)}
+.person b{font-size:11px}.person small{display:block;color:#999;font-size:8px}
+.reveal{display:flex;justify-content:space-between;margin-top:15px;padding-top:13px;border-top:1px solid #eee}.reveal b{font-size:19px}
 
 /* NOW */
-
-.nowHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.add{
-  border:0;
-  border-radius:20px;
-  background:#111;
-  color:#fff;
-  padding:10px 13px;
-  font-weight:850;
-}
-
-.feed{
-  height:calc(100vh - 170px);
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  margin:10px -15px -78px;
-  scrollbar-width:none;
-}
-
-.feed::-webkit-scrollbar{
-  display:none;
-}
-
-.post{
-  height:calc(100vh - 170px);
-  min-height:500px;
-  padding:0 9px 8px;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-}
-
-.media{
-  height:100%;
-  border-radius:26px;
-  position:relative;
-  overflow:hidden;
-  color:white;
-  background:linear-gradient(145deg,#ff466e,#754cff);
-}
-
-.post:nth-child(2) .media{
-  background:linear-gradient(145deg,#26bde8,#4356e8);
-}
-
-.post:nth-child(3) .media{
-  background:linear-gradient(145deg,#2ac995,#2b70dc);
-}
-
-.big{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  font-size:180px;
-  font-weight:1000;
-  color:#ffffff22;
-}
-
-.author{
-  position:absolute;
-  top:15px;
-  left:15px;
-  font-weight:900;
-  z-index:3;
-}
-
-.author small{
-  display:block;
-  font-weight:500;
-  margin-top:2px;
-}
-
-.music{
-  position:absolute;
-  left:15px;
-  bottom:118px;
-  background:#0008;
-  padding:7px 10px;
-  border-radius:20px;
-  font-size:10px;
-  z-index:4;
-}
-
-.caption{
-  position:absolute;
-  left:15px;
-  bottom:72px;
-  font-weight:800;
-  z-index:4;
-}
-
-.actions{
-  position:absolute;
-  right:13px;
-  bottom:88px;
-  display:grid;
-  gap:10px;
-  z-index:5;
-}
-
-.act{
-  width:48px;
-  height:48px;
-  border:0;
-  border-radius:50%;
-  background:#0007;
-  color:white;
-  font-size:19px;
-}
-
-.act.liked{
-  background:var(--pink);
-}
-
-.commentbar{
-  position:absolute;
-  bottom:14px;
-  left:15px;
-  right:15px;
-  display:flex;
-  gap:7px;
-  z-index:5;
-}
-
-.commentbar input{
-  flex:1;
-  min-width:0;
-  border:1px solid #ffffff55;
-  background:#0006;
-  color:#fff;
-  border-radius:22px;
-  padding:11px;
-}
-
-.commentbar input::placeholder{
-  color:#ddd;
-}
-
-.commentbar button{
-  border:0;
-  border-radius:50%;
-  width:40px;
-  background:white;
-  color:#111;
-  font-weight:900;
-}
+.nowHead{display:flex;align-items:center;justify-content:space-between;position:sticky;top:64px;z-index:30;background:var(--bg);padding:3px 0 9px}
+.addNow{border:0;border-radius:22px;background:#111;color:#fff;padding:11px 14px;font-weight:900;box-shadow:0 5px 18px #0002}
+.feed{height:calc(100dvh - 190px);overflow-y:auto;scroll-snap-type:y mandatory;margin:0 -15px -78px;scrollbar-width:none}.feed::-webkit-scrollbar{display:none}
+.post{height:calc(100dvh - 190px);min-height:500px;padding:0 9px 8px;scroll-snap-align:start;scroll-snap-stop:always}
+.media{height:100%;position:relative;overflow:hidden;border-radius:26px;color:#fff;background:linear-gradient(145deg,#ff416d,#754cff)}
+.post:nth-child(2) .media{background:linear-gradient(145deg,#21bfe9,#4054e9)}
+.post:nth-child(3) .media{background:linear-gradient(145deg,#24ca94,#276cdd)}
+.big{position:absolute;inset:0;display:grid;place-items:center;font-size:180px;font-weight:1000;color:#ffffff20}
+.author{position:absolute;top:16px;left:16px;font-weight:950;z-index:4}.author small{display:block;font-weight:500;margin-top:2px}
+.music{position:absolute;left:15px;bottom:120px;background:#0008;padding:7px 11px;border-radius:20px;font-size:10px;z-index:5}
+.caption{position:absolute;left:15px;bottom:76px;font-weight:850;z-index:5}
+.actions{position:absolute;right:13px;bottom:91px;display:grid;gap:10px;z-index:5}
+.act{width:48px;height:48px;border:0;border-radius:50%;background:#0007;color:white;font-size:19px}.act.liked{background:var(--pink)}
+.commentbar{position:absolute;bottom:14px;left:15px;right:15px;display:flex;gap:7px;z-index:5}
+.commentbar input{min-width:0;flex:1;border:1px solid #ffffff55;background:#0007;color:#fff;border-radius:22px;padding:11px}.commentbar input::placeholder{color:#ddd}
+.commentbar button{width:41px;border:0;border-radius:50%;background:#fff;font-weight:950}
 
 /* RANK */
+.winner{text-align:center}.winnerFace{width:80px;height:80px;border-radius:50%;margin:8px auto;background:linear-gradient(135deg,#ffd633,#ff5d5d);display:grid;place-items:center;color:#fff;font-size:30px;font-weight:1000}
+.rankrow{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #eee}.rankrow:last-child{border:0}.score{margin-left:auto;font-size:11px;color:#888}
 
-.winner{
-  text-align:center;
-  padding:10px 0 20px;
-}
+/* ROOM HOME */
+.roomHome{margin:-15px;background:#fff;min-height:calc(100dvh - 140px)}
+.roomHero{padding:18px;background:linear-gradient(120deg,#11131b,#24203b);color:#fff}
+.roomHero h2{margin:4px 0}.roomHero p{margin:0;color:#c7c7cf;font-size:11px}
+.chatRow{display:flex;gap:12px;align-items:center;padding:13px 15px;border-bottom:1px solid #eee;background:#fff}
+.chatAvatar{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ff2d72,#8054ff);color:#fff;font-weight:950;flex:none}
+.chatAvatar.groupAvatar{background:#00a884}
+.chatInfo{flex:1;min-width:0}.chatInfo b{display:block;font-size:14px}.chatInfo span{display:block;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chatTime{font-size:9px;color:#999}
+.roomTabs{display:grid;grid-template-columns:1fr 1fr;background:#fff;border-bottom:1px solid #eee}
+.roomTabs button{border:0;background:#fff;padding:13px;font-weight:900;color:#999}.roomTabs button.active{color:var(--pink);border-bottom:3px solid var(--pink)}
 
-.trophy{
-  font-size:55px;
-}
+/* CHAT */
+.chatPage{display:none;position:fixed;inset:0;z-index:80;background:var(--wa);max-width:520px;margin:auto}
+.chatPage.show{display:flex;flex-direction:column}
+.chatTop{height:65px;padding-top:env(safe-area-inset-top);background:#fff;display:flex;align-items:center;gap:9px;padding-left:10px;padding-right:10px;flex:none}
+.back{border:0;background:none;font-size:24px}.chatTop .chatAvatar{width:40px;height:40px}.chatTopInfo{flex:1}.chatTopInfo b{display:block}.chatTopInfo small{color:#888}
+.cameraBtn,.dotsBtn{border:0;background:none;font-size:20px}
+.chatMessages{flex:1;overflow-y:auto;padding:12px}
+.bubble{max-width:80%;width:max-content;background:#fff;padding:8px 10px 16px;border-radius:7px 12px 12px;margin:7px 0;position:relative;font-size:12px;box-shadow:0 1px 2px #0001}
+.bubble.mine{margin-left:auto;background:#d9fdd3}.sender{display:block;color:#087c68;font-size:9px;font-weight:900;margin-bottom:3px}
+.btime{position:absolute;right:6px;bottom:3px;font-size:7px;color:#888}.ticks{color:#248cff}
+.privatePhoto{background:#111;color:white;padding:15px;border-radius:12px;margin:4px 0;font-weight:850}
+.chatComposer{display:flex;gap:6px;padding:7px 7px calc(7px + env(safe-area-inset-bottom));background:#efeae2}
+.chatComposer input{min-width:0;flex:1;border:0;border-radius:23px;padding:12px 14px;background:#fff}
+.chatComposer button{width:44px;border:0;border-radius:50%;background:#00a884;color:#fff}
 
-.winnerFace{
-  width:82px;
-  height:82px;
-  margin:5px auto 10px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#ffd633,#ff6b52);
-  display:grid;
-  place-items:center;
-  color:white;
-  font-size:30px;
-  font-weight:1000;
-}
-
-.rankrow{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:13px 0;
-  border-bottom:1px solid #eee;
-}
-
-.rankrow:last-child{
-  border:0;
-}
-
-.rankrow .score{
-  margin-left:auto;
-  color:#888;
-  font-size:11px;
-}
-
-/* ROOM */
-
-.room{
-  background:#efeae2;
-  margin:-15px;
-  min-height:calc(100vh - 142px);
-  padding-bottom:80px;
-}
-
-.roomtop{
-  height:65px;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  padding:8px 12px;
-  gap:10px;
-  position:sticky;
-  top:64px;
-  z-index:10;
-}
-
-.group{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  background:#00a884;
-  color:white;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-}
-
-.roomName{
-  flex:1;
-}
-
-.roomName b{
-  display:block;
-}
-
-.roomDots{
-  border:0;
-  background:none;
-  font-size:20px;
-}
-
-.notice{
-  width:max-content;
-  max-width:90%;
-  margin:10px auto;
-  background:#fff3c4;
-  color:#65570e;
-  padding:7px 10px;
-  border-radius:8px;
-  font-size:9px;
-}
-
-.msgs{
-  padding:8px 12px;
-}
-
-.msg{
-  max-width:80%;
-  background:white;
-  padding:8px 48px 16px 9px;
-  border-radius:7px 12px 12px;
-  margin:7px 0;
-  font-size:12px;
-  position:relative;
-  box-shadow:0 1px 2px #00000012;
-}
-
-.msg.me{
-  margin-left:auto;
-  background:#d9fdd3;
-}
-
-.msg strong{
-  display:block;
-  color:#087c68;
-  font-size:9px;
-  margin-bottom:3px;
-}
-
-.time{
-  position:absolute;
-  right:6px;
-  bottom:4px;
-  font-size:7px;
-  color:#888;
-}
-
-.ticks{
-  color:#2b8eff;
-}
-
-.composer{
-  position:fixed;
-  bottom:68px;
-  left:50%;
-  transform:translateX(-50%);
-  max-width:520px;
-  width:100%;
-  background:#efeae2;
-  padding:7px;
-  display:flex;
-  gap:6px;
-  z-index:40;
-}
-
-.composer input{
-  flex:1;
-  min-width:0;
-  border:0;
-  border-radius:22px;
-  padding:12px 14px;
-  background:white;
-}
-
-.composer button{
-  width:44px;
-  border:0;
-  border-radius:50%;
-  background:#00a884;
-  color:white;
-  font-size:17px;
-}
+/* MEMBERS */
+.membersSheet .memberRow{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid #eee}.membersSheet .memberRow button{margin-left:auto;border:0;border-radius:17px;background:#111;color:#fff;padding:8px 10px;font-size:10px}
 
 /* RECAP */
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:15px;
-}
-
-.stat{
-  background:#fff;
-  border-radius:17px;
-  padding:16px;
-}
-
-.stat b{
-  font-size:23px;
-  display:block;
-}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.stat{background:#fff;border-radius:17px;padding:16px}.stat b{display:block;font-size:23px}
 
 /* NAV */
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);height:calc(69px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(5,1fr);z-index:60}
+.nav button{border:0;background:none;color:#92949e;font-size:9px;font-weight:850}.nav button span{font-size:20px;display:block}.nav button.on{color:var(--pink)}
 
-.nav{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(100%,520px);
-  height:69px;
-  background:rgba(255,255,255,.97);
-  backdrop-filter:blur(15px);
-  border-top:1px solid #eee;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  z-index:60;
-}
+/* OVERLAYS */
+.overlay{display:none;position:fixed;inset:0;background:#000a;z-index:120;align-items:flex-end;justify-content:center}.overlay.show{display:flex}
+.sheet{max-width:520px;width:100%;max-height:88dvh;overflow:auto;background:#fff;border-radius:26px 26px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom))}
+.sheet h2{margin:0 0 4px}.close{float:right;border:0;width:35px;height:35px;border-radius:50%;background:#eee;font-size:18px}
+.field{width:100%;padding:13px;border:1px solid #ddd;border-radius:13px;margin-top:10px;background:#fff}
 
-.nav button{
-  border:0;
-  background:none;
-  color:#92949e;
-  font-size:9px;
-  font-weight:800;
-}
+/* MUSIC */
+.soundSearch{width:100%;padding:13px;border:1px solid #ddd;border-radius:14px;margin:12px 0}
+.soundItem{display:flex;align-items:center;gap:11px;padding:11px;border-bottom:1px solid #eee}.soundIcon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#ff2d72,#8054ff);display:grid;place-items:center;color:#fff}.soundInfo{flex:1}.soundInfo b{display:block;font-size:12px}.soundInfo small{color:#888}.soundItem button{border:0;border-radius:16px;padding:7px 10px;background:#111;color:#fff;font-size:9px}
+.selectedSound{margin-top:10px;padding:10px;border-radius:13px;background:#f3efff;font-size:11px}
 
-.nav button span{
-  font-size:20px;
-  display:block;
-  margin-bottom:2px;
-}
+/* STORY VIEWER */
+.storyViewer{display:none;position:fixed;inset:0;background:#07070a;z-index:150;color:#fff;max-width:520px;margin:auto}.storyViewer.show{display:block}
+.storyBars{position:absolute;top:calc(9px + env(safe-area-inset-top));left:9px;right:9px;display:flex;gap:4px;z-index:5}.storyBar{height:3px;background:#ffffff50;flex:1;border-radius:5px}.storyBar.on{background:#fff}
+.storyClose{position:absolute;right:12px;top:calc(22px + env(safe-area-inset-top));z-index:7;border:0;background:#0006;color:#fff;border-radius:50%;width:38px;height:38px;font-size:19px}
+.storyUser{position:absolute;top:calc(27px + env(safe-area-inset-top));left:15px;z-index:6;font-weight:900}
+.storyContent{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(145deg,#ff2d72,#654cff);font-size:180px;font-weight:1000;color:#ffffff25}
+.storyText{position:absolute;bottom:110px;left:17px;font-size:17px;font-weight:900;z-index:6}
+.storyMusic{position:absolute;bottom:78px;left:17px;background:#0007;border-radius:17px;padding:7px 10px;font-size:10px;z-index:6}
+.storyReply{position:absolute;bottom:calc(15px + env(safe-area-inset-bottom));left:15px;right:15px;display:flex;gap:8px;z-index:7}.storyReply input{flex:1;min-width:0;border:1px solid #fff8;background:#0005;color:#fff;border-radius:25px;padding:13px}.storyReply button{width:45px;border:0;border-radius:50%;background:#fff}
 
-.nav button.on{
-  color:var(--pink);
-}
-
-/* SHEET */
-
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0009;
-  z-index:100;
-  align-items:flex-end;
-  justify-content:center;
-}
-
-.overlay.show{
-  display:flex;
-}
-
-.sheet{
-  max-width:520px;
-  width:100%;
-  background:#fff;
-  border-radius:25px 25px 0 0;
-  padding:20px;
-}
-
-.sheet h2{
-  margin-top:0;
-}
-
-.sheet input,
-.sheet select{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:13px;
-  margin-top:10px;
-  background:white;
-}
-
-.close{
-  float:right;
-  border:0;
-  background:#eee;
-  border-radius:50%;
-  width:34px;
-  height:34px;
-  font-size:18px;
-}
+/* CAMERA */
+.cameraPreview{height:260px;border-radius:20px;background:linear-gradient(145deg,#222,#4c315c);display:grid;place-items:center;color:#fff;text-align:center;margin-top:12px;font-size:50px}.cameraPreview small{display:block;font-size:11px;color:#ddd;margin-top:8px}
 </style>
 </head>
 
 <body>
-
 <div class="app">
 
-<div class="top">
-  <div class="logo">RANK<span>.</span></div>
-  <div class="streak">🔥 12</div>
-</div>
+<header class="top">
+ <div class="logo">RANK<i>.</i></div>
+ <div class="streak">🔥 12</div>
+</header>
 
 <!-- TODAY -->
-
 <section id="today" class="screen active">
+ <div class="stories">
+  <button class="story" onclick="openAddNow()"><div class="ring"><div class="face">＋</div></div>Ton NOW</button>
+  <button class="story" onclick="openStory(0)"><div class="ring"><div class="face">L</div></div>Léna</button>
+  <button class="story" onclick="openStory(1)"><div class="ring"><div class="face">N</div></div>Noé</button>
+  <button class="story" onclick="openStory(2)"><div class="ring"><div class="face">E</div></div>Emma</button>
+  <button class="story" onclick="openStory(3)"><div class="ring"><div class="face">I</div></div>Inès</button>
+ </div>
 
-<div class="stories">
+ <div class="kicker">TODAY · #27</div>
+ <div class="title">À toi de voter.</div>
+ <div class="muted">Une question aujourd'hui. Résultat ce soir.</div>
 
-<button class="story" onclick="openAdd()">
-<div class="ring"><div class="face">＋</div></div>
-Ton NOW
-</button>
+ <div class="card">
+  <div class="kicker">QUESTION DU JOUR</div>
+  <div class="question">Qui a le plus d'humour ?</div>
+  <div class="muted">Choisis jusqu'à 3 personnes · vote anonyme</div>
+  <div id="people" class="people"></div>
+  <button id="voteBtn" class="primary" disabled>VOTER</button>
 
-<button class="story" onclick="go('now')">
-<div class="ring"><div class="face">L</div></div>
-Léna
-</button>
+  <div class="reveal">
+   <div><span class="muted">REVEAL</span><br><b>19:30</b></div>
+   <div style="text-align:right"><span class="muted">RÉSULTATS DANS</span><br><b id="timer">--:--:--</b></div>
+  </div>
 
-<button class="story" onclick="go('now')">
-<div class="ring"><div class="face">N</div></div>
-Noé
-</button>
-
-<button class="story" onclick="go('now')">
-<div class="ring"><div class="face">E</div></div>
-Emma
-</button>
-
-<button class="story" onclick="go('now')">
-<div class="ring"><div class="face">I</div></div>
-Inès
-</button>
-
-</div>
-
-<div class="kicker">TODAY · #27</div>
-<div class="title">À toi de voter.</div>
-<div class="muted">
-Une question aujourd'hui. Résultat ce soir.
-</div>
-
-<div class="card todayCard">
-
-<div class="kicker">
-● QUESTION DU JOUR
-</div>
-
-<div class="question">
-Qui a le plus d'humour ?
-</div>
-
-<div class="muted">
-Choisis jusqu'à 3 personnes · vote anonyme
-</div>
-
-<div id="people" class="people"></div>
-
-<button id="vote" class="primary" disabled>
-VOTER
-</button>
-
-<div class="reveal">
-
-<div>
-<span class="muted">REVEAL</span><br>
-<b>19:30</b>
-</div>
-
-<div style="text-align:right">
-<span class="muted">RÉSULTATS DANS</span><br>
-<b id="timer">--:--:--</b>
-</div>
-
-</div>
-
-<button class="secondary" onclick="go('rank')">
-Voir le reveal · démo
-</button>
-
-</div>
+  <button class="secondary" onclick="go('rank')">Voir le reveal · démo</button>
+ </div>
 </section>
-
 
 <!-- NOW -->
-
 <section id="now" class="screen">
+ <div class="nowHead">
+  <div><div class="kicker">NOW · 24H</div><div class="title">NOW.</div></div>
+  <button class="addNow" onclick="openAddNow()">＋ Ajouter</button>
+ </div>
 
-<div class="nowHead">
+ <div id="feed" class="feed">
+  <div class="post">
+   <div class="media">
+    <div class="big">L</div>
+    <div class="author">@lenaa<small>12 min · expire dans 23 h 48</small></div>
+    <div class="music">♫ Son démo 01 · RANK</div>
+    <div class="caption">Journée terminée 😭</div>
+    <div class="actions"><button class="act like">♡</button><button class="act">💬</button><button class="act">↗</button></div>
+    <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+   </div>
+  </div>
 
-<div>
-<div class="kicker">NOW · 24H</div>
-<div class="title">NOW.</div>
-</div>
+  <div class="post">
+   <div class="media">
+    <div class="big">N</div>
+    <div class="author">@noe13<small>36 min · expire dans 23 h 24</small></div>
+    <div class="music">♫ Son original · @noe13</div>
+    <div class="caption">Je ne donnerai aucune explication 💀</div>
+    <div class="actions"><button class="act like">♡</button><button class="act">💬</button><button class="act">↗</button></div>
+    <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+   </div>
+  </div>
 
-<button class="add" onclick="openAdd()">
-＋ Ajouter
-</button>
-
-</div>
-
-
-<div id="feed" class="feed">
-
-<!-- LENA -->
-
-<div class="post">
-
-<div class="media">
-
-<div class="big">L</div>
-
-<div class="author">
-@lenaa
-<small>
-12 min · expire dans 23 h 48
-</small>
-</div>
-
-<div class="music">
-♫ Midnight City · M83
-</div>
-
-<div class="caption">
-Journée terminée 😭
-</div>
-
-<div class="actions">
-
-<button class="act like">
-♡
-</button>
-
-<button class="act" onclick="alert('Commentaires du groupe 💬')">
-💬
-</button>
-
-<button class="act" onclick="alert('Partagé dans le groupe ✓')">
-↗
-</button>
-
-</div>
-
-<div class="commentbar">
-
-<input placeholder="Ajouter un commentaire...">
-
-<button onclick="commentNow(this)">
-↑
-</button>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- NOE -->
-
-<div class="post">
-
-<div class="media">
-
-<div class="big">N</div>
-
-<div class="author">
-@noe13
-<small>
-36 min · expire dans 23 h 24
-</small>
-</div>
-
-<div class="music">
-♫ Son original · @noe13
-</div>
-
-<div class="caption">
-Je ne donnerai aucune explication 💀
-</div>
-
-<div class="actions">
-
-<button class="act like">
-♡
-</button>
-
-<button class="act">
-💬
-</button>
-
-<button class="act">
-↗
-</button>
-
-</div>
-
-<div class="commentbar">
-
-<input placeholder="Ajouter un commentaire...">
-
-<button onclick="commentNow(this)">
-↑
-</button>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- EMMA -->
-
-<div class="post">
-
-<div class="media">
-
-<div class="big">E</div>
-
-<div class="author">
-@emma
-<small>
-1 h · expire dans 23 h
-</small>
-</div>
-
-<div class="music">
-♫ Golden Hour · JVKE
-</div>
-
-<div class="caption">
-Vous validez ou pas ? 😂
-</div>
-
-<div class="actions">
-
-<button class="act like">
-♡
-</button>
-
-<button class="act">
-💬
-</button>
-
-<button class="act">
-↗
-</button>
-
-</div>
-
-<div class="commentbar">
-
-<input placeholder="Ajouter un commentaire...">
-
-<button onclick="commentNow(this)">
-↑
-</button>
-
-</div>
-
-</div>
-</div>
-
-</div>
+  <div class="post">
+   <div class="media">
+    <div class="big">E</div>
+    <div class="author">@emma<small>1 h · expire dans 23 h</small></div>
+    <div class="music">♫ Summer · Son démo</div>
+    <div class="caption">Vous validez ou pas ? 😂</div>
+    <div class="actions"><button class="act like">♡</button><button class="act">💬</button><button class="act">↗</button></div>
+    <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+   </div>
+  </div>
+ </div>
 </section>
-
 
 <!-- RANK -->
-
 <section id="rank" class="screen">
+ <div class="kicker">THE RANK IS OUT</div>
+ <div class="title">Le classement.</div>
+ <div class="muted">Qui a le plus d'humour ?</div>
 
-<div class="kicker">
-THE RANK IS OUT
-</div>
+ <div class="card">
+  <div class="winner"><div style="font-size:55px">🏆</div><div class="winnerFace">L</div><h2>Léna est #1</h2><div class="muted">132 votes</div></div>
+  <div id="ranking"></div>
+ </div>
 
-<div class="title">
-Le classement.
-</div>
-
-<div class="muted">
-Qui a le plus d'humour ?
-</div>
-
-<div class="card">
-
-<div class="winner">
-
-<div class="trophy">
-🏆
-</div>
-
-<div class="winnerFace">
-L
-</div>
-
-<h2>
-Léna est #1
-</h2>
-
-<div class="muted">
-132 votes
-</div>
-
-</div>
-
-<div id="ranking"></div>
-
-</div>
-
-<button class="primary" onclick="go('room')">
-Parler du résultat dans ROOM
-</button>
-
+ <button class="primary" onclick="openChat('group')">Parler du résultat dans ROOM</button>
 </section>
-
 
 <!-- ROOM -->
-
 <section id="room" class="screen">
+ <div class="roomHome">
+  <div class="roomHero">
+   <div class="kicker">ROOM</div>
+   <h2>Ton groupe. Tes amis.</h2>
+   <p>Discute dans le groupe ou directement avec un membre.</p>
+  </div>
 
-<div class="room">
+  <div class="roomTabs">
+   <button id="chatTab" class="active" onclick="roomTab('chats')">DISCUSSIONS</button>
+   <button id="memberTab" onclick="roomTab('members')">MEMBRES</button>
+  </div>
 
-<div class="roomtop">
+  <div id="roomChats">
+   <div class="chatRow" onclick="openChat('group')">
+    <div class="chatAvatar groupAvatar">R</div>
+    <div class="chatInfo"><b>Marseille 🔥</b><span>Noé : Je demande un recompte officiel 😂</span></div>
+    <div class="chatTime">19:34</div>
+   </div>
 
-<div class="group">
-R
-</div>
+   <div class="chatRow" onclick="openChat('Léna')">
+    <div class="chatAvatar">L</div>
+    <div class="chatInfo"><b>Léna</b><span>Tu as vu le classement ? 😂</span></div>
+    <div class="chatTime">18:52</div>
+   </div>
 
-<div class="roomName">
-<b>Marseille 🔥</b>
-<div class="muted">
-8 membres · groupe privé
-</div>
-</div>
+   <div class="chatRow" onclick="openChat('Noé')">
+    <div class="chatAvatar">N</div>
+    <div class="chatInfo"><b>Noé</b><span>Demain je gagne</span></div>
+    <div class="chatTime">17:41</div>
+   </div>
+  </div>
 
-<button class="roomDots" onclick="alert('Membres · Notifications · Quitter le groupe')">
-•••
-</button>
-
-</div>
-
-<div class="notice">
-🏆 Léna est #1 aujourd'hui
-</div>
-
-<div id="msgs" class="msgs"></div>
-
-</div>
-
-<div class="composer">
-
-<input
-id="message"
-placeholder="Message"
-maxlength="250"
->
-
-<button onclick="sendMessage()">
-↑
-</button>
-
-</div>
-
+  <div id="roomMembers" style="display:none"></div>
+ </div>
 </section>
-
 
 <!-- RECAP -->
-
 <section id="recap" class="screen">
+ <div class="kicker">WEEKLY RECAP</div>
+ <div class="title">Ta semaine.</div>
+ <div class="muted">Les moments RANK de ton groupe.</div>
 
-<div class="kicker">
-WEEKLY RECAP
-</div>
+ <div class="stats">
+  <div class="stat"><b>47</b><span class="muted">votes reçus</span></div>
+  <div class="stat"><b>2</b><span class="muted">podiums</span></div>
+  <div class="stat"><b>5/7</b><span class="muted">jours joués</span></div>
+  <div class="stat"><b>12</b><span class="muted">streak</span></div>
+ </div>
 
-<div class="title">
-Ta semaine.
-</div>
-
-<div class="muted">
-Les moments RANK de ton groupe.
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<b>47</b>
-<span class="muted">
-votes reçus
-</span>
-</div>
-
-<div class="stat">
-<b>2</b>
-<span class="muted">
-podiums
-</span>
-</div>
-
-<div class="stat">
-<b>5/7</b>
-<span class="muted">
-jours joués
-</span>
-</div>
-
-<div class="stat">
-<b>12</b>
-<span class="muted">
-jours de streak
-</span>
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>
-Create Question
-</h2>
-
-<p class="muted">
-Une proposition par semaine.
-</p>
-
-<input
-id="questionInput"
-style="
-width:100%;
-padding:13px;
-border:1px solid #ddd;
-border-radius:13px;
-"
-placeholder="Ex : Qui serait capable de devenir célèbre ?"
->
-
-<button class="primary" onclick="saveQuestion()">
-Proposer la question
-</button>
-
-</div>
-
+ <div class="card">
+  <h2>Créer une question</h2>
+  <div class="muted">Une proposition par semaine.</div>
+  <input id="questionInput" class="field" placeholder="Ex : Qui serait capable de devenir célèbre ?">
+  <button class="primary" onclick="saveQuestion()">PROPOSER</button>
+ </div>
 </section>
 
-
-<!-- NAVIGATION -->
-
 <nav class="nav">
-
-<button class="on" data-to="today">
-<span>⌂</span>
-TODAY
-</button>
-
-<button data-to="now">
-<span>▶</span>
-NOW
-</button>
-
-<button data-to="rank">
-<span>▥</span>
-RANK
-</button>
-
-<button data-to="room">
-<span>◌</span>
-ROOM
-</button>
-
-<button data-to="recap">
-<span>↻</span>
-RECAP
-</button>
-
+ <button class="on" data-to="today"><span>⌂</span>TODAY</button>
+ <button data-to="now"><span>▶</span>NOW</button>
+ <button data-to="rank"><span>▥</span>RANK</button>
+ <button data-to="room"><span>◌</span>ROOM</button>
+ <button data-to="recap"><span>↻</span>RECAP</button>
 </nav>
-
 </div>
 
+<!-- ADD NOW -->
+<div id="addNowSheet" class="overlay">
+ <div class="sheet">
+  <button class="close" onclick="closeOverlay('addNowSheet')">×</button>
+  <h2>Nouveau NOW</h2>
+  <div class="muted">Photo ou vidéo · 1 minute maximum · visible 24 h.</div>
 
-<!-- AJOUT NOW -->
+  <input id="nowFile" class="field" type="file" accept="image/*,video/*">
+  <input id="captionInput" class="field" placeholder="Ajouter une légende...">
 
-<div id="addSheet" class="overlay">
+  <button class="secondary" onclick="openMusic()">🎵 <span id="musicButtonText">Ajouter un son</span></button>
+  <div id="selectedSound" class="selectedSound" style="display:none"></div>
 
-<div class="sheet">
-
-<button class="close" onclick="closeAdd()">
-×
-</button>
-
-<h2>
-Nouveau NOW
-</h2>
-
-<p class="muted">
-Photo ou vidéo · disparaît automatiquement après 24 heures.
-</p>
-
-<input
-id="nowFile"
-type="file"
-accept="image/*,video/*"
->
-
-<input
-id="captionInput"
-placeholder="Ajouter une légende..."
->
-
-<select id="soundInput">
-
-<option>
-♫ Ajouter un son
-</option>
-
-<option>
-Midnight City · M83 (démo)
-</option>
-
-<option>
-Golden Hour · JVKE (démo)
-</option>
-
-<option>
-Son original
-</option>
-
-</select>
-
-<button class="primary" onclick="publishNow()">
-PUBLIER · 24H
-</button>
-
-</div>
+  <button class="primary" onclick="publishNow()">PUBLIER LE NOW</button>
+ </div>
 </div>
 
+<!-- MUSIC -->
+<div id="musicSheet" class="overlay">
+ <div class="sheet">
+  <button class="close" onclick="closeOverlay('musicSheet')">×</button>
+  <h2>Ajouter un son 🎵</h2>
+  <div class="muted">Bibliothèque de démonstration du prototype.</div>
+  <input id="soundSearch" class="soundSearch" placeholder="Rechercher un son..." oninput="drawSounds()">
+  <div id="sounds"></div>
+ </div>
+</div>
+
+<!-- STORY VIEWER -->
+<div id="storyViewer" class="storyViewer">
+ <div id="storyBars" class="storyBars"></div>
+ <button class="storyClose" onclick="closeStory()">×</button>
+ <div id="storyUser" class="storyUser"></div>
+ <div id="storyContent" class="storyContent"></div>
+ <div id="storyText" class="storyText"></div>
+ <div id="storyMusic" class="storyMusic"></div>
+ <div class="storyReply">
+  <input id="storyReplyInput" placeholder="Répondre à ce NOW...">
+  <button onclick="replyStory()">↑</button>
+ </div>
+</div>
+
+<!-- CHAT -->
+<div id="chatPage" class="chatPage">
+ <div class="chatTop">
+  <button class="back" onclick="closeChat()">‹</button>
+  <div id="chatAvatar" class="chatAvatar">R</div>
+  <div class="chatTopInfo"><b id="chatName">Marseille 🔥</b><small id="chatStatus">8 membres</small></div>
+  <button class="cameraBtn" onclick="openCamera()">📷</button>
+  <button class="dotsBtn" onclick="chatMenu()">⋮</button>
+ </div>
+
+ <div id="chatMessages" class="chatMessages"></div>
+
+ <div class="chatComposer">
+  <button style="background:#fff;color:#555" onclick="openCamera()">＋</button>
+  <input id="chatInput" placeholder="Message">
+  <button onclick="sendChat()">↑</button>
+ </div>
+</div>
+
+<!-- MEMBERS -->
+<div id="membersSheet" class="overlay">
+ <div class="sheet membersSheet">
+  <button class="close" onclick="closeOverlay('membersSheet')">×</button>
+  <h2>Membres du groupe</h2>
+  <div id="membersList"></div>
+ </div>
+</div>
+
+<!-- CAMERA -->
+<div id="cameraSheet" class="overlay">
+ <div class="sheet">
+  <button class="close" onclick="closeOverlay('cameraSheet')">×</button>
+  <h2>Photo RANK 📸</h2>
+  <div class="muted">Envoie une photo/vidéo directement dans cette conversation.</div>
+  <div class="cameraPreview">📸<small>Caméra / galerie</small></div>
+  <input id="privateMedia" class="field" type="file" accept="image/*,video/*" capture="environment">
+  <label style="display:block;margin-top:12px;font-size:12px"><input id="ephemeral" type="checkbox" checked> Disparaît après ouverture</label>
+  <button class="primary" onclick="sendPrivateMedia()">ENVOYER</button>
+ </div>
+</div>
 
 <script>
+const users=["Léna","Noé","Emma","Lucas","Inès","Mathis"];
+const selected=new Set();
+let currentChat="group";
+let currentStory=0;
+let selectedSound=null;
 
-/* MEMBRES DEMO */
-
-const users = [
-"Léna",
-"Noé",
-"Emma",
-"Lucas",
-"Inès",
-"Mathis"
+const storyData=[
+ {name:"Léna",user:"@lenaa",letter:"L",text:"Journée terminée 😭",sound:"♫ Son démo 01 · RANK",bg:"linear-gradient(145deg,#ff416d,#754cff)"},
+ {name:"Noé",user:"@noe13",letter:"N",text:"Je ne donnerai aucune explication 💀",sound:"♫ Son original · @noe13",bg:"linear-gradient(145deg,#21bfe9,#4054e9)"},
+ {name:"Emma",user:"@emma",letter:"E",text:"Vous validez ou pas ? 😂",sound:"♫ Summer · Son démo",bg:"linear-gradient(145deg,#24ca94,#276cdd)"},
+ {name:"Inès",user:"@iness",letter:"I",text:"Ce soir 🔥",sound:"♫ Night · Son démo",bg:"linear-gradient(145deg,#ff914d,#ff2d72)"}
 ];
 
-const selected = new Set();
+const demoSounds=[
+ {title:"Neon Night",artist:"RANK Sounds",time:"0:28"},
+ {title:"Summer Vibe",artist:"RANK Sounds",time:"0:34"},
+ {title:"Late Night",artist:"RANK Sounds",time:"0:22"},
+ {title:"Good Mood",artist:"RANK Sounds",time:"0:31"},
+ {title:"Funny Moment",artist:"RANK Sounds",time:"0:18"},
+ {title:"Son original",artist:"Ton audio",time:"Original"}
+];
 
+const chatStore={
+ group:[
+  {user:"@lenaa",text:"Merciii vous êtes des fous 😭"},
+  {user:"@noe13",text:"Je demande un recompte officiel 😂"},
+  {user:"@emma",text:"Franchement c'était mérité"},
+  {user:"@toi",text:"Demain ça va être serré 😂",mine:true}
+ ],
+ "Léna":[
+  {user:"@lenaa",text:"Tu as vu le classement ? 😂"},
+  {user:"@toi",text:"Oui 😭 bien joué",mine:true}
+ ],
+ "Noé":[
+  {user:"@noe13",text:"Demain je gagne 😂"},
+  {user:"@toi",text:"On verra ça",mine:true}
+ ],
+ "Emma":[],
+ "Lucas":[],
+ "Inès":[],
+ "Mathis":[]
+};
+
+/* NAV */
+function go(id){
+ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.to===id));
+ window.scrollTo(0,0);
+}
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.to));
 
 /* TODAY */
-
 function drawPeople(){
-
-const container =
-document.getElementById("people");
-
-container.innerHTML =
-users.map((name,index)=>`
-
-<div
-class="person ${selected.has(index) ? "sel" : ""}"
-onclick="pick(${index})"
->
-
-<div class="pface">
-${name.charAt(0)}
-</div>
-
-<b>
-${name}
-</b>
-
-<small>
-@${name.toLowerCase()}
-</small>
-
-</div>
-
-`).join("");
-
-document.getElementById("vote").disabled =
-selected.size === 0;
-
+ document.getElementById("people").innerHTML=users.map((n,i)=>`
+ <div class="person ${selected.has(i)?"sel":""}" onclick="pick(${i})">
+  <div class="pface">${n[0]}</div><b>${n}</b><small>@${n.toLowerCase()}</small>
+ </div>`).join("");
+ document.getElementById("voteBtn").disabled=!selected.size;
 }
-
-
-function pick(index){
-
-if(selected.has(index)){
-
-selected.delete(index);
-
-}else{
-
-if(selected.size >= 3){
-
-alert("Tu peux choisir 3 personnes maximum.");
-
-return;
-
+function pick(i){
+ if(selected.has(i))selected.delete(i);
+ else if(selected.size<3)selected.add(i);
+ else return alert("3 personnes maximum.");
+ drawPeople();
 }
-
-selected.add(index);
-
-}
-
-drawPeople();
-
-}
-
-
-document.getElementById("vote").onclick =
-function(){
-
-localStorage.setItem(
-"rank-v81-vote",
-JSON.stringify([...selected])
-);
-
-this.textContent =
-"VOTE ENREGISTRÉ ✓";
-
+document.getElementById("voteBtn").onclick=function(){
+ localStorage.setItem("rank82-vote",JSON.stringify([...selected]));
+ this.textContent="VOTE ENREGISTRÉ ✓";
 };
 
+/* STORIES */
+function openStory(i){
+ currentStory=i;
+ const s=storyData[i];
+ document.getElementById("storyViewer").classList.add("show");
+ document.getElementById("storyUser").textContent=s.user+" · maintenant";
+ document.getElementById("storyContent").textContent=s.letter;
+ document.getElementById("storyContent").style.background=s.bg;
+ document.getElementById("storyText").textContent=s.text;
+ document.getElementById("storyMusic").textContent=s.sound;
+ document.getElementById("storyBars").innerHTML=storyData.map((_,j)=>`<div class="storyBar ${j===i?"on":""}"></div>`).join("");
+}
+function closeStory(){document.getElementById("storyViewer").classList.remove("show")}
+function replyStory(){
+ const i=document.getElementById("storyReplyInput");
+ if(!i.value.trim())return;
+ const name=storyData[currentStory].name;
+ if(!chatStore[name])chatStore[name]=[];
+ chatStore[name].push({user:"@toi",text:"↪ NOW : "+i.value.trim(),mine:true});
+ i.value="";
+ closeStory();
+ openChat(name);
+}
 
-/* NAVIGATION */
-
-function go(id){
-
-document
-.querySelectorAll(".screen")
-.forEach(screen =>
-screen.classList.remove("active")
-);
-
-document
-.getElementById(id)
-.classList.add("active");
-
-document
-.querySelectorAll(".nav button")
-.forEach(button => {
-
-button.classList.toggle(
-"on",
-button.dataset.to === id
-);
-
+/* swipe stories */
+let touchX=0;
+document.getElementById("storyViewer").addEventListener("touchstart",e=>touchX=e.touches[0].clientX);
+document.getElementById("storyViewer").addEventListener("touchend",e=>{
+ const dx=e.changedTouches[0].clientX-touchX;
+ if(Math.abs(dx)>50){
+  if(dx<0 && currentStory<storyData.length-1)openStory(currentStory+1);
+  if(dx>0 && currentStory>0)openStory(currentStory-1);
+ }
 });
 
-window.scrollTo(0,0);
-
-}
-
-
-document
-.querySelectorAll(".nav button")
-.forEach(button => {
-
-button.onclick =
-()=>go(button.dataset.to);
-
+/* NOW LIKES */
+document.querySelectorAll(".like").forEach(b=>b.onclick=function(){
+ this.classList.toggle("liked");
+ this.textContent=this.classList.contains("liked")?"♥":"♡";
 });
-
-
-/* TIMER */
-
-function updateTimer(){
-
-const now = new Date();
-
-const reveal = new Date();
-
-reveal.setHours(
-19,
-30,
-0,
-0
-);
-
-if(now >= reveal){
-
-document.getElementById("timer").textContent =
-"DISPONIBLE";
-
-return;
-
+function quickComment(btn){
+ const input=btn.previousElementSibling;
+ if(!input.value.trim())return;
+ input.value="";
+ alert("Commentaire publié ✓");
 }
 
-const diff =
-reveal - now;
+/* ADD NOW */
+function openAddNow(){document.getElementById("addNowSheet").classList.add("show")}
+function closeOverlay(id){document.getElementById(id).classList.remove("show")}
 
-const hours =
-Math.floor(diff / 3600000);
-
-const minutes =
-Math.floor(
-(diff % 3600000) / 60000
-);
-
-const seconds =
-Math.floor(
-(diff % 60000) / 1000
-);
-
-document.getElementById("timer").textContent =
-
-[hours,minutes,seconds]
-
-.map(value =>
-String(value).padStart(2,"0")
-)
-
-.join(":");
-
+/* MUSIC */
+function openMusic(){
+ document.getElementById("musicSheet").classList.add("show");
+ drawSounds();
+}
+function drawSounds(){
+ const q=document.getElementById("soundSearch").value.toLowerCase();
+ const arr=demoSounds.filter(s=>(s.title+" "+s.artist).toLowerCase().includes(q));
+ document.getElementById("sounds").innerHTML=arr.map((s,i)=>`
+ <div class="soundItem">
+  <div class="soundIcon">♫</div>
+  <div class="soundInfo"><b>${s.title}</b><small>${s.artist} · ${s.time}</small></div>
+  <button onclick="chooseSound('${s.title.replace(/'/g,"")}','${s.artist.replace(/'/g,"")}')">UTILISER</button>
+ </div>`).join("");
+}
+function chooseSound(title,artist){
+ selectedSound={title,artist};
+ document.getElementById("selectedSound").style.display="block";
+ document.getElementById("selectedSound").textContent="♫ "+title+" · "+artist;
+ document.getElementById("musicButtonText").textContent=title;
+ closeOverlay("musicSheet");
 }
 
+/* PUBLISH NOW */
+function publishNow(){
+ const input=document.getElementById("nowFile");
+ const file=input.files[0];
+ if(!file)return alert("Choisis une photo ou une vidéo.");
 
-/* LIKES */
-
-document
-.querySelectorAll(".like")
-.forEach(button => {
-
-button.onclick =
-function(){
-
-const liked =
-this.classList.toggle("liked");
-
-this.textContent =
-liked ? "♥" : "♡";
-
-};
-
-});
-
-
-/* COMMENTAIRE NOW */
-
-function commentNow(button){
-
-const input =
-button.previousElementSibling;
-
-if(!input.value.trim())
-return;
-
-input.value = "";
-
-alert(
-"Commentaire publié ✓"
-);
-
+ if(file.type.startsWith("video/")){
+  const url=URL.createObjectURL(file),v=document.createElement("video");
+  v.onloadedmetadata=()=>{
+   if(v.duration>60){URL.revokeObjectURL(url);alert("Vidéo : 1 minute maximum.");return}
+   makeNow(file,url);
+  };
+  v.src=url;
+ }else makeNow(file,URL.createObjectURL(file));
 }
+function makeNow(file,url){
+ const caption=document.getElementById("captionInput").value.trim()||"Mon NOW";
+ const media=file.type.startsWith("video/")
+ ?`<video src="${url}" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>`
+ :`<img src="${url}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`;
 
-
-/* CLASSEMENT */
-
-const scores = [
-
-["Léna",132],
-["Noé",98],
-["Emma",78],
-["Lucas",61],
-["Inès",54],
-["Mathis",41]
-
-];
-
-
-document.getElementById("ranking").innerHTML =
-
-scores.map((item,index)=>`
-
-<div class="rankrow">
-
-<b>
-#${index + 1}
-</b>
-
-<div
-class="pface"
-style="
-margin:0;
-width:38px;
-height:38px;
-"
->
-
-${item[0].charAt(0)}
-
-</div>
-
-<b>
-${item[0]}
-</b>
-
-<span class="score">
-
-${item[1]} votes
-
-</span>
-
-</div>
-
-`).join("");
-
+ const p=document.createElement("div");
+ p.className="post";
+ p.dataset.expires=Date.now()+86400000;
+ p.innerHTML=`<div class="media">${media}
+ <div class="author">@toi<small>maintenant · expire dans 24 h</small></div>
+ <div class="music">♫ ${selectedSound?selectedSound.title+" · "+selectedSound.artist:"Son original"}</div>
+ <div class="caption">${escapeHTML(caption)}</div>
+ <div class="actions"><button class="act" onclick="this.classList.toggle('liked');this.textContent=this.classList.contains('liked')?'♥':'♡'">♡</button><button class="act">💬</button><button class="act">↗</button></div>
+ <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+ </div>`;
+ document.getElementById("feed").prepend(p);
+ input.value="";document.getElementById("captionInput").value="";
+ selectedSound=null;
+ document.getElementById("selectedSound").style.display="none";
+ document.getElementById("musicButtonText").textContent="Ajouter un son";
+ closeOverlay("addNowSheet");
+ go("now");
+}
 
 /* ROOM */
-
-let roomMessages;
-
-try{
-
-roomMessages =
-JSON.parse(
-localStorage.getItem(
-"rank-v81-room"
-)
-);
-
-}catch(error){
-
-roomMessages = null;
-
+function roomTab(tab){
+ const chats=document.getElementById("roomChats"),members=document.getElementById("roomMembers");
+ const ct=document.getElementById("chatTab"),mt=document.getElementById("memberTab");
+ chats.style.display=tab==="chats"?"block":"none";
+ members.style.display=tab==="members"?"block":"none";
+ ct.classList.toggle("active",tab==="chats");mt.classList.toggle("active",tab==="members");
+ if(tab==="members")drawRoomMembers();
+}
+function drawRoomMembers(){
+ document.getElementById("roomMembers").innerHTML=users.map(n=>`
+ <div class="chatRow" onclick="openChat('${n}')">
+  <div class="chatAvatar">${n[0]}</div>
+  <div class="chatInfo"><b>${n}</b><span>@${n.toLowerCase()} · membre du groupe</span></div>
+  <div>›</div>
+ </div>`).join("");
+}
+function openChat(name){
+ currentChat=name;
+ const group=name==="group";
+ document.getElementById("chatName").textContent=group?"Marseille 🔥":name;
+ document.getElementById("chatStatus").textContent=group?"8 membres · toucher ⋮ pour voir les membres":"en ligne";
+ document.getElementById("chatAvatar").textContent=group?"R":name[0];
+ document.getElementById("chatAvatar").classList.toggle("groupAvatar",group);
+ drawChat();
+ document.getElementById("chatPage").classList.add("show");
+}
+function closeChat(){document.getElementById("chatPage").classList.remove("show")}
+function drawChat(){
+ const arr=chatStore[currentChat]||[];
+ document.getElementById("chatMessages").innerHTML=arr.map(m=>`
+ <div class="bubble ${m.mine?"mine":""}">
+  ${(!m.mine&&currentChat==="group")?`<span class="sender">${escapeHTML(m.user)}</span>`:""}
+  ${escapeHTML(m.text)}
+  <span class="btime">19:34 ${m.mine?'<span class="ticks">✓✓</span>':""}</span>
+ </div>`).join("");
+ const c=document.getElementById("chatMessages");setTimeout(()=>c.scrollTop=c.scrollHeight,0);
+}
+function sendChat(){
+ const i=document.getElementById("chatInput"),t=i.value.trim();if(!t)return;
+ if(!chatStore[currentChat])chatStore[currentChat]=[];
+ chatStore[currentChat].push({user:"@toi",text:t,mine:true});i.value="";drawChat();
+}
+function chatMenu(){
+ if(currentChat==="group")openMembers();
+ else alert(currentChat+"\\n\\n📷 Envoyer une photo\\n🔕 Notifications\\n⛔ Bloquer\\n⚑ Signaler");
+}
+function openMembers(){
+ document.getElementById("membersList").innerHTML=users.map(n=>`
+ <div class="memberRow"><div class="chatAvatar">${n[0]}</div><div><b>${n}</b><div class="muted">@${n.toLowerCase()}</div></div><button onclick="closeOverlay('membersSheet');openChat('${n}')">MESSAGE</button></div>`).join("");
+ document.getElementById("membersSheet").classList.add("show");
 }
 
-
-if(!roomMessages){
-
-roomMessages = [
-
-{
-user:"@lenaa",
-text:"Merciii vous êtes des fous 😭",
-mine:false,
-time:"19:31"
-},
-
-{
-user:"@noe13",
-text:"Je demande un recompte officiel 😂",
-mine:false,
-time:"19:31"
-},
-
-{
-user:"@emma",
-text:"Franchement c'était mérité",
-mine:false,
-time:"19:32"
-},
-
-{
-user:"@jonathan",
-text:"Demain ça va être serré 😂",
-mine:true,
-time:"19:33"
+/* CAMERA / EPHEMERAL */
+function openCamera(){document.getElementById("cameraSheet").classList.add("show")}
+function sendPrivateMedia(){
+ const f=document.getElementById("privateMedia").files[0];
+ if(!f)return alert("Choisis une photo ou une vidéo.");
+ if(!chatStore[currentChat])chatStore[currentChat]=[];
+ const ephemeral=document.getElementById("ephemeral").checked;
+ chatStore[currentChat].push({user:"@toi",text:ephemeral?"📸 Photo éphémère · toucher pour ouvrir":"📸 Photo / vidéo",mine:true});
+ document.getElementById("privateMedia").value="";
+ closeOverlay("cameraSheet");drawChat();
 }
 
-];
+/* RANK */
+const scores=[["Léna",132],["Noé",98],["Emma",78],["Lucas",61],["Inès",54],["Mathis",41]];
+document.getElementById("ranking").innerHTML=scores.map((s,i)=>`
+<div class="rankrow"><b>#${i+1}</b><div class="pface" style="margin:0;width:38px;height:38px">${s[0][0]}</div><b>${s[0]}</b><span class="score">${s[1]} votes</span></div>`).join("");
 
+/* TIMER */
+function tick(){
+ const n=new Date(),r=new Date();r.setHours(19,30,0,0);
+ if(n>=r){document.getElementById("timer").textContent="DISPONIBLE";return}
+ const d=r-n;
+ document.getElementById("timer").textContent=[
+  Math.floor(d/3600000),
+  Math.floor((d%3600000)/60000),
+  Math.floor((d%60000)/1000)
+ ].map(x=>String(x).padStart(2,"0")).join(":");
 }
 
-
-function safeText(text){
-
-const element =
-document.createElement("div");
-
-element.textContent =
-text;
-
-return element.innerHTML;
-
-}
-
-
-function drawMessages(){
-
-const container =
-document.getElementById("msgs");
-
-container.innerHTML =
-
-roomMessages.map(message=>`
-
-<div class="msg ${message.mine ? "me" : ""}">
-
-${
-
-message.mine
-
-? ""
-
-: `<strong>${safeText(message.user)}</strong>`
-
-}
-
-${safeText(message.text)}
-
-<span class="time">
-
-${message.time}
-
-${
-
-message.mine
-
-? `<span class="ticks"> ✓✓</span>`
-
-: ""
-
-}
-
-</span>
-
-</div>
-
-`).join("");
-
-}
-
-
-function sendMessage(){
-
-const input =
-document.getElementById("message");
-
-const text =
-input.value.trim();
-
-if(!text)
-return;
-
-const now =
-new Date();
-
-const time =
-
-String(
-now.getHours()
-).padStart(2,"0")
-
-+
-
-":"
-
-+
-
-String(
-now.getMinutes()
-).padStart(2,"0");
-
-
-roomMessages.push({
-
-user:"@jonathan",
-
-text:text,
-
-mine:true,
-
-time:time
-
-});
-
-
-localStorage.setItem(
-
-"rank-v81-room",
-
-JSON.stringify(
-roomMessages
-)
-
-);
-
-
-input.value = "";
-
-drawMessages();
-
-}
-
-
-/* NOW */
-
-function openAdd(){
-
-document
-.getElementById("addSheet")
-.classList.add("show");
-
-}
-
-
-function closeAdd(){
-
-document
-.getElementById("addSheet")
-.classList.remove("show");
-
-}
-
-
-function publishNow(){
-
-const fileInput =
-document.getElementById("nowFile");
-
-const file =
-fileInput.files[0];
-
-if(!file){
-
-alert(
-"Choisis une photo ou une vidéo."
-);
-
-return;
-
-}
-
-
-/* VIDEO MAX 1 MINUTE */
-
-if(
-file.type.startsWith("video/")
-){
-
-const video =
-document.createElement("video");
-
-const url =
-URL.createObjectURL(file);
-
-video.preload =
-"metadata";
-
-video.onloadedmetadata =
-function(){
-
-if(video.duration > 60){
-
-URL.revokeObjectURL(url);
-
-alert(
-"La vidéo doit durer 1 minute maximum."
-);
-
-return;
-
-}
-
-createNowPost(
-file,
-url
-);
-
-};
-
-video.src =
-url;
-
-}else{
-
-createNowPost(
-file,
-URL.createObjectURL(file)
-);
-
-}
-
-}
-
-
-function createNowPost(
-file,
-url
-){
-
-const caption =
-
-safeText(
-
-document
-.getElementById("captionInput")
-.value.trim()
-
-|| "Mon NOW"
-
-);
-
-
-const sound =
-
-safeText(
-
-document
-.getElementById("soundInput")
-.value
-
-);
-
-
-const media =
-
-file.type.startsWith("video/")
-
-?
-
-`
-<video
-src="${url}"
-autoplay
-muted
-loop
-playsinline
-style="
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-"
-></video>
-`
-
-:
-
-`
-<img
-src="${url}"
-style="
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-"
->
-`;
-
-
-const post =
-document.createElement("div");
-
-post.className =
-"post";
-
-post.dataset.expires =
-Date.now() + 86400000;
-
-
-post.innerHTML = `
-
-<div class="media">
-
-${media}
-
-<div class="author">
-
-@toi
-
-<small>
-maintenant · expire dans 24 h
-</small>
-
-</div>
-
-<div class="music">
-♫ ${sound}
-</div>
-
-<div class="caption">
-${caption}
-</div>
-
-<div class="actions">
-
-<button
-class="act"
-onclick="
-this.classList.toggle('liked');
-this.textContent =
-this.classList.contains('liked')
-? '♥'
-: '♡';
-"
->
-♡
-</button>
-
-<button
-class="act"
-onclick="
-alert('Commentaires 💬')
-"
->
-💬
-</button>
-
-<button
-class="act"
-onclick="
-alert('Partagé dans le groupe ✓')
-"
->
-↗
-</button>
-
-</div>
-
-<div class="commentbar">
-
-<input
-placeholder="Ajouter un commentaire..."
->
-
-<button onclick="commentNow(this)">
-↑
-</button>
-
-</div>
-
-</div>
-
-`;
-
-
-document
-.getElementById("feed")
-.prepend(post);
-
-
-fileInput.value = "";
-
-document
-.getElementById("captionInput")
-.value = "";
-
-
-closeAdd();
-
-
-alert(
-"NOW publié ✓\nIl disparaîtra dans 24 heures."
-);
-
-}
-
-
-/* SUPPRESSION APRÈS 24H */
-
-function removeExpiredNow(){
-
-document
-.querySelectorAll("[data-expires]")
-.forEach(post => {
-
-if(
-Date.now()
->
-Number(post.dataset.expires)
-){
-
-post.remove();
-
-}
-
-});
-
-}
-
-
-/* CREATE QUESTION */
-
+/* QUESTION */
 function saveQuestion(){
-
-const input =
-document.getElementById(
-"questionInput"
-);
-
-const text =
-input.value.trim();
-
-if(text.length < 8){
-
-alert(
-"Écris une vraie question."
-);
-
-return;
-
+ const i=document.getElementById("questionInput"),q=i.value.trim();
+ if(q.length<8)return alert("Écris une vraie question.");
+ let old=null;try{old=JSON.parse(localStorage.getItem("rank82-question"))}catch(e){}
+ if(old&&Date.now()-old.date<604800000)return alert("Tu as déjà proposé une question cette semaine.");
+ localStorage.setItem("rank82-question",JSON.stringify({q,date:Date.now()}));i.value="";alert("Question proposée ✓");
 }
 
+/* EXPIRE */
+function cleanExpired(){document.querySelectorAll("[data-expires]").forEach(x=>{if(Date.now()>Number(x.dataset.expires))x.remove()})}
+function escapeHTML(t){const d=document.createElement("div");d.textContent=t;return d.innerHTML}
 
-const old =
-localStorage.getItem(
-"rank-v81-question"
-);
+/* RESTORE */
+try{JSON.parse(localStorage.getItem("rank82-vote")||"[]").forEach(i=>selected.add(i))}catch(e){}
 
-
-if(old){
-
-try{
-
-const data =
-JSON.parse(old);
-
-const week =
-7 * 24 * 60 * 60 * 1000;
-
-if(
-Date.now() - data.date
-<
-week
-){
-
-alert(
-"Tu as déjà proposé ta question cette semaine."
-);
-
-return;
-
-}
-
-}catch(error){}
-
-}
-
-
-localStorage.setItem(
-
-"rank-v81-question",
-
-JSON.stringify({
-
-text:text,
-
-date:Date.now()
-
-})
-
-);
-
-
-input.value = "";
-
-alert(
-"Question proposée ✓"
-);
-
-}
-
-
-/* RESTAURATION DU VOTE */
-
-try{
-
-const oldVote =
-JSON.parse(
-
-localStorage.getItem(
-"rank-v81-vote"
-)
-
-|| "[]"
-
-);
-
-oldVote.forEach(
-index =>
-selected.add(index)
-);
-
-}catch(error){}
-
-
-/* START */
-
-drawPeople();
-
-drawMessages();
-
-updateTimer();
-
-removeExpiredNow();
-
-setInterval(
-updateTimer,
-1000
-);
-
-setInterval(
-removeExpiredNow,
-60000
-);
-
+drawPeople();drawRoomMembers();drawSounds();tick();cleanExpired();
+setInterval(tick,1000);setInterval(cleanExpired,60000);
 </script>
-
 </body>
 </html>
