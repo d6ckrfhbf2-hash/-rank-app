@@ -2,9 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#f7f8fc">
-<title>RANK — V8</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RANK — V8.1</title>
 
 <style>
 *{
@@ -13,29 +12,26 @@
 }
 
 :root{
-  --bg:#f7f8fc;
-  --card:#ffffff;
-  --text:#111318;
-  --muted:#858995;
-  --line:#e8eaf0;
-  --blue:#2864ff;
-  --blue2:#5c8cff;
-  --yellow:#ffd633;
-  --coral:#ff526d;
-  --purple:#8c52ff;
-  --green:#20c997;
+  --bg:#f6f7fb;
+  --white:#ffffff;
+  --text:#101116;
+  --muted:#858895;
+  --line:#ececf2;
+  --pink:#ff2e6e;
+  --purple:#8054ff;
+  --blue:#426bff;
+  --green:#00a884;
 }
 
 html,body{
   margin:0;
-  padding:0;
   min-height:100%;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-button,input,textarea{
+button,input{
   font:inherit;
 }
 
@@ -44,148 +40,94 @@ button{
 }
 
 .app{
-  width:min(100%,560px);
-  min-height:100vh;
+  max-width:520px;
   margin:auto;
+  min-height:100vh;
   background:var(--bg);
-  position:relative;
+  padding-bottom:78px;
 }
 
-.header{
-  height:66px;
-  padding:0 17px;
+/* HEADER */
+
+.top{
+  height:64px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  padding:0 17px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(247,248,252,.95);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid #eee;
 }
 
 .logo{
-  font-size:26px;
-  font-weight:950;
-  letter-spacing:-1.4px;
+  font-size:27px;
+  font-weight:1000;
+  letter-spacing:-1.5px;
 }
 
 .logo span{
-  color:var(--blue);
-}
-
-.headerRight{
-  display:flex;
-  align-items:center;
-  gap:9px;
+  color:var(--pink);
 }
 
 .streak{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:999px;
+  background:#111;
+  color:#fff;
+  border-radius:20px;
   padding:8px 11px;
-  font-size:11px;
-  font-weight:850;
+  font-size:12px;
+  font-weight:800;
 }
 
-.profileBtn{
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:50%;
-  color:#111;
-  font-weight:950;
-  background:linear-gradient(135deg,#ffd633,#ff9d3d);
-}
-
-main{
-  padding:10px 15px 100px;
-}
+/* SCREENS */
 
 .screen{
   display:none;
+  padding:15px;
 }
 
 .screen.active{
   display:block;
 }
 
-.eyebrow{
-  font-size:10px;
+.kicker{
+  font-size:11px;
   font-weight:950;
-  letter-spacing:1.2px;
-  color:var(--blue);
-  margin-bottom:7px;
+  color:var(--pink);
+  letter-spacing:1px;
 }
 
-h1{
-  margin:0;
-  font-size:33px;
-  line-height:1.04;
+.title{
+  font-size:35px;
+  font-weight:1000;
+  line-height:1;
   letter-spacing:-1.5px;
+  margin:6px 0;
 }
 
-h2{
-  margin:0;
-  font-size:20px;
-  letter-spacing:-.5px;
-}
-
-p{
-  margin:0;
-}
-
-.sub{
+.muted{
   color:var(--muted);
   font-size:12px;
-  line-height:1.45;
-  margin-top:6px;
 }
 
 .card{
   background:#fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:17px;
-  margin-top:13px;
-  box-shadow:0 7px 25px rgba(20,30,60,.04);
-}
-
-.primary{
-  width:100%;
-  min-height:50px;
-  border:0;
-  border-radius:15px;
-  background:var(--blue);
-  color:#fff;
-  font-weight:900;
+  border-radius:25px;
+  padding:19px;
   margin-top:14px;
-}
-
-.primary:disabled{
-  opacity:.35;
-}
-
-.secondary{
-  width:100%;
-  min-height:47px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#f5f6f9;
-  color:var(--text);
-  font-weight:850;
-  margin-top:9px;
+  box-shadow:0 10px 35px rgba(20,30,70,.05);
 }
 
 /* STORIES */
 
 .stories{
   display:flex;
-  gap:13px;
+  gap:12px;
   overflow-x:auto;
-  padding:5px 1px 15px;
+  margin-bottom:18px;
   scrollbar-width:none;
 }
 
@@ -194,697 +136,489 @@ p{
 }
 
 .story{
-  min-width:64px;
+  text-align:center;
+  font-size:10px;
+  min-width:59px;
   border:0;
   background:none;
-  padding:0;
-  text-align:center;
-  color:var(--text);
 }
 
-.storyRing{
-  width:62px;
-  height:62px;
+.ring{
+  width:58px;
+  height:58px;
   border-radius:50%;
   padding:3px;
-  margin:auto;
   background:linear-gradient(
     135deg,
-    #ffd733 0%,
-    #ff6a55 28%,
-    #f13e96 53%,
-    #8a4dff 76%,
-    #3478ff 100%
+    #ffd400,
+    #ff385c,
+    #ff2e93,
+    #754cff,
+    #2684ff
   );
+  margin:auto auto 5px;
 }
 
-.storyInner{
-  width:100%;
+.face{
   height:100%;
   border-radius:50%;
   border:3px solid white;
-  background:#eef0f5;
+  background:#eee;
   display:grid;
   place-items:center;
-  font-weight:950;
-  font-size:15px;
-}
-
-.story.me .storyRing{
-  background:linear-gradient(135deg,#2864ff,#55c7ff);
-}
-
-.storyName{
-  display:block;
-  margin-top:5px;
-  font-size:9px;
+  font-weight:900;
+  font-size:18px;
 }
 
 /* TODAY */
 
-.todayIntro{
-  margin-top:5px;
+.todayCard{
+  position:relative;
+  overflow:hidden;
 }
 
-.questionCard{
-  margin-top:16px;
-  background:
-    radial-gradient(circle at 100% 0%,rgba(58,112,255,.14),transparent 38%),
-    white;
-}
-
-.questionTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.questionTag{
-  background:#edf3ff;
-  color:var(--blue);
-  border-radius:999px;
-  padding:6px 9px;
-  font-size:9px;
-  font-weight:950;
-}
-
-.questionNumber{
-  color:var(--muted);
-  font-size:9px;
-  font-weight:850;
+.todayCard:before{
+  content:"TODAY";
+  position:absolute;
+  right:-20px;
+  top:30px;
+  font-size:75px;
+  font-weight:1000;
+  color:#10111608;
+  transform:rotate(-8deg);
 }
 
 .question{
-  margin-top:15px;
-  font-size:27px;
-  line-height:1.12;
-  font-weight:950;
+  position:relative;
+  font-size:28px;
+  font-weight:1000;
+  line-height:1.08;
   letter-spacing:-.8px;
+  margin:15px 0;
 }
 
 .people{
+  position:relative;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  margin-top:17px;
+  margin-top:15px;
 }
 
 .person{
   position:relative;
-  border:1.5px solid var(--line);
-  background:#fafbfc;
-  border-radius:17px;
-  padding:11px 4px;
-  color:var(--text);
+  border:1px solid #ececf2;
+  background:#fafafd;
+  border-radius:16px;
+  padding:11px 3px;
+  text-align:center;
 }
 
-.person.selected{
-  border-color:var(--blue);
-  background:#edf3ff;
+.person.sel{
+  border:2px solid var(--pink);
+  background:#fff2f6;
 }
 
-.person.selected:after{
+.person.sel:after{
   content:"✓";
   position:absolute;
-  right:6px;
-  top:6px;
+  right:5px;
+  top:5px;
   width:18px;
   height:18px;
+  display:grid;
+  place-items:center;
   border-radius:50%;
-  background:var(--blue);
+  background:var(--pink);
   color:white;
-  display:grid;
-  place-items:center;
   font-size:9px;
-  font-weight:950;
 }
 
-.personAvatar{
-  width:45px;
-  height:45px;
+.pface{
+  width:43px;
+  height:43px;
+  margin:auto auto 6px;
   border-radius:50%;
-  margin:0 auto 7px;
+  background:linear-gradient(135deg,#426bff,#9354ff);
+  color:#fff;
   display:grid;
   place-items:center;
-  color:#fff;
-  font-weight:950;
+  font-weight:900;
 }
 
-.person:nth-child(1) .personAvatar{
-  background:linear-gradient(135deg,#ff5470,#ff8d4d);
-}
-.person:nth-child(2) .personAvatar{
-  background:linear-gradient(135deg,#3977ff,#58b7ff);
-}
-.person:nth-child(3) .personAvatar{
-  background:linear-gradient(135deg,#9656ff,#e55bd3);
-}
-.person:nth-child(4) .personAvatar{
-  background:linear-gradient(135deg,#20b989,#63d870);
-}
-.person:nth-child(5) .personAvatar{
-  background:linear-gradient(135deg,#ffb329,#ff6c3e);
-}
-.person:nth-child(6) .personAvatar{
-  background:linear-gradient(135deg,#5163ff,#894cff);
+.person:nth-child(even) .pface{
+  background:linear-gradient(135deg,#ff2e6e,#ff874b);
 }
 
-.person strong{
-  display:block;
+.person b{
   font-size:11px;
 }
 
 .person small{
-  color:var(--muted);
+  display:block;
+  color:#999;
   font-size:8px;
 }
 
-.voteSuccess{
-  display:none;
-  margin-top:9px;
-  padding:11px;
-  border-radius:12px;
-  background:#eafaf4;
-  color:#16855c;
-  font-size:10px;
-  font-weight:850;
+.primary{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  background:linear-gradient(100deg,#ff2e6e,#8054ff);
+  color:#fff;
+  padding:15px;
+  font-weight:950;
+  margin-top:13px;
+}
+
+.primary:disabled{
+  opacity:.35;
+}
+
+.secondary{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  background:#111;
+  color:white;
+  padding:14px;
+  font-weight:900;
+  margin-top:10px;
 }
 
 .reveal{
   display:flex;
   justify-content:space-between;
-  align-items:flex-end;
-  border-top:1px solid var(--line);
-  margin-top:17px;
-  padding-top:14px;
+  margin-top:15px;
+  padding-top:13px;
+  border-top:1px solid #eee;
 }
 
-.reveal small{
-  display:block;
-  color:var(--muted);
-  font-size:8px;
-  margin-bottom:2px;
-}
-
-.reveal strong{
+.reveal b{
   font-size:19px;
-}
-
-#countdown{
-  color:var(--blue);
-  font-size:11px;
-  font-weight:900;
 }
 
 /* NOW */
 
-.nowScreenHeader{
+.nowHead{
   display:flex;
-  align-items:flex-end;
   justify-content:space-between;
-  margin-bottom:10px;
+  align-items:center;
 }
 
-.addNowBtn{
+.add{
   border:0;
-  border-radius:999px;
-  background:var(--blue);
+  border-radius:20px;
+  background:#111;
   color:#fff;
-  padding:10px 14px;
-  font-size:10px;
-  font-weight:900;
+  padding:10px 13px;
+  font-weight:850;
 }
 
-.nowFeed{
-  height:calc(100dvh - 172px);
+.feed{
+  height:calc(100vh - 170px);
   overflow-y:auto;
   scroll-snap-type:y mandatory;
+  margin:10px -15px -78px;
   scrollbar-width:none;
-  margin:8px -15px -100px;
-  padding-bottom:70px;
 }
 
-.nowFeed::-webkit-scrollbar{
+.feed::-webkit-scrollbar{
   display:none;
 }
 
-.nowPost{
-  height:calc(100dvh - 172px);
-  min-height:520px;
+.post{
+  height:calc(100vh - 170px);
+  min-height:500px;
+  padding:0 9px 8px;
   scroll-snap-align:start;
   scroll-snap-stop:always;
-  padding:5px 15px 12px;
 }
 
-.nowMedia{
-  width:100%;
+.media{
   height:100%;
+  border-radius:26px;
   position:relative;
-  border-radius:27px;
   overflow:hidden;
-  box-shadow:0 12px 35px rgba(20,30,70,.12);
+  color:white;
+  background:linear-gradient(145deg,#ff466e,#754cff);
 }
 
-.media1{
-  background:
-    radial-gradient(circle at 72% 18%,#ffe16c 0,transparent 26%),
-    linear-gradient(145deg,#ff6676,#ff9e62);
+.post:nth-child(2) .media{
+  background:linear-gradient(145deg,#26bde8,#4356e8);
 }
 
-.media2{
-  background:
-    radial-gradient(circle at 18% 24%,#71dcff 0,transparent 25%),
-    linear-gradient(145deg,#396dff,#7654e8);
+.post:nth-child(3) .media{
+  background:linear-gradient(145deg,#2ac995,#2b70dc);
 }
 
-.media3{
-  background:
-    radial-gradient(circle at 80% 20%,#a4ff9c 0,transparent 26%),
-    linear-gradient(145deg,#1cbf93,#52a9ef);
-}
-
-.media4{
-  background:
-    radial-gradient(circle at 25% 15%,#ffc7ef 0,transparent 27%),
-    linear-gradient(145deg,#a25aff,#ff5f8f);
-}
-
-.mediaLetter{
+.big{
   position:absolute;
   inset:0;
   display:grid;
   place-items:center;
-  color:rgba(255,255,255,.20);
-  font-size:150px;
-  font-weight:950;
+  font-size:180px;
+  font-weight:1000;
+  color:#ffffff22;
 }
 
-.play{
+.author{
   position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:rgba(255,255,255,.92);
-  display:grid;
-  place-items:center;
-  padding-left:4px;
-  font-size:19px;
-  z-index:2;
-}
-
-.nowUserTop{
-  position:absolute;
-  top:14px;
-  left:14px;
-  right:14px;
-  z-index:4;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:white;
-}
-
-.nowRing{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  padding:2px;
-  background:linear-gradient(135deg,#ffd633,#ff526d,#8c52ff);
-}
-
-.nowAvatar{
-  width:100%;
-  height:100%;
-  border:2px solid white;
-  border-radius:50%;
-  background:#fff;
-  color:#111;
-  display:grid;
-  place-items:center;
-  font-size:11px;
-  font-weight:950;
-}
-
-.nowUserTop strong{
-  display:block;
-  font-size:12px;
-}
-
-.nowUserTop small{
-  display:block;
-  font-size:9px;
-  opacity:.82;
-  margin-top:2px;
-}
-
-.nowBottom{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  padding:90px 15px 15px;
-  color:white;
-  background:linear-gradient(transparent,rgba(0,0,0,.72));
+  top:15px;
+  left:15px;
+  font-weight:900;
   z-index:3;
 }
 
-.caption{
-  max-width:78%;
-  font-size:13px;
-  line-height:1.35;
-  font-weight:700;
+.author small{
+  display:block;
+  font-weight:500;
+  margin-top:2px;
 }
 
-.nowActions{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-}
-
-.nowAction{
-  border:0;
-  border-radius:999px;
-  padding:9px 12px;
-  background:rgba(255,255,255,.93);
-  color:#111;
+.music{
+  position:absolute;
+  left:15px;
+  bottom:118px;
+  background:#0008;
+  padding:7px 10px;
+  border-radius:20px;
   font-size:10px;
-  font-weight:850;
+  z-index:4;
 }
 
-.nowAction.liked{
-  background:var(--coral);
-  color:#fff;
+.caption{
+  position:absolute;
+  left:15px;
+  bottom:72px;
+  font-weight:800;
+  z-index:4;
 }
 
-.quickComment{
-  display:flex;
-  gap:7px;
-  margin-top:10px;
+.actions{
+  position:absolute;
+  right:13px;
+  bottom:88px;
+  display:grid;
+  gap:10px;
+  z-index:5;
 }
 
-.quickComment input{
-  flex:1;
-  min-width:0;
-  border:0;
-  background:rgba(255,255,255,.94);
-  border-radius:999px;
-  padding:11px 13px;
-  color:#111;
-  outline:none;
-}
-
-.quickComment button{
-  width:40px;
-  height:40px;
+.act{
+  width:48px;
+  height:48px;
   border:0;
   border-radius:50%;
-  background:#fff;
-  color:var(--blue);
-  font-weight:950;
+  background:#0007;
+  color:white;
+  font-size:19px;
 }
 
-.swipeText{
+.act.liked{
+  background:var(--pink);
+}
+
+.commentbar{
   position:absolute;
+  bottom:14px;
+  left:15px;
   right:15px;
-  bottom:145px;
-  color:white;
-  font-size:9px;
-  font-weight:800;
-  opacity:.75;
-  writing-mode:vertical-rl;
+  display:flex;
+  gap:7px;
+  z-index:5;
+}
+
+.commentbar input{
+  flex:1;
+  min-width:0;
+  border:1px solid #ffffff55;
+  background:#0006;
+  color:#fff;
+  border-radius:22px;
+  padding:11px;
+}
+
+.commentbar input::placeholder{
+  color:#ddd;
+}
+
+.commentbar button{
+  border:0;
+  border-radius:50%;
+  width:40px;
+  background:white;
+  color:#111;
+  font-weight:900;
 }
 
 /* RANK */
 
-.podium{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  align-items:end;
-  padding:28px 0 5px;
-}
-
-.podiumItem{
+.winner{
   text-align:center;
+  padding:10px 0 20px;
 }
 
-.podiumItem.first{
-  transform:translateY(-18px);
+.trophy{
+  font-size:55px;
 }
 
-.podiumAvatar{
-  width:62px;
-  height:62px;
+.winnerFace{
+  width:82px;
+  height:82px;
+  margin:5px auto 10px;
   border-radius:50%;
-  margin:auto auto 7px;
-  background:linear-gradient(135deg,#5c8cff,#9256ff);
-  color:white;
+  background:linear-gradient(135deg,#ffd633,#ff6b52);
   display:grid;
   place-items:center;
-  font-weight:950;
-}
-
-.first .podiumAvatar{
-  width:76px;
-  height:76px;
-  background:linear-gradient(135deg,#ffd72f,#ff9148);
-}
-
-.podiumItem strong{
-  display:block;
-  font-size:11px;
-}
-
-.podiumItem small{
-  color:var(--muted);
-  font-size:9px;
-}
-
-.rankRow{
-  min-height:58px;
-  display:grid;
-  grid-template-columns:34px 1fr auto;
-  gap:8px;
-  align-items:center;
-  border-bottom:1px solid var(--line);
-}
-
-.rankRow:last-child{
-  border:0;
-}
-
-.rankUser{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-  font-weight:850;
-}
-
-.rankVotes{
-  color:var(--muted);
-  font-size:10px;
-}
-
-.miniAvatar{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#4b75ff,#9b52ff);
   color:white;
-  display:grid;
-  place-items:center;
-  font-size:10px;
-  font-weight:950;
+  font-size:30px;
+  font-weight:1000;
 }
 
-/* ROOM - MESSAGERIE */
-
-.roomPage{
-  margin:-10px -15px -100px;
-  min-height:calc(100dvh - 66px);
-  background:#eef1f5;
-  position:relative;
-}
-
-.roomHeader{
-  position:sticky;
-  top:66px;
-  z-index:25;
-  min-height:67px;
-  padding:9px 13px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
+.rankrow{
   display:flex;
   align-items:center;
   gap:10px;
+  padding:13px 0;
+  border-bottom:1px solid #eee;
 }
 
-.groupAvatar{
-  width:46px;
-  height:46px;
-  flex:0 0 auto;
+.rankrow:last-child{
+  border:0;
+}
+
+.rankrow .score{
+  margin-left:auto;
+  color:#888;
+  font-size:11px;
+}
+
+/* ROOM */
+
+.room{
+  background:#efeae2;
+  margin:-15px;
+  min-height:calc(100vh - 142px);
+  padding-bottom:80px;
+}
+
+.roomtop{
+  height:65px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  padding:8px 12px;
+  gap:10px;
+  position:sticky;
+  top:64px;
+  z-index:10;
+}
+
+.group{
+  width:45px;
+  height:45px;
   border-radius:50%;
+  background:#00a884;
+  color:white;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#25c997,#3977ff);
-  color:white;
-  font-weight:950;
+  font-weight:900;
 }
 
-.roomTitle{
+.roomName{
   flex:1;
 }
 
-.roomTitle strong{
+.roomName b{
   display:block;
-  font-size:14px;
-}
-
-.roomTitle span{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  margin-top:2px;
 }
 
 .roomDots{
   border:0;
   background:none;
   font-size:20px;
-  color:#666;
 }
 
-.roomNotice{
+.notice{
   width:max-content;
   max-width:90%;
-  margin:12px auto 4px;
-  background:#fff6c9;
-  color:#6e5b14;
+  margin:10px auto;
+  background:#fff3c4;
+  color:#65570e;
   padding:7px 10px;
-  border-radius:9px;
+  border-radius:8px;
   font-size:9px;
-  box-shadow:0 1px 3px rgba(0,0,0,.05);
 }
 
-.messages{
-  padding:12px 10px 100px;
-  min-height:calc(100dvh - 140px);
+.msgs{
+  padding:8px 12px;
 }
 
-.message{
-  display:flex;
-  margin:5px 0;
-}
-
-.message.mine{
-  justify-content:flex-end;
-}
-
-.messageContent{
-  max-width:79%;
-}
-
-.bubble{
-  position:relative;
-  background:#fff;
-  border-radius:7px 13px 13px 13px;
-  padding:8px 50px 8px 10px;
-  min-height:37px;
+.msg{
+  max-width:80%;
+  background:white;
+  padding:8px 48px 16px 9px;
+  border-radius:7px 12px 12px;
+  margin:7px 0;
   font-size:12px;
-  line-height:1.42;
-  box-shadow:0 1px 2px rgba(0,0,0,.07);
+  position:relative;
+  box-shadow:0 1px 2px #00000012;
 }
 
-.mine .bubble{
+.msg.me{
+  margin-left:auto;
   background:#d9fdd3;
-  border-radius:13px 7px 13px 13px;
 }
 
-.sender{
+.msg strong{
   display:block;
-  color:var(--blue);
+  color:#087c68;
   font-size:9px;
-  font-weight:900;
   margin-bottom:3px;
 }
 
-.messageTime{
+.time{
   position:absolute;
-  right:7px;
-  bottom:5px;
-  color:#92969d;
+  right:6px;
+  bottom:4px;
   font-size:7px;
+  color:#888;
 }
 
-.readTicks{
+.ticks{
   color:#2b8eff;
-  margin-left:2px;
 }
 
-.replyPreview{
-  border-left:3px solid var(--blue);
-  background:rgba(0,0,0,.045);
-  border-radius:5px;
-  padding:5px 7px;
-  margin-bottom:6px;
-  font-size:9px;
-  color:#666;
-}
-
-.messageMenu{
-  border:0;
-  background:none;
-  color:#9a9a9a;
-  font-size:10px;
-  padding:2px 5px;
-}
-
-.roomComposer{
+.composer{
   position:fixed;
-  bottom:70px;
+  bottom:68px;
   left:50%;
   transform:translateX(-50%);
-  width:min(100%,560px);
-  padding:7px 9px;
-  display:flex;
-  align-items:flex-end;
-  gap:7px;
-  background:#eef1f5;
-  z-index:35;
-}
-
-.composerBox{
-  flex:1;
-  background:#fff;
-  border-radius:22px;
-  display:flex;
-  align-items:center;
-  padding:0 11px;
-  min-height:44px;
-  border:1px solid #e1e3e7;
-}
-
-.composerBox input{
+  max-width:520px;
   width:100%;
-  border:0;
-  outline:none;
-  padding:11px 4px;
-  background:transparent;
+  background:#efeae2;
+  padding:7px;
+  display:flex;
+  gap:6px;
+  z-index:40;
 }
 
-.sendBtn{
+.composer input{
+  flex:1;
+  min-width:0;
+  border:0;
+  border-radius:22px;
+  padding:12px 14px;
+  background:white;
+}
+
+.composer button{
   width:44px;
-  height:44px;
-  flex:0 0 auto;
   border:0;
   border-radius:50%;
-  background:#24b78a;
+  background:#00a884;
   color:white;
   font-size:17px;
-  font-weight:950;
 }
 
 /* RECAP */
@@ -892,124 +626,64 @@ p{
 .stats{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-top:13px;
+  gap:9px;
+  margin-top:15px;
 }
 
 .stat{
-  border-radius:15px;
-  padding:14px;
-  background:#f6f7fa;
+  background:#fff;
+  border-radius:17px;
+  padding:16px;
 }
 
-.stat:nth-child(1){background:#edf3ff;}
-.stat:nth-child(2){background:#fff4df;}
-.stat:nth-child(3){background:#eefaf5;}
-.stat:nth-child(4){background:#f5efff;}
-
-.stat strong{
+.stat b{
+  font-size:23px;
   display:block;
-  font-size:22px;
-}
-
-.stat span{
-  color:var(--muted);
-  font-size:9px;
-}
-
-.questionInput{
-  width:100%;
-  min-height:90px;
-  resize:none;
-  margin-top:12px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:#f8f9fb;
-  padding:12px;
-  outline:none;
-}
-
-/* PROFILE */
-
-.profileRow{
-  display:flex;
-  gap:13px;
-  align-items:center;
-}
-
-.bigAvatar{
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#ffd52f,#ff7857,#8c52ff);
-  color:white;
-  font-size:20px;
-  font-weight:950;
 }
 
 /* NAV */
 
-.bottomNav{
+.nav{
   position:fixed;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:min(100%,560px);
-  height:70px;
-  z-index:60;
+  width:min(100%,520px);
+  height:69px;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(15px);
+  border-top:1px solid #eee;
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  background:rgba(255,255,255,.97);
-  border-top:1px solid var(--line);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  z-index:60;
 }
 
-.navBtn{
+.nav button{
   border:0;
   background:none;
-  color:#999da6;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:4px;
+  color:#92949e;
+  font-size:9px;
+  font-weight:800;
 }
 
-.navBtn.active{
-  color:var(--blue);
+.nav button span{
+  font-size:20px;
+  display:block;
+  margin-bottom:2px;
 }
 
-.navIcon{
-  font-size:19px;
-  height:22px;
+.nav button.on{
+  color:var(--pink);
 }
 
-.navLabel{
-  font-size:8px;
-  font-weight:900;
-}
-
-.nowNav .navIcon{
-  width:35px;
-  height:29px;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  color:white;
-  background:linear-gradient(135deg,#ff526d,#ffad3e);
-}
-
-/* OVERLAYS */
+/* SHEET */
 
 .overlay{
   display:none;
   position:fixed;
   inset:0;
-  z-index:200;
-  background:rgba(25,28,38,.38);
+  background:#0009;
+  z-index:100;
   align-items:flex-end;
   justify-content:center;
 }
@@ -1019,2084 +693,1447 @@ p{
 }
 
 .sheet{
-  width:min(100%,560px);
-  max-height:82vh;
-  overflow:auto;
+  max-width:520px;
+  width:100%;
+  background:#fff;
+  border-radius:25px 25px 0 0;
+  padding:20px;
+}
+
+.sheet h2{
+  margin-top:0;
+}
+
+.sheet input,
+.sheet select{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:13px;
+  margin-top:10px;
   background:white;
-  border-radius:26px 26px 0 0;
-  padding:12px 16px 25px;
 }
 
-.handle{
-  width:38px;
-  height:4px;
-  border-radius:999px;
-  background:#ddd;
-  margin:0 auto 14px;
-}
-
-.sheetHead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.closeBtn{
+.close{
+  float:right;
+  border:0;
+  background:#eee;
+  border-radius:50%;
   width:34px;
   height:34px;
-  border:0;
-  border-radius:50%;
-  background:#f1f2f5;
-  font-size:20px;
-}
-
-.commentItem{
-  display:flex;
-  gap:10px;
-  margin:17px 0;
-}
-
-.commentText{
-  flex:1;
-}
-
-.commentText strong{
-  font-size:10px;
-}
-
-.commentText p{
-  font-size:12px;
-  margin-top:3px;
-}
-
-.commentMeta{
-  color:var(--muted);
-  font-size:8px;
-  margin-top:5px;
-}
-
-.commentActions{
-  display:flex;
-  gap:14px;
-  margin-top:5px;
-  color:#777;
-  font-size:8px;
-  font-weight:800;
-}
-
-.commentComposer{
-  display:flex;
-  gap:7px;
-  margin-top:14px;
-  border-top:1px solid var(--line);
-  padding-top:12px;
-}
-
-.commentComposer input{
-  flex:1;
-  min-width:0;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:11px 13px;
-  outline:none;
-}
-
-.commentComposer button{
-  width:42px;
-  border:0;
-  border-radius:50%;
-  background:var(--blue);
-  color:white;
-}
-
-.uploadBox{
-  margin-top:16px;
-  border:2px dashed #dce0e9;
-  background:#f8f9fc;
-  border-radius:22px;
-  padding:35px 20px;
-  text-align:center;
-}
-
-.uploadButton{
-  display:inline-block;
-  margin-top:14px;
-  background:var(--blue);
-  color:white;
-  padding:10px 16px;
-  border-radius:999px;
-  font-size:10px;
-  font-weight:900;
-}
-
-.uploadButton input{
-  display:none;
-}
-
-.captionInput{
-  width:100%;
-  margin-top:12px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:13px;
-  outline:none;
-}
-
-.menuAction{
-  width:100%;
-  border:0;
-  border-bottom:1px solid var(--line);
-  background:white;
-  text-align:left;
-  padding:15px 4px;
-  color:var(--text);
-  font-weight:800;
-}
-
-.menuAction.danger{
-  color:var(--coral);
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  z-index:400;
-  top:72px;
-  left:50%;
-  transform:translate(-50%,-10px);
-  width:min(calc(100% - 30px),520px);
-  padding:12px 14px;
-  border-radius:14px;
-  background:#16181d;
-  color:white;
-  font-size:10px;
-  font-weight:850;
-  opacity:0;
-  pointer-events:none;
-  transition:.2s;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-@media(min-width:700px){
-  body{
-    background:#eceef3;
-  }
-
-  .app{
-    box-shadow:0 0 70px rgba(30,40,70,.1);
-  }
+  font-size:18px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="toast" class="toast"></div>
-
 <div class="app">
 
-<header class="header">
+<div class="top">
   <div class="logo">RANK<span>.</span></div>
+  <div class="streak">🔥 12</div>
+</div>
 
-  <div class="headerRight">
-    <div class="streak">🔥 12</div>
-    <button class="profileBtn" data-go="profileScreen">JT</button>
-  </div>
-</header>
+<!-- TODAY -->
 
-<main>
+<section id="today" class="screen active">
 
-<!-- ================= TODAY ================= -->
+<div class="stories">
 
-<section id="todayScreen" class="screen active">
+<button class="story" onclick="openAdd()">
+<div class="ring"><div class="face">＋</div></div>
+Ton NOW
+</button>
 
-  <div class="stories">
+<button class="story" onclick="go('now')">
+<div class="ring"><div class="face">L</div></div>
+Léna
+</button>
 
-    <button class="story me" id="topAddNow">
-      <div class="storyRing">
-        <div class="storyInner">＋</div>
-      </div>
-      <span class="storyName">Ton NOW</span>
-    </button>
+<button class="story" onclick="go('now')">
+<div class="ring"><div class="face">N</div></div>
+Noé
+</button>
 
-    <button class="story" data-story="0">
-      <div class="storyRing">
-        <div class="storyInner">L</div>
-      </div>
-      <span class="storyName">Léna</span>
-    </button>
+<button class="story" onclick="go('now')">
+<div class="ring"><div class="face">E</div></div>
+Emma
+</button>
 
-    <button class="story" data-story="1">
-      <div class="storyRing">
-        <div class="storyInner">N</div>
-      </div>
-      <span class="storyName">Noé</span>
-    </button>
+<button class="story" onclick="go('now')">
+<div class="ring"><div class="face">I</div></div>
+Inès
+</button>
 
-    <button class="story" data-story="2">
-      <div class="storyRing">
-        <div class="storyInner">E</div>
-      </div>
-      <span class="storyName">Emma</span>
-    </button>
+</div>
 
-    <button class="story" data-story="3">
-      <div class="storyRing">
-        <div class="storyInner">I</div>
-      </div>
-      <span class="storyName">Inès</span>
-    </button>
+<div class="kicker">TODAY · #27</div>
+<div class="title">À toi de voter.</div>
+<div class="muted">
+Une question aujourd'hui. Résultat ce soir.
+</div>
 
-  </div>
+<div class="card todayCard">
 
-  <div class="todayIntro">
-    <div class="eyebrow">TODAY · #27</div>
-    <h1>À toi de voter.</h1>
-    <p class="sub">Une question aujourd'hui. Résultat ce soir.</p>
-  </div>
+<div class="kicker">
+● QUESTION DU JOUR
+</div>
 
-  <div class="card questionCard">
+<div class="question">
+Qui a le plus d'humour ?
+</div>
 
-    <div class="questionTop">
-      <div class="questionTag">● QUESTION DU JOUR</div>
-      <div class="questionNumber">#27</div>
-    </div>
+<div class="muted">
+Choisis jusqu'à 3 personnes · vote anonyme
+</div>
 
-    <div class="question">
-      Qui a le plus d'humour ?
-    </div>
+<div id="people" class="people"></div>
 
-    <p class="sub">
-      Choisis jusqu'à 3 personnes · vote anonyme
-    </p>
+<button id="vote" class="primary" disabled>
+VOTER
+</button>
 
-    <div id="peopleGrid" class="people"></div>
+<div class="reveal">
 
-    <button id="voteBtn" class="primary" disabled>
-      Valider mon vote
-    </button>
+<div>
+<span class="muted">REVEAL</span><br>
+<b>19:30</b>
+</div>
 
-    <div id="voteSuccess" class="voteSuccess">
-      Ton vote est enregistré ✓
-    </div>
+<div style="text-align:right">
+<span class="muted">RÉSULTATS DANS</span><br>
+<b id="timer">--:--:--</b>
+</div>
 
-    <div class="reveal">
+</div>
 
-      <div>
-        <small>REVEAL</small>
-        <strong>19:30</strong>
-      </div>
+<button class="secondary" onclick="go('rank')">
+Voir le reveal · démo
+</button>
 
-      <div style="text-align:right">
-        <small>RÉSULTATS DANS</small>
-        <div id="countdown">--:--:--</div>
-      </div>
+</div>
+</section>
 
-    </div>
 
-    <button id="demoReveal" class="secondary">
-      Voir le reveal · démo
-    </button>
+<!-- NOW -->
 
-  </div>
+<section id="now" class="screen">
+
+<div class="nowHead">
+
+<div>
+<div class="kicker">NOW · 24H</div>
+<div class="title">NOW.</div>
+</div>
+
+<button class="add" onclick="openAdd()">
+＋ Ajouter
+</button>
+
+</div>
+
+
+<div id="feed" class="feed">
+
+<!-- LENA -->
+
+<div class="post">
+
+<div class="media">
+
+<div class="big">L</div>
+
+<div class="author">
+@lenaa
+<small>
+12 min · expire dans 23 h 48
+</small>
+</div>
+
+<div class="music">
+♫ Midnight City · M83
+</div>
+
+<div class="caption">
+Journée terminée 😭
+</div>
+
+<div class="actions">
+
+<button class="act like">
+♡
+</button>
+
+<button class="act" onclick="alert('Commentaires du groupe 💬')">
+💬
+</button>
+
+<button class="act" onclick="alert('Partagé dans le groupe ✓')">
+↗
+</button>
+
+</div>
+
+<div class="commentbar">
+
+<input placeholder="Ajouter un commentaire...">
+
+<button onclick="commentNow(this)">
+↑
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- NOE -->
+
+<div class="post">
+
+<div class="media">
+
+<div class="big">N</div>
+
+<div class="author">
+@noe13
+<small>
+36 min · expire dans 23 h 24
+</small>
+</div>
+
+<div class="music">
+♫ Son original · @noe13
+</div>
+
+<div class="caption">
+Je ne donnerai aucune explication 💀
+</div>
+
+<div class="actions">
+
+<button class="act like">
+♡
+</button>
+
+<button class="act">
+💬
+</button>
+
+<button class="act">
+↗
+</button>
+
+</div>
+
+<div class="commentbar">
+
+<input placeholder="Ajouter un commentaire...">
+
+<button onclick="commentNow(this)">
+↑
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- EMMA -->
+
+<div class="post">
+
+<div class="media">
+
+<div class="big">E</div>
+
+<div class="author">
+@emma
+<small>
+1 h · expire dans 23 h
+</small>
+</div>
+
+<div class="music">
+♫ Golden Hour · JVKE
+</div>
+
+<div class="caption">
+Vous validez ou pas ? 😂
+</div>
+
+<div class="actions">
+
+<button class="act like">
+♡
+</button>
+
+<button class="act">
+💬
+</button>
+
+<button class="act">
+↗
+</button>
+
+</div>
+
+<div class="commentbar">
+
+<input placeholder="Ajouter un commentaire...">
+
+<button onclick="commentNow(this)">
+↑
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- RANK -->
+
+<section id="rank" class="screen">
+
+<div class="kicker">
+THE RANK IS OUT
+</div>
+
+<div class="title">
+Le classement.
+</div>
+
+<div class="muted">
+Qui a le plus d'humour ?
+</div>
+
+<div class="card">
+
+<div class="winner">
+
+<div class="trophy">
+🏆
+</div>
+
+<div class="winnerFace">
+L
+</div>
+
+<h2>
+Léna est #1
+</h2>
+
+<div class="muted">
+132 votes
+</div>
+
+</div>
+
+<div id="ranking"></div>
+
+</div>
+
+<button class="primary" onclick="go('room')">
+Parler du résultat dans ROOM
+</button>
 
 </section>
 
-<!-- ================= NOW ================= -->
 
-<section id="nowScreen" class="screen">
+<!-- ROOM -->
 
-  <div class="nowScreenHeader">
+<section id="room" class="screen">
 
-    <div>
-      <div class="eyebrow">NOW · 24 H</div>
-      <h1>NOW.</h1>
-    </div>
+<div class="room">
 
-    <button id="addNowBtn" class="addNowBtn">
-      ＋ Ajouter
-    </button>
+<div class="roomtop">
 
-  </div>
+<div class="group">
+R
+</div>
 
-  <div id="nowFeed" class="nowFeed">
+<div class="roomName">
+<b>Marseille 🔥</b>
+<div class="muted">
+8 membres · groupe privé
+</div>
+</div>
 
-    <article class="nowPost">
+<button class="roomDots" onclick="alert('Membres · Notifications · Quitter le groupe')">
+•••
+</button>
 
-      <div class="nowMedia media1">
+</div>
 
-        <div class="mediaLetter">L</div>
-        <div class="play">▶</div>
+<div class="notice">
+🏆 Léna est #1 aujourd'hui
+</div>
 
-        <div class="nowUserTop">
-          <div class="nowRing">
-            <div class="nowAvatar">L</div>
-          </div>
-          <div>
-            <strong>@lenaa</strong>
-            <small>12 min · disparaît dans 23 h</small>
-          </div>
-        </div>
+<div id="msgs" class="msgs"></div>
 
-        <div class="swipeText">
-          GLISSE ↑
-        </div>
+</div>
 
-        <div class="nowBottom">
+<div class="composer">
 
-          <div class="caption">
-            Journée terminée 😭
-          </div>
+<input
+id="message"
+placeholder="Message"
+maxlength="250"
+>
 
-          <div class="nowActions">
-            <button class="nowAction likeBtn">♡ <span>24</span></button>
-            <button class="nowAction commentBtn" data-user="Léna">◌ 8</button>
-            <button class="nowAction shareBtn">↗ Partager</button>
-          </div>
+<button onclick="sendMessage()">
+↑
+</button>
 
-          <div class="quickComment">
-            <input placeholder="Ajouter un commentaire...">
-            <button class="quickSend">↑</button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </article>
-
-    <article class="nowPost">
-
-      <div class="nowMedia media2">
-
-        <div class="mediaLetter">N</div>
-
-        <div class="nowUserTop">
-          <div class="nowRing">
-            <div class="nowAvatar">N</div>
-          </div>
-          <div>
-            <strong>@noe13</strong>
-            <small>36 min · disparaît dans 23 h</small>
-          </div>
-        </div>
-
-        <div class="swipeText">GLISSE ↑</div>
-
-        <div class="nowBottom">
-
-          <div class="caption">
-            Je ne donnerai aucune explication 💀
-          </div>
-
-          <div class="nowActions">
-            <button class="nowAction likeBtn">♡ <span>31</span></button>
-            <button class="nowAction commentBtn" data-user="Noé">◌ 12</button>
-            <button class="nowAction shareBtn">↗ Partager</button>
-          </div>
-
-          <div class="quickComment">
-            <input placeholder="Ajouter un commentaire...">
-            <button class="quickSend">↑</button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </article>
-
-    <article class="nowPost">
-
-      <div class="nowMedia media3">
-
-        <div class="mediaLetter">E</div>
-        <div class="play">▶</div>
-
-        <div class="nowUserTop">
-          <div class="nowRing">
-            <div class="nowAvatar">E</div>
-          </div>
-          <div>
-            <strong>@emma</strong>
-            <small>1 h · disparaît dans 22 h</small>
-          </div>
-        </div>
-
-        <div class="swipeText">GLISSE ↑</div>
-
-        <div class="nowBottom">
-
-          <div class="caption">
-            Vous validez ou pas ? 😂
-          </div>
-
-          <div class="nowActions">
-            <button class="nowAction likeBtn">♡ <span>18</span></button>
-            <button class="nowAction commentBtn" data-user="Emma">◌ 5</button>
-            <button class="nowAction shareBtn">↗ Partager</button>
-          </div>
-
-          <div class="quickComment">
-            <input placeholder="Ajouter un commentaire...">
-            <button class="quickSend">↑</button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </article>
-
-    <article class="nowPost">
-
-      <div class="nowMedia media4">
-
-        <div class="mediaLetter">I</div>
-
-        <div class="nowUserTop">
-          <div class="nowRing">
-            <div class="nowAvatar">I</div>
-          </div>
-          <div>
-            <strong>@iness</strong>
-            <small>2 h · disparaît dans 21 h</small>
-          </div>
-        </div>
-
-        <div class="nowBottom">
-
-          <div class="caption">
-            Ce soir ça va être quelque chose 👀
-          </div>
-
-          <div class="nowActions">
-            <button class="nowAction likeBtn">♡ <span>16</span></button>
-            <button class="nowAction commentBtn" data-user="Inès">◌ 3</button>
-            <button class="nowAction shareBtn">↗ Partager</button>
-          </div>
-
-          <div class="quickComment">
-            <input placeholder="Ajouter un commentaire...">
-            <button class="quickSend">↑</button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </article>
-
-  </div>
+</div>
 
 </section>
 
-<!-- ================= RANK ================= -->
 
-<section id="rankScreen" class="screen">
+<!-- RECAP -->
 
-  <div class="eyebrow">THE RANK IS OUT</div>
-  <h1>Le classement.</h1>
-  <p class="sub">Qui a le plus d'humour ?</p>
+<section id="recap" class="screen">
 
-  <div class="card">
-    <div id="podium" class="podium"></div>
-  </div>
+<div class="kicker">
+WEEKLY RECAP
+</div>
 
-  <div class="card">
-    <h2 style="margin-bottom:8px">Classement complet</h2>
-    <div id="rankingList"></div>
-  </div>
+<div class="title">
+Ta semaine.
+</div>
 
-  <button class="primary" data-go="roomScreen">
-    Parler du résultat dans ROOM
-  </button>
+<div class="muted">
+Les moments RANK de ton groupe.
+</div>
 
-</section>
+<div class="stats">
 
-<!-- ================= ROOM ================= -->
+<div class="stat">
+<b>47</b>
+<span class="muted">
+votes reçus
+</span>
+</div>
 
-<section id="roomScreen" class="screen">
+<div class="stat">
+<b>2</b>
+<span class="muted">
+podiums
+</span>
+</div>
 
-  <div class="roomPage">
+<div class="stat">
+<b>5/7</b>
+<span class="muted">
+jours joués
+</span>
+</div>
 
-    <div class="roomHeader">
+<div class="stat">
+<b>12</b>
+<span class="muted">
+jours de streak
+</span>
+</div>
 
-      <div class="groupAvatar">
-        R
-      </div>
+</div>
 
-      <div class="roomTitle">
-        <strong>Marseille 🔥</strong>
-        <span>Léna, Noé, Emma, Lucas, Inès, Mathis...</span>
-      </div>
+<div class="card">
 
-      <button id="roomMenuBtn" class="roomDots">
-        •••
-      </button>
+<h2>
+Create Question
+</h2>
 
-    </div>
+<p class="muted">
+Une proposition par semaine.
+</p>
 
-    <div class="roomNotice">
-      🏆 Léna est #1 aujourd'hui
-    </div>
+<input
+id="questionInput"
+style="
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:13px;
+"
+placeholder="Ex : Qui serait capable de devenir célèbre ?"
+>
 
-    <div id="messages" class="messages"></div>
+<button class="primary" onclick="saveQuestion()">
+Proposer la question
+</button>
 
-  </div>
-
-  <div class="roomComposer">
-
-    <div class="composerBox">
-      <input
-        id="messageInput"
-        maxlength="250"
-        placeholder="Message"
-      >
-    </div>
-
-    <button id="sendMessageBtn" class="sendBtn">
-      ↑
-    </button>
-
-  </div>
-
-</section>
-
-<!-- ================= RECAP ================= -->
-
-<section id="recapScreen" class="screen">
-
-  <div class="eyebrow">WEEKLY RECAP</div>
-  <h1>Ta semaine.</h1>
-  <p class="sub">Les moments RANK de ton groupe.</p>
-
-  <div class="card">
-
-    <h2>Ton recap</h2>
-
-    <div class="stats">
-
-      <div class="stat">
-        <strong>47</strong>
-        <span>votes reçus</span>
-      </div>
-
-      <div class="stat">
-        <strong>2</strong>
-        <span>podiums</span>
-      </div>
-
-      <div class="stat">
-        <strong>5/7</strong>
-        <span>jours joués</span>
-      </div>
-
-      <div class="stat">
-        <strong>12</strong>
-        <span>jours de streak</span>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <h2>Personne de la semaine</h2>
-
-    <div style="display:flex;gap:11px;align-items:center;margin-top:14px">
-
-      <div class="miniAvatar" style="width:54px;height:54px">
-        L
-      </div>
-
-      <div>
-        <strong>Léna</strong>
-        <p class="sub">3 premières places cette semaine</p>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h2>Create Question</h2>
-      <small style="color:var(--muted)">1× / semaine</small>
-    </div>
-
-    <textarea
-      id="customQuestion"
-      class="questionInput"
-      maxlength="100"
-      placeholder="Ex : Qui serait capable de devenir célèbre ?"
-    ></textarea>
-
-    <button id="createQuestionBtn" class="primary">
-      Proposer la question
-    </button>
-
-    <p id="questionStatus" class="sub">
-      Une proposition disponible cette semaine.
-    </p>
-
-  </div>
+</div>
 
 </section>
 
-<!-- ================= PROFILE ================= -->
 
-<section id="profileScreen" class="screen">
+<!-- NAVIGATION -->
 
-  <div class="eyebrow">PROFILE</div>
+<nav class="nav">
 
-  <div class="card">
+<button class="on" data-to="today">
+<span>⌂</span>
+TODAY
+</button>
 
-    <div class="profileRow">
+<button data-to="now">
+<span>▶</span>
+NOW
+</button>
 
-      <div class="bigAvatar">
-        JT
-      </div>
+<button data-to="rank">
+<span>▥</span>
+RANK
+</button>
 
-      <div>
-        <h1 style="font-size:27px">Jonathan</h1>
-        <p class="sub">@jonathan</p>
-      </div>
+<button data-to="room">
+<span>◌</span>
+ROOM
+</button>
 
-    </div>
-
-    <div class="stats">
-
-      <div class="stat">
-        <strong>12</strong>
-        <span>streak</span>
-      </div>
-
-      <div class="stat">
-        <strong>5</strong>
-        <span>podiums</span>
-      </div>
-
-      <div class="stat">
-        <strong>47</strong>
-        <span>votes reçus</span>
-      </div>
-
-      <div class="stat">
-        <strong>8</strong>
-        <span>amis</span>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-    <h2>Mon groupe</h2>
-    <p class="sub">Marseille · 8 membres · privé</p>
-  </div>
-
-</section>
-
-</main>
-
-<!-- ================= NAV ================= -->
-
-<nav class="bottomNav">
-
-  <button class="navBtn active" data-go="todayScreen">
-    <span class="navIcon">⌂</span>
-    <span class="navLabel">TODAY</span>
-  </button>
-
-  <button class="navBtn nowNav" data-go="nowScreen">
-    <span class="navIcon">▶</span>
-    <span class="navLabel">NOW</span>
-  </button>
-
-  <button class="navBtn" data-go="rankScreen">
-    <span class="navIcon">▥</span>
-    <span class="navLabel">RANK</span>
-  </button>
-
-  <button class="navBtn" data-go="roomScreen">
-    <span class="navIcon">◌</span>
-    <span class="navLabel">ROOM</span>
-  </button>
-
-  <button class="navBtn" data-go="recapScreen">
-    <span class="navIcon">↻</span>
-    <span class="navLabel">RECAP</span>
-  </button>
+<button data-to="recap">
+<span>↻</span>
+RECAP
+</button>
 
 </nav>
 
 </div>
 
-<!-- ================= COMMENTS ================= -->
 
-<div id="commentsOverlay" class="overlay">
+<!-- AJOUT NOW -->
 
-  <div class="sheet">
+<div id="addSheet" class="overlay">
 
-    <div class="handle"></div>
+<div class="sheet">
 
-    <div class="sheetHead">
-      <h2>Commentaires</h2>
-      <button class="closeBtn" data-close="commentsOverlay">×</button>
-    </div>
+<button class="close" onclick="closeAdd()">
+×
+</button>
 
-    <div id="commentsList"></div>
+<h2>
+Nouveau NOW
+</h2>
 
-    <div class="commentComposer">
-      <input id="commentInput" placeholder="Ajouter un commentaire...">
-      <button id="sendCommentBtn">↑</button>
-    </div>
+<p class="muted">
+Photo ou vidéo · disparaît automatiquement après 24 heures.
+</p>
 
-  </div>
+<input
+id="nowFile"
+type="file"
+accept="image/*,video/*"
+>
 
-</div>
+<input
+id="captionInput"
+placeholder="Ajouter une légende..."
+>
 
-<!-- ================= ADD NOW ================= -->
+<select id="soundInput">
 
-<div id="addNowOverlay" class="overlay">
+<option>
+♫ Ajouter un son
+</option>
 
-  <div class="sheet">
+<option>
+Midnight City · M83 (démo)
+</option>
 
-    <div class="handle"></div>
+<option>
+Golden Hour · JVKE (démo)
+</option>
 
-    <div class="sheetHead">
-      <h2>Nouveau NOW</h2>
-      <button class="closeBtn" data-close="addNowOverlay">×</button>
-    </div>
+<option>
+Son original
+</option>
 
-    <p class="sub">
-      Photo ou vidéo jusqu'à 1 minute · visible pendant 24 h.
-    </p>
+</select>
 
-    <div class="uploadBox">
-
-      <div style="font-size:38px">＋</div>
-
-      <strong>Choisis ton contenu</strong>
-
-      <p id="fileName" class="sub">
-        Aucune photo ou vidéo choisie
-      </p>
-
-      <label class="uploadButton">
-        Choisir
-        <input id="nowFile" type="file" accept="image/*,video/*">
-      </label>
-
-    </div>
-
-    <input
-      id="nowCaption"
-      class="captionInput"
-      maxlength="100"
-      placeholder="Ajouter une légende..."
-    >
-
-    <button id="publishNowBtn" class="primary">
-      Publier mon NOW
-    </button>
-
-  </div>
+<button class="primary" onclick="publishNow()">
+PUBLIER · 24H
+</button>
 
 </div>
-
-<!-- ================= MESSAGE MENU ================= -->
-
-<div id="messageMenuOverlay" class="overlay">
-
-  <div class="sheet">
-
-    <div class="handle"></div>
-
-    <button id="replyBtn" class="menuAction">
-      ↩ Répondre
-    </button>
-
-    <button id="reportBtn" class="menuAction">
-      ⚑ Signaler
-    </button>
-
-    <button id="blockBtn" class="menuAction">
-      ⊘ Bloquer cette personne
-    </button>
-
-    <button id="deleteBtn" class="menuAction danger">
-      Supprimer mon message
-    </button>
-
-    <button class="menuAction" data-close="messageMenuOverlay">
-      Annuler
-    </button>
-
-  </div>
-
 </div>
 
-<!-- ================= ROOM MENU ================= -->
-
-<div id="roomMenuOverlay" class="overlay">
-
-  <div class="sheet">
-
-    <div class="handle"></div>
-
-    <h2 style="margin-bottom:10px">Marseille 🔥</h2>
-
-    <button id="membersBtn" class="menuAction">
-      👥 Voir les membres
-    </button>
-
-    <button id="muteBtn" class="menuAction">
-      🔔 Mettre en silencieux
-    </button>
-
-    <button id="leaveRoomBtn" class="menuAction danger">
-      Quitter le groupe
-    </button>
-
-    <button class="menuAction" data-close="roomMenuOverlay">
-      Annuler
-    </button>
-
-  </div>
-
-</div>
 
 <script>
-"use strict";
 
-/* ================= DATA ================= */
+/* MEMBRES DEMO */
 
-const members = [
-  {id:1,name:"Léna",username:"@lenaa",initial:"L",votes:132},
-  {id:2,name:"Noé",username:"@noe13",initial:"N",votes:98},
-  {id:3,name:"Emma",username:"@emma",initial:"E",votes:78},
-  {id:4,name:"Lucas",username:"@lucas",initial:"L",votes:61},
-  {id:5,name:"Inès",username:"@iness",initial:"I",votes:54},
-  {id:6,name:"Mathis",username:"@mathis",initial:"M",votes:41}
+const users = [
+"Léna",
+"Noé",
+"Emma",
+"Lucas",
+"Inès",
+"Mathis"
 ];
 
-let selectedVotes = new Set();
-let selectedNowFile = null;
-let activeMessageId = null;
-let replyTo = null;
+const selected = new Set();
 
-const defaultMessages = [
-  {
-    id:101,
-    username:"@lenaa",
-    time:"19:31",
-    text:"Merciii vous êtes des fous 😭",
-    mine:false
-  },
-  {
-    id:102,
-    username:"@noe13",
-    time:"19:31",
-    text:"Je demande un recompte officiel 😂",
-    mine:false
-  },
-  {
-    id:103,
-    username:"@emma",
-    time:"19:32",
-    text:"Franchement c'était mérité",
-    mine:false
-  },
-  {
-    id:104,
-    username:"@lucas",
-    time:"19:33",
-    text:"Demain je prends la première place",
-    mine:false
-  }
+
+/* TODAY */
+
+function drawPeople(){
+
+const container =
+document.getElementById("people");
+
+container.innerHTML =
+users.map((name,index)=>`
+
+<div
+class="person ${selected.has(index) ? "sel" : ""}"
+onclick="pick(${index})"
+>
+
+<div class="pface">
+${name.charAt(0)}
+</div>
+
+<b>
+${name}
+</b>
+
+<small>
+@${name.toLowerCase()}
+</small>
+
+</div>
+
+`).join("");
+
+document.getElementById("vote").disabled =
+selected.size === 0;
+
+}
+
+
+function pick(index){
+
+if(selected.has(index)){
+
+selected.delete(index);
+
+}else{
+
+if(selected.size >= 3){
+
+alert("Tu peux choisir 3 personnes maximum.");
+
+return;
+
+}
+
+selected.add(index);
+
+}
+
+drawPeople();
+
+}
+
+
+document.getElementById("vote").onclick =
+function(){
+
+localStorage.setItem(
+"rank-v81-vote",
+JSON.stringify([...selected])
+);
+
+this.textContent =
+"VOTE ENREGISTRÉ ✓";
+
+};
+
+
+/* NAVIGATION */
+
+function go(id){
+
+document
+.querySelectorAll(".screen")
+.forEach(screen =>
+screen.classList.remove("active")
+);
+
+document
+.getElementById(id)
+.classList.add("active");
+
+document
+.querySelectorAll(".nav button")
+.forEach(button => {
+
+button.classList.toggle(
+"on",
+button.dataset.to === id
+);
+
+});
+
+window.scrollTo(0,0);
+
+}
+
+
+document
+.querySelectorAll(".nav button")
+.forEach(button => {
+
+button.onclick =
+()=>go(button.dataset.to);
+
+});
+
+
+/* TIMER */
+
+function updateTimer(){
+
+const now = new Date();
+
+const reveal = new Date();
+
+reveal.setHours(
+19,
+30,
+0,
+0
+);
+
+if(now >= reveal){
+
+document.getElementById("timer").textContent =
+"DISPONIBLE";
+
+return;
+
+}
+
+const diff =
+reveal - now;
+
+const hours =
+Math.floor(diff / 3600000);
+
+const minutes =
+Math.floor(
+(diff % 3600000) / 60000
+);
+
+const seconds =
+Math.floor(
+(diff % 60000) / 1000
+);
+
+document.getElementById("timer").textContent =
+
+[hours,minutes,seconds]
+
+.map(value =>
+String(value).padStart(2,"0")
+)
+
+.join(":");
+
+}
+
+
+/* LIKES */
+
+document
+.querySelectorAll(".like")
+.forEach(button => {
+
+button.onclick =
+function(){
+
+const liked =
+this.classList.toggle("liked");
+
+this.textContent =
+liked ? "♥" : "♡";
+
+};
+
+});
+
+
+/* COMMENTAIRE NOW */
+
+function commentNow(button){
+
+const input =
+button.previousElementSibling;
+
+if(!input.value.trim())
+return;
+
+input.value = "";
+
+alert(
+"Commentaire publié ✓"
+);
+
+}
+
+
+/* CLASSEMENT */
+
+const scores = [
+
+["Léna",132],
+["Noé",98],
+["Emma",78],
+["Lucas",61],
+["Inès",54],
+["Mathis",41]
+
 ];
 
-let messages;
+
+document.getElementById("ranking").innerHTML =
+
+scores.map((item,index)=>`
+
+<div class="rankrow">
+
+<b>
+#${index + 1}
+</b>
+
+<div
+class="pface"
+style="
+margin:0;
+width:38px;
+height:38px;
+"
+>
+
+${item[0].charAt(0)}
+
+</div>
+
+<b>
+${item[0]}
+</b>
+
+<span class="score">
+
+${item[1]} votes
+
+</span>
+
+</div>
+
+`).join("");
+
+
+/* ROOM */
+
+let roomMessages;
 
 try{
-  messages =
-    JSON.parse(localStorage.getItem("rank-v8-room")) ||
-    defaultMessages;
-}catch(e){
-  messages = [...defaultMessages];
+
+roomMessages =
+JSON.parse(
+localStorage.getItem(
+"rank-v81-room"
+)
+);
+
+}catch(error){
+
+roomMessages = null;
+
 }
 
-/* ================= UTILS ================= */
 
-function toast(text){
+if(!roomMessages){
 
-  const element = document.getElementById("toast");
+roomMessages = [
 
-  element.textContent = text;
-  element.classList.add("show");
+{
+user:"@lenaa",
+text:"Merciii vous êtes des fous 😭",
+mine:false,
+time:"19:31"
+},
 
-  setTimeout(function(){
-    element.classList.remove("show");
-  },1800);
+{
+user:"@noe13",
+text:"Je demande un recompte officiel 😂",
+mine:false,
+time:"19:31"
+},
+
+{
+user:"@emma",
+text:"Franchement c'était mérité",
+mine:false,
+time:"19:32"
+},
+
+{
+user:"@jonathan",
+text:"Demain ça va être serré 😂",
+mine:true,
+time:"19:33"
 }
 
-function escapeHTML(text){
-
-  const div = document.createElement("div");
-  div.textContent = text;
-
-  return div.innerHTML;
-}
-
-function closeOverlay(id){
-
-  const element = document.getElementById(id);
-
-  if(element){
-    element.classList.remove("show");
-  }
-}
-
-/* ================= NAVIGATION ================= */
-
-function goTo(screenId){
-
-  document.querySelectorAll(".screen").forEach(function(screen){
-    screen.classList.remove("active");
-  });
-
-  const target = document.getElementById(screenId);
-
-  if(!target){
-    return;
-  }
-
-  target.classList.add("active");
-
-  document.querySelectorAll(".navBtn").forEach(function(button){
-
-    button.classList.toggle(
-      "active",
-      button.dataset.go === screenId
-    );
-
-  });
-
-  if(screenId === "roomScreen"){
-    renderMessages();
-  }
-
-  if(screenId !== "nowScreen"){
-    window.scrollTo(0,0);
-  }
-}
-
-document.querySelectorAll("[data-go]").forEach(function(button){
-
-  button.addEventListener("click",function(){
-
-    goTo(this.dataset.go);
-
-  });
-
-});
-
-/* ================= TODAY ================= */
-
-function renderPeople(){
-
-  const grid = document.getElementById("peopleGrid");
-
-  grid.innerHTML = members.map(function(member){
-
-    return `
-      <button
-        class="person ${selectedVotes.has(member.id) ? "selected" : ""}"
-        data-person="${member.id}"
-      >
-
-        <div class="personAvatar">
-          ${member.initial}
-        </div>
-
-        <strong>${member.name}</strong>
-        <small>${member.username}</small>
-
-      </button>
-    `;
-
-  }).join("");
-
-  grid.querySelectorAll("[data-person]").forEach(function(button){
-
-    button.addEventListener("click",function(){
-
-      const id = Number(this.dataset.person);
-
-      if(selectedVotes.has(id)){
-
-        selectedVotes.delete(id);
-
-      }else{
-
-        if(selectedVotes.size >= 3){
-          toast("3 personnes maximum");
-          return;
-        }
-
-        selectedVotes.add(id);
-      }
-
-      renderPeople();
-
-    });
-
-  });
-
-  document.getElementById("voteBtn").disabled =
-    selectedVotes.size === 0;
-}
-
-document.getElementById("voteBtn")
-.addEventListener("click",function(){
-
-  localStorage.setItem(
-    "rank-v8-vote",
-    JSON.stringify(Array.from(selectedVotes))
-  );
-
-  document.getElementById("voteSuccess").style.display =
-    "block";
-
-  toast("Vote enregistré ✓");
-
-});
-
-/* ================= COUNTDOWN ================= */
-
-function updateCountdown(){
-
-  const now = new Date();
-
-  const reveal = new Date();
-
-  reveal.setHours(19,30,0,0);
-
-  const display = document.getElementById("countdown");
-
-  if(now >= reveal){
-
-    display.textContent = "DISPONIBLE";
-
-    return;
-  }
-
-  const difference =
-    reveal.getTime() - now.getTime();
-
-  const hours =
-    Math.floor(difference / 3600000);
-
-  const minutes =
-    Math.floor((difference % 3600000) / 60000);
-
-  const seconds =
-    Math.floor((difference % 60000) / 1000);
-
-  display.textContent =
-    String(hours).padStart(2,"0") + ":" +
-    String(minutes).padStart(2,"0") + ":" +
-    String(seconds).padStart(2,"0");
-}
-
-/* ================= RANK ================= */
-
-function renderRank(){
-
-  const ranking =
-    [...members].sort(function(a,b){
-      return b.votes - a.votes;
-    });
-
-  const podium = [
-    ranking[1],
-    ranking[0],
-    ranking[2]
-  ];
-
-  document.getElementById("podium").innerHTML =
-    podium.map(function(member,index){
-
-      const place =
-        index === 1 ? 1 :
-        index === 0 ? 2 : 3;
-
-      return `
-        <div class="podiumItem ${place === 1 ? "first" : ""}">
-
-          <div class="podiumAvatar">
-            ${member.initial}
-          </div>
-
-          <strong>#${place} ${member.name}</strong>
-          <small>${member.votes} votes</small>
-
-        </div>
-      `;
-
-    }).join("");
-
-  document.getElementById("rankingList").innerHTML =
-    ranking.map(function(member,index){
-
-      return `
-        <div class="rankRow">
-
-          <strong>#${index + 1}</strong>
-
-          <div class="rankUser">
-
-            <div class="miniAvatar">
-              ${member.initial}
-            </div>
-
-            ${member.name}
-
-          </div>
-
-          <div class="rankVotes">
-            ${member.votes}
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-}
-
-document.getElementById("demoReveal")
-.addEventListener("click",function(){
-
-  renderRank();
-  goTo("rankScreen");
-
-});
-
-/* ================= STORY BUTTONS ================= */
-
-document.querySelectorAll("[data-story]").forEach(function(button){
-
-  button.addEventListener("click",function(){
-
-    const index = Number(this.dataset.story);
-
-    goTo("nowScreen");
-
-    setTimeout(function(){
-
-      const posts =
-        document.querySelectorAll(".nowPost");
-
-      if(posts[index]){
-
-        posts[index].scrollIntoView({
-          behavior:"smooth",
-          block:"start"
-        });
-
-      }
-
-    },100);
-
-  });
-
-});
-
-/* ================= NOW LIKES ================= */
-
-document.querySelectorAll(".likeBtn").forEach(function(button){
-
-  button.addEventListener("click",function(){
-
-    const countElement =
-      this.querySelector("span");
-
-    let count =
-      Number(countElement.textContent);
-
-    if(this.classList.contains("liked")){
-
-      this.classList.remove("liked");
-
-      this.childNodes[0].textContent = "♡ ";
-
-      count--;
-
-    }else{
-
-      this.classList.add("liked");
-
-      this.childNodes[0].textContent = "♥ ";
-
-      count++;
-
-    }
-
-    countElement.textContent = count;
-
-  });
-
-});
-
-/* ================= COMMENTS ================= */
-
-const demoComments = [
-  {
-    initial:"E",
-    username:"@emma",
-    text:"Mais non 😭😭",
-    likes:4
-  },
-  {
-    initial:"N",
-    username:"@noe13",
-    text:"J'étais pas prêt 😂",
-    likes:8
-  },
-  {
-    initial:"L",
-    username:"@lucas",
-    text:"Incroyable",
-    likes:2
-  }
 ];
 
-function openComments(user){
-
-  document.getElementById("commentsList").innerHTML =
-    demoComments.map(function(comment){
-
-      return `
-        <div class="commentItem">
-
-          <div class="miniAvatar">
-            ${comment.initial}
-          </div>
-
-          <div class="commentText">
-
-            <strong>${comment.username}</strong>
-
-            <p>${comment.text}</p>
-
-            <div class="commentMeta">
-              il y a quelques minutes
-            </div>
-
-            <div class="commentActions">
-              <span>Répondre</span>
-              <span>♡ ${comment.likes}</span>
-            </div>
-
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-
-  document.getElementById("commentInput").placeholder =
-    "Commenter le NOW de " + user + "...";
-
-  document.getElementById("commentsOverlay")
-    .classList.add("show");
 }
 
-document.querySelectorAll(".commentBtn").forEach(function(button){
 
-  button.addEventListener("click",function(){
+function safeText(text){
 
-    openComments(this.dataset.user);
+const element =
+document.createElement("div");
 
-  });
+element.textContent =
+text;
 
-});
+return element.innerHTML;
 
-document.getElementById("sendCommentBtn")
-.addEventListener("click",function(){
-
-  const input =
-    document.getElementById("commentInput");
-
-  const text =
-    input.value.trim();
-
-  if(!text){
-    return;
-  }
-
-  const item =
-    document.createElement("div");
-
-  item.className = "commentItem";
-
-  item.innerHTML = `
-    <div class="miniAvatar">J</div>
-
-    <div class="commentText">
-
-      <strong>@jonathan</strong>
-
-      <p>${escapeHTML(text)}</p>
-
-      <div class="commentMeta">
-        maintenant
-      </div>
-
-      <div class="commentActions">
-        <span>Répondre</span>
-        <span>♡ 0</span>
-      </div>
-
-    </div>
-  `;
-
-  document.getElementById("commentsList")
-    .appendChild(item);
-
-  input.value = "";
-
-  toast("Commentaire publié ✓");
-
-});
-
-/* QUICK COMMENT */
-
-document.querySelectorAll(".quickSend").forEach(function(button){
-
-  button.addEventListener("click",function(){
-
-    const input =
-      this.parentElement.querySelector("input");
-
-    if(!input.value.trim()){
-      return;
-    }
-
-    input.value = "";
-
-    toast("Commentaire publié ✓");
-
-  });
-
-});
-
-/* SHARE */
-
-document.querySelectorAll(".shareBtn").forEach(function(button){
-
-  button.addEventListener("click",function(){
-
-    toast("NOW partagé ✓");
-
-  });
-
-});
-
-/* ================= ADD NOW ================= */
-
-function openAddNow(){
-
-  document.getElementById("addNowOverlay")
-    .classList.add("show");
 }
 
-document.getElementById("addNowBtn")
-.addEventListener("click",openAddNow);
 
-document.getElementById("topAddNow")
-.addEventListener("click",openAddNow);
+function drawMessages(){
 
-document.getElementById("nowFile")
-.addEventListener("change",function(){
+const container =
+document.getElementById("msgs");
 
-  selectedNowFile =
-    this.files[0] || null;
+container.innerHTML =
 
-  if(!selectedNowFile){
-    return;
-  }
+roomMessages.map(message=>`
 
-  document.getElementById("fileName").textContent =
-    selectedNowFile.name;
+<div class="msg ${message.mine ? "me" : ""}">
 
-  if(selectedNowFile.type.startsWith("video/")){
+${
 
-    const video =
-      document.createElement("video");
+message.mine
 
-    const url =
-      URL.createObjectURL(selectedNowFile);
+? ""
 
-    video.preload = "metadata";
+: `<strong>${safeText(message.user)}</strong>`
 
-    video.onloadedmetadata = function(){
-
-      if(video.duration > 60){
-
-        selectedNowFile = null;
-
-        document.getElementById("nowFile").value = "";
-
-        document.getElementById("fileName").textContent =
-          "Vidéo trop longue";
-
-        toast("1 minute maximum");
-
-      }else{
-
-        toast("Vidéo prête ✓");
-
-      }
-
-      URL.revokeObjectURL(url);
-
-    };
-
-    video.src = url;
-
-  }else{
-
-    toast("Photo prête ✓");
-
-  }
-
-});
-
-document.getElementById("publishNowBtn")
-.addEventListener("click",function(){
-
-  if(!selectedNowFile){
-
-    toast("Choisis une photo ou une vidéo");
-
-    return;
-  }
-
-  const caption =
-    document.getElementById("nowCaption").value.trim();
-
-  const fileURL =
-    URL.createObjectURL(selectedNowFile);
-
-  const post =
-    document.createElement("article");
-
-  post.className = "nowPost";
-
-  let mediaHTML = "";
-
-  if(selectedNowFile.type.startsWith("video/")){
-
-    mediaHTML = `
-      <video
-        src="${fileURL}"
-        autoplay
-        muted
-        loop
-        playsinline
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
-      ></video>
-    `;
-
-  }else{
-
-    mediaHTML = `
-      <img
-        src="${fileURL}"
-        alt=""
-        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
-      >
-    `;
-
-  }
-
-  post.innerHTML = `
-    <div class="nowMedia">
-
-      ${mediaHTML}
-
-      <div class="nowUserTop">
-
-        <div class="nowRing">
-          <div class="nowAvatar">J</div>
-        </div>
-
-        <div>
-          <strong>@jonathan</strong>
-          <small>maintenant · disparaît dans 24 h</small>
-        </div>
-
-      </div>
-
-      <div class="swipeText">
-        GLISSE ↑
-      </div>
-
-      <div class="nowBottom">
-
-        <div class="caption">
-          ${escapeHTML(caption || "Mon NOW")}
-        </div>
-
-        <div class="nowActions">
-          <button class="nowAction dynamicLike">♡ <span>0</span></button>
-          <button class="nowAction dynamicComment">◌ 0</button>
-          <button class="nowAction dynamicShare">↗ Partager</button>
-        </div>
-
-        <div class="quickComment">
-          <input placeholder="Ajouter un commentaire...">
-          <button class="dynamicQuickSend">↑</button>
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  document.getElementById("nowFeed")
-    .prepend(post);
-
-  const like =
-    post.querySelector(".dynamicLike");
-
-  like.addEventListener("click",function(){
-
-    const span =
-      this.querySelector("span");
-
-    const liked =
-      this.classList.toggle("liked");
-
-    span.textContent =
-      liked ? "1" : "0";
-
-    this.childNodes[0].textContent =
-      liked ? "♥ " : "♡ ";
-
-  });
-
-  post.querySelector(".dynamicComment")
-    .addEventListener("click",function(){
-      openComments("Jonathan");
-    });
-
-  post.querySelector(".dynamicShare")
-    .addEventListener("click",function(){
-      toast("NOW partagé ✓");
-    });
-
-  post.querySelector(".dynamicQuickSend")
-    .addEventListener("click",function(){
-
-      const input =
-        this.parentElement.querySelector("input");
-
-      if(!input.value.trim()){
-        return;
-      }
-
-      input.value = "";
-
-      toast("Commentaire publié ✓");
-
-    });
-
-  selectedNowFile = null;
-
-  document.getElementById("nowFile").value = "";
-  document.getElementById("nowCaption").value = "";
-  document.getElementById("fileName").textContent =
-    "Aucune photo ou vidéo choisie";
-
-  closeOverlay("addNowOverlay");
-
-  toast("Ton NOW est publié ✓");
-
-});
-
-/* ================= ROOM ================= */
-
-function saveMessages(){
-
-  localStorage.setItem(
-    "rank-v8-room",
-    JSON.stringify(messages)
-  );
 }
 
-function renderMessages(){
+${safeText(message.text)}
 
-  const container =
-    document.getElementById("messages");
+<span class="time">
 
-  container.innerHTML =
-    messages.map(function(message){
+${message.time}
 
-      let replyHTML = "";
+${
 
-      if(message.reply){
+message.mine
 
-        replyHTML = `
-          <div class="replyPreview">
-            <strong>${escapeHTML(message.reply.user)}</strong><br>
-            ${escapeHTML(message.reply.text)}
-          </div>
-        `;
+? `<span class="ticks"> ✓✓</span>`
 
-      }
-
-      return `
-        <div class="message ${message.mine ? "mine" : ""}">
-
-          <div class="messageContent">
-
-            <div class="bubble">
-
-              ${
-                message.mine
-                ? ""
-                : `<span class="sender">${escapeHTML(message.username)}</span>`
-              }
-
-              ${replyHTML}
-
-              ${escapeHTML(message.text)}
-
-              <span class="messageTime">
-                ${message.time}
-                ${
-                  message.mine
-                  ? `<span class="readTicks">✓✓</span>`
-                  : ""
-                }
-              </span>
-
-            </div>
-
-            <button
-              class="messageMenu"
-              data-message="${message.id}"
-            >
-              •••
-            </button>
-
-          </div>
-
-        </div>
-      `;
-
-    }).join("");
-
-  container.querySelectorAll("[data-message]")
-    .forEach(function(button){
-
-      button.addEventListener("click",function(){
-
-        activeMessageId =
-          Number(this.dataset.message);
-
-        const message =
-          messages.find(function(item){
-            return item.id === activeMessageId;
-          });
-
-        if(!message){
-          return;
-        }
-
-        document.getElementById("deleteBtn").style.display =
-          message.mine ? "block" : "none";
-
-        document.getElementById("reportBtn").style.display =
-          message.mine ? "none" : "block";
-
-        document.getElementById("blockBtn").style.display =
-          message.mine ? "none" : "block";
-
-        document.getElementById("messageMenuOverlay")
-          .classList.add("show");
-
-      });
-
-    });
+: ""
 
 }
+
+</span>
+
+</div>
+
+`).join("");
+
+}
+
 
 function sendMessage(){
 
-  const input =
-    document.getElementById("messageInput");
+const input =
+document.getElementById("message");
 
-  const text =
-    input.value.trim();
+const text =
+input.value.trim();
 
-  if(!text){
-    return;
-  }
+if(!text)
+return;
 
-  const now =
-    new Date();
+const now =
+new Date();
 
-  const message = {
-    id:Date.now(),
-    username:"@jonathan",
-    time:
-      String(now.getHours()).padStart(2,"0") +
-      ":" +
-      String(now.getMinutes()).padStart(2,"0"),
-    text:text,
-    mine:true
-  };
+const time =
 
-  if(replyTo){
+String(
+now.getHours()
+).padStart(2,"0")
 
-    message.reply = {
-      user:replyTo.username,
-      text:replyTo.text
-    };
++
 
-  }
+":"
 
-  messages.push(message);
++
 
-  replyTo = null;
+String(
+now.getMinutes()
+).padStart(2,"0");
 
-  input.value = "";
-  input.placeholder = "Message";
 
-  saveMessages();
-  renderMessages();
+roomMessages.push({
 
-  setTimeout(function(){
+user:"@jonathan",
 
-    const room =
-      document.querySelector(".roomPage");
+text:text,
 
-    room.scrollTop =
-      room.scrollHeight;
+mine:true,
 
-  },50);
+time:time
+
+});
+
+
+localStorage.setItem(
+
+"rank-v81-room",
+
+JSON.stringify(
+roomMessages
+)
+
+);
+
+
+input.value = "";
+
+drawMessages();
 
 }
 
-document.getElementById("sendMessageBtn")
-.addEventListener("click",sendMessage);
 
-document.getElementById("messageInput")
-.addEventListener("keydown",function(event){
+/* NOW */
 
-  if(event.key === "Enter"){
+function openAdd(){
 
-    event.preventDefault();
-
-    sendMessage();
-
-  }
-
-});
-
-/* REPLY */
-
-document.getElementById("replyBtn")
-.addEventListener("click",function(){
-
-  const message =
-    messages.find(function(item){
-      return item.id === activeMessageId;
-    });
-
-  if(message){
-
-    replyTo = message;
-
-    document.getElementById("messageInput").placeholder =
-      "Répondre à " + message.username;
-
-    document.getElementById("messageInput").focus();
-
-    toast("Réponse à " + message.username);
-
-  }
-
-  closeOverlay("messageMenuOverlay");
-
-});
-
-/* REPORT */
-
-document.getElementById("reportBtn")
-.addEventListener("click",function(){
-
-  closeOverlay("messageMenuOverlay");
-
-  toast("Message signalé ✓");
-
-});
-
-/* BLOCK */
-
-document.getElementById("blockBtn")
-.addEventListener("click",function(){
-
-  const message =
-    messages.find(function(item){
-      return item.id === activeMessageId;
-    });
-
-  if(!message){
-    return;
-  }
-
-  messages =
-    messages.filter(function(item){
-      return item.username !== message.username;
-    });
-
-  saveMessages();
-  renderMessages();
-
-  closeOverlay("messageMenuOverlay");
-
-  toast(message.username + " bloqué");
-
-});
-
-/* DELETE */
-
-document.getElementById("deleteBtn")
-.addEventListener("click",function(){
-
-  messages =
-    messages.filter(function(item){
-      return item.id !== activeMessageId;
-    });
-
-  saveMessages();
-  renderMessages();
-
-  closeOverlay("messageMenuOverlay");
-
-  toast("Message supprimé");
-
-});
-
-/* ROOM MENU */
-
-document.getElementById("roomMenuBtn")
-.addEventListener("click",function(){
-
-  document.getElementById("roomMenuOverlay")
-    .classList.add("show");
-
-});
-
-document.getElementById("membersBtn")
-.addEventListener("click",function(){
-
-  closeOverlay("roomMenuOverlay");
-
-  toast("8 membres dans Marseille 🔥");
-
-});
-
-document.getElementById("muteBtn")
-.addEventListener("click",function(){
-
-  closeOverlay("roomMenuOverlay");
-
-  toast("Notifications en silencieux ✓");
-
-});
-
-document.getElementById("leaveRoomBtn")
-.addEventListener("click",function(){
-
-  closeOverlay("roomMenuOverlay");
-
-  toast("Démo : tu restes dans le groupe");
-
-});
-
-/* ================= CREATE QUESTION ================= */
-
-function updateQuestionAvailability(){
-
-  const button =
-    document.getElementById("createQuestionBtn");
-
-  const status =
-    document.getElementById("questionStatus");
-
-  const saved =
-    localStorage.getItem("rank-v8-question");
-
-  if(!saved){
-
-    button.disabled = false;
-
-    status.textContent =
-      "Une proposition disponible cette semaine.";
-
-    return;
-  }
-
-  try{
-
-    const data =
-      JSON.parse(saved);
-
-    const sevenDays =
-      7 * 24 * 60 * 60 * 1000;
-
-    const remaining =
-      sevenDays - (Date.now() - data.createdAt);
-
-    if(remaining <= 0){
-
-      localStorage.removeItem("rank-v8-question");
-
-      button.disabled = false;
-
-      status.textContent =
-        "Une proposition disponible cette semaine.";
-
-    }else{
-
-      const days =
-        Math.ceil(
-          remaining / (24 * 60 * 60 * 1000)
-        );
-
-      button.disabled = true;
-
-      status.textContent =
-        "Question envoyée ✓ · prochaine proposition dans environ " +
-        days +
-        " jour" +
-        (days > 1 ? "s." : ".");
-
-    }
-
-  }catch(e){
-
-    localStorage.removeItem("rank-v8-question");
-
-  }
+document
+.getElementById("addSheet")
+.classList.add("show");
 
 }
 
-document.getElementById("createQuestionBtn")
-.addEventListener("click",function(){
 
-  const input =
-    document.getElementById("customQuestion");
+function closeAdd(){
 
-  const text =
-    input.value.trim();
+document
+.getElementById("addSheet")
+.classList.remove("show");
 
-  if(text.length < 8){
+}
 
-    toast("Écris une vraie question");
 
-    return;
-  }
+function publishNow(){
 
-  localStorage.setItem(
-    "rank-v8-question",
-    JSON.stringify({
-      text:text,
-      createdAt:Date.now()
-    })
-  );
+const fileInput =
+document.getElementById("nowFile");
 
-  input.value = "";
+const file =
+fileInput.files[0];
 
-  updateQuestionAvailability();
+if(!file){
 
-  toast("Question proposée ✓");
+alert(
+"Choisis une photo ou une vidéo."
+);
+
+return;
+
+}
+
+
+/* VIDEO MAX 1 MINUTE */
+
+if(
+file.type.startsWith("video/")
+){
+
+const video =
+document.createElement("video");
+
+const url =
+URL.createObjectURL(file);
+
+video.preload =
+"metadata";
+
+video.onloadedmetadata =
+function(){
+
+if(video.duration > 60){
+
+URL.revokeObjectURL(url);
+
+alert(
+"La vidéo doit durer 1 minute maximum."
+);
+
+return;
+
+}
+
+createNowPost(
+file,
+url
+);
+
+};
+
+video.src =
+url;
+
+}else{
+
+createNowPost(
+file,
+URL.createObjectURL(file)
+);
+
+}
+
+}
+
+
+function createNowPost(
+file,
+url
+){
+
+const caption =
+
+safeText(
+
+document
+.getElementById("captionInput")
+.value.trim()
+
+|| "Mon NOW"
+
+);
+
+
+const sound =
+
+safeText(
+
+document
+.getElementById("soundInput")
+.value
+
+);
+
+
+const media =
+
+file.type.startsWith("video/")
+
+?
+
+`
+<video
+src="${url}"
+autoplay
+muted
+loop
+playsinline
+style="
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+"
+></video>
+`
+
+:
+
+`
+<img
+src="${url}"
+style="
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+"
+>
+`;
+
+
+const post =
+document.createElement("div");
+
+post.className =
+"post";
+
+post.dataset.expires =
+Date.now() + 86400000;
+
+
+post.innerHTML = `
+
+<div class="media">
+
+${media}
+
+<div class="author">
+
+@toi
+
+<small>
+maintenant · expire dans 24 h
+</small>
+
+</div>
+
+<div class="music">
+♫ ${sound}
+</div>
+
+<div class="caption">
+${caption}
+</div>
+
+<div class="actions">
+
+<button
+class="act"
+onclick="
+this.classList.toggle('liked');
+this.textContent =
+this.classList.contains('liked')
+? '♥'
+: '♡';
+"
+>
+♡
+</button>
+
+<button
+class="act"
+onclick="
+alert('Commentaires 💬')
+"
+>
+💬
+</button>
+
+<button
+class="act"
+onclick="
+alert('Partagé dans le groupe ✓')
+"
+>
+↗
+</button>
+
+</div>
+
+<div class="commentbar">
+
+<input
+placeholder="Ajouter un commentaire..."
+>
+
+<button onclick="commentNow(this)">
+↑
+</button>
+
+</div>
+
+</div>
+
+`;
+
+
+document
+.getElementById("feed")
+.prepend(post);
+
+
+fileInput.value = "";
+
+document
+.getElementById("captionInput")
+.value = "";
+
+
+closeAdd();
+
+
+alert(
+"NOW publié ✓\nIl disparaîtra dans 24 heures."
+);
+
+}
+
+
+/* SUPPRESSION APRÈS 24H */
+
+function removeExpiredNow(){
+
+document
+.querySelectorAll("[data-expires]")
+.forEach(post => {
+
+if(
+Date.now()
+>
+Number(post.dataset.expires)
+){
+
+post.remove();
+
+}
 
 });
 
-/* ================= OVERLAYS ================= */
+}
 
-document.querySelectorAll("[data-close]")
-.forEach(function(button){
 
-  button.addEventListener("click",function(){
+/* CREATE QUESTION */
 
-    closeOverlay(this.dataset.close);
+function saveQuestion(){
 
-  });
+const input =
+document.getElementById(
+"questionInput"
+);
 
-});
+const text =
+input.value.trim();
 
-document.querySelectorAll(".overlay")
-.forEach(function(overlay){
+if(text.length < 8){
 
-  overlay.addEventListener("click",function(event){
+alert(
+"Écris une vraie question."
+);
 
-    if(event.target === this){
+return;
 
-      this.classList.remove("show");
+}
 
-    }
 
-  });
+const old =
+localStorage.getItem(
+"rank-v81-question"
+);
 
-});
 
-/* ================= RESTORE VOTE ================= */
+if(old){
 
 try{
 
-  const savedVotes =
-    JSON.parse(
-      localStorage.getItem("rank-v8-vote") || "[]"
-    );
+const data =
+JSON.parse(old);
 
-  savedVotes.forEach(function(id){
-    selectedVotes.add(id);
-  });
+const week =
+7 * 24 * 60 * 60 * 1000;
 
-  if(savedVotes.length){
+if(
+Date.now() - data.date
+<
+week
+){
 
-    document.getElementById("voteSuccess").style.display =
-      "block";
+alert(
+"Tu as déjà proposé ta question cette semaine."
+);
 
-  }
+return;
 
-}catch(e){}
+}
 
-/* ================= START ================= */
+}catch(error){}
 
-renderPeople();
-renderRank();
-renderMessages();
-updateQuestionAvailability();
-updateCountdown();
+}
 
-setInterval(updateCountdown,1000);
+
+localStorage.setItem(
+
+"rank-v81-question",
+
+JSON.stringify({
+
+text:text,
+
+date:Date.now()
+
+})
+
+);
+
+
+input.value = "";
+
+alert(
+"Question proposée ✓"
+);
+
+}
+
+
+/* RESTAURATION DU VOTE */
+
+try{
+
+const oldVote =
+JSON.parse(
+
+localStorage.getItem(
+"rank-v81-vote"
+)
+
+|| "[]"
+
+);
+
+oldVote.forEach(
+index =>
+selected.add(index)
+);
+
+}catch(error){}
+
+
+/* START */
+
+drawPeople();
+
+drawMessages();
+
+updateTimer();
+
+removeExpiredNow();
+
+setInterval(
+updateTimer,
+1000
+);
+
+setInterval(
+removeExpiredNow,
+60000
+);
 
 </script>
 
