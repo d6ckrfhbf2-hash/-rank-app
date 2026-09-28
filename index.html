@@ -3,133 +3,1094 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>RANK — V8.2</title>
+<title>RANK — V8.3</title>
 
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
- --bg:#f6f7fb;--card:#fff;--text:#111218;--muted:#898c98;
- --line:#e9eaf0;--pink:#ff2d72;--purple:#8054ff;--blue:#4169ff;
- --green:#00a884;--wa:#efeae2;
+ --bg:#f6f7fb;
+ --card:#fff;
+ --text:#101116;
+ --muted:#8a8d98;
+ --line:#e9eaf0;
+ --pink:#ff2d72;
+ --purple:#8054ff;
+ --blue:#426bff;
+ --green:#00a884;
+ --wa:#efeae2;
 }
-html,body{margin:0;min-height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
-button,input{font:inherit}button{cursor:pointer}
-.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:calc(76px + env(safe-area-inset-bottom));background:var(--bg)}
-.top{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;background:#fffc;backdrop-filter:blur(18px);position:sticky;top:0;z-index:50;border-bottom:1px solid #eee}
-.logo{font-size:28px;font-weight:1000;letter-spacing:-1.5px}.logo i{font-style:normal;color:var(--pink)}
-.streak{background:#111;color:#fff;padding:8px 11px;border-radius:20px;font-size:12px;font-weight:900}
-.screen{display:none;padding:15px}.screen.active{display:block}
-.kicker{font-size:11px;font-weight:950;letter-spacing:1px;color:var(--pink)}
-.title{font-size:35px;font-weight:1000;letter-spacing:-1.5px;line-height:1;margin:6px 0}
+html,body{
+ margin:0;
+ min-height:100%;
+ background:var(--bg);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ color:var(--text);
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.app{
+ max-width:520px;
+ margin:auto;
+ min-height:100dvh;
+ padding-bottom:calc(75px + env(safe-area-inset-bottom));
+ background:var(--bg);
+}
+.top{
+ height:64px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 17px;
+ background:#fffffff0;
+ backdrop-filter:blur(18px);
+ position:sticky;
+ top:0;
+ z-index:50;
+ border-bottom:1px solid #eee;
+}
+.logo{
+ font-size:28px;
+ font-weight:1000;
+ letter-spacing:-1.6px;
+}
+.logo i{font-style:normal;color:var(--pink)}
+.streak{
+ background:#111;
+ color:#fff;
+ border-radius:20px;
+ padding:8px 11px;
+ font-size:12px;
+ font-weight:900;
+}
+.screen{display:none;padding:15px}
+.screen.active{display:block}
+.kicker{
+ font-size:11px;
+ font-weight:950;
+ letter-spacing:1px;
+ color:var(--pink);
+}
+.title{
+ font-size:34px;
+ line-height:1;
+ font-weight:1000;
+ letter-spacing:-1.5px;
+ margin:6px 0;
+}
 .muted{font-size:12px;color:var(--muted)}
-.card{background:white;border-radius:25px;padding:19px;margin-top:14px;box-shadow:0 10px 35px #15204a0d}
-.primary{width:100%;border:0;border-radius:15px;padding:15px;margin-top:13px;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;font-weight:950}
-.primary:disabled{opacity:.35}
-.secondary{width:100%;border:0;border-radius:15px;padding:14px;margin-top:10px;background:#111;color:#fff;font-weight:900}
+.card{
+ background:#fff;
+ border-radius:25px;
+ padding:19px;
+ margin-top:14px;
+ box-shadow:0 10px 35px #15204a0d;
+}
+.primary{
+ width:100%;
+ border:0;
+ border-radius:16px;
+ padding:15px;
+ margin-top:12px;
+ color:#fff;
+ font-weight:950;
+ background:linear-gradient(100deg,var(--pink),var(--purple));
+}
+.secondary{
+ width:100%;
+ border:0;
+ border-radius:16px;
+ padding:14px;
+ margin-top:10px;
+ color:#fff;
+ font-weight:900;
+ background:#111;
+}
+.lightBtn{
+ border:0;
+ border-radius:18px;
+ padding:9px 12px;
+ background:#f0f1f5;
+ font-size:11px;
+ font-weight:900;
+}
 
 /* STORIES */
-.stories{display:flex;gap:12px;overflow-x:auto;margin-bottom:18px;scrollbar-width:none}.stories::-webkit-scrollbar{display:none}
-.story{border:0;background:none;text-align:center;min-width:59px;font-size:10px}
-.ring{width:59px;height:59px;padding:3px;border-radius:50%;margin:auto auto 5px;background:linear-gradient(135deg,#ffd633,#ff385c,#ff2e93,#754cff,#2684ff)}
-.face{height:100%;border-radius:50%;border:3px solid white;background:#eee;display:grid;place-items:center;font-size:18px;font-weight:950}
+.stories{
+ display:flex;
+ gap:12px;
+ overflow-x:auto;
+ margin-bottom:18px;
+ scrollbar-width:none;
+}
+.stories::-webkit-scrollbar{display:none}
+.story{
+ border:0;
+ background:none;
+ text-align:center;
+ min-width:59px;
+ font-size:10px;
+}
+.ring{
+ width:59px;
+ height:59px;
+ padding:3px;
+ border-radius:50%;
+ margin:auto auto 5px;
+ background:linear-gradient(135deg,#ffd633,#ff385c,#ff2e93,#754cff,#2684ff);
+}
+.face{
+ height:100%;
+ border-radius:50%;
+ border:3px solid #fff;
+ background:#eee;
+ display:grid;
+ place-items:center;
+ font-size:18px;
+ font-weight:950;
+}
 
 /* TODAY */
-.question{font-size:28px;font-weight:1000;line-height:1.08;letter-spacing:-.8px;margin:15px 0}
-.people{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.person{position:relative;border:1px solid var(--line);background:#fafafd;border-radius:17px;padding:11px 3px;text-align:center}
-.person.sel{border:2px solid var(--pink);background:#fff1f6}
-.person.sel:after{content:"✓";position:absolute;right:5px;top:5px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--pink);color:#fff;font-size:9px}
-.pface{width:43px;height:43px;border-radius:50%;margin:auto auto 6px;display:grid;place-items:center;color:#fff;font-weight:950;background:linear-gradient(135deg,#4169ff,#9254ff)}
-.person:nth-child(even) .pface{background:linear-gradient(135deg,#ff2d72,#ff874b)}
-.person b{font-size:11px}.person small{display:block;color:#999;font-size:8px}
-.reveal{display:flex;justify-content:space-between;margin-top:15px;padding-top:13px;border-top:1px solid #eee}.reveal b{font-size:19px}
+.todayHero{
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(135deg,#fff,#fff5f8);
+}
+.todayHero:after{
+ content:"TODAY";
+ position:absolute;
+ right:-10px;
+ top:-13px;
+ font-size:72px;
+ font-weight:1000;
+ color:#ff2d7208;
+}
+.question{
+ font-size:28px;
+ font-weight:1000;
+ line-height:1.08;
+ letter-spacing:-.8px;
+ margin:15px 0;
+}
+.people{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin-top:14px;
+}
+.person{
+ position:relative;
+ border:1px solid var(--line);
+ background:#fafafd;
+ border-radius:17px;
+ padding:11px 3px;
+ text-align:center;
+}
+.person.sel{
+ border:2px solid var(--pink);
+ background:#fff1f6;
+}
+.person.sel:after{
+ content:"✓";
+ position:absolute;
+ right:5px;
+ top:5px;
+ width:18px;
+ height:18px;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ background:var(--pink);
+ color:#fff;
+ font-size:9px;
+}
+.pface{
+ width:43px;
+ height:43px;
+ border-radius:50%;
+ margin:auto auto 6px;
+ display:grid;
+ place-items:center;
+ color:#fff;
+ font-weight:950;
+ background:linear-gradient(135deg,#426bff,#9254ff);
+}
+.person:nth-child(even) .pface{
+ background:linear-gradient(135deg,#ff2d72,#ff874b);
+}
+.person b{font-size:11px}
+.person small{
+ display:block;
+ color:#999;
+ font-size:8px;
+}
+.timeBox{
+ margin-top:15px;
+ border-top:1px solid #eee;
+ padding-top:14px;
+ display:flex;
+ justify-content:space-between;
+}
+.timeBox b{font-size:18px}
+
+/* EVENT CARD */
+.eventCard{
+ background:#101116;
+ color:#fff;
+ border-radius:25px;
+ padding:21px;
+ margin-top:14px;
+ position:relative;
+ overflow:hidden;
+}
+.eventCard:after{
+ content:"R";
+ position:absolute;
+ right:-8px;
+ bottom:-40px;
+ font-size:150px;
+ font-weight:1000;
+ color:#ffffff08;
+}
+.eventCard .kicker{color:#ff6c9a}
+.eventTime{
+ font-size:38px;
+ font-weight:1000;
+ margin:6px 0;
+}
+.eventStatus{font-size:12px;color:#bbb}
 
 /* NOW */
-.nowHead{display:flex;align-items:center;justify-content:space-between;position:sticky;top:64px;z-index:30;background:var(--bg);padding:3px 0 9px}
-.addNow{border:0;border-radius:22px;background:#111;color:#fff;padding:11px 14px;font-weight:900;box-shadow:0 5px 18px #0002}
-.feed{height:calc(100dvh - 190px);overflow-y:auto;scroll-snap-type:y mandatory;margin:0 -15px -78px;scrollbar-width:none}.feed::-webkit-scrollbar{display:none}
-.post{height:calc(100dvh - 190px);min-height:500px;padding:0 9px 8px;scroll-snap-align:start;scroll-snap-stop:always}
-.media{height:100%;position:relative;overflow:hidden;border-radius:26px;color:#fff;background:linear-gradient(145deg,#ff416d,#754cff)}
-.post:nth-child(2) .media{background:linear-gradient(145deg,#21bfe9,#4054e9)}
-.post:nth-child(3) .media{background:linear-gradient(145deg,#24ca94,#276cdd)}
-.big{position:absolute;inset:0;display:grid;place-items:center;font-size:180px;font-weight:1000;color:#ffffff20}
-.author{position:absolute;top:16px;left:16px;font-weight:950;z-index:4}.author small{display:block;font-weight:500;margin-top:2px}
-.music{position:absolute;left:15px;bottom:120px;background:#0008;padding:7px 11px;border-radius:20px;font-size:10px;z-index:5}
-.caption{position:absolute;left:15px;bottom:76px;font-weight:850;z-index:5}
-.actions{position:absolute;right:13px;bottom:91px;display:grid;gap:10px;z-index:5}
-.act{width:48px;height:48px;border:0;border-radius:50%;background:#0007;color:white;font-size:19px}.act.liked{background:var(--pink)}
-.commentbar{position:absolute;bottom:14px;left:15px;right:15px;display:flex;gap:7px;z-index:5}
-.commentbar input{min-width:0;flex:1;border:1px solid #ffffff55;background:#0007;color:#fff;border-radius:22px;padding:11px}.commentbar input::placeholder{color:#ddd}
-.commentbar button{width:41px;border:0;border-radius:50%;background:#fff;font-weight:950}
+.nowHead{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ position:sticky;
+ top:64px;
+ z-index:40;
+ background:var(--bg);
+ padding:4px 0 10px;
+}
+.addNow{
+ border:0;
+ border-radius:22px;
+ background:#111;
+ color:#fff;
+ padding:11px 14px;
+ font-weight:900;
+ box-shadow:0 5px 18px #0002;
+ position:relative;
+ z-index:45;
+}
+.feed{
+ height:calc(100dvh - 190px);
+ overflow-y:auto;
+ scroll-snap-type:y mandatory;
+ margin:0 -15px -78px;
+ scrollbar-width:none;
+}
+.feed::-webkit-scrollbar{display:none}
+.post{
+ height:calc(100dvh - 190px);
+ min-height:500px;
+ padding:0 9px 8px;
+ scroll-snap-align:start;
+ scroll-snap-stop:always;
+}
+.media{
+ height:100%;
+ position:relative;
+ overflow:hidden;
+ border-radius:26px;
+ color:#fff;
+ background:linear-gradient(145deg,#ff416d,#754cff);
+}
+.post:nth-child(2) .media{
+ background:linear-gradient(145deg,#21bfe9,#4054e9);
+}
+.post:nth-child(4) .media{
+ background:linear-gradient(145deg,#24ca94,#276cdd);
+}
+.big{
+ position:absolute;
+ inset:0;
+ display:grid;
+ place-items:center;
+ font-size:180px;
+ font-weight:1000;
+ color:#ffffff20;
+}
+.author{
+ position:absolute;
+ top:16px;
+ left:16px;
+ font-weight:950;
+ z-index:4;
+}
+.author small{
+ display:block;
+ font-weight:500;
+ margin-top:2px;
+}
+.music{
+ position:absolute;
+ left:15px;
+ bottom:120px;
+ background:#0008;
+ padding:7px 11px;
+ border-radius:20px;
+ font-size:10px;
+ z-index:5;
+}
+.caption{
+ position:absolute;
+ left:15px;
+ bottom:76px;
+ font-weight:850;
+ z-index:5;
+}
+.actions{
+ position:absolute;
+ right:13px;
+ bottom:91px;
+ display:grid;
+ gap:10px;
+ z-index:5;
+}
+.act{
+ width:48px;
+ height:48px;
+ border:0;
+ border-radius:50%;
+ background:#0007;
+ color:#fff;
+ font-size:19px;
+}
+.act.liked{background:var(--pink)}
+.commentbar{
+ position:absolute;
+ bottom:14px;
+ left:15px;
+ right:15px;
+ display:flex;
+ gap:7px;
+ z-index:5;
+}
+.commentbar input{
+ min-width:0;
+ flex:1;
+ border:1px solid #ffffff55;
+ background:#0007;
+ color:#fff;
+ border-radius:22px;
+ padding:11px;
+}
+.commentbar input::placeholder{color:#ddd}
+.commentbar button{
+ width:41px;
+ border:0;
+ border-radius:50%;
+ background:#fff;
+ font-weight:950;
+}
+
+/* SPONSORED NOW */
+.sponsored .media{
+ background:
+ radial-gradient(circle at 80% 20%,#ff4b8b55,transparent 35%),
+ linear-gradient(145deg,#11131c,#272b44);
+}
+.sponsorLabel{
+ display:inline-block;
+ margin-top:4px;
+ padding:4px 8px;
+ border:1px solid #ffffff55;
+ border-radius:15px;
+ font-size:8px;
+ letter-spacing:.5px;
+}
+.sponsorCenter{
+ position:absolute;
+ inset:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ text-align:center;
+ padding:35px;
+}
+.sponsorCenter .adLogo{
+ width:90px;
+ height:90px;
+ border-radius:24px;
+ display:grid;
+ place-items:center;
+ font-size:42px;
+ background:#fff;
+ color:#111;
+ font-weight:1000;
+}
+.sponsorCenter h2{margin:15px 0 5px}
+.sponsorCenter p{
+ color:#d1d1d6;
+ font-size:12px;
+ max-width:270px;
+}
+.sponsorCTA{
+ border:0;
+ border-radius:20px;
+ padding:11px 20px;
+ background:#fff;
+ color:#111;
+ font-weight:950;
+}
 
 /* RANK */
-.winner{text-align:center}.winnerFace{width:80px;height:80px;border-radius:50%;margin:8px auto;background:linear-gradient(135deg,#ffd633,#ff5d5d);display:grid;place-items:center;color:#fff;font-size:30px;font-weight:1000}
-.rankrow{display:flex;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #eee}.rankrow:last-child{border:0}.score{margin-left:auto;font-size:11px;color:#888}
+.winner{text-align:center}
+.winnerFace{
+ width:80px;
+ height:80px;
+ border-radius:50%;
+ margin:8px auto;
+ background:linear-gradient(135deg,#ffd633,#ff5d5d);
+ display:grid;
+ place-items:center;
+ color:#fff;
+ font-size:30px;
+ font-weight:1000;
+}
+.rankrow{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ padding:13px 0;
+ border-bottom:1px solid #eee;
+}
+.rankrow:last-child{border:0}
+.score{
+ margin-left:auto;
+ font-size:11px;
+ color:#888;
+}
 
-/* ROOM HOME */
-.roomHome{margin:-15px;background:#fff;min-height:calc(100dvh - 140px)}
-.roomHero{padding:18px;background:linear-gradient(120deg,#11131b,#24203b);color:#fff}
-.roomHero h2{margin:4px 0}.roomHero p{margin:0;color:#c7c7cf;font-size:11px}
-.chatRow{display:flex;gap:12px;align-items:center;padding:13px 15px;border-bottom:1px solid #eee;background:#fff}
-.chatAvatar{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ff2d72,#8054ff);color:#fff;font-weight:950;flex:none}
-.chatAvatar.groupAvatar{background:#00a884}
-.chatInfo{flex:1;min-width:0}.chatInfo b{display:block;font-size:14px}.chatInfo span{display:block;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chatTime{font-size:9px;color:#999}
-.roomTabs{display:grid;grid-template-columns:1fr 1fr;background:#fff;border-bottom:1px solid #eee}
-.roomTabs button{border:0;background:#fff;padding:13px;font-weight:900;color:#999}.roomTabs button.active{color:var(--pink);border-bottom:3px solid var(--pink)}
+/* ROOM */
+.roomShell{
+ margin:-15px;
+ background:#fff;
+ min-height:calc(100dvh - 140px);
+}
+.roomHero{
+ padding:18px 16px 12px;
+ background:#fff;
+}
+.roomTopLine{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.roomActions{display:flex;gap:7px}
+.roundAction{
+ width:38px;
+ height:38px;
+ border:0;
+ border-radius:50%;
+ background:#f0f1f5;
+ font-size:18px;
+}
+.roomTabs{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ border-bottom:1px solid #eee;
+ background:#fff;
+ position:sticky;
+ top:64px;
+ z-index:20;
+}
+.roomTabs button{
+ border:0;
+ background:#fff;
+ padding:13px;
+ font-weight:900;
+ color:#999;
+}
+.roomTabs button.active{
+ color:var(--pink);
+ border-bottom:3px solid var(--pink);
+}
+.chatRow{
+ display:flex;
+ gap:12px;
+ align-items:center;
+ padding:13px 15px;
+ border-bottom:1px solid #eee;
+ background:#fff;
+}
+.chatAvatar{
+ width:49px;
+ height:49px;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(135deg,#ff2d72,#8054ff);
+ color:#fff;
+ font-weight:950;
+ flex:none;
+}
+.groupAvatar{background:#00a884}
+.chatInfo{
+ flex:1;
+ min-width:0;
+}
+.chatInfo b{
+ display:block;
+ font-size:14px;
+}
+.chatInfo span{
+ display:block;
+ font-size:11px;
+ color:#888;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ margin-top:3px;
+}
+.chatTime{
+ font-size:9px;
+ color:#999;
+ text-align:right;
+}
+.unread{
+ display:inline-grid;
+ place-items:center;
+ min-width:19px;
+ height:19px;
+ border-radius:50%;
+ background:var(--pink);
+ color:#fff;
+ font-size:8px;
+ margin-top:5px;
+}
 
-/* CHAT */
-.chatPage{display:none;position:fixed;inset:0;z-index:80;background:var(--wa);max-width:520px;margin:auto}
-.chatPage.show{display:flex;flex-direction:column}
-.chatTop{height:65px;padding-top:env(safe-area-inset-top);background:#fff;display:flex;align-items:center;gap:9px;padding-left:10px;padding-right:10px;flex:none}
-.back{border:0;background:none;font-size:24px}.chatTop .chatAvatar{width:40px;height:40px}.chatTopInfo{flex:1}.chatTopInfo b{display:block}.chatTopInfo small{color:#888}
-.cameraBtn,.dotsBtn{border:0;background:none;font-size:20px}
-.chatMessages{flex:1;overflow-y:auto;padding:12px}
-.bubble{max-width:80%;width:max-content;background:#fff;padding:8px 10px 16px;border-radius:7px 12px 12px;margin:7px 0;position:relative;font-size:12px;box-shadow:0 1px 2px #0001}
-.bubble.mine{margin-left:auto;background:#d9fdd3}.sender{display:block;color:#087c68;font-size:9px;font-weight:900;margin-bottom:3px}
-.btime{position:absolute;right:6px;bottom:3px;font-size:7px;color:#888}.ticks{color:#248cff}
-.privatePhoto{background:#111;color:white;padding:15px;border-radius:12px;margin:4px 0;font-weight:850}
-.chatComposer{display:flex;gap:6px;padding:7px 7px calc(7px + env(safe-area-inset-bottom));background:#efeae2}
-.chatComposer input{min-width:0;flex:1;border:0;border-radius:23px;padding:12px 14px;background:#fff}
-.chatComposer button{width:44px;border:0;border-radius:50%;background:#00a884;color:#fff}
+/* CHANNELS */
+.channelHeader{
+ padding:17px 15px 9px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.channelHeader h2{margin:0}
+.channelRow{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:13px 15px;
+ border-bottom:1px solid #eee;
+}
+.channelAvatar{
+ width:52px;
+ height:52px;
+ border-radius:17px;
+ display:grid;
+ place-items:center;
+ font-size:23px;
+ background:#f1efff;
+}
+.channelInfo{
+ flex:1;
+ min-width:0;
+}
+.channelInfo b{font-size:14px}
+.channelInfo span{
+ display:block;
+ font-size:10px;
+ color:#888;
+ margin-top:4px;
+}
+.follow{
+ border:0;
+ border-radius:18px;
+ padding:8px 11px;
+ background:#f2eaff;
+ color:var(--purple);
+ font-weight:900;
+ font-size:9px;
+}
+.channelAd{
+ margin:12px 15px;
+ border-radius:18px;
+ background:linear-gradient(120deg,#111,#30254d);
+ color:#fff;
+ padding:17px;
+}
+.channelAd small{
+ color:#bbb;
+ font-size:8px;
+}
+.channelAd h3{
+ margin:8px 0 5px;
+}
+.channelAd p{
+ font-size:10px;
+ color:#ccc;
+ margin:0 0 10px;
+}
 
-/* MEMBERS */
-.membersSheet .memberRow{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid #eee}.membersSheet .memberRow button{margin-left:auto;border:0;border-radius:17px;background:#111;color:#fff;padding:8px 10px;font-size:10px}
+/* CHAT PAGE */
+.chatPage{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:var(--wa);
+ max-width:520px;
+ margin:auto;
+}
+.chatPage.show{
+ display:flex;
+ flex-direction:column;
+}
+.chatTop{
+ min-height:65px;
+ padding-top:env(safe-area-inset-top);
+ background:#fff;
+ display:flex;
+ align-items:center;
+ gap:9px;
+ padding-left:9px;
+ padding-right:9px;
+ flex:none;
+}
+.back{
+ border:0;
+ background:none;
+ font-size:25px;
+}
+.chatTop .chatAvatar{
+ width:40px;
+ height:40px;
+}
+.chatTopInfo{flex:1}
+.chatTopInfo b{display:block}
+.chatTopInfo small{color:#888}
+.iconBtn{
+ border:0;
+ background:none;
+ font-size:20px;
+}
+.chatMessages{
+ flex:1;
+ overflow-y:auto;
+ padding:12px;
+}
+.bubble{
+ max-width:80%;
+ width:max-content;
+ background:#fff;
+ padding:8px 10px 16px;
+ border-radius:7px 12px 12px;
+ margin:7px 0;
+ position:relative;
+ font-size:12px;
+ box-shadow:0 1px 2px #0001;
+}
+.bubble.mine{
+ margin-left:auto;
+ background:#d9fdd3;
+}
+.sender{
+ display:block;
+ color:#087c68;
+ font-size:9px;
+ font-weight:900;
+ margin-bottom:3px;
+}
+.btime{
+ position:absolute;
+ right:6px;
+ bottom:3px;
+ font-size:7px;
+ color:#888;
+}
+.ticks{color:#248cff}
+.chatComposer{
+ display:flex;
+ gap:6px;
+ padding:7px 7px calc(7px + env(safe-area-inset-bottom));
+ background:#efeae2;
+}
+.chatComposer input{
+ min-width:0;
+ flex:1;
+ border:0;
+ border-radius:23px;
+ padding:12px 14px;
+ background:#fff;
+}
+.chatComposer button{
+ width:44px;
+ border:0;
+ border-radius:50%;
+ background:#00a884;
+ color:#fff;
+}
 
 /* RECAP */
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.stat{background:#fff;border-radius:17px;padding:16px}.stat b{display:block;font-size:23px}
+.stats{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:9px;
+ margin-top:15px;
+}
+.stat{
+ background:#fff;
+ border-radius:17px;
+ padding:16px;
+}
+.stat b{
+ display:block;
+ font-size:23px;
+}
 
 /* NAV */
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);height:calc(69px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(5,1fr);z-index:60}
-.nav button{border:0;background:none;color:#92949e;font-size:9px;font-weight:850}.nav button span{font-size:20px;display:block}.nav button.on{color:var(--pink)}
+.nav{
+ position:fixed;
+ bottom:0;
+ left:50%;
+ transform:translateX(-50%);
+ width:min(100%,520px);
+ height:calc(69px + env(safe-area-inset-bottom));
+ padding-bottom:env(safe-area-inset-bottom);
+ background:#fff;
+ border-top:1px solid #eee;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ z-index:70;
+}
+.nav button{
+ border:0;
+ background:none;
+ color:#92949e;
+ font-size:9px;
+ font-weight:850;
+}
+.nav button span{
+ font-size:20px;
+ display:block;
+}
+.nav button.on{color:var(--pink)}
 
 /* OVERLAYS */
-.overlay{display:none;position:fixed;inset:0;background:#000a;z-index:120;align-items:flex-end;justify-content:center}.overlay.show{display:flex}
-.sheet{max-width:520px;width:100%;max-height:88dvh;overflow:auto;background:#fff;border-radius:26px 26px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom))}
-.sheet h2{margin:0 0 4px}.close{float:right;border:0;width:35px;height:35px;border-radius:50%;background:#eee;font-size:18px}
-.field{width:100%;padding:13px;border:1px solid #ddd;border-radius:13px;margin-top:10px;background:#fff}
+.overlay{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#000b;
+ z-index:150;
+ align-items:flex-end;
+ justify-content:center;
+}
+.overlay.show{display:flex}
+.sheet{
+ max-width:520px;
+ width:100%;
+ max-height:90dvh;
+ overflow:auto;
+ background:#fff;
+ border-radius:26px 26px 0 0;
+ padding:20px 20px calc(20px + env(safe-area-inset-bottom));
+}
+.sheet h2{margin:0 0 5px}
+.close{
+ float:right;
+ border:0;
+ width:35px;
+ height:35px;
+ border-radius:50%;
+ background:#eee;
+ font-size:18px;
+}
+.field{
+ width:100%;
+ padding:13px;
+ border:1px solid #ddd;
+ border-radius:13px;
+ margin-top:10px;
+ background:#fff;
+}
+
+/* ADD CONTACT */
+.contactItem{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ padding:11px 0;
+ border-bottom:1px solid #eee;
+}
+.contactItem button{
+ margin-left:auto;
+ border:0;
+ border-radius:17px;
+ padding:8px 11px;
+ background:#111;
+ color:#fff;
+ font-size:9px;
+ font-weight:900;
+}
 
 /* MUSIC */
-.soundSearch{width:100%;padding:13px;border:1px solid #ddd;border-radius:14px;margin:12px 0}
-.soundItem{display:flex;align-items:center;gap:11px;padding:11px;border-bottom:1px solid #eee}.soundIcon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#ff2d72,#8054ff);display:grid;place-items:center;color:#fff}.soundInfo{flex:1}.soundInfo b{display:block;font-size:12px}.soundInfo small{color:#888}.soundItem button{border:0;border-radius:16px;padding:7px 10px;background:#111;color:#fff;font-size:9px}
-.selectedSound{margin-top:10px;padding:10px;border-radius:13px;background:#f3efff;font-size:11px}
+.soundItem{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ padding:11px 0;
+ border-bottom:1px solid #eee;
+}
+.soundIcon{
+ width:42px;
+ height:42px;
+ border-radius:11px;
+ display:grid;
+ place-items:center;
+ color:#fff;
+ background:linear-gradient(135deg,#ff2d72,#8054ff);
+}
+.soundInfo{flex:1}
+.soundInfo b{
+ display:block;
+ font-size:12px;
+}
+.soundInfo small{color:#888}
+.soundItem button{
+ border:0;
+ border-radius:16px;
+ padding:7px 10px;
+ background:#111;
+ color:#fff;
+ font-size:9px;
+}
 
 /* STORY VIEWER */
-.storyViewer{display:none;position:fixed;inset:0;background:#07070a;z-index:150;color:#fff;max-width:520px;margin:auto}.storyViewer.show{display:block}
-.storyBars{position:absolute;top:calc(9px + env(safe-area-inset-top));left:9px;right:9px;display:flex;gap:4px;z-index:5}.storyBar{height:3px;background:#ffffff50;flex:1;border-radius:5px}.storyBar.on{background:#fff}
-.storyClose{position:absolute;right:12px;top:calc(22px + env(safe-area-inset-top));z-index:7;border:0;background:#0006;color:#fff;border-radius:50%;width:38px;height:38px;font-size:19px}
-.storyUser{position:absolute;top:calc(27px + env(safe-area-inset-top));left:15px;z-index:6;font-weight:900}
-.storyContent{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(145deg,#ff2d72,#654cff);font-size:180px;font-weight:1000;color:#ffffff25}
-.storyText{position:absolute;bottom:110px;left:17px;font-size:17px;font-weight:900;z-index:6}
-.storyMusic{position:absolute;bottom:78px;left:17px;background:#0007;border-radius:17px;padding:7px 10px;font-size:10px;z-index:6}
-.storyReply{position:absolute;bottom:calc(15px + env(safe-area-inset-bottom));left:15px;right:15px;display:flex;gap:8px;z-index:7}.storyReply input{flex:1;min-width:0;border:1px solid #fff8;background:#0005;color:#fff;border-radius:25px;padding:13px}.storyReply button{width:45px;border:0;border-radius:50%;background:#fff}
+.storyViewer{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#07070a;
+ z-index:180;
+ color:#fff;
+ max-width:520px;
+ margin:auto;
+}
+.storyViewer.show{display:block}
+.storyBars{
+ position:absolute;
+ top:calc(9px + env(safe-area-inset-top));
+ left:9px;
+ right:9px;
+ display:flex;
+ gap:4px;
+ z-index:5;
+}
+.storyBar{
+ height:3px;
+ background:#ffffff50;
+ flex:1;
+ border-radius:5px;
+}
+.storyBar.on{background:#fff}
+.storyClose{
+ position:absolute;
+ right:12px;
+ top:calc(22px + env(safe-area-inset-top));
+ z-index:7;
+ border:0;
+ background:#0006;
+ color:#fff;
+ border-radius:50%;
+ width:38px;
+ height:38px;
+ font-size:19px;
+}
+.storyUser{
+ position:absolute;
+ top:calc(27px + env(safe-area-inset-top));
+ left:15px;
+ z-index:6;
+ font-weight:900;
+}
+.storyContent{
+ position:absolute;
+ inset:0;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(145deg,#ff2d72,#654cff);
+ font-size:180px;
+ font-weight:1000;
+ color:#ffffff25;
+}
+.storyText{
+ position:absolute;
+ bottom:110px;
+ left:17px;
+ font-size:17px;
+ font-weight:900;
+ z-index:6;
+}
+.storyMusic{
+ position:absolute;
+ bottom:78px;
+ left:17px;
+ background:#0007;
+ border-radius:17px;
+ padding:7px 10px;
+ font-size:10px;
+ z-index:6;
+}
+.storyReply{
+ position:absolute;
+ bottom:calc(15px + env(safe-area-inset-bottom));
+ left:15px;
+ right:15px;
+ display:flex;
+ gap:8px;
+ z-index:7;
+}
+.storyReply input{
+ flex:1;
+ min-width:0;
+ border:1px solid #fff8;
+ background:#0005;
+ color:#fff;
+ border-radius:25px;
+ padding:13px;
+}
+.storyReply button{
+ width:45px;
+ border:0;
+ border-radius:50%;
+ background:#fff;
+}
 
-/* CAMERA */
-.cameraPreview{height:260px;border-radius:20px;background:linear-gradient(145deg,#222,#4c315c);display:grid;place-items:center;color:#fff;text-align:center;margin-top:12px;font-size:50px}.cameraPreview small{display:block;font-size:11px;color:#ddd;margin-top:8px}
+/* EVENT / AD FULLSCREEN */
+.eventOverlay{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:250;
+ background:#08090d;
+ color:#fff;
+ max-width:520px;
+ margin:auto;
+}
+.eventOverlay.show{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ padding:25px;
+}
+.eventBrand{
+ position:absolute;
+ top:calc(20px + env(safe-area-inset-top));
+ font-size:24px;
+ font-weight:1000;
+}
+.eventBrand i{
+ color:var(--pink);
+ font-style:normal;
+}
+.eventMini{
+ color:#aaa;
+ font-size:11px;
+ letter-spacing:1.4px;
+ font-weight:900;
+}
+.eventBig{
+ font-size:90px;
+ line-height:1;
+ font-weight:1000;
+ margin:15px 0;
+}
+.eventOverlay h1{
+ font-size:31px;
+ margin:5px 0;
+}
+.eventOverlay p{
+ color:#aaa;
+ font-size:12px;
+}
+.demoBtn{
+ border:0;
+ border-radius:20px;
+ padding:11px 18px;
+ margin-top:17px;
+ font-weight:900;
+}
+
+/* AD */
+.adOverlay{
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:260;
+ background:#111;
+ color:#fff;
+ max-width:520px;
+ margin:auto;
+}
+.adOverlay.show{
+ display:flex;
+ flex-direction:column;
+}
+.adTop{
+ display:flex;
+ justify-content:space-between;
+ padding:calc(14px + env(safe-area-inset-top)) 15px 10px;
+ font-size:10px;
+ color:#ccc;
+}
+.adBody{
+ flex:1;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ text-align:center;
+ padding:35px;
+ background:
+ radial-gradient(circle at 70% 25%,#ff2d7240,transparent 30%),
+ linear-gradient(145deg,#111,#28213a);
+}
+.adDemoLogo{
+ width:100px;
+ height:100px;
+ border-radius:28px;
+ background:#fff;
+ color:#111;
+ display:grid;
+ place-items:center;
+ font-size:44px;
+ font-weight:1000;
+}
+.adBody h2{
+ font-size:28px;
+ margin:18px 0 6px;
+}
+.adBody p{
+ color:#bbb;
+ font-size:12px;
+}
+.adSkip{
+ border:0;
+ border-radius:20px;
+ padding:11px 18px;
+ margin-top:15px;
+ font-weight:900;
+}
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header class="top">
@@ -139,279 +1100,947 @@ button,input{font:inherit}button{cursor:pointer}
 
 <!-- TODAY -->
 <section id="today" class="screen active">
+
  <div class="stories">
-  <button class="story" onclick="openAddNow()"><div class="ring"><div class="face">＋</div></div>Ton NOW</button>
-  <button class="story" onclick="openStory(0)"><div class="ring"><div class="face">L</div></div>Léna</button>
-  <button class="story" onclick="openStory(1)"><div class="ring"><div class="face">N</div></div>Noé</button>
-  <button class="story" onclick="openStory(2)"><div class="ring"><div class="face">E</div></div>Emma</button>
-  <button class="story" onclick="openStory(3)"><div class="ring"><div class="face">I</div></div>Inès</button>
+  <button class="story" onclick="openAddNow()">
+   <div class="ring"><div class="face">＋</div></div>
+   Ton NOW
+  </button>
+
+  <button class="story" onclick="openStory(0)">
+   <div class="ring"><div class="face">L</div></div>Léna
+  </button>
+
+  <button class="story" onclick="openStory(1)">
+   <div class="ring"><div class="face">N</div></div>Noé
+  </button>
+
+  <button class="story" onclick="openStory(2)">
+   <div class="ring"><div class="face">E</div></div>Emma
+  </button>
+
+  <button class="story" onclick="openStory(3)">
+   <div class="ring"><div class="face">I</div></div>Inès
+  </button>
  </div>
 
- <div class="kicker">TODAY · #27</div>
+ <div class="kicker">TODAY · #28</div>
  <div class="title">À toi de voter.</div>
- <div class="muted">Une question aujourd'hui. Résultat ce soir.</div>
+ <div class="muted">Une question chaque matin. Un reveal chaque soir.</div>
 
- <div class="card">
+ <div class="eventCard">
+  <div class="kicker">PROCHAIN RENDEZ-VOUS</div>
+  <div id="nextEventTitle" class="eventTime">19:00</div>
+  <div id="nextEventText" class="eventStatus">THE RANK IS OUT · reveal du classement</div>
+  <button class="demoBtn" onclick="demoMorning()">Démo 07h</button>
+  <button class="demoBtn" onclick="demoReveal()">Démo 19h</button>
+ </div>
+
+ <div class="card todayHero">
   <div class="kicker">QUESTION DU JOUR</div>
-  <div class="question">Qui a le plus d'humour ?</div>
-  <div class="muted">Choisis jusqu'à 3 personnes · vote anonyme</div>
-  <div id="people" class="people"></div>
-  <button id="voteBtn" class="primary" disabled>VOTER</button>
 
-  <div class="reveal">
-   <div><span class="muted">REVEAL</span><br><b>19:30</b></div>
-   <div style="text-align:right"><span class="muted">RÉSULTATS DANS</span><br><b id="timer">--:--:--</b></div>
+  <div class="question">
+   Qui a le plus d'humour ?
   </div>
 
-  <button class="secondary" onclick="go('rank')">Voir le reveal · démo</button>
+  <div class="muted">
+   Choisis jusqu'à 3 personnes · vote anonyme
+  </div>
+
+  <div id="people" class="people"></div>
+
+  <button id="voteBtn" class="primary" disabled>
+   VOTER
+  </button>
+
+  <div class="timeBox">
+   <div>
+    <span class="muted">QUESTION</span><br>
+    <b>07:00</b>
+   </div>
+
+   <div style="text-align:right">
+    <span class="muted">REVEAL</span><br>
+    <b>19:00</b>
+   </div>
+  </div>
  </div>
 </section>
 
 <!-- NOW -->
 <section id="now" class="screen">
+
  <div class="nowHead">
-  <div><div class="kicker">NOW · 24H</div><div class="title">NOW.</div></div>
-  <button class="addNow" onclick="openAddNow()">＋ Ajouter</button>
+  <div>
+   <div class="kicker">NOW · 24H</div>
+   <div class="title">NOW.</div>
+  </div>
+
+  <button class="addNow" onclick="openAddNow()">
+   ＋ Ajouter
+  </button>
  </div>
 
  <div id="feed" class="feed">
+
   <div class="post">
    <div class="media">
+
     <div class="big">L</div>
-    <div class="author">@lenaa<small>12 min · expire dans 23 h 48</small></div>
-    <div class="music">♫ Son démo 01 · RANK</div>
+
+    <div class="author">
+     @lenaa
+     <small>12 min · expire dans 23 h 48</small>
+    </div>
+
+    <div class="music">♫ Summer Vibe</div>
     <div class="caption">Journée terminée 😭</div>
-    <div class="actions"><button class="act like">♡</button><button class="act">💬</button><button class="act">↗</button></div>
-    <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+
+    <div class="actions">
+     <button class="act like">♡</button>
+     <button class="act">💬</button>
+     <button class="act">↗</button>
+    </div>
+
+    <div class="commentbar">
+     <input placeholder="Ajouter un commentaire...">
+     <button onclick="quickComment(this)">↑</button>
+    </div>
+
    </div>
   </div>
 
   <div class="post">
    <div class="media">
+
     <div class="big">N</div>
-    <div class="author">@noe13<small>36 min · expire dans 23 h 24</small></div>
-    <div class="music">♫ Son original · @noe13</div>
-    <div class="caption">Je ne donnerai aucune explication 💀</div>
-    <div class="actions"><button class="act like">♡</button><button class="act">💬</button><button class="act">↗</button></div>
-    <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+
+    <div class="author">
+     @noe13
+     <small>36 min · expire dans 23 h 24</small>
+    </div>
+
+    <div class="music">♫ Son original</div>
+    <div class="caption">Aucune explication 😂</div>
+
+    <div class="actions">
+     <button class="act like">♡</button>
+     <button class="act">💬</button>
+     <button class="act">↗</button>
+    </div>
+
+    <div class="commentbar">
+     <input placeholder="Ajouter un commentaire...">
+     <button onclick="quickComment(this)">↑</button>
+    </div>
+
+   </div>
+  </div>
+
+  <!-- PUB INTÉGRÉE AU SCROLL -->
+  <div class="post sponsored">
+   <div class="media">
+
+    <div class="author">
+     RANK ADS
+     <small class="sponsorLabel">SPONSORISÉ</small>
+    </div>
+
+    <div class="sponsorCenter">
+
+     <div class="adLogo">A</div>
+
+     <h2>Publicité démo</h2>
+
+     <p>
+      Ici apparaîtra une publicité native entre deux NOW,
+      comme une publication du feed.
+     </p>
+
+     <button class="sponsorCTA">
+      EN SAVOIR PLUS
+     </button>
+
+    </div>
+
    </div>
   </div>
 
   <div class="post">
    <div class="media">
+
     <div class="big">E</div>
-    <div class="author">@emma<small>1 h · expire dans 23 h</small></div>
-    <div class="music">♫ Summer · Son démo</div>
-    <div class="caption">Vous validez ou pas ? 😂</div>
-    <div class="actions"><button class="act like">♡</button><button class="act">💬</button><button class="act">↗</button></div>
-    <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
+
+    <div class="author">
+     @emma
+     <small>1 h · expire dans 23 h</small>
+    </div>
+
+    <div class="music">♫ Good Mood</div>
+    <div class="caption">Vous validez ? 😂</div>
+
+    <div class="actions">
+     <button class="act like">♡</button>
+     <button class="act">💬</button>
+     <button class="act">↗</button>
+    </div>
+
+    <div class="commentbar">
+     <input placeholder="Ajouter un commentaire...">
+     <button onclick="quickComment(this)">↑</button>
+    </div>
+
    </div>
   </div>
+
  </div>
 </section>
 
 <!-- RANK -->
 <section id="rank" class="screen">
+
  <div class="kicker">THE RANK IS OUT</div>
  <div class="title">Le classement.</div>
- <div class="muted">Qui a le plus d'humour ?</div>
 
- <div class="card">
-  <div class="winner"><div style="font-size:55px">🏆</div><div class="winnerFace">L</div><h2>Léna est #1</h2><div class="muted">132 votes</div></div>
-  <div id="ranking"></div>
+ <div class="muted">
+  Qui a le plus d'humour ?
  </div>
 
- <button class="primary" onclick="openChat('group')">Parler du résultat dans ROOM</button>
+ <div class="card">
+
+  <div class="winner">
+   <div style="font-size:55px">🏆</div>
+
+   <div class="winnerFace">
+    L
+   </div>
+
+   <h2>Léna est #1</h2>
+
+   <div class="muted">
+    132 votes
+   </div>
+  </div>
+
+  <div id="ranking"></div>
+
+ </div>
+
+ <button class="primary" onclick="openChat('group')">
+  Parler du résultat dans ROOM
+ </button>
+
 </section>
 
 <!-- ROOM -->
 <section id="room" class="screen">
- <div class="roomHome">
+
+ <div class="roomShell">
+
   <div class="roomHero">
-   <div class="kicker">ROOM</div>
-   <h2>Ton groupe. Tes amis.</h2>
-   <p>Discute dans le groupe ou directement avec un membre.</p>
+
+   <div class="roomTopLine">
+
+    <div>
+     <div class="kicker">ROOM</div>
+     <div class="title" style="font-size:30px">
+      Messages.
+     </div>
+    </div>
+
+    <div class="roomActions">
+
+     <button class="roundAction" onclick="openNewContact()">
+      ＋
+     </button>
+
+     <button class="roundAction" onclick="alert('Recherche · démo')">
+      ⌕
+     </button>
+
+    </div>
+
+   </div>
+
   </div>
 
   <div class="roomTabs">
-   <button id="chatTab" class="active" onclick="roomTab('chats')">DISCUSSIONS</button>
-   <button id="memberTab" onclick="roomTab('members')">MEMBRES</button>
+
+   <button id="discussionTab"
+           class="active"
+           onclick="roomTab('discussions')">
+    DISCUSSIONS
+   </button>
+
+   <button id="channelTab"
+           onclick="roomTab('channels')">
+    CHAÎNES
+   </button>
+
   </div>
 
-  <div id="roomChats">
-   <div class="chatRow" onclick="openChat('group')">
-    <div class="chatAvatar groupAvatar">R</div>
-    <div class="chatInfo"><b>Marseille 🔥</b><span>Noé : Je demande un recompte officiel 😂</span></div>
-    <div class="chatTime">19:34</div>
+  <!-- DISCUSSIONS -->
+  <div id="discussions">
+
+   <div class="chatRow"
+        onclick="openChat('group')">
+
+    <div class="chatAvatar groupAvatar">
+     R
+    </div>
+
+    <div class="chatInfo">
+     <b>Marseille 🔥</b>
+     <span>Noé : Je demande un recompte officiel 😂</span>
+    </div>
+
+    <div class="chatTime">
+     19:34
+     <div class="unread">3</div>
+    </div>
+
    </div>
 
-   <div class="chatRow" onclick="openChat('Léna')">
-    <div class="chatAvatar">L</div>
-    <div class="chatInfo"><b>Léna</b><span>Tu as vu le classement ? 😂</span></div>
-    <div class="chatTime">18:52</div>
+   <div class="chatRow"
+        onclick="openChat('Léna')">
+
+    <div class="chatAvatar">
+     L
+    </div>
+
+    <div class="chatInfo">
+     <b>Léna</b>
+     <span>Tu as vu le classement ? 😂</span>
+    </div>
+
+    <div class="chatTime">
+     18:52
+    </div>
+
    </div>
 
-   <div class="chatRow" onclick="openChat('Noé')">
-    <div class="chatAvatar">N</div>
-    <div class="chatInfo"><b>Noé</b><span>Demain je gagne</span></div>
-    <div class="chatTime">17:41</div>
+   <div class="chatRow"
+        onclick="openChat('Noé')">
+
+    <div class="chatAvatar">
+     N
+    </div>
+
+    <div class="chatInfo">
+     <b>Noé</b>
+     <span>Demain je gagne 😂</span>
+    </div>
+
+    <div class="chatTime">
+     17:41
+    </div>
+
    </div>
+
+   <div id="dynamicContacts"></div>
+
   </div>
 
-  <div id="roomMembers" style="display:none"></div>
+  <!-- CHAÎNES -->
+  <div id="channels" style="display:none">
+
+   <div class="channelAd">
+
+    <small>PUBLICITÉ · DÉMO</small>
+
+    <h3>Une publicité avant tes chaînes</h3>
+
+    <p>
+     Dans l'application finale, cet emplacement
+     pourra être monétisé.
+    </p>
+
+    <button class="sponsorCTA">
+     CONTINUER
+    </button>
+
+   </div>
+
+   <div class="channelHeader">
+
+    <h2>Tes chaînes</h2>
+
+    <button class="lightBtn"
+            onclick="openCreateChannel()">
+     ＋ Créer
+    </button>
+
+   </div>
+
+   <div class="channelRow">
+
+    <div class="channelAvatar">
+     ⚽️
+    </div>
+
+    <div class="channelInfo">
+     <b>Foot Daily</b>
+     <span>Résultats, mercato et vidéos</span>
+    </div>
+
+    <button class="follow">
+     SUIVIE
+    </button>
+
+   </div>
+
+   <div class="channelRow">
+
+    <div class="channelAvatar">
+     😂
+    </div>
+
+    <div class="channelInfo">
+     <b>Humour</b>
+     <span>Les publications du jour</span>
+    </div>
+
+    <button class="follow">
+     SUIVIE
+    </button>
+
+   </div>
+
+   <div class="channelRow">
+
+    <div class="channelAvatar">
+     🎮
+    </div>
+
+    <div class="channelInfo">
+     <b>Gaming</b>
+     <span>Nouveautés et communauté</span>
+    </div>
+
+    <button class="follow"
+            onclick="toggleFollow(this)">
+     ＋ SUIVRE
+    </button>
+
+   </div>
+
+   <div class="channelRow">
+
+    <div class="channelAvatar">
+     🍔
+    </div>
+
+    <div class="channelInfo">
+     <b>Food</b>
+     <span>Recettes et bonnes adresses</span>
+    </div>
+
+    <button class="follow"
+            onclick="toggleFollow(this)">
+     ＋ SUIVRE
+    </button>
+
+   </div>
+
+   <div id="newChannels"></div>
+
+  </div>
+
  </div>
+
 </section>
 
 <!-- RECAP -->
 <section id="recap" class="screen">
- <div class="kicker">WEEKLY RECAP</div>
- <div class="title">Ta semaine.</div>
- <div class="muted">Les moments RANK de ton groupe.</div>
+
+ <div class="kicker">
+  WEEKLY RECAP
+ </div>
+
+ <div class="title">
+  Ta semaine.
+ </div>
+
+ <div class="muted">
+  Les moments RANK de ton groupe.
+ </div>
 
  <div class="stats">
-  <div class="stat"><b>47</b><span class="muted">votes reçus</span></div>
-  <div class="stat"><b>2</b><span class="muted">podiums</span></div>
-  <div class="stat"><b>5/7</b><span class="muted">jours joués</span></div>
-  <div class="stat"><b>12</b><span class="muted">streak</span></div>
+
+  <div class="stat">
+   <b>47</b>
+   <span class="muted">votes reçus</span>
+  </div>
+
+  <div class="stat">
+   <b>2</b>
+   <span class="muted">podiums</span>
+  </div>
+
+  <div class="stat">
+   <b>5/7</b>
+   <span class="muted">jours joués</span>
+  </div>
+
+  <div class="stat">
+   <b>12</b>
+   <span class="muted">streak</span>
+  </div>
+
  </div>
 
  <div class="card">
+
   <h2>Créer une question</h2>
-  <div class="muted">Une proposition par semaine.</div>
-  <input id="questionInput" class="field" placeholder="Ex : Qui serait capable de devenir célèbre ?">
-  <button class="primary" onclick="saveQuestion()">PROPOSER</button>
+
+  <div class="muted">
+   Une proposition par semaine.
+  </div>
+
+  <input id="questionInput"
+         class="field"
+         placeholder="Ex : Qui serait capable de devenir célèbre ?">
+
+  <button class="primary"
+          onclick="saveQuestion()">
+   PROPOSER
+  </button>
+
  </div>
+
 </section>
 
+<!-- NAV -->
 <nav class="nav">
- <button class="on" data-to="today"><span>⌂</span>TODAY</button>
- <button data-to="now"><span>▶</span>NOW</button>
- <button data-to="rank"><span>▥</span>RANK</button>
- <button data-to="room"><span>◌</span>ROOM</button>
- <button data-to="recap"><span>↻</span>RECAP</button>
+
+ <button class="on" data-to="today">
+  <span>⌂</span>
+  TODAY
+ </button>
+
+ <button data-to="now">
+  <span>▶</span>
+  NOW
+ </button>
+
+ <button data-to="rank">
+  <span>▥</span>
+  RANK
+ </button>
+
+ <button data-to="room">
+  <span>◌</span>
+  ROOM
+ </button>
+
+ <button data-to="recap">
+  <span>↻</span>
+  RECAP
+ </button>
+
 </nav>
+
 </div>
 
 <!-- ADD NOW -->
 <div id="addNowSheet" class="overlay">
+
  <div class="sheet">
-  <button class="close" onclick="closeOverlay('addNowSheet')">×</button>
+
+  <button class="close"
+          onclick="closeOverlay('addNowSheet')">
+   ×
+  </button>
+
   <h2>Nouveau NOW</h2>
-  <div class="muted">Photo ou vidéo · 1 minute maximum · visible 24 h.</div>
 
-  <input id="nowFile" class="field" type="file" accept="image/*,video/*">
-  <input id="captionInput" class="field" placeholder="Ajouter une légende...">
+  <div class="muted">
+   Photo ou vidéo · 1 minute maximum · disparaît après 24 h.
+  </div>
 
-  <button class="secondary" onclick="openMusic()">🎵 <span id="musicButtonText">Ajouter un son</span></button>
-  <div id="selectedSound" class="selectedSound" style="display:none"></div>
+  <input id="nowFile"
+         class="field"
+         type="file"
+         accept="image/*,video/*">
 
-  <button class="primary" onclick="publishNow()">PUBLIER LE NOW</button>
+  <input id="captionInput"
+         class="field"
+         placeholder="Ajouter une légende...">
+
+  <button class="secondary"
+          onclick="openMusic()">
+   🎵 <span id="musicText">Ajouter une musique</span>
+  </button>
+
+  <div id="chosenMusic"
+       style="display:none;margin-top:10px;padding:11px;background:#f4efff;border-radius:13px;font-size:11px">
+  </div>
+
+  <button class="primary"
+          onclick="publishNow()">
+   PUBLIER LE NOW
+  </button>
+
  </div>
+
 </div>
 
 <!-- MUSIC -->
 <div id="musicSheet" class="overlay">
+
  <div class="sheet">
-  <button class="close" onclick="closeOverlay('musicSheet')">×</button>
-  <h2>Ajouter un son 🎵</h2>
-  <div class="muted">Bibliothèque de démonstration du prototype.</div>
-  <input id="soundSearch" class="soundSearch" placeholder="Rechercher un son..." oninput="drawSounds()">
-  <div id="sounds"></div>
+
+  <button class="close"
+          onclick="closeOverlay('musicSheet')">
+   ×
+  </button>
+
+  <h2>Ajouter une musique 🎵</h2>
+
+  <div class="muted">
+   Musiques de démonstration pour le prototype.
+  </div>
+
+  <div id="musicList"></div>
+
  </div>
+
 </div>
 
-<!-- STORY VIEWER -->
-<div id="storyViewer" class="storyViewer">
- <div id="storyBars" class="storyBars"></div>
- <button class="storyClose" onclick="closeStory()">×</button>
- <div id="storyUser" class="storyUser"></div>
- <div id="storyContent" class="storyContent"></div>
- <div id="storyText" class="storyText"></div>
- <div id="storyMusic" class="storyMusic"></div>
- <div class="storyReply">
-  <input id="storyReplyInput" placeholder="Répondre à ce NOW...">
-  <button onclick="replyStory()">↑</button>
+<!-- ADD CONTACT -->
+<div id="contactSheet" class="overlay">
+
+ <div class="sheet">
+
+  <button class="close"
+          onclick="closeOverlay('contactSheet')">
+   ×
+  </button>
+
+  <h2>Nouvelle discussion</h2>
+
+  <button class="secondary"
+          onclick="createGroup()">
+   👥 Nouveau groupe
+  </button>
+
+  <input id="contactSearch"
+         class="field"
+         placeholder="Rechercher un contact">
+
+  <div id="contactList"></div>
+
  </div>
+
+</div>
+
+<!-- CREATE CHANNEL -->
+<div id="channelSheet" class="overlay">
+
+ <div class="sheet">
+
+  <button class="close"
+          onclick="closeOverlay('channelSheet')">
+   ×
+  </button>
+
+  <h2>Créer une chaîne</h2>
+
+  <div class="muted">
+   Publie des informations pour tes abonnés.
+  </div>
+
+  <input id="channelName"
+         class="field"
+         placeholder="Nom de la chaîne">
+
+  <input id="channelDesc"
+         class="field"
+         placeholder="Description">
+
+  <button class="primary"
+          onclick="createChannel()">
+   CRÉER LA CHAÎNE
+  </button>
+
+ </div>
+
+</div>
+
+<!-- STORY -->
+<div id="storyViewer" class="storyViewer">
+
+ <div id="storyBars"
+      class="storyBars">
+ </div>
+
+ <button class="storyClose"
+         onclick="closeStory()">
+  ×
+ </button>
+
+ <div id="storyUser"
+      class="storyUser">
+ </div>
+
+ <div id="storyContent"
+      class="storyContent">
+ </div>
+
+ <div id="storyText"
+      class="storyText">
+ </div>
+
+ <div id="storyMusic"
+      class="storyMusic">
+ </div>
+
+ <div class="storyReply">
+
+  <input id="storyReplyInput"
+         placeholder="Répondre à ce NOW...">
+
+  <button onclick="replyStory()">
+   ↑
+  </button>
+
+ </div>
+
 </div>
 
 <!-- CHAT -->
 <div id="chatPage" class="chatPage">
+
  <div class="chatTop">
-  <button class="back" onclick="closeChat()">‹</button>
-  <div id="chatAvatar" class="chatAvatar">R</div>
-  <div class="chatTopInfo"><b id="chatName">Marseille 🔥</b><small id="chatStatus">8 membres</small></div>
-  <button class="cameraBtn" onclick="openCamera()">📷</button>
-  <button class="dotsBtn" onclick="chatMenu()">⋮</button>
+
+  <button class="back"
+          onclick="closeChat()">
+   ‹
+  </button>
+
+  <div id="chatAvatar"
+       class="chatAvatar">
+   R
+  </div>
+
+  <div class="chatTopInfo"
+       onclick="chatInfo()">
+
+   <b id="chatName">
+    Marseille 🔥
+   </b>
+
+   <small id="chatStatus">
+    8 participants
+   </small>
+
+  </div>
+
+  <button class="iconBtn"
+          onclick="sendMedia()">
+   📷
+  </button>
+
+  <button class="iconBtn"
+          onclick="chatMenu()">
+   ⋮
+  </button>
+
  </div>
 
- <div id="chatMessages" class="chatMessages"></div>
+ <div id="chatMessages"
+      class="chatMessages">
+ </div>
 
  <div class="chatComposer">
-  <button style="background:#fff;color:#555" onclick="openCamera()">＋</button>
-  <input id="chatInput" placeholder="Message">
-  <button onclick="sendChat()">↑</button>
+
+  <button style="background:#fff;color:#555"
+          onclick="sendMedia()">
+   ＋
+  </button>
+
+  <input id="chatInput"
+         placeholder="Message">
+
+  <button onclick="sendChat()">
+   ↑
+  </button>
+
  </div>
+
 </div>
 
-<!-- MEMBERS -->
-<div id="membersSheet" class="overlay">
- <div class="sheet membersSheet">
-  <button class="close" onclick="closeOverlay('membersSheet')">×</button>
-  <h2>Membres du groupe</h2>
-  <div id="membersList"></div>
+<!-- EVENT COUNTDOWN -->
+<div id="eventOverlay"
+     class="eventOverlay">
+
+ <div class="eventBrand">
+  RANK<i>.</i>
  </div>
+
+ <div id="eventMini"
+      class="eventMini">
+  LA QUESTION ARRIVE
+ </div>
+
+ <div id="eventBig"
+      class="eventBig">
+  10
+ </div>
+
+ <h1 id="eventHeading">
+  TODAY.
+ </h1>
+
+ <p id="eventParagraph">
+  Prépare-toi.
+ </p>
+
 </div>
 
-<!-- CAMERA -->
-<div id="cameraSheet" class="overlay">
- <div class="sheet">
-  <button class="close" onclick="closeOverlay('cameraSheet')">×</button>
-  <h2>Photo RANK 📸</h2>
-  <div class="muted">Envoie une photo/vidéo directement dans cette conversation.</div>
-  <div class="cameraPreview">📸<small>Caméra / galerie</small></div>
-  <input id="privateMedia" class="field" type="file" accept="image/*,video/*" capture="environment">
-  <label style="display:block;margin-top:12px;font-size:12px"><input id="ephemeral" type="checkbox" checked> Disparaît après ouverture</label>
-  <button class="primary" onclick="sendPrivateMedia()">ENVOYER</button>
+<!-- AD FULLSCREEN -->
+<div id="adOverlay"
+     class="adOverlay">
+
+ <div class="adTop">
+
+  <span>
+   PUBLICITÉ · DÉMO
+  </span>
+
+  <span id="adCountdown">
+   3
+  </span>
+
  </div>
+
+ <div class="adBody">
+
+  <div class="adDemoLogo">
+   A
+  </div>
+
+  <h2>
+   Publicité démo
+  </h2>
+
+  <p>
+   Dans la vraie application,
+   cet emplacement pourra afficher une publicité.
+  </p>
+
+  <button id="adSkip"
+          class="adSkip"
+          disabled>
+   Continuer dans 3 s
+  </button>
+
+ </div>
+
 </div>
 
 <script>
-const users=["Léna","Noé","Emma","Lucas","Inès","Mathis"];
-const selected=new Set();
-let currentChat="group";
-let currentStory=0;
-let selectedSound=null;
+
+/* ---------------- DATA ---------------- */
+
+const users=[
+ "Léna",
+ "Noé",
+ "Emma",
+ "Lucas",
+ "Inès",
+ "Mathis"
+];
+
+const scores=[
+ ["Léna",132],
+ ["Noé",98],
+ ["Emma",78],
+ ["Lucas",61],
+ ["Inès",54],
+ ["Mathis",41]
+];
+
+const sounds=[
+ "Summer Vibe",
+ "Good Mood",
+ "Night Drive",
+ "Funny Moment",
+ "Chill",
+ "Son original"
+];
 
 const storyData=[
- {name:"Léna",user:"@lenaa",letter:"L",text:"Journée terminée 😭",sound:"♫ Son démo 01 · RANK",bg:"linear-gradient(145deg,#ff416d,#754cff)"},
- {name:"Noé",user:"@noe13",letter:"N",text:"Je ne donnerai aucune explication 💀",sound:"♫ Son original · @noe13",bg:"linear-gradient(145deg,#21bfe9,#4054e9)"},
- {name:"Emma",user:"@emma",letter:"E",text:"Vous validez ou pas ? 😂",sound:"♫ Summer · Son démo",bg:"linear-gradient(145deg,#24ca94,#276cdd)"},
- {name:"Inès",user:"@iness",letter:"I",text:"Ce soir 🔥",sound:"♫ Night · Son démo",bg:"linear-gradient(145deg,#ff914d,#ff2d72)"}
+ {
+  name:"Léna",
+  user:"@lenaa",
+  letter:"L",
+  text:"Journée terminée 😭",
+  sound:"♫ Summer Vibe",
+  bg:"linear-gradient(145deg,#ff416d,#754cff)"
+ },
+ {
+  name:"Noé",
+  user:"@noe13",
+  letter:"N",
+  text:"Aucune explication 😂",
+  sound:"♫ Son original",
+  bg:"linear-gradient(145deg,#21bfe9,#4054e9)"
+ },
+ {
+  name:"Emma",
+  user:"@emma",
+  letter:"E",
+  text:"Vous validez ? 😂",
+  sound:"♫ Good Mood",
+  bg:"linear-gradient(145deg,#24ca94,#276cdd)"
+ },
+ {
+  name:"Inès",
+  user:"@iness",
+  letter:"I",
+  text:"Ce soir 🔥",
+  sound:"♫ Night Drive",
+  bg:"linear-gradient(145deg,#ff914d,#ff2d72)"
+ }
 ];
 
-const demoSounds=[
- {title:"Neon Night",artist:"RANK Sounds",time:"0:28"},
- {title:"Summer Vibe",artist:"RANK Sounds",time:"0:34"},
- {title:"Late Night",artist:"RANK Sounds",time:"0:22"},
- {title:"Good Mood",artist:"RANK Sounds",time:"0:31"},
- {title:"Funny Moment",artist:"RANK Sounds",time:"0:18"},
- {title:"Son original",artist:"Ton audio",time:"Original"}
-];
-
-const chatStore={
+const chats={
  group:[
-  {user:"@lenaa",text:"Merciii vous êtes des fous 😭"},
-  {user:"@noe13",text:"Je demande un recompte officiel 😂"},
-  {user:"@emma",text:"Franchement c'était mérité"},
-  {user:"@toi",text:"Demain ça va être serré 😂",mine:true}
+  {
+   user:"@lenaa",
+   text:"Merciii vous êtes des fous 😭"
+  },
+  {
+   user:"@noe13",
+   text:"Je demande un recompte officiel 😂"
+  },
+  {
+   user:"@emma",
+   text:"Franchement c'était mérité"
+  },
+  {
+   user:"@toi",
+   text:"Demain ça va être serré 😂",
+   mine:true
+  }
  ],
  "Léna":[
-  {user:"@lenaa",text:"Tu as vu le classement ? 😂"},
-  {user:"@toi",text:"Oui 😭 bien joué",mine:true}
+  {
+   user:"@lenaa",
+   text:"Tu as vu le classement ? 😂"
+  },
+  {
+   user:"@toi",
+   text:"Oui 😭 bien joué",
+   mine:true
+  }
  ],
  "Noé":[
-  {user:"@noe13",text:"Demain je gagne 😂"},
-  {user:"@toi",text:"On verra ça",mine:true}
+  {
+   user:"@noe13",
+   text:"Demain je gagne 😂"
+  }
  ],
  "Emma":[],
  "Lucas":[],
@@ -419,248 +2048,1190 @@ const chatStore={
  "Mathis":[]
 };
 
-/* NAV */
+let selected=new Set();
+let currentStory=0;
+let currentChat="group";
+let selectedMusic=null;
+let eventAfterAd=null;
+
+/* ---------------- NAV ---------------- */
+
 function go(id){
- document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.to===id));
+
+ document
+ .querySelectorAll(".screen")
+ .forEach(s=>s.classList.remove("active"));
+
+ document
+ .getElementById(id)
+ .classList.add("active");
+
+ document
+ .querySelectorAll(".nav button")
+ .forEach(b=>{
+  b.classList.toggle(
+   "on",
+   b.dataset.to===id
+  );
+ });
+
  window.scrollTo(0,0);
 }
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>go(b.dataset.to));
 
-/* TODAY */
+document
+.querySelectorAll(".nav button")
+.forEach(b=>{
+ b.onclick=()=>go(b.dataset.to);
+});
+
+/* ---------------- TODAY ---------------- */
+
 function drawPeople(){
- document.getElementById("people").innerHTML=users.map((n,i)=>`
- <div class="person ${selected.has(i)?"sel":""}" onclick="pick(${i})">
-  <div class="pface">${n[0]}</div><b>${n}</b><small>@${n.toLowerCase()}</small>
- </div>`).join("");
- document.getElementById("voteBtn").disabled=!selected.size;
+
+ document.getElementById("people").innerHTML=
+ users.map((name,i)=>`
+
+  <div class="person ${selected.has(i)?"sel":""}"
+       onclick="pick(${i})">
+
+   <div class="pface">
+    ${name[0]}
+   </div>
+
+   <b>${name}</b>
+
+   <small>
+    @${name.toLowerCase()}
+   </small>
+
+  </div>
+
+ `).join("");
+
+ document.getElementById("voteBtn").disabled=
+ selected.size===0;
 }
+
 function pick(i){
- if(selected.has(i))selected.delete(i);
- else if(selected.size<3)selected.add(i);
- else return alert("3 personnes maximum.");
+
+ if(selected.has(i)){
+  selected.delete(i);
+ }
+
+ else if(selected.size<3){
+  selected.add(i);
+ }
+
+ else{
+  alert("3 personnes maximum.");
+  return;
+ }
+
  drawPeople();
 }
+
 document.getElementById("voteBtn").onclick=function(){
- localStorage.setItem("rank82-vote",JSON.stringify([...selected]));
- this.textContent="VOTE ENREGISTRÉ ✓";
+
+ localStorage.setItem(
+  "rank83-vote",
+  JSON.stringify([...selected])
+ );
+
+ this.textContent=
+ "VOTE ENREGISTRÉ ✓";
 };
 
-/* STORIES */
+/* ---------------- STORIES ---------------- */
+
 function openStory(i){
+
  currentStory=i;
+
  const s=storyData[i];
- document.getElementById("storyViewer").classList.add("show");
- document.getElementById("storyUser").textContent=s.user+" · maintenant";
- document.getElementById("storyContent").textContent=s.letter;
- document.getElementById("storyContent").style.background=s.bg;
- document.getElementById("storyText").textContent=s.text;
- document.getElementById("storyMusic").textContent=s.sound;
- document.getElementById("storyBars").innerHTML=storyData.map((_,j)=>`<div class="storyBar ${j===i?"on":""}"></div>`).join("");
+
+ document
+ .getElementById("storyViewer")
+ .classList.add("show");
+
+ document.getElementById("storyUser").textContent=
+ s.user+" · maintenant";
+
+ document.getElementById("storyContent").textContent=
+ s.letter;
+
+ document.getElementById("storyContent").style.background=
+ s.bg;
+
+ document.getElementById("storyText").textContent=
+ s.text;
+
+ document.getElementById("storyMusic").textContent=
+ s.sound;
+
+ document.getElementById("storyBars").innerHTML=
+ storyData.map((_,j)=>
+ `<div class="storyBar ${j===i?"on":""}"></div>`
+ ).join("");
 }
-function closeStory(){document.getElementById("storyViewer").classList.remove("show")}
+
+function closeStory(){
+
+ document
+ .getElementById("storyViewer")
+ .classList.remove("show");
+}
+
 function replyStory(){
- const i=document.getElementById("storyReplyInput");
- if(!i.value.trim())return;
- const name=storyData[currentStory].name;
- if(!chatStore[name])chatStore[name]=[];
- chatStore[name].push({user:"@toi",text:"↪ NOW : "+i.value.trim(),mine:true});
- i.value="";
+
+ const input=
+ document.getElementById("storyReplyInput");
+
+ const text=input.value.trim();
+
+ if(!text)return;
+
+ const person=
+ storyData[currentStory].name;
+
+ if(!chats[person]){
+  chats[person]=[];
+ }
+
+ chats[person].push({
+  user:"@toi",
+  text:"↪ NOW : "+text,
+  mine:true
+ });
+
+ input.value="";
+
  closeStory();
- openChat(name);
+
+ openChat(person);
 }
 
-/* swipe stories */
-let touchX=0;
-document.getElementById("storyViewer").addEventListener("touchstart",e=>touchX=e.touches[0].clientX);
-document.getElementById("storyViewer").addEventListener("touchend",e=>{
- const dx=e.changedTouches[0].clientX-touchX;
- if(Math.abs(dx)>50){
-  if(dx<0 && currentStory<storyData.length-1)openStory(currentStory+1);
-  if(dx>0 && currentStory>0)openStory(currentStory-1);
+/* swipe story */
+
+let startX=0;
+
+document
+.getElementById("storyViewer")
+.addEventListener(
+ "touchstart",
+ e=>{
+  startX=e.touches[0].clientX;
  }
+);
+
+document
+.getElementById("storyViewer")
+.addEventListener(
+ "touchend",
+ e=>{
+
+  const dx=
+  e.changedTouches[0].clientX-startX;
+
+  if(Math.abs(dx)<50)return;
+
+  if(dx<0 &&
+     currentStory<storyData.length-1){
+   openStory(currentStory+1);
+  }
+
+  if(dx>0 &&
+     currentStory>0){
+   openStory(currentStory-1);
+  }
+ }
+);
+
+/* ---------------- NOW ---------------- */
+
+document
+.querySelectorAll(".like")
+.forEach(btn=>{
+
+ btn.onclick=function(){
+
+  this.classList.toggle("liked");
+
+  this.textContent=
+  this.classList.contains("liked")
+  ?"♥"
+  :"♡";
+ };
 });
 
-/* NOW LIKES */
-document.querySelectorAll(".like").forEach(b=>b.onclick=function(){
- this.classList.toggle("liked");
- this.textContent=this.classList.contains("liked")?"♥":"♡";
-});
 function quickComment(btn){
- const input=btn.previousElementSibling;
+
+ const input=
+ btn.previousElementSibling;
+
  if(!input.value.trim())return;
+
  input.value="";
+
  alert("Commentaire publié ✓");
 }
 
-/* ADD NOW */
-function openAddNow(){document.getElementById("addNowSheet").classList.add("show")}
-function closeOverlay(id){document.getElementById(id).classList.remove("show")}
+function openAddNow(){
 
-/* MUSIC */
+ document
+ .getElementById("addNowSheet")
+ .classList.add("show");
+}
+
+function closeOverlay(id){
+
+ document
+ .getElementById(id)
+ .classList.remove("show");
+}
+
+/* ---------------- MUSIC ---------------- */
+
 function openMusic(){
- document.getElementById("musicSheet").classList.add("show");
- drawSounds();
+
+ document
+ .getElementById("musicSheet")
+ .classList.add("show");
+
+ drawMusic();
 }
-function drawSounds(){
- const q=document.getElementById("soundSearch").value.toLowerCase();
- const arr=demoSounds.filter(s=>(s.title+" "+s.artist).toLowerCase().includes(q));
- document.getElementById("sounds").innerHTML=arr.map((s,i)=>`
- <div class="soundItem">
-  <div class="soundIcon">♫</div>
-  <div class="soundInfo"><b>${s.title}</b><small>${s.artist} · ${s.time}</small></div>
-  <button onclick="chooseSound('${s.title.replace(/'/g,"")}','${s.artist.replace(/'/g,"")}')">UTILISER</button>
- </div>`).join("");
+
+function drawMusic(){
+
+ document.getElementById("musicList").innerHTML=
+ sounds.map((sound,i)=>`
+
+  <div class="soundItem">
+
+   <div class="soundIcon">
+    ♫
+   </div>
+
+   <div class="soundInfo">
+
+    <b>${sound}</b>
+
+    <small>
+     Musique démo
+    </small>
+
+   </div>
+
+   <button onclick="chooseMusic(${i})">
+    AJOUTER
+   </button>
+
+  </div>
+
+ `).join("");
 }
-function chooseSound(title,artist){
- selectedSound={title,artist};
- document.getElementById("selectedSound").style.display="block";
- document.getElementById("selectedSound").textContent="♫ "+title+" · "+artist;
- document.getElementById("musicButtonText").textContent=title;
+
+function chooseMusic(i){
+
+ selectedMusic=sounds[i];
+
+ document.getElementById("musicText").textContent=
+ selectedMusic;
+
+ const chosen=
+ document.getElementById("chosenMusic");
+
+ chosen.style.display="block";
+
+ chosen.textContent=
+ "♫ "+selectedMusic;
+
  closeOverlay("musicSheet");
 }
 
-/* PUBLISH NOW */
+/* ---------------- PUBLISH NOW ---------------- */
+
 function publishNow(){
- const input=document.getElementById("nowFile");
+
+ const input=
+ document.getElementById("nowFile");
+
  const file=input.files[0];
- if(!file)return alert("Choisis une photo ou une vidéo.");
+
+ if(!file){
+
+  alert(
+   "Choisis une photo ou une vidéo."
+  );
+
+  return;
+ }
+
+ const url=
+ URL.createObjectURL(file);
 
  if(file.type.startsWith("video/")){
-  const url=URL.createObjectURL(file),v=document.createElement("video");
-  v.onloadedmetadata=()=>{
-   if(v.duration>60){URL.revokeObjectURL(url);alert("Vidéo : 1 minute maximum.");return}
-   makeNow(file,url);
-  };
-  v.src=url;
- }else makeNow(file,URL.createObjectURL(file));
-}
-function makeNow(file,url){
- const caption=document.getElementById("captionInput").value.trim()||"Mon NOW";
- const media=file.type.startsWith("video/")
- ?`<video src="${url}" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>`
- :`<img src="${url}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`;
 
- const p=document.createElement("div");
- p.className="post";
- p.dataset.expires=Date.now()+86400000;
- p.innerHTML=`<div class="media">${media}
- <div class="author">@toi<small>maintenant · expire dans 24 h</small></div>
- <div class="music">♫ ${selectedSound?selectedSound.title+" · "+selectedSound.artist:"Son original"}</div>
- <div class="caption">${escapeHTML(caption)}</div>
- <div class="actions"><button class="act" onclick="this.classList.toggle('liked');this.textContent=this.classList.contains('liked')?'♥':'♡'">♡</button><button class="act">💬</button><button class="act">↗</button></div>
- <div class="commentbar"><input placeholder="Ajouter un commentaire..."><button onclick="quickComment(this)">↑</button></div>
- </div>`;
- document.getElementById("feed").prepend(p);
- input.value="";document.getElementById("captionInput").value="";
- selectedSound=null;
- document.getElementById("selectedSound").style.display="none";
- document.getElementById("musicButtonText").textContent="Ajouter un son";
+  const video=
+  document.createElement("video");
+
+  video.onloadedmetadata=()=>{
+
+   if(video.duration>60){
+
+    URL.revokeObjectURL(url);
+
+    alert(
+     "La vidéo doit durer 1 minute maximum."
+    );
+
+    return;
+   }
+
+   createNowPost(
+    file,
+    url
+   );
+  };
+
+  video.src=url;
+ }
+
+ else{
+
+  createNowPost(
+   file,
+   url
+  );
+ }
+}
+
+function createNowPost(file,url){
+
+ const caption=
+ document
+ .getElementById("captionInput")
+ .value
+ .trim()
+ ||"Mon NOW";
+
+ const visual=
+ file.type.startsWith("video/")
+ ?
+ `<video
+    src="${url}"
+    autoplay
+    muted
+    loop
+    playsinline
+    style="
+     position:absolute;
+     inset:0;
+     width:100%;
+     height:100%;
+     object-fit:cover
+    ">
+  </video>`
+ :
+ `<img
+    src="${url}"
+    style="
+     position:absolute;
+     inset:0;
+     width:100%;
+     height:100%;
+     object-fit:cover
+    ">`;
+
+ const post=
+ document.createElement("div");
+
+ post.className="post";
+
+ post.dataset.expires=
+ Date.now()+86400000;
+
+ post.innerHTML=`
+
+  <div class="media">
+
+   ${visual}
+
+   <div class="author">
+    @toi
+    <small>
+     maintenant · expire dans 24 h
+    </small>
+   </div>
+
+   <div class="music">
+    ♫ ${escapeHTML(
+     selectedMusic || "Son original"
+    )}
+   </div>
+
+   <div class="caption">
+    ${escapeHTML(caption)}
+   </div>
+
+   <div class="actions">
+
+    <button
+     class="act"
+     onclick="
+      this.classList.toggle('liked');
+      this.textContent=
+      this.classList.contains('liked')
+      ?'♥':'♡'
+     ">
+     ♡
+    </button>
+
+    <button class="act">
+     💬
+    </button>
+
+    <button class="act">
+     ↗
+    </button>
+
+   </div>
+
+   <div class="commentbar">
+
+    <input
+     placeholder="Ajouter un commentaire...">
+
+    <button
+     onclick="quickComment(this)">
+     ↑
+    </button>
+
+   </div>
+
+  </div>
+ `;
+
+ document
+ .getElementById("feed")
+ .prepend(post);
+
+ document.getElementById("nowFile").value="";
+
+ document.getElementById("captionInput").value="";
+
+ selectedMusic=null;
+
+ document.getElementById("musicText").textContent=
+ "Ajouter une musique";
+
+ document.getElementById("chosenMusic").style.display=
+ "none";
+
  closeOverlay("addNowSheet");
+
  go("now");
 }
 
-/* ROOM */
-function roomTab(tab){
- const chats=document.getElementById("roomChats"),members=document.getElementById("roomMembers");
- const ct=document.getElementById("chatTab"),mt=document.getElementById("memberTab");
- chats.style.display=tab==="chats"?"block":"none";
- members.style.display=tab==="members"?"block":"none";
- ct.classList.toggle("active",tab==="chats");mt.classList.toggle("active",tab==="members");
- if(tab==="members")drawRoomMembers();
+/* ---------------- RANK ---------------- */
+
+document.getElementById("ranking").innerHTML=
+ scores.map((s,i)=>`
+
+  <div class="rankrow">
+
+   <b>#${i+1}</b>
+
+   <div
+    class="pface"
+    style="
+     margin:0;
+     width:38px;
+     height:38px
+    ">
+    ${s[0][0]}
+   </div>
+
+   <b>${s[0]}</b>
+
+   <span class="score">
+    ${s[1]} votes
+   </span>
+
+  </div>
+
+ `).join("");
+
+/* ---------------- ROOM ---------------- */
+
+function roomTab(type){
+
+ const discussions=
+ document.getElementById("discussions");
+
+ const channels=
+ document.getElementById("channels");
+
+ const dTab=
+ document.getElementById("discussionTab");
+
+ const cTab=
+ document.getElementById("channelTab");
+
+ const isDiscussions=
+ type==="discussions";
+
+ discussions.style.display=
+ isDiscussions
+ ?"block"
+ :"none";
+
+ channels.style.display=
+ isDiscussions
+ ?"none"
+ :"block";
+
+ dTab.classList.toggle(
+  "active",
+  isDiscussions
+ );
+
+ cTab.classList.toggle(
+  "active",
+  !isDiscussions
+ );
 }
-function drawRoomMembers(){
- document.getElementById("roomMembers").innerHTML=users.map(n=>`
- <div class="chatRow" onclick="openChat('${n}')">
-  <div class="chatAvatar">${n[0]}</div>
-  <div class="chatInfo"><b>${n}</b><span>@${n.toLowerCase()} · membre du groupe</span></div>
-  <div>›</div>
- </div>`).join("");
+
+/* ---------------- CONTACTS ---------------- */
+
+function openNewContact(){
+
+ document
+ .getElementById("contactSheet")
+ .classList.add("show");
+
+ drawContactList();
 }
+
+function drawContactList(){
+
+ document.getElementById("contactList").innerHTML=
+ users.map(name=>`
+
+  <div class="contactItem">
+
+   <div class="chatAvatar">
+    ${name[0]}
+   </div>
+
+   <div>
+    <b>${name}</b>
+
+    <div class="muted">
+     @${name.toLowerCase()}
+    </div>
+   </div>
+
+   <button
+    onclick="startContact('${name}')">
+    MESSAGE
+   </button>
+
+  </div>
+
+ `).join("");
+}
+
+function startContact(name){
+
+ closeOverlay("contactSheet");
+
+ openChat(name);
+}
+
+function createGroup(){
+
+ const name=
+ prompt(
+  "Nom du nouveau groupe :"
+ );
+
+ if(!name)return;
+
+ alert(
+  'Groupe "'+
+  name+
+  '" créé · démo'
+ );
+
+ closeOverlay("contactSheet");
+}
+
+/* ---------------- CHAT ---------------- */
+
 function openChat(name){
+
  currentChat=name;
- const group=name==="group";
- document.getElementById("chatName").textContent=group?"Marseille 🔥":name;
- document.getElementById("chatStatus").textContent=group?"8 membres · toucher ⋮ pour voir les membres":"en ligne";
- document.getElementById("chatAvatar").textContent=group?"R":name[0];
- document.getElementById("chatAvatar").classList.toggle("groupAvatar",group);
+
+ const group=
+ name==="group";
+
+ document.getElementById("chatName").textContent=
+ group
+ ?"Marseille 🔥"
+ :name;
+
+ document.getElementById("chatStatus").textContent=
+ group
+ ?"8 participants"
+ :"en ligne";
+
+ document.getElementById("chatAvatar").textContent=
+ group
+ ?"R"
+ :name[0];
+
+ document
+ .getElementById("chatAvatar")
+ .classList.toggle(
+  "groupAvatar",
+  group
+ );
+
  drawChat();
- document.getElementById("chatPage").classList.add("show");
+
+ document
+ .getElementById("chatPage")
+ .classList.add("show");
 }
-function closeChat(){document.getElementById("chatPage").classList.remove("show")}
+
+function closeChat(){
+
+ document
+ .getElementById("chatPage")
+ .classList.remove("show");
+}
+
 function drawChat(){
- const arr=chatStore[currentChat]||[];
- document.getElementById("chatMessages").innerHTML=arr.map(m=>`
- <div class="bubble ${m.mine?"mine":""}">
-  ${(!m.mine&&currentChat==="group")?`<span class="sender">${escapeHTML(m.user)}</span>`:""}
-  ${escapeHTML(m.text)}
-  <span class="btime">19:34 ${m.mine?'<span class="ticks">✓✓</span>':""}</span>
- </div>`).join("");
- const c=document.getElementById("chatMessages");setTimeout(()=>c.scrollTop=c.scrollHeight,0);
+
+ const list=
+ chats[currentChat] || [];
+
+ document.getElementById("chatMessages").innerHTML=
+ list.map(message=>`
+
+  <div
+   class="bubble ${message.mine?"mine":""}">
+
+   ${
+    !message.mine &&
+    currentChat==="group"
+    ?
+    `<span class="sender">
+      ${escapeHTML(message.user)}
+     </span>`
+    :""
+   }
+
+   ${escapeHTML(message.text)}
+
+   <span class="btime">
+    19:34
+    ${
+     message.mine
+     ?'<span class="ticks"> ✓✓</span>'
+     :""
+    }
+   </span>
+
+  </div>
+
+ `).join("");
+
+ const box=
+ document.getElementById("chatMessages");
+
+ setTimeout(
+  ()=>box.scrollTop=box.scrollHeight,
+  0
+ );
 }
+
 function sendChat(){
- const i=document.getElementById("chatInput"),t=i.value.trim();if(!t)return;
- if(!chatStore[currentChat])chatStore[currentChat]=[];
- chatStore[currentChat].push({user:"@toi",text:t,mine:true});i.value="";drawChat();
+
+ const input=
+ document.getElementById("chatInput");
+
+ const text=
+ input.value.trim();
+
+ if(!text)return;
+
+ if(!chats[currentChat]){
+  chats[currentChat]=[];
+ }
+
+ chats[currentChat].push({
+  user:"@toi",
+  text:text,
+  mine:true
+ });
+
+ input.value="";
+
+ drawChat();
 }
+
+function chatInfo(){
+
+ if(currentChat==="group"){
+
+  alert(
+   "Marseille 🔥\\n\\n"+
+   "8 participants\\n"+
+   "Léna\\nNoé\\nEmma\\nLucas\\n"+
+   "Inès\\nMathis\\nJonathan\\n..."
+  );
+ }
+
+ else{
+
+  alert(
+   currentChat+
+   "\\n\\nProfil RANK\\n"+
+   "Message privé"
+  );
+ }
+}
+
 function chatMenu(){
- if(currentChat==="group")openMembers();
- else alert(currentChat+"\\n\\n📷 Envoyer une photo\\n🔕 Notifications\\n⛔ Bloquer\\n⚑ Signaler");
-}
-function openMembers(){
- document.getElementById("membersList").innerHTML=users.map(n=>`
- <div class="memberRow"><div class="chatAvatar">${n[0]}</div><div><b>${n}</b><div class="muted">@${n.toLowerCase()}</div></div><button onclick="closeOverlay('membersSheet');openChat('${n}')">MESSAGE</button></div>`).join("");
- document.getElementById("membersSheet").classList.add("show");
-}
 
-/* CAMERA / EPHEMERAL */
-function openCamera(){document.getElementById("cameraSheet").classList.add("show")}
-function sendPrivateMedia(){
- const f=document.getElementById("privateMedia").files[0];
- if(!f)return alert("Choisis une photo ou une vidéo.");
- if(!chatStore[currentChat])chatStore[currentChat]=[];
- const ephemeral=document.getElementById("ephemeral").checked;
- chatStore[currentChat].push({user:"@toi",text:ephemeral?"📸 Photo éphémère · toucher pour ouvrir":"📸 Photo / vidéo",mine:true});
- document.getElementById("privateMedia").value="";
- closeOverlay("cameraSheet");drawChat();
-}
+ if(currentChat==="group"){
 
-/* RANK */
-const scores=[["Léna",132],["Noé",98],["Emma",78],["Lucas",61],["Inès",54],["Mathis",41]];
-document.getElementById("ranking").innerHTML=scores.map((s,i)=>`
-<div class="rankrow"><b>#${i+1}</b><div class="pface" style="margin:0;width:38px;height:38px">${s[0][0]}</div><b>${s[0]}</b><span class="score">${s[1]} votes</span></div>`).join("");
+  alert(
+   "Infos du groupe\\n"+
+   "Rechercher\\n"+
+   "Notifications\\n"+
+   "Signaler\\n"+
+   "Quitter le groupe"
+  );
+ }
 
-/* TIMER */
-function tick(){
- const n=new Date(),r=new Date();r.setHours(19,30,0,0);
- if(n>=r){document.getElementById("timer").textContent="DISPONIBLE";return}
- const d=r-n;
- document.getElementById("timer").textContent=[
-  Math.floor(d/3600000),
-  Math.floor((d%3600000)/60000),
-  Math.floor((d%60000)/1000)
- ].map(x=>String(x).padStart(2,"0")).join(":");
+ else{
+
+  alert(
+   "Voir le profil\\n"+
+   "Notifications\\n"+
+   "Bloquer\\n"+
+   "Signaler"
+  );
+ }
 }
 
-/* QUESTION */
+function sendMedia(){
+
+ alert(
+  "📷 Photo / vidéo privée · démo"
+ );
+}
+
+/* ---------------- CHANNELS ---------------- */
+
+function toggleFollow(btn){
+
+ const following=
+ btn.textContent.includes("SUIVIE");
+
+ btn.textContent=
+ following
+ ?"＋ SUIVRE"
+ :"SUIVIE";
+}
+
+function openCreateChannel(){
+
+ document
+ .getElementById("channelSheet")
+ .classList.add("show");
+}
+
+function createChannel(){
+
+ const name=
+ document
+ .getElementById("channelName")
+ .value
+ .trim();
+
+ const desc=
+ document
+ .getElementById("channelDesc")
+ .value
+ .trim();
+
+ if(!name){
+
+  alert(
+   "Entre le nom de ta chaîne."
+  );
+
+  return;
+ }
+
+ const row=
+ document.createElement("div");
+
+ row.className=
+ "channelRow";
+
+ row.innerHTML=`
+
+  <div class="channelAvatar">
+   📢
+  </div>
+
+  <div class="channelInfo">
+
+   <b>
+    ${escapeHTML(name)}
+   </b>
+
+   <span>
+    ${escapeHTML(desc || "Nouvelle chaîne RANK")}
+   </span>
+
+  </div>
+
+  <button class="follow">
+   TA CHAÎNE
+  </button>
+ `;
+
+ document
+ .getElementById("newChannels")
+ .prepend(row);
+
+ document.getElementById("channelName").value="";
+
+ document.getElementById("channelDesc").value="";
+
+ closeOverlay("channelSheet");
+}
+
+/* ---------------- EVENTS 07H / 19H ---------------- */
+
+function demoMorning(){
+
+ startEvent(
+  "LA QUESTION ARRIVE",
+  "TODAY.",
+  "La question du jour arrive.",
+  ()=>{
+   showAd(
+    ()=>{
+     go("today");
+     alert(
+      "🔥 La question du jour est disponible !"
+     );
+    }
+   );
+  }
+ );
+}
+
+function demoReveal(){
+
+ startEvent(
+  "THE RANK ARRIVE",
+  "19:00.",
+  "Qui est #1 aujourd'hui ?",
+  ()=>{
+   showAd(
+    ()=>{
+     go("rank");
+    }
+   );
+  }
+ );
+}
+
+function startEvent(
+ mini,
+ heading,
+ paragraph,
+ callback
+){
+
+ const overlay=
+ document.getElementById("eventOverlay");
+
+ const big=
+ document.getElementById("eventBig");
+
+ document.getElementById("eventMini").textContent=
+ mini;
+
+ document.getElementById("eventHeading").textContent=
+ heading;
+
+ document.getElementById("eventParagraph").textContent=
+ paragraph;
+
+ overlay.classList.add("show");
+
+ let count=10;
+
+ big.textContent=count;
+
+ const interval=
+ setInterval(()=>{
+
+  count--;
+
+  big.textContent=count;
+
+  if(count<=0){
+
+   clearInterval(interval);
+
+   overlay.classList.remove("show");
+
+   callback();
+  }
+
+ },500);
+}
+
+/* ---------------- AD DEMO ---------------- */
+
+function showAd(callback){
+
+ const overlay=
+ document.getElementById("adOverlay");
+
+ const countdown=
+ document.getElementById("adCountdown");
+
+ const skip=
+ document.getElementById("adSkip");
+
+ overlay.classList.add("show");
+
+ skip.disabled=true;
+
+ let seconds=3;
+
+ countdown.textContent=seconds;
+
+ skip.textContent=
+ "Continuer dans "+seconds+" s";
+
+ const interval=
+ setInterval(()=>{
+
+  seconds--;
+
+  countdown.textContent=
+  Math.max(seconds,0);
+
+  if(seconds>0){
+
+   skip.textContent=
+   "Continuer dans "+
+   seconds+
+   " s";
+  }
+
+  else{
+
+   clearInterval(interval);
+
+   skip.disabled=false;
+
+   skip.textContent=
+   "CONTINUER →";
+
+   skip.onclick=()=>{
+
+    overlay.classList.remove("show");
+
+    callback();
+   };
+  }
+
+ },1000);
+}
+
+/* ---------------- REAL CLOCK ---------------- */
+
+function updateDailyStatus(){
+
+ const now=
+ new Date();
+
+ const minutes=
+ now.getHours()*60+
+ now.getMinutes();
+
+ const title=
+ document.getElementById("nextEventTitle");
+
+ const text=
+ document.getElementById("nextEventText");
+
+ if(minutes<420){
+
+  title.textContent=
+  "07:00";
+
+  text.textContent=
+  "La nouvelle question arrive ce matin.";
+ }
+
+ else if(minutes<1140){
+
+  title.textContent=
+  "19:00";
+
+  text.textContent=
+  "THE RANK IS OUT · reveal du classement";
+ }
+
+ else{
+
+  title.textContent=
+  "07:00";
+
+  text.textContent=
+  "Nouvelle question demain matin.";
+ }
+}
+
+/* ---------------- WEEK QUESTION ---------------- */
+
 function saveQuestion(){
- const i=document.getElementById("questionInput"),q=i.value.trim();
- if(q.length<8)return alert("Écris une vraie question.");
- let old=null;try{old=JSON.parse(localStorage.getItem("rank82-question"))}catch(e){}
- if(old&&Date.now()-old.date<604800000)return alert("Tu as déjà proposé une question cette semaine.");
- localStorage.setItem("rank82-question",JSON.stringify({q,date:Date.now()}));i.value="";alert("Question proposée ✓");
+
+ const input=
+ document.getElementById("questionInput");
+
+ const q=
+ input.value.trim();
+
+ if(q.length<8){
+
+  alert(
+   "Écris une vraie question."
+  );
+
+  return;
+ }
+
+ let previous=null;
+
+ try{
+
+  previous=
+  JSON.parse(
+   localStorage.getItem(
+    "rank83-question"
+   )
+  );
+
+ }catch(e){}
+
+ if(
+  previous &&
+  Date.now()-previous.date<604800000
+ ){
+
+  alert(
+   "Tu as déjà proposé une question cette semaine."
+  );
+
+  return;
+ }
+
+ localStorage.setItem(
+  "rank83-question",
+  JSON.stringify({
+   q:q,
+   date:Date.now()
+  })
+ );
+
+ input.value="";
+
+ alert(
+  "Question proposée ✓"
+ );
 }
 
-/* EXPIRE */
-function cleanExpired(){document.querySelectorAll("[data-expires]").forEach(x=>{if(Date.now()>Number(x.dataset.expires))x.remove()})}
-function escapeHTML(t){const d=document.createElement("div");d.textContent=t;return d.innerHTML}
+/* ---------------- EXPIRATION NOW ---------------- */
 
-/* RESTORE */
-try{JSON.parse(localStorage.getItem("rank82-vote")||"[]").forEach(i=>selected.add(i))}catch(e){}
+function cleanExpired(){
 
-drawPeople();drawRoomMembers();drawSounds();tick();cleanExpired();
-setInterval(tick,1000);setInterval(cleanExpired,60000);
+ document
+ .querySelectorAll("[data-expires]")
+ .forEach(post=>{
+
+  if(
+   Date.now()>
+   Number(post.dataset.expires)
+  ){
+   post.remove();
+  }
+ });
+}
+
+/* ---------------- UTILITY ---------------- */
+
+function escapeHTML(text){
+
+ const div=
+ document.createElement("div");
+
+ div.textContent=text;
+
+ return div.innerHTML;
+}
+
+/* ---------------- RESTORE ---------------- */
+
+try{
+
+ const oldVotes=
+ JSON.parse(
+  localStorage.getItem(
+   "rank83-vote"
+  ) || "[]"
+ );
+
+ oldVotes.forEach(
+  i=>selected.add(i)
+ );
+
+}catch(e){}
+
+/* ---------------- START ---------------- */
+
+drawPeople();
+
+drawMusic();
+
+updateDailyStatus();
+
+cleanExpired();
+
+setInterval(
+ updateDailyStatus,
+ 30000
+);
+
+setInterval(
+ cleanExpired,
+ 60000
+);
+
 </script>
+
 </body>
 </html>
